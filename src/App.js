@@ -1,12 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Card } from './components/atoms/Card/Card';
+import DatePicker from './components/atoms/DatePicker/DatePicker';
 
 function App() {
   return (
     <div className="App">
-      <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>
+      <DatePicker />
     </div>
   );
 }
