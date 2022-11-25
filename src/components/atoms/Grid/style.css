@@ -285,52 +285,42 @@
     }
 
     .grid.xs--2 {
-        /*   */
         max-width: 16%;
     }
 
     .grid.xs--3 {
-        /*   */
         max-width: 25%;
     }
 
     .grid.xs--4 {
-        /*   */
         max-width: 34%;
     }
 
     .grid.xs--5 {
-        /*   */
         max-width: 42%;
     }
 
     .grid.xs--6 {
-        /*   */
         max-width: 50%;
     }
 
     .grid.xs--7 {
-        /*   */
         max-width: 58%;
     }
 
     .grid.xs--8 {
-        /*   */
         max-width: 66%;
     }
 
     .grid.xs--9 {
-        /*   */
         max-width: 75%;
     }
 
     .grid.xs--10 {
-        /*   */
         max-width: 84%;
     }
 
     .grid.xs--11 {
-        /*   */
         max-width: 92%;
     }
 

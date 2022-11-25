@@ -147,5 +147,5 @@ Grid.defaultProps = {
     md: true,
     lg: true,
     xl: true,
-    wrap: 'nowrap'
+    wrap: 'wrap'
 }
