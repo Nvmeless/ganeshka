@@ -2,8 +2,11 @@ import React from 'react';
 import './App.css';
 // import { Card } from './components/atoms/Card/Card';
 import { Grid } from './components/atoms/Grid/Grid';
+import easterEgg from './components/atoms/Grid/easterEgg';
 
 function App() {
+  easterEgg();
+
   return (
     <div className="App">
       {/* <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card> */}
@@ -37,7 +40,7 @@ function App() {
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </div >
   );
 }
 
