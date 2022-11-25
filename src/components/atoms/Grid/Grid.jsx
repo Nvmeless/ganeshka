@@ -3,6 +3,15 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 export const Grid = ({ container, item, direction, justify, alignItems, spacing, rowSpacing, columnSpacing, xs, sm, md, lg, xl, wrap, ...props }) => {
+    // if any breakpoints are defined, set all undefined breakpoints to the last defined breakpoint
+    if (xs || sm || md || lg || xl) {
+        if (sm === true) sm = xs;
+        if (md === true) md = sm;
+        if (lg === true) lg = md;
+        if (xl === true) xl = lg;
+    }
+    // console.log('xs', xs, 'sm', sm, 'md', md, 'lg', lg, 'xl', xl);
+
     const containerClass = container ? 'container' : '';
     const itemClass = item ? 'item' : '';
     const directionClass = direction
