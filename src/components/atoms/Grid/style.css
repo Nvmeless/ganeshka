@@ -1,0 +1,265 @@
+/* Path: src\components\atoms\Grid\style.css */
+.grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.grid.container {
+    flex-direction: column;
+}
+
+.grid.item {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+}
+
+.grid.direction--row {
+    flex-direction: row;
+}
+
+.grid.direction--row-reverse {
+    flex-direction: row-reverse;
+}
+
+.grid.direction--column {
+    flex-direction: column;
+}
+
+.grid.direction--column-reverse {
+    flex-direction: column-reverse;
+}
+
+.grid.justify--flex-start {
+    justify-content: flex-start;
+}
+
+.grid.justify--flex-end {
+    justify-content: flex-end;
+}
+
+.grid.justify--center {
+    justify-content: center;
+}
+
+.grid.justify--space-between {
+    justify-content: space-between;
+}
+
+.grid.justify--space-around {
+    justify-content: space-around;
+}
+
+.grid.justify--space-evenly {
+    justify-content: space-evenly;
+}
+
+.grid.alignItems--flex-start {
+    align-items: flex-start;
+}
+
+.grid.alignItems--flex-end {
+    align-items: flex-end;
+}
+
+.grid.alignItems--center {
+    align-items: center;
+}
+
+.grid.alignItems--baseline {
+    align-items: baseline;
+}
+
+.grid.alignItems--stretch {
+    align-items: stretch;
+}
+
+.grid.spacing--0 {
+    gap: 0;
+}
+
+.grid.spacing--0\.5 {
+    gap: 4px;
+}
+
+.grid.spacing--1 {
+    gap: 8px;
+}
+
+.grid.spacing--2 {
+    gap: 16px;
+}
+
+.grid.spacing--3 {
+    gap: 24px;
+}
+
+.grid.spacing--4 {
+    gap: 32px;
+}
+
+.grid.spacing--5 {
+    gap: 40px;
+}
+
+.grid.spacing--6 {
+    gap: 48px;
+}
+
+.grid.spacing--7 {
+    gap: 56px;
+}
+
+.grid.spacing--8 {
+    gap: 64px;
+}
+
+.grid.spacing--9 {
+    gap: 72px;
+}
+
+.grid.spacing--10 {
+    gap: 80px;
+}
+
+.grid.spacing--11 {
+    gap: 88px;
+}
+
+.grid.spacing--12 {
+    gap: 96px;
+}
+
+.grid.rowSpacing--0 {
+    row-gap: 0;
+}
+
+.grid.rowSpacing--0\.5 {
+    row-gap: 4px;
+}
+
+.grid.rowSpacing--1 {
+    row-gap: 8px;
+}
+
+.grid.rowSpacing--2 {
+    row-gap: 16px;
+}
+
+.grid.rowSpacing--3 {
+    row-gap: 24px;
+}
+
+.grid.rowSpacing--4 {
+    row-gap: 32px;
+}
+
+.grid.rowSpacing--5 {
+    row-gap: 40px;
+}
+
+.grid.rowSpacing--6 {
+    row-gap: 48px;
+}
+
+.grid.rowSpacing--7 {
+    row-gap: 56px;
+}
+
+.grid.rowSpacing--8 {
+    row-gap: 64px;
+}
+
+.grid.rowSpacing--9 {
+    row-gap: 72px;
+}
+
+.grid.rowSpacing--10 {
+    row-gap: 80px;
+}
+
+.grid.rowSpacing--11 {
+    row-gap: 88px;
+}
+
+.grid.rowSpacing--12 {
+    row-gap: 96px;
+}
+
+
+.grid.columnSpacing--0 {
+    column-gap: 0;
+}
+
+.grid.columnSpacing--0\.5 {
+    column-gap: 4px;
+}
+
+.grid.columnSpacing--1 {
+    column-gap: 8px;
+}
+
+.grid.columnSpacing--2 {
+    column-gap: 16px;
+}
+
+.grid.columnSpacing--3 {
+    column-gap: 24px;
+}
+
+.grid.columnSpacing--4 {
+    column-gap: 32px;
+}
+
+.grid.columnSpacing--5 {
+    column-gap: 40px;
+}
+
+.grid.columnSpacing--6 {
+    column-gap: 48px;
+}
+
+.grid.columnSpacing--7 {
+    column-gap: 56px;
+}
+
+.grid.columnSpacing--8 {
+    column-gap: 64px;
+}
+
+.grid.columnSpacing--9 {
+    column-gap: 72px;
+}
+
+.grid.columnSpacing--10 {
+    column-gap: 80px;
+}
+
+.grid.columnSpacing--11 {
+    column-gap: 88px;
+}
+
+.grid.columnSpacing--12 {
+    column-gap: 96px;
+}
+
+.grid.wrap--nowrap {
+    flex-wrap: nowrap;
+}
+
+.grid.wrap--wrap {
+    flex-wrap: wrap;
+}
+
+.grid.wrap--wrap-reverse {
+    flex-wrap: wrap-reverse;
+}
