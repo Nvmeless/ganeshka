@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export const Grid = ({ container, item, direction, justify, alignItems, spacing, rowSpacing, columnSpacing, wrap, ...props }) => {
+export const Grid = ({ container, item, direction, justify, alignItems, spacing, rowSpacing, columnSpacing, xs, sm, md, lg, xl, wrap, ...props }) => {
     const containerClass = container ? 'container' : '';
     const itemClass = item ? 'item' : '';
     const directionClass = direction
@@ -23,6 +23,21 @@ export const Grid = ({ container, item, direction, justify, alignItems, spacing,
     const columnSpacingClass = columnSpacing
         ? `columnSpacing--${columnSpacing}`
         : '';
+    const xsClass = xs
+        ? `xs--${xs}`
+        : '';
+    const smClass = sm
+        ? `sm--${sm}`
+        : '';
+    const mdClass = md
+        ? `md--${md}`
+        : '';
+    const lgClass = lg
+        ? `lg--${lg}`
+        : '';
+    const xlClass = xl
+        ? `xl--${xl}`
+        : '';
     const wrapClass = wrap
         ? `wrap--${wrap}`
         : '';
@@ -37,6 +52,11 @@ export const Grid = ({ container, item, direction, justify, alignItems, spacing,
             spacingClass,
             rowSpacingClass,
             columnSpacingClass,
+            xsClass,
+            smClass,
+            mdClass,
+            lgClass,
+            xlClass,
             wrapClass,
             props.className
         ].join(' ')} style={props.style}>
@@ -79,6 +99,26 @@ Grid.propTypes = {
      * */
     columnSpacing: PropTypes.oneOf([0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
+     * xs
+     * */
+    xs: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    /**
+     * sm
+     * */
+    sm: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    /**
+     * md
+     * */
+    md: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    /**
+     * lg
+     * */
+    lg: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    /**
+     * xl
+     * */
+    xl: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    /**
      * Wrap
      * */
     wrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse'])
@@ -91,18 +131,12 @@ Grid.defaultProps = {
     justify: 'flex-start',
     alignItems: 'stretch',
     spacing: 0,
+    rowSpacing: 0,
+    columnSpacing: 0,
+    xs: true,
+    sm: true,
+    md: true,
+    lg: true,
+    xl: true,
     wrap: 'nowrap'
 }
-
-// // Path: src\components\atoms\Grid\index.test.js
-// import React from 'react';
-// import { render } from '@testing-library/react';
-// import { Grid } from './Grid';
-
-// describe('Grid', () => {
-//     it('should render', () => {
-//         const { container } = render(<Grid />);
-//         expect(container).toBeInTheDocument();
-//     });
-// }
-

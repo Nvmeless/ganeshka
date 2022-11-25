@@ -189,19 +189,6 @@ storiesOf('Atoms/Grid', module)
         </Grid>
     ))
 
-    // skip nested grid for now
-    // .add('Nested Grid', () => (
-    //     <Grid container>
-    //         <Grid item>
-    //             <Grid container>
-    //                 <Grid item>
-
-    //                 </Grid>
-    //             </Grid>
-    //         </Grid>
-    //     </Grid>
-    // ))
-
     .add('Spacing', () => (
         <Grid container spacing={2}>
             <Grid item>
@@ -215,6 +202,37 @@ storiesOf('Atoms/Grid', module)
             </Grid>
         </Grid>
     ))
+
+    // row spacing
+    .add('Row Spacing', () => (
+        <Grid container rowSpacing={2}>
+            <Grid item>
+                <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }} />
+            </Grid>
+            <Grid item>
+                <div style={{ width: '100%', height: '100%', backgroundColor: 'green' }} />
+            </Grid>
+            <Grid item>
+                <div style={{ width: '100%', height: '100%', backgroundColor: 'blue' }} />
+            </Grid>
+        </Grid>
+    ))
+
+    // column spacing
+    .add('Column Spacing', () => (
+        <Grid container columnSpacing={2}>
+            <Grid item>
+                <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }} />
+            </Grid>
+            <Grid item>
+                <div style={{ width: '100%', height: '100%', backgroundColor: 'green' }} />
+            </Grid>
+            <Grid item>
+                <div style={{ width: '100%', height: '100%', backgroundColor: 'blue' }} />
+            </Grid>
+        </Grid>
+    ))
+
 
     .add('Breakpoints', () => (
         <Grid container spacing={2}>
@@ -246,62 +264,33 @@ storiesOf('Atoms/Grid', module)
 
     .add('Auto Layout with Breakpoints', () => (
         <Grid container spacing={2}>
-            <Grid item xs={12} sm>
+            <Grid item xs={12} sm={6}>
                 <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }} />
             </Grid>
-            <Grid item xs={12} sm>
+            <Grid item xs={12} sm={6}>
                 <div style={{ width: '100%', height: '100%', backgroundColor: 'green' }} />
             </Grid>
-            <Grid item xs={12} sm>
+            <Grid item xs={12} sm={6}>
                 <div style={{ width: '100%', height: '100%', backgroundColor: 'blue' }} />
             </Grid>
         </Grid>
     ))
 
-    .add('Auto Layout with Breakpoints and Fixed Width', () => (
+    .add('Auto Layout with Breakpoints and Fixed Height', () => (
         <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} style={{ height: '100px' }}>
                 <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }} />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} style={{ height: '100px' }}>
                 <div style={{ width: '100%', height: '100%', backgroundColor: 'green' }} />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} style={{ height: '100px' }}>
                 <div style={{ width: '100%', height: '100%', backgroundColor: 'blue' }} />
             </Grid>
         </Grid>
     ))
 
     .add('Auto Layout with Breakpoints and Fixed Width and Fixed Height', () => (
-        <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} style={{ height: '100px' }}>
-                <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }} />
-            </Grid>
-            <Grid item xs={12} sm={6} style={{ height: '100px' }}>
-                <div style={{ width: '100%', height: '100%', backgroundColor: 'green' }} />
-            </Grid>
-            <Grid item xs={12} sm={6} style={{ height: '100px' }}>
-                <div style={{ width: '100%', height: '100%', backgroundColor: 'blue' }} />
-            </Grid>
-        </Grid>
-    ))
-
-    .add('Auto Layout with Breakpoints and Fixed Width and Fixed Height and Fixed Width', () => (
-        <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} style={{ height: '100px', width: '100px' }}>
-                <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }} />
-            </Grid>
-            <Grid item xs={12} sm={6} style={{ height: '100px', width: '100px' }}>
-                <div style={{ width: '100%', height: '100%', backgroundColor: 'green' }} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} style={{ height: '100px', width: '100px' }}>
-                <div style={{ width: '100%', height: '100%', backgroundColor: 'blue' }} />
-            </Grid>
-        </Grid>
-    ))
-
-    .add('Auto Layout with Breakpoints and Fixed Width and Fixed Height and Fixed Width and Fixed Height', () => (
         <Grid container spacing={2}>
             <Grid item xs={12} sm={6} style={{ height: '100px', width: '100px' }}>
                 <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }} />
