@@ -1,15 +1,15 @@
 import React from "react";
-import {Card } from '../../components/atoms/Card/Card'
+import {Select } from '../../components/atoms/Select/Select'
 
 export default {
-    title:"Atoms/Card",
-    component: Card,
+    title:"Atoms/Select",
+    component: Select,
     argType: {
         backgroundColor: {control: 'color'}
     },
 }
 
-const Template = (args) => <Card {...args}/>
+const Template = (args) => <Select {...args}/>
 
 export const Primary = Template.bind({});
 Primary.args = {
