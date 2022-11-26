@@ -1,12 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Card } from './components/atoms/Card/Card';
+import { TimePicker } from './components/atoms/TimePicker/TimePicker';
 
 function App() {
   return (
     <div className="App">
-      <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>
+      <TimePicker label={"Basic Example"} value={"12:25 PM"}/>
     </div>
   );
 }
