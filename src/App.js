@@ -57,7 +57,7 @@ function App() {
         </Grid>
       </Grid>
       {/* Grid 3 */}
-      {/* <Grid container direction={"column"} rowSpacing={2}>
+      <Grid container direction={"column"} rowSpacing={2}>
         <Grid xs={12} md={12} spacing={1} wrap={"nowrap"}>
           <Grid item xs={6} md={8}>
             <div style={{ width: '100%', height: '100%', backgroundColor: 'pink' }}>6 / 8</div>
@@ -74,7 +74,7 @@ function App() {
             <div style={{ width: '100%', height: '100%', backgroundColor: 'darkkhaki' }}>6 / 8</div>
           </Grid>
         </Grid>
-      </Grid> */}
+      </Grid>
     </div >
   );
 }

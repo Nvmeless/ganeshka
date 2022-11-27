@@ -19,7 +19,7 @@ const DefaultTemplate = ({ children, ...args }) => (
                     style={{
                         width: "100%",
                         height: "100%",
-                        backgroundColor: "red",
+                        backgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16), // random color
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -105,5 +105,3 @@ ColumnSpacing.args = {
     xl: 12,
     wrap: 'wrap',
 };
-
-
