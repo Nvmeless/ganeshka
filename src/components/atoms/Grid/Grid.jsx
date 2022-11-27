@@ -1,80 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+import { StyledGrid } from './styles.js';
 
-export const Grid = ({ container, item, direction, justify, alignItems, spacing, rowSpacing, columnSpacing, xs, sm, md, lg, xl, wrap, ...props }) => {
+export const Grid = ({ ...props }) => {
     // if any breakpoints are defined, set all undefined breakpoints to the last defined breakpoint
-    if (xs || sm || md || lg || xl) {
-        if (sm === true) sm = xs;
-        if (md === true) md = sm;
-        if (lg === true) lg = md;
-        if (xl === true) xl = lg;
+    if (props.xs || props.sm || props.md || props.lg || props.xl) {
+        if (!props.sm) props.sm = props.xs;
+        if (!props.md) props.md = props.sm;
+        if (!props.lg) props.lg = props.md;
+        if (!props.xl) props.xl = props.lg;
     }
-    // console.log('xs', xs, 'sm', sm, 'md', md, 'lg', lg, 'xl', xl);
 
-    const containerClass = container ? 'container' : '';
-    const itemClass = item ? 'item' : '';
-    const directionClass = direction
-        ? `direction--${direction}`
-        : '';
-    const justifyClass = justify
-        ? `justify--${justify}`
-        : '';
-    const alignItemsClass = alignItems
-        ? `alignItems--${alignItems}`
-        : '';
-    const spacingClass = spacing
-        ? `spacing--${spacing}`
-        : '';
-    const rowSpacingClass = rowSpacing
-        ? `rowSpacing--${rowSpacing}`
-        : '';
-    const columnSpacingClass = columnSpacing
-        ? `columnSpacing--${columnSpacing}`
-        : '';
-    const xsClass = xs
-        ? `xs--${xs}`
-        : '';
-    const smClass = sm
-        ? `sm--${sm}`
-        : '';
-    const mdClass = md
-        ? `md--${md}`
-        : '';
-    const lgClass = lg
-        ? `lg--${lg}`
-        : '';
-    const xlClass = xl
-        ? `xl--${xl}`
-        : '';
-    const wrapClass = wrap
-        ? `wrap--${wrap}`
-        : '';
+    console.log(props);
+
     return (
-        <div className={[
-            'grid',
-            containerClass,
-            itemClass,
-            directionClass,
-            justifyClass,
-            alignItemsClass,
-            spacingClass,
-            rowSpacingClass,
-            columnSpacingClass,
-            xsClass,
-            smClass,
-            mdClass,
-            lgClass,
-            xlClass,
-            wrapClass,
-            props.className
-        ].join(' ')} style={props.style}>
+        <StyledGrid {...props}>
             {props.children}
-        </div>
-    )
+        </StyledGrid>
+    );
 }
 
 Grid.propTypes = {
+    /**
+     * Columns
+     * */
+    columns: PropTypes.number,
     /**
      * Is container ?
      * */
@@ -134,6 +84,7 @@ Grid.propTypes = {
 }
 
 Grid.defaultProps = {
+    columns: 12,
     container: false,
     item: false,
     direction: 'row',
@@ -142,10 +93,10 @@ Grid.defaultProps = {
     spacing: 0,
     rowSpacing: 0,
     columnSpacing: 0,
-    xs: true,
-    sm: true,
-    md: true,
-    lg: true,
-    xl: true,
+    xs: false,
+    sm: false,
+    md: false,
+    lg: false,
+    xl: false,
     wrap: 'wrap'
 }

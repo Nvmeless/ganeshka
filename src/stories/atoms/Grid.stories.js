@@ -20,9 +20,6 @@ const DefaultTemplate = ({ children, ...args }) => (
                         width: "100%",
                         height: "100%",
                         backgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16), // random color
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
                     }}
                 >
                     {n + 1}
@@ -31,6 +28,81 @@ const DefaultTemplate = ({ children, ...args }) => (
         ))}
     </Grid>
 )
+
+
+const TwoByTwoTemplate = ({ ...args }) => (
+    <>
+        <Grid {...args}>
+            <Grid item>
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "gold",
+                    }}
+                >1</div>
+            </Grid>
+            <Grid item>
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "pink",
+                    }}
+                >2</div>
+            </Grid>
+        </Grid>
+        <Grid {...args}>
+            <Grid item>
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "turquoise",
+                    }}
+                >3</div>
+            </Grid>
+            <Grid item>
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "lightblue",
+                    }}
+                >4</div>
+            </Grid>
+        </Grid>
+    </>
+)
+
+const AlignmentTemplate = ({ ...args }) => (
+    <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="flex-start"
+    >
+        <Grid item>
+            <div
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "gold",
+                }}
+            >1</div>
+        </Grid>
+        <Grid item>
+            <div
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "pink",
+                }}
+            >2</div>
+        </Grid>
+    </Grid>
+)
+
 
 
 
@@ -104,4 +176,23 @@ ColumnSpacing.args = {
     lg: 12,
     xl: 12,
     wrap: 'wrap',
+};
+
+export const TwoByTwo = TwoByTwoTemplate.bind({});
+
+export const Alignments = AlignmentTemplate.bind({});
+Alignments.args = {
+    container: true,
+    item: false,
+    direction: 'row',
+    justify: 'flex-start',
+    alignItems: 'flex-start',
+    spacing: 2,
+    rowSpacing: 2,
+    columnSpacing: 2,
+    xs: 1,
+    sm: 1,
+    md: 1,
+    lg: 1,
+    xl: 1,
 };
