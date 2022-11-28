@@ -2,12 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Card } from './components/atoms/Card/Card';
-
+import { ThemeProvider } from 'styled-components';
+import {getTheme} from './themes/default.js'
 function App() {
   return (
+    <ThemeProvider theme={getTheme()}>
     <div className="App">
-      <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>
+      Ganeshka toolkit
     </div>
+    </ThemeProvider>
   );
 }
 
