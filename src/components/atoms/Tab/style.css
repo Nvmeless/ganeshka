@@ -1,0 +1,40 @@
+.tab{
+    background-color: transparent;
+    /* border: none; */
+    cursor: pointer;
+}
+
+.tabLabel{
+    text-transform: uppercase;
+}
+
+.tabIcon svg{
+    width: 20px;
+    height: 20px;
+}
+
+.iconPosition--top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+    margin: 0 auto;
+}
+.iconPosition--start{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.iconPosition--end{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.iconPosition--bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
