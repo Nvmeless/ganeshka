@@ -1,14 +1,12 @@
 import React from 'react';
 import './App.css';
-import { ThemeProvider } from 'styled-components';
-import {getTheme} from './themes/default.js'
+import { TableContainer } from './components/atoms/TableContainer/TableContainer';
 
 function App() {
   return (
     <div className="App">
-      <ThemeProvider theme={getTheme()}>
-        {/* Mets ton element que tu dev ICI */}
-      </ThemeProvider>
+      <TableContainer>
+      </TableContainer>
     </div>
   );
 }
