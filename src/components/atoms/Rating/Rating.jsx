@@ -4,7 +4,7 @@ import {StyledRating} from './styles.js';
 import {FaStar, FaRegStar} from "react-icons/fa"
 
 
-export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLabelText, highlightSelectedOnly, icon, max, name, _onChange, onChangeActive, precision, readOnly, size, sx, value}) => {
+export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLabelText, highlightSelectedOnly, icon, IconContainerComponent, max, name, _onChange, onChangeActive, precision, readOnly, size, sx, value}) => {
     //     Rating.defaultProps = {
     //         defaultValue: 0,
     //         disabled: false,
@@ -21,12 +21,13 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
     var _defaultValue = defaultValue || 0;
     var _disabled = disabled || false;
     var _emptyIcon = () => emptyIcon || <FaRegStar fontSize="inherit"/>
-    var _emptyLabelText = emptyLabelText || 'Empty';
-    var _getLabelText = getLabelText || function defaultLabelText(value) { return `${value} Star${value !== 1 ? 's' : ''}`; };
+    //var _emptyLabelText = emptyLabelText || 'Empty';
+    //var _getLabelText = getLabelText || function defaultLabelText(value) { return `${value} Star${value !== 1 ? 's' : ''}`; };
     var _highlightSelectedOnly = highlightSelectedOnly || false;
     var _icon = () => icon || <FaStar fontSize="inherit"  color='#FFBA5A'/>;
+    //var _IconContainerComponent = IconContainerComponent || function IconContainer(props) { const { value, ...other } = props; return <span {...other} />; }
     var _max = max || 5;
-    var _name = name || "rating-part";
+    //var _name = name || "rating-part";
     var _precision = precision || 1;
     var _readOnly = readOnly || false;
     var _value = value || null;
@@ -34,9 +35,10 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
 
     const [rate, setRate] = useState(_value || _defaultValue)
     const [hover, setHover] = useState(undefined)
-    var stars = Array(_max).fill(0)
+    var icons = Array(_max).fill(0)
 
     const HandleRating = (rateValue) => {
+        console.log(rateValue)
         setRate(rateValue);
     }
 
@@ -48,19 +50,13 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
         setHover(undefined);
     }
 
-    const ShowStar = (index) => {
-        if ((hover || rate) > index){
-            return (
-                <_icon  />
-            )
-        } else {
-            return (
-                <_emptyIcon  />
-            )
-        }
+    // permet de calculer la taille du container d'icon
+    const widthIconContainer = () => {
+        return (rate * 100) / _max
     }
 
-    const ShowHighLightStar = (index) => {
+    const ShowHighLightIcon = (index) => {
+        console.log(index)
         if ((hover || rate) === index){
             return (
                 <_icon  />
@@ -73,8 +69,73 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
     }
 
     return(
-        <StyledRating size={size} >
-            {stars.map((_, index) => {
+        <StyledRating size={size} precision={precision} width_icon_container={widthIconContainer()} max={_max}>
+            
+            {(!_highlightSelectedOnly) &&
+                    <span className="emptyIconContainer icon-cursor-style">
+                        {
+                            icons.map((_, index) => {
+                                return <span key={index}><_emptyIcon  /></span>
+                            }
+                        )}
+
+                    </span>
+            }
+            
+            <span className="iconContainer">
+                {
+                    icons.map((_, index) => {
+                        if (_disabled){
+                            if (_highlightSelectedOnly){
+                                return (
+                                    <span className="star-disabled-highlight-style" key={index}>
+                                        {ShowHighLightIcon(index+1)}
+                                    </span>
+                                )
+                            } else {
+                                return (
+                                    <span className="star-disabled-style" key={index}>
+                                        <_icon  />
+                                    </span>
+                                )
+                            }
+                        } else {
+                            if (_readOnly) {
+                                if (_highlightSelectedOnly){
+                                    return (
+                                        <span className="star-readOnly-highlight-style" key={index}>
+                                            {ShowHighLightIcon(index+1)}
+                                        </span>
+                                    )
+                                } else {
+                                    return (
+                                        <span className="star-readOnly-style" key={index}>
+                                            <_icon  />
+                                        </span>
+                                    )
+                                }
+                            } else {
+                                if (_highlightSelectedOnly){
+                                    return (
+                                        <span className="star-highlight-style icon-cursor-style" key={index} onClick={() => HandleRating(index+1)} onMouseOver={() => HandleHover(index+1)} onMouseLeave={() => HandleLeave()}>
+                                            {ShowHighLightIcon(index+1)}
+                                        </span>
+                                    )
+                                } else {
+                                    return (
+                                        <span className="star-style icon-cursor-style" key={index} onClick={() => HandleRating(index+1)} onMouseOver={() => HandleHover(index+1)} onMouseLeave={() => HandleLeave()}>
+                                            <_icon  />
+                                        </span>
+                                    )
+                                }
+                            }
+                        }
+                    }
+                )}
+
+            </span>
+            {/* {icons.map((_, index) => {
+
                 if (_disabled){
                     if (_highlightSelectedOnly){
                         return (
@@ -121,7 +182,7 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
                     }
                 }
                 
-            })}
+            })} */}
         </StyledRating>
     )     
 }
@@ -138,11 +199,11 @@ Rating.propTypes ={
     /**
      * The icon to display when empty.
      */
-    emptyIcon: PropTypes.element,
+    emptyIcon: PropTypes.node,
      /**
      * The label read when the rating input is empty.
      */
-    emptyLabelText: PropTypes.string,
+    emptyLabelText: PropTypes.node,
     /**
      * Which size
      */
@@ -154,7 +215,11 @@ Rating.propTypes ={
     /**
      * The icon to display
      */
-    icon: PropTypes.element,
+    icon: PropTypes.node,
+     /**
+     * The component containing the icon.
+     */
+    IconContainerComponent: PropTypes.elementType,
      /**
      * Which max rating
      */
