@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Card } from './components/atoms/Card/Card';
+import { Rating } from './components/atoms/Rating/Rating';
 
 function App() {
   return (
     <div className="App">
-      <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>
+      <Rating defaultValue={2} disabled size="small"/>
+      <Rating defaultValue={2} readOnly/>
+      <Rating defaultValue={2} size="large"/>
+      <Rating defaultValue={2} size="large" highlightSelectedOnly/>
     </div>
   );
 }
