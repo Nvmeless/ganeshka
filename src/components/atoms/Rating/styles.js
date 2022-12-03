@@ -6,34 +6,44 @@ export const StyledRating = styled.div`
     position: relative;
     text-align: left;
     padding: 0px;
-
+    
+    // si le prop size est utilisé et/ou set à "medium"
     ${props => ((props?.size === "medium")||(!props?.size)) && css`
         width: ${props => parseInt(props?.max) * 24}px;
         height: 24px;
-        span, svg {
+        span {
             width: 24px; 
             height: 24px;
         }  
+        svg {
+            height: 24px;
+        }
         
     `}
+    // si le prop size est set à "small"
         ${props => (props?.size === "small") && css`
             width: ${props => parseInt(props?.max) * 18}px;
             height: 18px;
-            span, svg {
+            span {
+                width: 18px;
+                height: 18px;
+            } 
+            svg {
                 height: 18px;
             }
-            svg {
-                width: 18px;
-            } 
         `}
-        
+        // si le prop size est set à "large"
         ${props => (props?.size ==="large") && css`
             width: ${props => parseInt(props?.max) * 30}px;
             height: 30px;
-            svg {
+            .star-container{
                 width: 30px;
                 height: 30px;
-            } 
+            }
+            svg{
+                width: 30px;
+                height: 30px;
+            }
         `}
 
     .icon-cursor-style {
@@ -44,30 +54,12 @@ export const StyledRating = styled.div`
         opacity: 0.5;
     }
 
-    .iconContainer star-disabled-style, .star-style, .star-readOnly-style{
+    // les icons positif doivent recouvrir les icons vides (voir rating_view.png)
+    .active-star-style{
         position: absolute;
-        left: 0px;
-        z-index: 2;
-        ${props => ((props?.size === "medium")||(!props?.size)) && css`
-            height: 24px;
-        
-        `}
-        ${props => (props?.size === "small") && css`
-            height: 18px;
-        `}
-        
-        ${props => (props?.size ==="large") && css`
-            height: 30px;
-        `}
         white-space: nowrap;
         overflow: hidden;
     }
 
-    .emptyIconContainer{
-        position: absolute;
-        left: 0px;
-        width: 100%;
-        z-index: 1;
-    }
-
 `
+

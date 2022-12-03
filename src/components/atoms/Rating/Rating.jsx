@@ -4,7 +4,8 @@ import {StyledRating} from './styles.js';
 import {FaStar, FaRegStar} from "react-icons/fa"
 
 
-export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLabelText, highlightSelectedOnly, icon, IconContainerComponent, max, name, _onChange, onChangeActive, precision, readOnly, size, sx, value}) => {
+export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLabelText, highlightSelectedOnly, icon, IconContainerComponent, max, name, _onChange, onChangeActive, precision, readOnly, size, value}) => {
+    // Pour le moment inutilisable (err)
     //     Rating.defaultProps = {
     //         defaultValue: 0,
     //         disabled: false,
@@ -20,12 +21,11 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
     //    }
     var _defaultValue = defaultValue || 0;
     var _disabled = disabled || false;
-    var _emptyIcon = () => emptyIcon || <FaRegStar fontSize="inherit"/>
+    const DynamicEmptyIcon = () => emptyIcon || <FaRegStar fontSize="inherit"/>
     //var _emptyLabelText = emptyLabelText || 'Empty';
     //var _getLabelText = getLabelText || function defaultLabelText(value) { return `${value} Star${value !== 1 ? 's' : ''}`; };
     var _highlightSelectedOnly = highlightSelectedOnly || false;
-    var _icon = () => icon || <FaStar fontSize="inherit"  color='#FFBA5A'/>;
-    //var _IconContainerComponent = IconContainerComponent || function IconContainer(props) { const { value, ...other } = props; return <span {...other} />; }
+    const DynamicIcon = () => icon || <FaStar fontSize="inherit"  color='#FFBA5A'/>;
     var _max = max || 5;
     //var _name = name || "rating-part";
     var _precision = precision || 1;
@@ -38,7 +38,7 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
     var icons = Array(_max).fill(0)
 
     const HandleRating = (rateValue) => {
-        console.log(rateValue)
+        console.log(rateValue + " --> " + widthIconContainer(rateValue));
         setRate(rateValue);
     }
 
@@ -51,138 +51,96 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
     }
 
     // permet de calculer la taille du container d'icon
-    const widthIconContainer = () => {
-        return (rate * 100) / _max
+    const widthIconContainer = (rateValue) => {
+        return (rateValue * 100) / _max
     }
-
+    
+    // permet d'afficher unique la selection
     const ShowHighLightIcon = (index) => {
         console.log(index)
         if ((hover || rate) === index){
             return (
-                <_icon  />
+                <DynamicIcon  />
             )
         } else {
             return (
-                <_emptyIcon  />
+                <DynamicEmptyIcon  />
             )
         }
     }
 
     return(
-        <StyledRating size={size} precision={precision} width_icon_container={widthIconContainer()} max={_max}>
-            
-            {(!_highlightSelectedOnly) &&
-                    <span className="emptyIconContainer icon-cursor-style">
-                        {
-                            icons.map((_, index) => {
-                                return <span key={index}><_emptyIcon  /></span>
-                            }
-                        )}
-
-                    </span>
-            }
-            
-            <span className="iconContainer">
-                {
-                    icons.map((_, index) => {
-                        if (_disabled){
+        <StyledRating size={size} precision={precision} max={_max}>
+            {
+                // Pour chaque étoiles
+                icons.map((_, index) => {
+                    // si le props disabled est utilisé
+                    if (_disabled){
+                        // si le props highlightSelectedOnly est utilisé
+                        if (_highlightSelectedOnly){
+                            return (
+                                <span className="star-disabled-highlight-style" key={index}>
+                                    {ShowHighLightIcon(index+1)}
+                                </span>
+                            )
+                        // le props highlightSelectedOnly n'est pas utilisé
+                        } else {
+                            return (
+                                <span key={index}>
+                                    <span className="star-disabled-style active-star-style">
+                                        <DynamicIcon  />
+                                    </span>
+                                    <span className="star-disabled-style"><DynamicEmptyIcon /></span>
+                                </span>
+                                
+                            )
+                        }
+                    } else {
+                        // si le readOnly est utilisé
+                        if (_readOnly) {
+                            // si le props highlightSelectedOnly est utilisé
                             if (_highlightSelectedOnly){
                                 return (
-                                    <span className="star-disabled-highlight-style" key={index}>
+                                    <span className="star-readOnly-highlight-style" key={index}>
                                         {ShowHighLightIcon(index+1)}
                                     </span>
                                 )
+                            // le props highlightSelectedOnly n'est pas utilisé
                             } else {
                                 return (
-                                    <span className="star-disabled-style" key={index}>
-                                        <_icon  />
+                                    <span key={index}>
+                                        <span className="star-readOnly-style active-star-style">
+                                            <DynamicIcon  />
+                                        </span>
+                                        <span className="star-readOnly-style">
+                                            <DynamicEmptyIcon  />
+                                        </span>
                                     </span>
                                 )
                             }
                         } else {
-                            if (_readOnly) {
-                                if (_highlightSelectedOnly){
-                                    return (
-                                        <span className="star-readOnly-highlight-style" key={index}>
-                                            {ShowHighLightIcon(index+1)}
-                                        </span>
-                                    )
-                                } else {
-                                    return (
-                                        <span className="star-readOnly-style" key={index}>
-                                            <_icon  />
-                                        </span>
-                                    )
-                                }
+                            // si le props highlightSelectedOnly est utilisé
+                            if (_highlightSelectedOnly){
+                                return (
+                                    <span className="star-highlight-style icon-cursor-style" key={index} onClick={() => HandleRating(index+1)} onMouseOver={() => HandleHover(index+1)} onMouseLeave={() => HandleLeave()}>
+                                        {ShowHighLightIcon(index+1)}
+                                    </span>
+                                )
+                            // le props highlightSelectedOnly n'est pas utilisé
                             } else {
-                                if (_highlightSelectedOnly){
-                                    return (
-                                        <span className="star-highlight-style icon-cursor-style" key={index} onClick={() => HandleRating(index+1)} onMouseOver={() => HandleHover(index+1)} onMouseLeave={() => HandleLeave()}>
-                                            {ShowHighLightIcon(index+1)}
+                                return (
+                                    <span className="icon-cursor-style" key={index} onClick={() => HandleRating(index+1)} onMouseOver={() => HandleHover(index+1)} onMouseLeave={() => HandleLeave()}>
+                                        <span className="basic-star-style active-star-style" > {/*ajouter --> style={{width: index+1 <= rate ? "100%" : "0%"}} <-- err*/}
+                                            <DynamicIcon />
                                         </span>
-                                    )
-                                } else {
-                                    return (
-                                        <span className="star-style icon-cursor-style" key={index} onClick={() => HandleRating(index+1)} onMouseOver={() => HandleHover(index+1)} onMouseLeave={() => HandleLeave()}>
-                                            <_icon  />
-                                        </span>
-                                    )
-                                }
+                                        <span className="basic-star-style star-container"><DynamicEmptyIcon  /></span>
+                                    </span>
+                                )
                             }
                         }
                     }
-                )}
-
-            </span>
-            {/* {icons.map((_, index) => {
-
-                if (_disabled){
-                    if (_highlightSelectedOnly){
-                        return (
-                            <div className="star-disabled-highlight-style" key={index}>
-                                {ShowHighLightStar(index+1)}
-                            </div>
-                        )
-                    } else {
-                        return (
-                            <div className="star-disabled-style" key={index}>
-                                {ShowStar(index)}
-                            </div>
-                        )
-                    }
-                } else {
-                    if (_readOnly) {
-                        if (_highlightSelectedOnly){
-                            return (
-                                <div className="star-readOnly-highlight-style" key={index}>
-                                    {ShowHighLightStar(index+1)}
-                                </div>
-                            )
-                        } else {
-                            return (
-                                <div className="star-readOnly-style" key={index}>
-                                    {ShowStar(index)}  
-                                </div>
-                            )
-                        }
-                    } else {
-                        if (_highlightSelectedOnly){
-                            return (
-                                <div className="star-highlight-style" key={index} onClick={() => HandleRating(index+1)} onMouseOver={() => HandleHover(index+1)} onMouseLeave={() => HandleLeave()}>
-                                    {ShowHighLightStar(index+1)}
-                                </div>
-                            )
-                        } else {
-                            return (
-                                <div className="star-style" key={index} onClick={() => HandleRating(index+1)} onMouseOver={() => HandleHover(index+1)} onMouseLeave={() => HandleLeave()}>
-                                    {ShowStar(index)}
-                                </div>
-                            )
-                        }
-                    }
                 }
-                
-            })} */}
+            )}
         </StyledRating>
     )     
 }
