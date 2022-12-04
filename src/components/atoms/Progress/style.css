@@ -1,0 +1,55 @@
+body{
+  background-color: white;
+}
+
+.loader{
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.circular{
+  height: 100px;
+  position: relative;
+  width: 100px;
+  animation: rotate 2s linear infinite;
+}
+
+.circular-no_rotate {
+  height: 100px;
+  position: relative;
+  width: 100px;
+  transform: rotate(270deg);
+}
+
+
+.path {
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+  animation:
+   dash 1.5s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+
+@keyframes rotate{
+ 100%{
+  transform: rotate(360deg);
+ }
+}
+@keyframes dash{
+ 0%{
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+ }
+ 50%{
+  stroke-dasharray: 89,200;
+  stroke-dashoffset: -35;
+ }
+ 100%{
+  stroke-dasharray: 89,200;
+  stroke-dashoffset: -124;
+ }
+}

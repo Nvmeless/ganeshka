@@ -1,12 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Card } from './components/atoms/Card/Card';
+import { CircularProgress } from './components/atoms/Progress/Progress';
+
 
 function App() {
   return (
     <div className="App">
-      <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>
+        <CircularProgress color={"green"} varient={"determinate"} value={50}></CircularProgress>
+        <CircularProgress color={"blue"} ></CircularProgress>
     </div>
   );
 }
