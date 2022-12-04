@@ -1,30 +1,31 @@
 import PropTypes, { bool, func } from 'prop-types';
+import {StyledTableCell} from './styles.js';
+import './style.css';
 
 export const TableCell = ({align,children,classes,component,padding,scope,size,sortDirection,sx,variant,...props}) => {
-    
-    let temp_classes = [];
-    temp_classes.push((variant === 'head' ? 'MuiTableCell-head' : ''));
-    temp_classes.push((variant === 'body' ? 'MuiTableCell-body' : ''));
-    temp_classes.push((variant === 'footer' ? 'MuiTableCell-footer' : ''));
-    temp_classes.push((size === 'small' ? 'MuiTableCell-sizeSmall' : ''));
-    temp_classes.push((size === 'medium' ? 'MuiTableCell-sizeMedium' : ''));
-    temp_classes.push((padding === 'checkbox' ? 'MuiTableCell-paddingCheckbox' : ''));
-    temp_classes.push((padding === 'none' ? 'MuiTableCell-paddingNone' : ''));
-    temp_classes.push((align === 'left' ? 'MuiTableCell-alignLeft' : ''));
-    temp_classes.push((align === 'center' ? 'MuiTableCell-alignCenter' : ''));
-    temp_classes.push((align === 'right' ? 'MuiTableCell-alignRight' : ''));
-    temp_classes.push((align === 'justify' ? 'MuiTableCell-alignJustify' : ''));
+    classes = classes ? classes : '';
+    classes += ((variant === 'head' ? 'MuiTableCell-head' : ''));
+    classes += ((variant === 'body' ? 'MuiTableCell-body' : ''));
+    classes += ((variant === 'footer' ? 'MuiTableCell-footer' : ''));
+    classes += ((size === 'small' ? 'MuiTableCell-sizeSmall' : ''));
+    classes += ((size === 'medium' ? 'MuiTableCell-sizeMedium' : ''));
+    classes += ((padding === 'checkbox' ? 'MuiTableCell-paddingCheckbox' : ''));
+    classes += ((padding === 'none' ? 'MuiTableCell-paddingNone' : ''));
+    classes += ((align === 'left' ? 'MuiTableCell-alignLeft' : ''));
+    classes += ((align === 'center' ? 'MuiTableCell-alignCenter' : ''));
+    classes += ((align === 'right' ? 'MuiTableCell-alignRight' : ''));
+    classes += ((align === 'justify' ? 'MuiTableCell-alignJustify' : ''));
     return (
-        <td scope={scope} className={['MuiTableCell-root',classes, props?.className].join(' ') + ' ' +temp_classes.join(' ')} style={
+        <StyledTableCell  {...props} scope={scope} className={['MuiTableCell-root',classes, props?.className].join(' ')} style={
             {
                 ...{
-                    border: "solid black 2px",
                     size: size
                 }
             }
         }>
             {children}
-        </td>
+        </StyledTableCell>
+        
     )
 }
 

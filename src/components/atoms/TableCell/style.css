@@ -1,0 +1,35 @@
+.MuiTableCell-head{
+
+}
+.MuiTableCell-body{
+
+}
+.MuiTableCell-footer{
+
+}
+.MuiTableCell-sizeSmall{
+    font-size: 12px;
+}
+.MuiTableCell-sizeMedium{
+    font-size: 20px;
+}
+.MuiTableCell-paddingCheckbox{
+
+}
+.MuiTableCell-paddingNone{
+    padding: 0;
+}
+.MuiTableCell-alignLeft{
+    text-align: left;
+}
+.MuiTableCell-alignCenter{
+    text-align: center;
+
+}
+.MuiTableCell-alignRight{
+    text-align: right;
+
+}
+.MuiTableCell-alignJustify{
+    text-align: justify;
+}
