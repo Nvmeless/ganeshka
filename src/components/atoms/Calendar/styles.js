@@ -43,6 +43,36 @@ export default styled.div`
     }
   }
 
+  .agenda__year-chooser {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background-color: ${(props) => props.backgroundColor};
+    color: ${(props) => props.color};
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 10px;
+    font-size: 0.9em;
+    overflow: auto;
+
+    span {
+      padding: 7px 0;
+      border-radius: 100px;
+      cursor: pointer;
+    }
+
+    span:hover {
+      background-color: ${(props) => props.backgroundColor};
+      filter: brightness(85%);
+    }
+
+    span.selected {
+      color: ${(props) => props.backgroundColor};
+      background-color: ${(props) => props.color};
+    }
+  }
+
   .agenda__body-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

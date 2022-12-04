@@ -11,22 +11,24 @@ const DatePicker = (props) => {
 
   const inputRef = useRef();
 
-  // const formatToDateString = (e) => {
-  //   e.preventDefault();
-  //   const value = e.target.value;
-  //   const isDeleteKey = e.nativeEvent.inputType === "deleteContentBackward";
-  //   const isValidDateFormat = /^([0-9]{1,2}\/?)?([0-9]{1,2}\/?)?([0-9]{1,4})?$/g.test(value);
+  const formatToDateString = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const eventValue = e.target.value;
+    const isDeleteKey = e.nativeEvent.inputType === "deleteContentBackward";
+    const isValidDateFormat = /^([0-9]{1,2}\/?)?([0-9]{1,2}\/?)?([0-9]{1,4})?$/g.test(eventValue);
+    const isValidCompleteDateFormat = /^([0-9]{2}\/)([0-9]{2}\/)([0-9]{4})$/g.test(eventValue);
 
-  //   if (value.length > 10 || (!isValidDateFormat && !isDeleteKey)) return;
-
-  //   if (!isDeleteKey && [2,5].includes(value.length)) {
-  //     return setValue(`${value}/`);
-  //   }
-    
-  //   setValue(value);
-  //   const dateValue = value.split('/')
-  //   setFormattedValue({day: dateValue[0], month: dateValue[1], year: dateValue[2]})
-  // };
+    if (isValidDateFormat || isValidCompleteDateFormat) {
+      if (!isDeleteKey && [2,5].includes(eventValue.length)) {
+        return setValue(`${eventValue}/`);
+      }
+      setValue(eventValue)
+    }
+    if (isValidCompleteDateFormat) {
+      setFormattedValue(new Date(eventValue));
+    }
+  };
 
   const animateFocus = (e) => {
     e.preventDefault();
@@ -40,24 +42,16 @@ const DatePicker = (props) => {
     setDisplay(!display);
   }
 
-  const setFormattedValue = ({day, month, year}) => {
-    const newDate = date;
-    newDate.setDate(day);
-    newDate.setMonth(month);
-    newDate.setFullYear(year);
+  const setFormattedValue = (newDate) => {
     setDate(newDate);
-    props.onChange(date);
-    setValue(`${('0' + day).slice(-2)}/${('0' + (month + 1)).slice(-2)}/${year}`);
+    props.onChange(newDate);
   }
 
   useEffect(() => {
     if (props.value) {
-      setFormattedValue({
-        day: props.value?.getDate(),
-        month: props.value?.getMonth(),
-        year: props.value?.getFullYear()
-      })
+      return setFormattedValue(props.value)
     }
+    props.onChange(date);
   }, [])
 
   return (
@@ -66,9 +60,9 @@ const DatePicker = (props) => {
         value,
         ref: inputRef,
         className: 'datepicker__input',
-        onChange: props.onChange,
-        placeholder: 'DD/MM/YYYY',
-        readOnly: true,
+        onChange: formatToDateString,
+        placeholder: 'MM/DD/YYYY',
+        readOnly: props.disabled,
       })}
       {props.label && <label>{props.label}</label>}
       <span className='datepicker__icon' onClick={!props.disabled && displayCalendar}><CgCalendar size={25} color={props.color} /></span>

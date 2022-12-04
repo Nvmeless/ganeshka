@@ -1,12 +1,18 @@
+import { useState, useEffect, useRef } from 'react';
 import { RiArrowDropRightLine, RiArrowDropLeftLine } from 'react-icons/ri';
 import { MdArrowDropDown } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import StyledCalendar from './styles.js';
-import { useEffect } from 'react';
 
 const Calendar = (props) => {
+  const [isYearChooserDisplayed, setDisplayYearChooser] = useState(false);
+  const yearChooserRef = useRef();
+
   const daysName = ["Monday", "Tuesday", "Wenesday", "Thursday", "Friday", "Saturday", "Sunday"];
   const monthsName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const minYear = new Date().getFullYear() - 100;
+  const maxYear = new Date().getFullYear() + 100;
+  const yearsAvailable = Array(maxYear - minYear).fill(0);
 
   const getAllDaysInMonth = (year, month) => {
     const startDate = new Date(year, month, 1);
@@ -27,44 +33,62 @@ const Calendar = (props) => {
   const setPrevMonth = () => {
     const newMonth = props.value.getMonth() - 1;
     const isYearBoundaries = props.value.getMonth() === 0;
-    props.onChange({
-      day: props.value.getDate(),
-      month: isYearBoundaries ? monthsName.length - 1 : newMonth,
-      year: isYearBoundaries ? props.value.getFullYear() - 1 : props.value.getFullYear(),
-    })
+    const month = isYearBoundaries ? monthsName.length - 1 : newMonth;
+    const year = isYearBoundaries && props.value.getFullYear() > minYear ? props.value.getFullYear() - 1 : props.value.getFullYear();
+    props.onChange(new Date(year, month, props.value.getDate()))
   }
 
   const setNextMonth = () => {
     const newMonth = props.value.getMonth() + 1;
     const isYearBoundaries = props.value.getMonth() === monthsName.length - 1;
-    props.onChange({
-      day: props.value.getDate(),
-      month: isYearBoundaries ? 0 : newMonth,
-      year: isYearBoundaries ? props.value.getFullYear() + 1 : props.value.getFullYear(),
-    })
+    const month = isYearBoundaries ? 0 : newMonth;
+    const year = isYearBoundaries && props.value.getFullYear() < (maxYear - 1) ? props.value.getFullYear() + 1 : props.value.getFullYear();
+    props.onChange(new Date(year, month, props.value.getDate()))
+  }
+
+  const setYear = (year) => {
+    props.onChange(new Date(year, props.value.getMonth(), props.value.getDate()));
+  }
+
+  const displayYearChooser = () => {
+    setDisplayYearChooser(old => !old);
   }
 
   const selectDate = (day) => {
-    props.onChange({
-      day: day.getDate(),
-      month: day.getMonth(),
-      year: day.getFullYear()
-    })
+    props.onChange(day)
   }
+
+  useEffect(() => {
+    if (isYearChooserDisplayed) {
+      const selectedElementPos = yearChooserRef.current.querySelector('span.selected').offsetTop;
+      yearChooserRef.current.scrollTop = selectedElementPos - (yearChooserRef.current.offsetHeight / 2)
+    }
+  }, [isYearChooserDisplayed]);
 
   return (
     <StyledCalendar {...props} className={`agenda ${props.className}`} onClick={(e) => e.stopPropagation()}>
       <div className='agenda__header'>
         <div>
           <span>{monthsName[props.value.getMonth()]} {props.value.getFullYear()}</span>
-          <MdArrowDropDown size={30} color={props.color} />
+          <MdArrowDropDown size={30} color={props.color} onClick={displayYearChooser} />
         </div>
         <div>
-          <RiArrowDropLeftLine size={30} color={props.color} onClick={setPrevMonth} />
-          <RiArrowDropRightLine size={30} color={props.color} onClick={setNextMonth} />
+          {!isYearChooserDisplayed && (
+            <>
+              <RiArrowDropLeftLine size={30} color={props.color} onClick={setPrevMonth} />
+              <RiArrowDropRightLine size={30} color={props.color} onClick={setNextMonth} />
+            </>
+          )}
         </div>
       </div>
-      <div>
+      <div style={{ position: 'relative'}}>
+        {isYearChooserDisplayed && (
+          <div className='agenda__year-chooser' ref={yearChooserRef}>
+            {yearsAvailable.map((val, index) => (
+              <span key={minYear + index} onClick={() => setYear(minYear + index)} className={`${props.value.getFullYear() === minYear + index ? 'selected' : ''}`}>{minYear + index}</span>
+            ))}
+          </div>
+        )}
         <div className='agenda__body-header'>
           {daysName.map((dayName, index) => (
             <span key={index}>{props.dayOfWeekFormatter(dayName)}</span>
