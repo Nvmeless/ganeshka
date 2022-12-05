@@ -11,11 +11,8 @@ export const StyledRating = styled.div`
     ${props => ((props?.size === "medium")||(!props?.size)) && css`
         width: ${props => parseInt(props?.max) * 24}px;
         height: 24px;
-        span {
-            width: 24px; 
-            height: 24px;
-        }  
         svg {
+            width: 24px; 
             height: 24px;
         }
         
@@ -24,11 +21,8 @@ export const StyledRating = styled.div`
         ${props => (props?.size === "small") && css`
             width: ${props => parseInt(props?.max) * 18}px;
             height: 18px;
-            span {
-                width: 18px;
-                height: 18px;
-            } 
             svg {
+                width: 18px;
                 height: 18px;
             }
         `}
@@ -36,10 +30,6 @@ export const StyledRating = styled.div`
         ${props => (props?.size ==="large") && css`
             width: ${props => parseInt(props?.max) * 30}px;
             height: 30px;
-            .star-container{
-                width: 30px;
-                height: 30px;
-            }
             svg{
                 width: 30px;
                 height: 30px;
