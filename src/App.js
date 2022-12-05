@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
-import { Rating } from './components/atoms/Rating/Rating';
+import { Card } from './components/atoms/Card/Card';
+import { ThemeProvider } from 'styled-components';
+import {getTheme} from './themes/default.js'
 
 function App() {
   return (
+    <ThemeProvider theme={getTheme()}>
     <div className="App">
-      <Rating defaultValue={2.5} size="large" precision={0.5}/>
+      Ganeshka toolkit
     </div>
+    </ThemeProvider>
   );
 }
 
