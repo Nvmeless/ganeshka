@@ -12,12 +12,10 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
     ///////////////////////////////////////////////////////////////////
     var _max = max || 5;
     var _defaultValue = ((defaultValue > 0 && defaultValue <= _max) && defaultValue) || 0;
-    var _disabled = disabled || false;
     const DynamicEmptyIcon = () => emptyIcon || <FaRegStar fontSize="inherit"/>
     var _highlightSelectedOnly = highlightSelectedOnly || false;
     const DynamicIcon = () => icon || <FaStar fontSize="inherit"  color='#FFBA5A'/>;
     var _precision = precision || 1;
-    var _readOnly = readOnly || false;
     var _value = ((value > 0 && value <= _max) && value) || null;
     var _emptyLabelText = emptyLabelText || 'Empty';
     const defaultLabelText = (value) => { 
@@ -33,14 +31,83 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
     const [label, setLabel] = useState((!value && !defaultValue) ? _emptyLabelText : ((getLabelText && getLabelText)||defaultLabelText(rate)))
     const [isHovered, setIsHovered] = useState(false);
     const [mousePos, setMousePos] = useState({});
+    const [labelClass, setLabelClass] = useState("")
     const ratingContainerRef = useRef(null);
     
     
     ///////////////////////////////////////////////////////////////////
     //                       HOOKS & Functions                       //
     ///////////////////////////////////////////////////////////////////
-    // on conserve la position de la sourie lorsqu'elle se déplace
-    useEffect(() => {
+   
+    const handleClassNameRoot = () => {
+        var rootClassName = "MuiRating-root";
+        if (size && size === "small") {
+            rootClassName += " MuiRating-sizeSmall";
+                
+        } else if (size && size === "large"){
+            rootClassName += " MuiRating-sizeLarge";
+
+        } else {
+            rootClassName += " MuiRating-sizeMedium";
+        }
+
+        if(disabled){
+            rootClassName += " Mui-disabled";
+        }
+
+        if(readOnly){
+            rootClassName += " Mui-readOnly";
+        }
+
+        return rootClassName;          
+
+    }
+
+    const handleClassNameLabel = () => {
+        if (rate === 0) {
+            setLabelClass("MuiRating-labelEmptyValueActive");
+        } else {
+            setLabelClass("MuiRating-label");
+        }
+    }
+
+    const calculateRating = (precision) => {
+        // on récupère les coordonnées du composant rating (sa taille et sa distance par rapport à la gauche)
+        const { width, left } = ratingContainerRef.current.getBoundingClientRect();
+        // la position de notre curseur dans une icon [en pourcent]
+        let mousePosXInIconPercent = (mousePos.x - left) / width;
+        // la position de notre curseur dans le container total d'icons [en pourcent]
+        const mousePosXInContainerPercent = mousePosXInIconPercent * _max;
+        // la note la plus proche de la position de notre sourie
+        const nearestRate = Math.round((mousePosXInContainerPercent + precision / 2) / precision) * precision;
+        const newRate = Number(nearestRate.toFixed(precision.toString().split(".")[1]?.length || 0))
+        setLabel(((getLabelText && getLabelText)|| defaultLabelText(newRate)));
+        handleClassNameLabel()
+        return (newRate)
+    };
+
+    const handleRating = (precision) => {
+        setRate(calculateRating(precision));
+    }
+
+    const handleHover = (precision) => {
+        setIsHovered(true)
+        setHover(calculateRating(precision));
+    }
+
+    const handleLeave = () => {
+        setIsHovered(false);
+        setHover(undefined);
+        setLabel(((getLabelText && getLabelText)|| defaultLabelText(rate)))
+        handleClassNameLabel()
+    }
+
+     // on conserve la position de la sourie lorsqu'elle se déplace
+     useEffect(() => {
+        if (labelClass === ""){
+            handleClassNameLabel();
+        }
+
         const handleMouseMove = (event) => {
             setMousePos({ x: event.clientX, y: event.clientY });
         };
@@ -55,72 +122,41 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
         };
     }, []);
 
-    const calculateRating = (precision) => {
-        // on récupère les coordonnées du composant rating (sa taille et sa distance par rapport à la gauche)
-        const { width, left } = ratingContainerRef.current.getBoundingClientRect();
-        // la position de notre curseur dans une icon [en pourcent]
-        let mousePosXInIconPercent = (mousePos.x - left) / width;
-        // la position de notre curseur dans le container total d'icons [en pourcent]
-        const mousePosXInContainerPercent = mousePosXInIconPercent * _max;
-        // la note la plus proche de la position de notre sourie
-        const nearestRate = Math.round((mousePosXInContainerPercent + precision / 2) / precision) * precision;
-        const newRate = Number(nearestRate.toFixed(precision.toString().split(".")[1]?.length || 0))
-        setLabel(((getLabelText && getLabelText)|| defaultLabelText(newRate)));
-        return (newRate)
-    };
-
-    const HandleRating = (precision) => {
-        setRate(calculateRating(precision));
-    }
-
-    const HandleHover = (precision) => {
-        setIsHovered(true)
-        setHover(calculateRating(precision));
-    }
-
-    const HandleLeave = () => {
-        setIsHovered(false);
-        setHover(undefined);
-        setLabel(((getLabelText && getLabelText)|| defaultLabelText(rate)))
-
-    }
-
     ///////////////////////////////////////////////////////////////////
     //                       RETURN CONTENT                          //
     ///////////////////////////////////////////////////////////////////
 
     return(
-        <StyledRating className={classes} size={size} precision={precision} max={_max} sx={sx}>
-            <Box ref={ratingContainerRef} sx={{
-                display: "inline-flex",
-                position: "relative",
-                textAlign: "left",
-            }}>
-                {
-                    // Pour chaque étoiles
-                    [...new Array(_max)].map((_, index) => {
-                        //si une icone est  survolée alors la valeurs de la note = valeur survolée
-                        //sinon note = valeur sélectionné précédement ou par défaut
-                        const currentRate = isHovered ? hover : rate;
-                        // si la note actuelle n'est pas valable ou qu'elle est plus petite que l'icone 
-                        // courant --> afficher une icone vide
-                        const showEmptyIcon = currentRate <= 0 || currentRate < index + 1;
-                        // si la note actuelle n'est pas égale à l'index de l'icone courant --> afficher une icone vide
-                        const isActiveRating = currentRate !== 1;
-                        const isRatingWithPrecision = currentRate % 1 !== 0;
-                        // si la note est égale à l'index supérieur le plus proche --> true
-                        const isRatingEqualToIndex = Math.ceil(currentRate) === index + 1;
-                        // si toutes les conditions précédentes sont respectées --> true
-                        const showRatingWithPrecision =
-                        isActiveRating && isRatingWithPrecision && isRatingEqualToIndex;
+        <StyledRating precision={precision} max={_max} sx={sx}>
+            <div className={handleClassNameRoot()}>
+                <Box ref={ratingContainerRef} className="container-icons-style" sx={{
+                    display: "inline-flex",
+                    position: "relative",
+                    textAlign: "left",
+                }}>
+                    {
+                        // Pour chaque étoiles
+                        [...new Array(_max)].map((_, index) => {
+                            //si une icone est  survolée alors la valeurs de la note = valeur survolée
+                            //sinon note = valeur sélectionné précédement ou par défaut
+                            const currentRate = isHovered ? hover : rate;
+                            // si la note actuelle n'est pas valable ou qu'elle est plus petite que l'icone 
+                            // courant --> afficher une icone vide
+                            const showEmptyIcon = currentRate <= 0 || currentRate < index + 1;
+                            // si la note actuelle n'est pas égale à l'index de l'icone courant --> afficher une icone vide
+                            const isActiveRating = currentRate !== 1;
+                            const isRatingWithPrecision = currentRate % 1 !== 0;
+                            // si la note est égale à l'index supérieur le plus proche --> true
+                            const isRatingEqualToIndex = Math.ceil(currentRate) === index + 1;
+                            // si toutes les conditions précédentes sont respectées --> true
+                            const showRatingWithPrecision =
+                            isActiveRating && isRatingWithPrecision && isRatingEqualToIndex;
 
-                        // si le props disabled est utilisé
-                        if (_disabled){
                             // si le props highlightSelectedOnly est utilisé
                             if (_highlightSelectedOnly){
                                 return (
-                                    <Box key={index} position="relative" className="star-disabled-highlight-style">
-                                        <Box sx={{width: (currentRate === index + 1) ? "100%":"0%"}} className='active-star-style'>
+                                    <Box key={index} position="relative" className={(!readOnly && !disabled) && "icon-cursor-style"} onClick={() => (!readOnly && !disabled) && handleRating(1)} onMouseOver={() => (!readOnly && !disabled) && handleHover(1)} onMouseLeave={() => (!readOnly && !disabled) && handleLeave()}>
+                                        <Box sx={{width: (currentRate === index + 1) ? "100%":"0%"}} className='MuiRating-iconActive'>
                                             <DynamicIcon />
                                         </Box>
                                         <Box>
@@ -131,79 +167,23 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
                             // le props highlightSelectedOnly n'est pas utilisé
                             } else {
                                 return (
-                                    <Box key={index} position="relative">
-                                        <Box sx={{width: showRatingWithPrecision ? `${(rate % 1) * 100}%`:"0%"}} className="star-disabled-style active-star-style">
-                                            <DynamicIcon  />
+                                    <Box key={index} position="relative" className={(!readOnly && !disabled) && "icon-cursor-style"} onClick={() =>(!readOnly && !disabled) && (((onChange) && onChange) || handleRating(_precision))} onMouseOver={() => (!readOnly && !disabled) && (((onChangeActive) && onChangeActive) || handleHover(_precision))} onMouseLeave={() => (!readOnly && !disabled) && handleLeave()}>
+                                        <Box sx={{width: showRatingWithPrecision ? `${(currentRate % 1) * 100}%`:"0%"}} className='MuiRating-iconActive'>
+                                            <DynamicIcon />
                                         </Box>
-                                        <Box className="star-disabled-style">
+                                        <Box>
                                             {showEmptyIcon ? <DynamicEmptyIcon /> :  <DynamicIcon />}
                                         </Box>
                                     </Box>
-                                    
                                 )
                             }
-                        } else {
-                            // si le readOnly est utilisé
-                            if (_readOnly) {
-                                // si le props highlightSelectedOnly est utilisé
-                                if (_highlightSelectedOnly){
-                                    return (
-                                        <Box key={index} position="relative" className="star-readOnly-highlight-style">
-                                            <Box sx={{width: (currentRate === index + 1) ? "100%":"0%"}} className='active-star-style'>
-                                                <DynamicIcon />
-                                            </Box>
-                                            <Box>
-                                                <DynamicEmptyIcon />
-                                            </Box>
-                                        </Box>
-                                    )
-                                // le props highlightSelectedOnly n'est pas utilisé
-                                } else {
-                                    return (
-                                        <Box key={index} position="relative" >
-                                            <Box sx={{width: showRatingWithPrecision ? `${(rate % 1) * 100}%`:"0%"}} className='active-star-style'>
-                                                <DynamicIcon />
-                                            </Box>
-                                            <Box>
-                                                {showEmptyIcon ? <DynamicEmptyIcon /> :  <DynamicIcon />}
-                                            </Box>
-                                        </Box>
-                                    )
-                                }
-                            } else {
-                                // si le props highlightSelectedOnly est utilisé
-                                if (_highlightSelectedOnly){
-                                    return (
-                                        <Box key={index} position="relative" className="star-highlight-style icon-cursor-style" onClick={() => HandleRating(1)} onMouseOver={() => HandleHover(1)} onMouseLeave={() => HandleLeave()}>
-                                            <Box sx={{width: (currentRate === index + 1) ? "100%":"0%"}} className='active-star-style'>
-                                                <DynamicIcon />
-                                            </Box>
-                                            <Box>
-                                                <DynamicEmptyIcon />
-                                            </Box>
-                                        </Box>
-                                    )
-                                // le props highlightSelectedOnly n'est pas utilisé
-                                } else {
-                                    return (
-                                        <Box key={index} position="relative" className="icon-cursor-style" onClick={() =>(((onChange) && onChange) || HandleRating(_precision))} onMouseOver={() => (((onChangeActive) && onChangeActive) || HandleHover(_precision))} onMouseLeave={() => HandleLeave()}>
-                                            <Box sx={{width: showRatingWithPrecision ? `${(currentRate % 1) * 100}%`:"0%"}} className='active-star-style'>
-                                                <DynamicIcon />
-                                            </Box>
-                                            <Box>
-                                                {showEmptyIcon ? <DynamicEmptyIcon /> :  <DynamicIcon />}
-                                            </Box>
-                                        </Box>
-                                    )
-                                }
-                            }
                         }
-                    }
-                )}
-            </Box>
-            <Box className="MuiRating-label">
-                <p>{label}</p>
-            </Box>
+                    )}
+                </Box>
+                <Box className={labelClass}>
+                    <p>{label}</p>
+                </Box>
+            </div>
         </StyledRating>
     )     
 }

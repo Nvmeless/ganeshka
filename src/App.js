@@ -8,7 +8,8 @@ function App() {
   return (
     <ThemeProvider theme={getTheme()}>
     <div className="App">
-        <Rating precision={0.5} size="large"/>
+        <Rating precision={0.5} defaultValue={1.5} size="large" emptyLabelText="0 avis" highlightSelectedOnly readOnly/>
+        {/* <Rating precision={0.5} size="large" emptyLabelText="0 avis" getlabelText={(value) => { return `${value} Icon ${value !== 1 ? 's' : ''}`; }}/> */}
     </div>
     </ThemeProvider>
   );
