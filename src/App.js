@@ -42,7 +42,7 @@ function App() {
           </Grid>
         </Grid> */}
       {/* Grid 2 */}
-      <Grid container columns={30} spacing={2}>
+      <Grid container columns={8} spacing={2}>
         <Grid item xs={8}>
           <div style={{ width: '100%', height: '100%', backgroundColor: 'darkorange' }}>8</div>
         </Grid>

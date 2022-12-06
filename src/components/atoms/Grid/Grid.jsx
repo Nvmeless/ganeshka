@@ -1,23 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledGrid } from './styles.js';
+import { StyledGridContainer, StyledGridItem } from './styles.js';
 
 export const Grid = ({ ...props }) => {
-    // if any breakpoints are defined, set all undefined breakpoints to the last defined breakpoint
-    if (props.xs || props.sm || props.md || props.lg || props.xl) {
-        if (!props.sm) props.sm = props.xs;
-        if (!props.md) props.md = props.sm;
-        if (!props.lg) props.lg = props.md;
-        if (!props.xl) props.xl = props.lg;
+    const setChildProps = (data) => {
+        if (data.xs || data.sm || data.md || data.lg || data.xl) {
+            if (!data.sm) data.sm = data.xs;
+            if (!data.md) data.md = data.sm;
+            if (!data.lg) data.lg = data.md;
+            if (!data.xl) data.xl = data.lg;
+        }
+
+        const childProps = {
+            xs: data.xs,
+            sm: data.sm,
+            md: data.md,
+            lg: data.lg,
+            xl: data.xl,
+            columns: props.columns,
+            spacing: props.spacing
+        }
+
+        return childProps;
     }
 
-    console.log(props);
-
-    return (
-        <StyledGrid {...props}>
-            {props.children}
-        </StyledGrid>
-    );
+    if (props.container) {
+        return (
+            <StyledGridContainer {...props}>
+                {/* {props.children} */}
+                {React.Children.map(props.children, child => (
+                    <StyledGridItem {...setChildProps({ ...child.props })}>
+                        {child.props.children}
+                    </StyledGridItem>
+                ))}
+            </StyledGridContainer >
+        );
+    }
 }
 
 Grid.propTypes = {
@@ -60,23 +78,23 @@ Grid.propTypes = {
     /**
      * xs
      * */
-    xs: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    xs: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * sm
      * */
-    sm: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    sm: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * md
      * */
-    md: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    md: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * lg
      * */
-    lg: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    lg: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * xl
      * */
-    xl: PropTypes.oneOf(['auto', 'none', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    xl: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * Wrap
      * */
@@ -90,6 +108,7 @@ Grid.defaultProps = {
     direction: 'row',
     justify: 'flex-start',
     alignItems: 'stretch',
+    wrap: 'wrap',
     spacing: 0,
     rowSpacing: 0,
     columnSpacing: 0,
@@ -97,6 +116,5 @@ Grid.defaultProps = {
     sm: false,
     md: false,
     lg: false,
-    xl: false,
-    wrap: 'wrap'
+    xl: false
 }
