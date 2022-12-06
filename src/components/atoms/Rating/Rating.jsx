@@ -5,7 +5,7 @@ import {FaStar, FaRegStar} from "react-icons/fa"
 import Box from "@mui/material/Box";
 
 
-export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLabelText, highlightSelectedOnly, icon, IconContainerComponent, max, name, _onChange, onChangeActive, precision, readOnly, size, value}) => {
+export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelText, getLabelText, highlightSelectedOnly, icon, max, name, onChange, onChangeActive, precision, readOnly, size, value, sx}) => {
 
     ///////////////////////////////////////////////////////////////////
     //                       INIT PROPS                              //
@@ -19,10 +19,10 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
     var _precision = precision || 1;
     var _readOnly = readOnly || false;
     var _value = ((value > 0 && value <= _max) && value) || null;
-    //var _name = name || "rating-part";
-    //var _emptyLabelText = emptyLabelText || 'Empty';
-    //var _getLabelText = getLabelText || function defaultLabelText(value) { return `${value} Star${value !== 1 ? 's' : ''}`; };
-
+    var _emptyLabelText = emptyLabelText || 'Empty';
+    const defaultLabelText = (value) => { 
+        return `${value} Star${value !== 1 ? 's' : ''}`; 
+    };
 
     ///////////////////////////////////////////////////////////////////
     //                       INIT Vars                               //
@@ -30,11 +30,12 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
 
     const [rate, setRate] = useState(_value || _defaultValue)
     const [hover, setHover] = useState(undefined)
+    const [label, setLabel] = useState((!value && !defaultValue) ? _emptyLabelText : ((getLabelText && getLabelText)||defaultLabelText(rate)))
     const [isHovered, setIsHovered] = useState(false);
     const [mousePos, setMousePos] = useState({});
     const ratingContainerRef = useRef(null);
     
-
+    
     ///////////////////////////////////////////////////////////////////
     //                       HOOKS & Functions                       //
     ///////////////////////////////////////////////////////////////////
@@ -63,7 +64,9 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
         const mousePosXInContainerPercent = mousePosXInIconPercent * _max;
         // la note la plus proche de la position de notre sourie
         const nearestRate = Math.round((mousePosXInContainerPercent + precision / 2) / precision) * precision;
-        return (Number(nearestRate.toFixed(precision.toString().split(".")[1]?.length || 0)))
+        const newRate = Number(nearestRate.toFixed(precision.toString().split(".")[1]?.length || 0))
+        setLabel(((getLabelText && getLabelText)|| defaultLabelText(newRate)));
+        return (newRate)
     };
 
     const HandleRating = (precision) => {
@@ -76,8 +79,10 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
     }
 
     const HandleLeave = () => {
-        setIsHovered(false)
+        setIsHovered(false);
         setHover(undefined);
+        setLabel(((getLabelText && getLabelText)|| defaultLabelText(rate)))
+
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -85,7 +90,7 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
     ///////////////////////////////////////////////////////////////////
 
     return(
-        <StyledRating size={size} precision={precision} max={_max}>
+        <StyledRating className={classes} size={size} precision={precision} max={_max} sx={sx}>
             <Box ref={ratingContainerRef} sx={{
                 display: "inline-flex",
                 position: "relative",
@@ -181,7 +186,7 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
                                 // le props highlightSelectedOnly n'est pas utilisé
                                 } else {
                                     return (
-                                        <Box key={index} position="relative" className="icon-cursor-style" onClick={() => HandleRating(_precision)} onMouseOver={() => HandleHover(_precision)} onMouseLeave={() => HandleLeave()}>
+                                        <Box key={index} position="relative" className="icon-cursor-style" onClick={() =>(((onChange) && onChange) || HandleRating(_precision))} onMouseOver={() => (((onChangeActive) && onChangeActive) || HandleHover(_precision))} onMouseLeave={() => HandleLeave()}>
                                             <Box sx={{width: showRatingWithPrecision ? `${(currentRate % 1) * 100}%`:"0%"}} className='active-star-style'>
                                                 <DynamicIcon />
                                             </Box>
@@ -196,6 +201,9 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
                     }
                 )}
             </Box>
+            <Box className="MuiRating-label">
+                <p>{label}</p>
+            </Box>
         </StyledRating>
     )     
 }
@@ -205,6 +213,10 @@ export const Rating = ({defaultValue, disabled, emptyIcon, emptyLabelText, getLa
 ///////////////////////////////////////////////////////////////////
 
 Rating.propTypes ={ 
+    /**
+     * Which dafault value
+     */
+    classes: PropTypes.object,
     /**
      * Which dafault value
      */
@@ -233,10 +245,6 @@ Rating.propTypes ={
      * The icon to display
      */
     icon: PropTypes.node,
-    /**
-     * The component containing the icon.
-     */
-    IconContainerComponent: PropTypes.elementType,
     /**
      * Which max rating
      */

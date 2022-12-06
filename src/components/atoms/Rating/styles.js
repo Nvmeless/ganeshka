@@ -3,8 +3,9 @@ import styled, {css} from "styled-components";
 
 export const StyledRating = styled.div`
 
-    position: relative;
-    text-align: left;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0px;
     
     // si le prop size est utilisé et/ou set à "medium"
@@ -14,6 +15,9 @@ export const StyledRating = styled.div`
         svg {
             width: 24px; 
             height: 24px;
+        }
+        .MuiRating-label p{
+            font-size: 18px;
         }
         
     `}
@@ -25,6 +29,9 @@ export const StyledRating = styled.div`
                 width: 18px;
                 height: 18px;
             }
+            .MuiRating-label p{
+                font-size: 14px;
+            }
         `}
         // si le prop size est set à "large"
         ${props => (props?.size ==="large") && css`
@@ -33,6 +40,9 @@ export const StyledRating = styled.div`
             svg{
                 width: 30px;
                 height: 30px;
+            }
+            .MuiRating-label p{
+                font-size: 23px;
             }
         `}
 
@@ -49,6 +59,12 @@ export const StyledRating = styled.div`
         position: absolute;
         white-space: nowrap;
         overflow: hidden;
+    }
+
+    .MuiRating-label p{
+        text-align: center;
+        margin: auto;
+        margin-left: 10px;
     }
 
 `
