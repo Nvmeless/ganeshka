@@ -24,6 +24,14 @@ body{
   transform: rotate(270deg);
 }
 
+.dash {
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+  animation:
+   dash-varient 3s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
 
 .path {
   stroke-dasharray: 1,200;
@@ -33,6 +41,27 @@ body{
   stroke-linecap: round;
 }
 
+
+@keyframes dash-varient{
+  0%{
+   stroke-dasharray: 1,200;
+  }
+  25%{
+   stroke-dasharray: 50,200;
+  }
+  50%{
+   stroke-dasharray: 89,200;
+  }
+  75%{
+   stroke-dasharray: 120,200;
+  }
+  80%{
+   stroke-dasharray: 150,200;
+  }
+  100%{
+   stroke-dasharray: 0,200;
+  }
+ }
 
 @keyframes rotate{
  100%{
@@ -53,3 +82,14 @@ body{
   stroke-dashoffset: -124;
  }
 }
+
+.test {
+  position: absolute;
+  height: auto;
+  width: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 12px;
+}
+
