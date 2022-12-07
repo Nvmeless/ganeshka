@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './style.css';
 
+
+//Premier composant
 export const CircularProgress = ({ value, color, varient }) => {
 
     const [perimeter, setPerimeter] = useState();
@@ -23,6 +25,7 @@ export const CircularProgress = ({ value, color, varient }) => {
             )
         }
     }
+
     return (
         <svg className={varient && value ? "circular-no_rotate" : "circular"}>
             {varient && value ?
@@ -34,7 +37,7 @@ export const CircularProgress = ({ value, color, varient }) => {
     )
 }
 
-
+//Deuxième composant
 export const CircularProgressWithLabel = ({ value, interval, color, varient }) => {
 
     const [Circlevalue, setCircleValue] = useState(value);
@@ -42,7 +45,6 @@ export const CircularProgressWithLabel = ({ value, interval, color, varient }) =
     if (Circlevalue === "progress") {
         setCircleValue(0);
     }
-    
     if (Circlevalue >= 100) {
         setCircleValue(0);
     }
@@ -55,15 +57,39 @@ export const CircularProgressWithLabel = ({ value, interval, color, varient }) =
         setCircleValue(Circlevalue + interval);
     }
 
-
     return (
         <div style={{
             position: 'relative'
         }}>
             <CircularProgress value={Circlevalue} color={color} varient={varient} />
-            <div className='test'>
+            <div className='circular-label'>
                 {Circlevalue}%
             </div>
+        </div>
+    )
+}
+
+
+//Troisième composant
+export const LinearProgress = ({backgroundColor, lineColor }) => {
+    return (
+        <div className='progress-container'>
+            <div style={{
+                position: 'absolute',
+                width: 100 + '%',
+                height: 100 + '%',
+                backgroundColor: backgroundColor ? backgroundColor : "rgb(72, 101, 124)",
+                zIndex : 0
+            }}></div>
+            <div style={{
+                position: 'absolute',
+                width: 100 + '%',
+                height: 100 + '%',
+                backgroundColor: lineColor ? lineColor : "rgb(144, 202, 249)",
+                animation: 'progress 1.5s linear infinite'
+    
+            }}
+            ></div>
         </div>
     )
 }

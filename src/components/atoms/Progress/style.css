@@ -1,5 +1,5 @@
 body{
-  background-color: white;
+  background: radial-gradient(circle at 10% 17%,#001518 0,#040c18 93%);
 }
 
 .loader{
@@ -41,6 +41,32 @@ body{
   stroke-linecap: round;
 }
 
+.circular-label {
+  position: absolute;
+  height: auto;
+  width: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 12px;
+  color: white
+}
+
+
+.path-determinate {
+  transition: all 0.3s ease-in-out;
+  stroke-linecap: round;
+}
+
+.progress-container {
+  height: 7px;
+  width: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+
 
 @keyframes dash-varient{
   0%{
@@ -68,6 +94,8 @@ body{
   transform: rotate(360deg);
  }
 }
+
+
 @keyframes dash{
  0%{
   stroke-dasharray: 1,200;
@@ -83,13 +111,22 @@ body{
  }
 }
 
-.test {
-  position: absolute;
-  height: auto;
-  width: auto;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -60%);
-  font-size: 12px;
-}
 
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  25% {
+    width: 25%;
+    margin-left: 20%;
+  }
+  50% {
+    width: 40%;
+    margin-left: 40%;
+  }
+  100% {
+    width: 50%;
+    margin-left: 100%;
+  }
+}
+  
