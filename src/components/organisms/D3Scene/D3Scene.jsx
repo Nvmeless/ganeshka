@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useInterval } from 'react';
 
 const generateDataset = () => (
   Array(10).fill(0).map(() => ([
@@ -28,7 +28,12 @@ const D3Scene = ({height = 400 , width = 400, ...props}) => {
         .attr("r",  10)
   }, [dataset])
 
-  
+  useInterval(() => {
+    const newDataset = generateDataset()
+    console.log("Hey")
+    setDataset(newDataset)
+  }, 20000)
+
   return (
     <svg
       height={height}
