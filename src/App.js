@@ -9,7 +9,7 @@ function App() {
         <CircularProgress color={"green"} varient={"determinate"} value={"progress"}></CircularProgress>
         <CircularProgress color={"green"} varient={"determinate"} value={25}></CircularProgress>
         <CircularProgress color={"red"} ></CircularProgress>
-        <CircularProgressWithLabel varient={"determinate"} value={"progress"} interval={5} ></CircularProgressWithLabel>
+        <CircularProgressWithLabel varient={"determinate"} value={"progress"} interval={10} ></CircularProgressWithLabel>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type';
 import { useEffect, useState } from 'react';
 import './style.css';
 
@@ -36,38 +35,34 @@ export const CircularProgress = ({ value, color, varient }) => {
 }
 
 
-export const CircularProgressWithLabel = ({ value, interval ,color, varient }) => {
+export const CircularProgressWithLabel = ({ value, interval, color, varient }) => {
 
-    // const [Circlevalue, setCircleValue] = useState(value);
+    const [Circlevalue, setCircleValue] = useState(value);
 
-    // if (Circlevalue === "progress") {
-    //     setCircleValue(0);
-    // }
-    // useEffect(() => {
-    //     if (Circlevalue >= 100) {
-    //         setCircleValue(0);
-    //     }
-    //     else if (Circlevalue < 100 && Circlevalue !== 0) {
-    //         setInterval(() => {
-    //             console.log(Circlevalue)
-    //             setCircleValue(Circlevalue);
-    //         }, 1000)
-    //     }
-    //     else if(Circlevalue == 0){
-    //         const newValue = Circlevalue + interval;
-    //         setCircleValue(newValue);
-    //     }
-    // })
+    if (Circlevalue === "progress") {
+        setCircleValue(0);
+    }
+    
+    if (Circlevalue >= 100) {
+        setCircleValue(0);
+    }
+    else if (Circlevalue < 100 && Circlevalue !== 0) {
+        setTimeout(() => {
+            setCircleValue(Circlevalue + interval);
+        }, 1000)
+    }
+    else if (Circlevalue == 0) {
+        setCircleValue(Circlevalue + interval);
+    }
+
 
     return (
         <div style={{
             position: 'relative'
         }}>
-
-
-            <CircularProgress value={value} color={color} varient={varient} />
+            <CircularProgress value={Circlevalue} color={color} varient={varient} />
             <div className='test'>
-                {value}%
+                {Circlevalue}%
             </div>
         </div>
     )
