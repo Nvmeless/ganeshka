@@ -1,29 +1,45 @@
 import * as d3 from 'd3';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
-const generateDataset = () => {
-  
-}
+const generateDataset = () => (
+  Array(10).fill(0).map(() => ([
+    Math.random() * 400 + 10,
+    Math.random() * 400 + 10,
+  ]))
+)
 
 
-const D3Scene = () => {
+const D3Scene = ({height = 400 , width = 400, ...props}) => {
 
   const ref = useRef()
+  const [dataset, setDataset] = useState(
+    generateDataset()
+  )
+
+
 
   useEffect(() => {
     const svgElement = d3.select(ref.current)
-    svgElement.append("circle")
-      .attr("cx", 150)
-      .attr("cy", 70)
-      .attr("r",  50)
-  }, [])
+    svgElement.selectAll("circle")
+      .data(dataset)
+      .join("circle")
+        .attr("cx", d => d[0])
+        .attr("cy", d => d[1])
+        .attr("r",  10)
+  }, [dataset])
 
-
+  
   return (
     <svg
+      height={height}
+      width={width}
+      // viewBox="0 0 100 50"
       ref={ref}
     />
   )
 }
+
+
+
 
 export default D3Scene
