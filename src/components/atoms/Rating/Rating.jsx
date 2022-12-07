@@ -5,7 +5,7 @@ import {FaStar, FaRegStar} from "react-icons/fa"
 import Box from "@mui/material/Box";
 
 
-export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelText, getLabelText, highlightSelectedOnly, icon, max, name, onChange, onChangeActive, precision, readOnly, size, value, sx}) => {
+export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelText, getLabelText, highlightSelectedOnly, icon, max, name, onChange, onChangeActive, precision, readOnly, size, value, valueActive, sx}) => {
 
     ///////////////////////////////////////////////////////////////////
     //                       INIT PROPS                              //
@@ -71,7 +71,7 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
         }
     }
 
-    const calculateRating = (precision) => {
+    const calculateNewRating = (precision) => {
         // on récupère les coordonnées du composant rating (sa taille et sa distance par rapport à la gauche)
         const { width, left } = ratingContainerRef.current.getBoundingClientRect();
         // la position de notre curseur dans une icon [en pourcent]
@@ -80,25 +80,31 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
         const mousePosXInContainerPercent = mousePosXInIconPercent * _max;
         // la note la plus proche de la position de notre sourie
         const nearestRate = Math.round((mousePosXInContainerPercent + precision / 2) / precision) * precision;
-        const newRate = Number(nearestRate.toFixed(precision.toString().split(".")[1]?.length || 0))
-        setLabel(((getLabelText && getLabelText)|| defaultLabelText(newRate)));
-        handleClassNameLabel()
+        var newRate = Number(nearestRate.toFixed(precision.toString().split(".")[1]?.length || 0))
+        
+        if (newRate < 0) {
+            newRate = 0;
+        } else if (newRate > _max){
+            newRate = _max;
+        }
+        setLabel(((getLabelText && getLabelText(newRate))|| defaultLabelText(newRate)));
+        handleClassNameLabel();
         return (newRate)
     };
 
     const handleRating = (precision) => {
-        setRate(calculateRating(precision));
+        setRate(calculateNewRating(precision));
     }
 
     const handleHover = (precision) => {
         setIsHovered(true)
-        setHover(calculateRating(precision));
+        setHover(calculateNewRating(precision));
     }
 
     const handleLeave = () => {
         setIsHovered(false);
         setHover(undefined);
-        setLabel(((getLabelText && getLabelText)|| defaultLabelText(rate)))
+        setLabel(((getLabelText && getLabelText(rate))|| defaultLabelText(rate)))
         handleClassNameLabel()
     }
 
@@ -106,6 +112,14 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
      useEffect(() => {
         if (labelClass === ""){
             handleClassNameLabel();
+        }
+        if (value){
+            console.log("HERE")
+            setRate(value);
+        }
+        if (valueActive){
+            console.log("HERE2")
+            setHover(valueActive);
         }
 
         const handleMouseMove = (event) => {
@@ -120,14 +134,14 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
                 handleMouseMove
             );
         };
-    }, []);
+    }, [value, valueActive]);
 
     ///////////////////////////////////////////////////////////////////
     //                       RETURN CONTENT                          //
     ///////////////////////////////////////////////////////////////////
 
     return(
-        <StyledRating precision={precision} max={_max} sx={sx}>
+        <StyledRating  precision={precision} max={_max} sx={sx}>
             <div className={handleClassNameRoot()}>
                 <Box ref={ratingContainerRef} className="container-icons-style" sx={{
                     display: "inline-flex",
@@ -167,7 +181,7 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
                             // le props highlightSelectedOnly n'est pas utilisé
                             } else {
                                 return (
-                                    <Box key={index} position="relative" className={(!readOnly && !disabled) && "icon-cursor-style"} onClick={() =>(!readOnly && !disabled) && (((onChange) && onChange) || handleRating(_precision))} onMouseOver={() => (!readOnly && !disabled) && (((onChangeActive) && onChangeActive) || handleHover(_precision))} onMouseLeave={() => (!readOnly && !disabled) && handleLeave()}>
+                                    <Box key={index} position="relative" className={(!readOnly && !disabled) && "icon-cursor-style"} onClick={() =>(!readOnly && !disabled) && ((onChange && onChange(calculateNewRating(_precision)))||handleRating(_precision))} onMouseOver={() => (!readOnly && !disabled) && (((onChangeActive) && onChangeActive(calculateNewRating(_precision))) || handleHover(_precision))} onMouseLeave={() => (!readOnly && !disabled) && handleLeave()}>
                                         <Box sx={{width: showRatingWithPrecision ? `${(currentRate % 1) * 100}%`:"0%"}} className='MuiRating-iconActive'>
                                             <DynamicIcon />
                                         </Box>
