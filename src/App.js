@@ -6,6 +6,16 @@ import { ThemeProvider } from 'styled-components';
 import {getTheme} from './themes/default.js'
 import D3Scene from './components/organisms/D3Scene/D3Scene.jsx';
 function App() {
+  fetch('https://api.github.com/users/Nvmeless/repos').then(
+  resp => resp.json() // this returns a promise
+).then(repos => {
+  console.log('REPOS FETCHED')
+  for (const repo of repos) {
+    // console.log(repo.name);
+  }
+}).catch(ex => {
+  console.error(ex);
+})
   return (
     <ThemeProvider theme={getTheme()}>
     <div className="App">
