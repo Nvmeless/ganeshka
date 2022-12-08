@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
-import { useRef, useEffect, useState, useInterval } from 'react';
-
+import { useRef, useEffect, useState  } from 'react';
+import useInterval from '../../../hooks/useInterval.tsx'
 const generateDataset = () => (
   Array(10).fill(0).map(() => ([
     Math.random() * 400 + 10,
@@ -32,7 +32,7 @@ const D3Scene = ({height = 400 , width = 400, ...props}) => {
     const newDataset = generateDataset()
     console.log("Hey")
     setDataset(newDataset)
-  }, 20000)
+  }, 1000)
 
   return (
     <svg
