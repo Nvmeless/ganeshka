@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       Ganeshka toolkit
     </div>
-    <D3Scene></D3Scene>
+    <D3Scene width={1920} height={720}></D3Scene>
     </ThemeProvider>
   );
 }
