@@ -80,7 +80,6 @@
     "@storybook/react": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
     "babel-plugin-named-exports-order": "^0.0.2",
-    "http-server": "^14.1.1",
     "prop-types": "^15.8.1",
     "webpack": "^5.75.0"
   }
