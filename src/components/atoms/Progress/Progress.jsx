@@ -12,6 +12,7 @@ export const CircularProgress = ({ value, color, varient }) => {
         const perimeter = circle.getTotalLength();
         setPerimeter(perimeter * value / 100);
     })
+    
 
     const loadVarient = () => {
         if (typeof value == "number") {
@@ -71,7 +72,49 @@ export const CircularProgressWithLabel = ({ value, interval, color, varient }) =
 
 
 //Troisième composant
-export const LinearProgress = ({backgroundColor, lineColor }) => {
+export const LinearProgress = ({backgroundColor, lineColor, varient }) => {
+
+
+    const switchVarient = (varient) => {
+        switch (varient) {
+            case "determinate":
+                console.log(varient)
+                return loadVarientDeterminate();
+            default: 
+                console.log(varient)
+                return loadRegularProgress();
+        }
+    }
+
+
+    const loadRegularProgress = () => {
+        return (
+            <div style={{
+                position: 'absolute',
+                width: 100 + '%',
+                height: 100 + '%',
+                backgroundColor: lineColor ? lineColor : "rgb(144, 202, 249)",
+                animation: 'progress 1.5s linear infinite'
+    
+            }}></div>
+        )
+    }
+
+
+    const loadVarientDeterminate = () => {
+            return (
+                <div style={{
+                    position: 'absolute',
+                    width: 100 + '%',
+                    height: 100 + '%',
+                    backgroundColor: backgroundColor ? backgroundColor : "rgb(144, 202, 249)",
+                    animation: 'progress-determinate 4s ease infinite'
+                }}></div>
+            )
+    }
+
+
+    
     return (
         <div className='progress-container'>
             <div style={{
@@ -81,15 +124,7 @@ export const LinearProgress = ({backgroundColor, lineColor }) => {
                 backgroundColor: backgroundColor ? backgroundColor : "rgb(72, 101, 124)",
                 zIndex : 0
             }}></div>
-            <div style={{
-                position: 'absolute',
-                width: 100 + '%',
-                height: 100 + '%',
-                backgroundColor: lineColor ? lineColor : "rgb(144, 202, 249)",
-                animation: 'progress 1.5s linear infinite'
-    
-            }}
-            ></div>
+            {switchVarient(varient)}
         </div>
     )
 }

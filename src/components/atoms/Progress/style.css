@@ -130,3 +130,37 @@ body{
   }
 }
   
+
+@keyframes progress-determinate {
+  0% {
+    width: 0%;
+  }
+  10% {
+    width: 10%;
+  }
+  15% {
+    width: 15%;
+  }
+  25% {
+    width: 25%;
+  }
+  35% {
+    width: 35%;
+  }
+  50% {
+    width: 50%;
+  }
+  60% {
+    width: 60%;
+  }
+  75% {
+    width: 75%;
+  }
+  90% {
+    width: 100%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+  

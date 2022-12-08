@@ -10,7 +10,8 @@ function App() {
         <CircularProgress color={"rgb(72, 101, 124)"} varient={"determinate"} value={75}></CircularProgress>
         <CircularProgress color={"rgb(144, 202, 249)"} ></CircularProgress>
         <CircularProgressWithLabel color={"rgb(72, 101, 124)"} varient={"determinate"} value={"progress"} interval={10} ></CircularProgressWithLabel>
-        <LinearProgress backgroundColor={false} lineColor={false} value={90}></LinearProgress>
+        <LinearProgress backgroundColor={false} lineColor={false} varient={"determinate"}></LinearProgress>
+        <LinearProgress></LinearProgress>
     </div>
   );
 }
