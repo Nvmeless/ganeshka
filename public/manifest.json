@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "App",
+  "name": "Mon App",
   "icons": [
     {
     "src": "favicon.ico",
@@ -28,7 +28,7 @@
 
 
   ],
-  "description": "Weather forecast information",
+  "description": "Description",
   "screenshots": [
     {
       "src": "logo512.png",
