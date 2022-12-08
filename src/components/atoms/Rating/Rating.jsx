@@ -34,11 +34,11 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
     const [labelClass, setLabelClass] = useState("")
     const ratingContainerRef = useRef(null);
     
-    
     ///////////////////////////////////////////////////////////////////
     //                       HOOKS & Functions                       //
     ///////////////////////////////////////////////////////////////////
    
+    //Composition de la className root en fonction du prop size
     const handleClassNameRoot = () => {
         var rootClassName = "MuiRating-root";
         if (size && size === "small") {
@@ -63,6 +63,7 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
 
     }
 
+    //Composition de la className Label en fonction de l'existance d'une note ou non
     const handleClassNameLabel = () => {
         if (rate === 0) {
             setLabelClass("MuiRating-labelEmptyValueActive");
@@ -82,11 +83,14 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
         const nearestRate = Math.round((mousePosXInContainerPercent + precision / 2) / precision) * precision;
         var newRate = Number(nearestRate.toFixed(precision.toString().split(".")[1]?.length || 0))
         
+        // on s'assure qu'aucune sortie d'interval ne soit possible
         if (newRate < 0) {
             newRate = 0;
         } else if (newRate > _max){
             newRate = _max;
         }
+        // si une fonction getLabelText existe pour traiter l'affichage du label en fonction de la note --> on l'utilise
+        // sinon on garde le traitement par défaut
         setLabel(((getLabelText && getLabelText(newRate))|| defaultLabelText(newRate)));
         handleClassNameLabel();
         return (newRate)
@@ -113,12 +117,13 @@ export const Rating = ({classes, defaultValue, disabled, emptyIcon, emptyLabelTe
         if (labelClass === ""){
             handleClassNameLabel();
         }
+
+        // si un traitement est fait sur la note dans App.js on modifie la valeur à chaque modif de la note dans les props
         if (value){
-            console.log("HERE")
             setRate(value);
         }
+        // si un traitement est fait sur la noteActive dans App.js on modifie la valeur à chaque modif de la note dans les props
         if (valueActive){
-            console.log("HERE2")
             setHover(valueActive);
         }
 

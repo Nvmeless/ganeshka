@@ -80,6 +80,7 @@ export const StyledRating = styled.div`
         text-align: left;
     }
     
+    ${props => ((props?.sx) && props?.sx)}
 
 `
 
