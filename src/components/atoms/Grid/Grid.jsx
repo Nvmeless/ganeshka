@@ -58,7 +58,7 @@ Grid.propTypes = {
     /**
      * Justify
      * */
-    justify: PropTypes.oneOf(['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']),
+    justifyContent: PropTypes.oneOf(['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']),
     /**
      * Align items
      * */
@@ -106,7 +106,7 @@ Grid.defaultProps = {
     container: false,
     item: false,
     direction: 'row',
-    justify: 'flex-start',
+    justifyContent: 'flex-start',
     alignItems: 'stretch',
     wrap: 'wrap',
     spacing: 0,
