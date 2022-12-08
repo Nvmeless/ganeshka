@@ -4,10 +4,13 @@ import { registerRoute } from 'workbox-routing';
 import useInterval from '../../../hooks/useInterval.tsx'
 
 const move = ({vector, x,y}) => {
+
+  let quotien = 15
+
   return {
 
-    y: (() => (y + (Math.random() * (Math.random() < .5) ? .15 : -.15) ))(),
-    x: (() => (x + (Math.random() * (Math.random() < .5) ? .15 : -.15) ))(),
+    y: (() => (y + (Math.random() * (Math.random() < .5) ? quotien : -quotien) ))(),
+    x: (() => (x + (Math.random() * (Math.random() < .5) ? quotien: -quotien) ))(),
     vector: vector
   }
 }
