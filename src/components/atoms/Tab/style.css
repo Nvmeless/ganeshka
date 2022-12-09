@@ -1,6 +1,6 @@
 .tab{
     background-color: transparent;
-    /* border: none; */
+    border: none;
     cursor: pointer;
 }
 
@@ -37,4 +37,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.tabActive{
+    color: red;
 }

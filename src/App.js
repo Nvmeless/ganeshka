@@ -12,8 +12,8 @@ function App() {
       <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>
       <Container>
 
-        <Tab label={"Item One"} value={"1"} icon={<FaAmazon />} iconPosition={'bottom'}/>
-        <Tab label={"Item One"} value={"1"} icon={"icon"}/>
+        <Tab label={"Item One"} value={"1"}/>
+        <Tab label={"Item One"} value={"1"} icon={"icon"} iconPosition={'bottom'}/>
         <Tab label={"Item One"} value={"1"} icon={"icon"}/>
       </Container>
     </div>
