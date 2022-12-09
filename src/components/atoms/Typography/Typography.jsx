@@ -1,13 +1,44 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {StyledTypography,StyledTitle} from './styles.js';
+import {StyledTypography,StyledTitleOne,StyledTitleTwo, StyledTitleThree, StyledTitleFour, StyledTitleFive, StyledTitleSix,StyledWrap,StyledGutterBottom,Styledparagraph} from './styles.js';
 
 export const Typography = ({...props}) => {
-    const {component} = props;
-    console.log(component,props);
+    const {component,noWrap,gutterBottom,paragraph} = props;
     if (component === 'h1'){
-        return( <StyledTitle {...props}></StyledTitle>)
+        return( <StyledTitleOne {...props}></StyledTitleOne>)
     }
+    else if (component === 'h2'){
+        return( <StyledTitleTwo {...props}></StyledTitleTwo>)
+    }
+    else if (component === 'h3'){
+        return( <StyledTitleThree {...props}></StyledTitleThree>)
+    }
+    else if (component === 'h4'){
+        return( <StyledTitleFour {...props}></StyledTitleFour>)
+    }
+    else if (component === 'h5'){
+        return( <StyledTitleFive {...props}></StyledTitleFive>)
+    }
+    else if (component === 'h6'){
+        return( <StyledTitleSix {...props}></StyledTitleSix>)
+    }
+    if (noWrap === true)
+    {
+        return( <StyledWrap {...props}></StyledWrap>)
+    }
+    if (gutterBottom === true)
+    {
+        return( <StyledGutterBottom {...props}></StyledGutterBottom>)
+    }
+    
+    if (paragraph === true)
+    {
+        return( <Styledparagraph {...props}></Styledparagraph>)
+    }
+    
+    
+    
+    
 
     return( <StyledTypography {...props}></StyledTypography>)
     
