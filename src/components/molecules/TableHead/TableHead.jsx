@@ -1,16 +1,12 @@
 import React from "react";
 import PropTypes, { bool, func, object } from 'prop-types';
-import styled, { css, useTheme, withTheme } from "styled-components";
-const StyledTHead = styled.thead`
-color:red;
-${(props) => {if(props?.primary){return css`background-color:${props => props.theme.primary}`}return css`background-color:${props => props.theme.secondary}`}}
-background-color:${props => props.primary ? props.theme.primary : props.theme.secondary};
-`;
+import styled, { css, withTheme } from "styled-components";
+import StyledTHead from "./style";
+
 class TableHead extends React.Component {
 
     constructor(props){
         super(props);
-
         }
 
     render(){
@@ -28,13 +24,6 @@ class TableHead extends React.Component {
             </StyledTHead>
         )
     }
-
-/*     definiteColor = () => {
-        if(this.theme.primary){
-            return this.theme.primary;
-        }
-        return this.theme.secondary;
-    } */
 
 }
 
