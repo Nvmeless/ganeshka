@@ -2,10 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-
-
-
-
 export const Modal = ({...props}) => {
 
     const background = props.hideBackdrop && 'rgba(255,255,255)' || 'rgba(0,0,0,0.7)' 
@@ -27,19 +23,52 @@ export const Modal = ({...props}) => {
         right: 0,
         top: 0,
         bottom: 0,
-        zIndex: 1000
-    }
-    
-    var CONTENT_STYLES = {
         textAlign: 'center',
         zIndex: 1000
     }
+    
 
     const inputReference = useRef(null);
 
     useEffect(() => {  
-        
 
+        if(props.open && !props.disableScrollLock){
+            document.body.style.overflow = 'hidden';
+        }
+        else if(!props.open && !props.disableScrollLock){
+            document.body.style.overflow = '';
+        }
+
+        if(props.open && !props.disableEnforceFocus){
+            const focusableModalElements = inputReference.current.querySelectorAll(
+                'a[href], button:not([disabled]), textarea, input, select'
+              );
+
+              const firstElement = focusableModalElements[0]
+              const lastElement =
+                focusableModalElements[focusableModalElements.length - 1]
+
+            firstElement.focus();
+
+            document.addEventListener('keydown', function handleFocus(e) {
+                    if(e.key === 'Tab'){
+                        // if going forward by pressing tab and lastElement is active shift focus to first focusable element 
+                        if (!e.shiftKey && document.activeElement === lastElement) {
+                            firstElement.focus()
+                            return e.preventDefault()
+                        }
+                    
+                        // if going backward by pressing tab and firstElement is active shift focus to last focusable element 
+                        if (e.shiftKey && document.activeElement === firstElement) {
+                            lastElement.focus()
+                            e.preventDefault()
+                        }
+                }
+                
+                    
+            })
+        }
+        
         if(props.open && !props.disableAutoFocus){
             inputReference.current.focus();
         }
@@ -50,6 +79,7 @@ export const Modal = ({...props}) => {
         }
 
         if (props.open && !props.disableEscapeKeyDown){
+            
             function handleEscape(e) {
                 if(e.keyCode === 27)
                     props.onClose();
@@ -60,7 +90,6 @@ export const Modal = ({...props}) => {
             return function cleanup() {
             document.removeEventListener('keydown', handleEscape);
             }
-        
         }
     }, [props.open]);
 
@@ -68,10 +97,10 @@ export const Modal = ({...props}) => {
         if(!props.disablePortal){
             return ReactDOM.createPortal(
                 <div className="overlay" onClick={props.onClose} style={OVERLAY_STYLES} autoFocus>
-                    <div className={['modal']} onClick={(e) => {
+                    <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
                         e.stopPropagation();
                     }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
-                        <div className="content" style={CONTENT_STYLES} >
+                        <div className="content"  >
                             {props.children}
                         </div>
                     </div>
@@ -80,13 +109,10 @@ export const Modal = ({...props}) => {
         }
         return (
             <div className="overlay" onClick={props.onClose} style={OVERLAY_STYLES}>
-                <div className={['modal']} onClick={(e) => {
+                <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
                     e.stopPropagation();
-                }} style={MODAL_STYLES}>
-                    <div className="content" style={CONTENT_STYLES}>
+                }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
                         {props.children}
-                        
-                    </div>
                 </div>
             </div>
         )
