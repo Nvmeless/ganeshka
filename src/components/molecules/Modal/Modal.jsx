@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export const Modal = ({...props}) => {
 
-    const background = props.hideBackdrop && 'rgba(255,255,255)' || 'rgba(0,0,0,0.7)' 
+    const background = !props.hideBackdrop && ('rgba(0,0,0,0.7)' || 'rgba(255,255,255)') 
 
     var MODAL_STYLES = {
         position: 'fixed',
@@ -100,9 +100,7 @@ export const Modal = ({...props}) => {
                     <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
                         e.stopPropagation();
                     }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
-                        <div className="content"  >
                             {props.children}
-                        </div>
                     </div>
                 </div>
             , document.getElementById('portal'))
