@@ -44,16 +44,16 @@ function App() {
       {/* Grid 2 */}
       <Grid container columns={8} spacing={2}>
         <Grid item xs={8}>
-          <div style={{ width: '100%', height: '100%', backgroundColor: 'darkorange' }}>8</div>
+          <div style={{ backgroundColor: 'darkorange' }}>8</div>
         </Grid>
         <Grid item xs={4}>
-          <div style={{ width: '100%', height: '100%', backgroundColor: 'darkslateblue' }}>4</div>
+          <div style={{ backgroundColor: 'darkslateblue' }}>4</div>
         </Grid>
         <Grid item xs={4}>
-          <div style={{ width: '100%', height: '100%', backgroundColor: 'plum' }}>4</div>
+          <div style={{ backgroundColor: 'plum' }}>4</div>
         </Grid>
         <Grid item xs={8}>
-          <div style={{ width: '100%', height: '100%', backgroundColor: 'gold' }}>8</div>
+          <div style={{ backgroundColor: 'gold' }}>8</div>
         </Grid>
       </Grid>
       {/* Grid 3 */}

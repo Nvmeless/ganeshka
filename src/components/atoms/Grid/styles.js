@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-
 //TODO: Add grid item styles
 
 export const StyledGridContainer = styled.div`
@@ -12,14 +11,15 @@ export const StyledGridContainer = styled.div`
   flex-direction: ${props => props?.direction && props.direction};
   justify-content: ${props => props?.justifyContent && props.justifyContent};
   align-items: ${props => props?.alignItems && props.alignItems};
-  // align-content: ${props => props?.alignContent && props.alignContent};
   row-gap: ${props => props?.rowSpacing && props.rowSpacing * 8}px;
   column-gap: ${props => props?.columnSpacing && props.columnSpacing * 8}px;
   gap: ${props => props?.spacing && props.spacing * 8}px;
 `
 
 export const StyledGridItem = styled.div`
-  width: 100%;
+  // width: 100%;
+  flex: 1;
+
   ${props => (props?.xs && props.xs < props.columns) && css`
     @media (min-width: 0px) {
       max-width: calc(${(props.xs / props.columns) * 100}% - ${props.spacing * 4}px);
