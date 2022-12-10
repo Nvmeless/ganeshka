@@ -6,6 +6,7 @@ export const Grid = ({ ...props }) => {
     if(!props.rowSpacing && props.spacing) props.rowSpacing = props.spacing;
     if(!props.columnSpacing && props.spacing) props.columnSpacing = props.spacing;
 
+    // This function is used to get the max number of item per row
     const getNbItemPerRow = () => {
         const breakPointObj = {xs: [], sm: [], md: [], lg: [], xl: []};
         
@@ -39,6 +40,7 @@ export const Grid = ({ ...props }) => {
         }
     }
 
+    // This function is used to set the props of the child
     const setChildProps = (data, nbItemPerRow) => {
         if (data.xs || data.sm || data.md || data.lg || data.xl) {
             if (!data.sm) data.sm = data.xs;
@@ -61,6 +63,7 @@ export const Grid = ({ ...props }) => {
         return childProps;
     }
 
+    // If its a container we return the components
     if (props.container) {
         const nbItemPerRow = getNbItemPerRow();
         console.log("max item per row :", nbItemPerRow);
@@ -78,6 +81,7 @@ export const Grid = ({ ...props }) => {
     }
 }
 
+// Define possible values for the props
 Grid.propTypes = {
     /**
      * Columns
@@ -141,6 +145,7 @@ Grid.propTypes = {
     wrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse'])
 }
 
+// Define default values for the props
 Grid.defaultProps = {
     columns: 12,
     container: false,
