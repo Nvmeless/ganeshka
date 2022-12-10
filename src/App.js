@@ -42,8 +42,8 @@ function App() {
           </Grid>
         </Grid> */}
       {/* Grid 2 */}
-      <section style={{ width: '80vw', backgroundColor: 'silver' }}>
-        <Grid container direction={'row'} alignItems={'stretch'} columns={8} spacing={4} columnSpacing={8} rowSpacing={2}>
+      <section style={{ width: '80vw', height: '60vh', backgroundColor: 'silver' }}>
+        <Grid container direction={'row'} alignItems={'flex-start'} columns={8} spacing={4} columnSpacing={8} rowSpacing={2}>
           <Grid item xs={8} md={6}>
             <div style={{ backgroundColor: 'darkorange' }}>xs: 8 | md: 6</div>
           </Grid>

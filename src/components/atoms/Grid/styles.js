@@ -19,7 +19,11 @@ export const StyledGridContainer = styled.div`
 
 // Grid item styles
 export const StyledGridItem = styled.div`
-  flex-basis: 100%;
+  // Child styles
+  > * {
+    height: 100%;
+    width: 100%;
+  }
 
   // XS
   @media (min-width: 0px) {
