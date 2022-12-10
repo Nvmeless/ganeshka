@@ -1,8 +1,16 @@
 import React from "react";
 import AvatarDefaultImage from './AvatarDefaultImage.png'
+import './Avatar.css';
 
-export const Avatar = ({...props}) => {
+export const Avatar = ({src,...props}) => {
 
+    const randomColor = () => {
+        var x = Math.floor(Math.random() * 256);
+        var y = Math.floor(Math.random() * 256);
+        var z = Math.floor(Math.random() * 256);
+        var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+        return bgColor;
+    }
 
     /*
     * Permet de générer soit : 
@@ -12,17 +20,29 @@ export const Avatar = ({...props}) => {
     */
     const generateAvatarIcon = () => {
         if (typeof (props.children) == "string") {
-            return getLetters();
-        } else if (typeof (props.children) == "undefined"){
-            return <img src={AvatarDefaultImage}></img>
-        } else {
-            return props.children
+            let Letters = getLetters()
+            let color = {
+                backgroundColor : randomColor()
+            }
+            
+            return <div className="textAvatar" style={color}>{Letters}</div>;
+
+        } else if (src) {
+           
+            return <img src={src} className="imgAvatar "></img>
         }
+        else if (typeof (props.children) == "undefined"){
+            
+            return <img src={AvatarDefaultImage} className="imgDefaultAvatar"></img>
+
+        } 
 
     }
 
     const getSize = () => {
-        
+        const defautSize = "medium"
+
+
     }
 
 

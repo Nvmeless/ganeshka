@@ -8,10 +8,10 @@ function App() {
   return (
     <div className="App">
       {/*<Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>*/}
-      <Avatar><img src="./logo512.png"/></Avatar>
+      <Avatar src="./logo512.png"></Avatar>
       <Avatar>Julien Guilet</Avatar>
       <Avatar>A</Avatar>
-      <Avatar></Avatar>
+      <Avatar ></Avatar>
     </div>
   );
 }
