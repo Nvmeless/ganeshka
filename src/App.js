@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 // import { Card } from './components/atoms/Card/Card';
+import { ThemeProvider } from 'styled-components';
+import {getTheme} from './themes/default.js';
 import { Grid } from './components/atoms/Grid/Grid';
 import easterEgg from './components/atoms/Grid/easterEgg';
 
@@ -8,13 +10,15 @@ function App() {
   easterEgg();
 
   return (
+    <ThemeProvider theme={getTheme()} />
     <div className="App">
-      {/* <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card> */}
+      Ganeshka toolkit
       {/* Grid 1 */}
       {/* <Grid container style={{ width: '100vw', height: '100vh' }}>
           <Grid item>
             <Grid container direction="row" wrap={"nowrap"}>
               <div style={{ backgroundColor: 'red' }}>1</div>
+    </ThemeProvider>
               <div style={{ backgroundColor: 'lightgray' }}>2</div>
               <div style={{ backgroundColor: 'yellow' }}>3</div>
             </Grid>
