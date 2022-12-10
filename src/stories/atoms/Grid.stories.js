@@ -15,7 +15,7 @@ export default {
         spacing: {
             control: {
                 type: "select",
-                options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                options: [null, 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             },
         },
         columns: {
@@ -51,13 +51,13 @@ export default {
         rowSpacing: {
             control: {
                 type: "select",
-                options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                options: [null, 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             },
         },
         columnSpacing: {
             control: {
                 type: "select",
-                options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                options: [null, 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             },
         },
         // children: { type: "number", defaultValue: 4 },
@@ -91,7 +91,6 @@ export default {
 const GridContainerTemplate = ({ ...args }) => (
 
     <Grid container {...args} style={{
-        width: "100%",
         border: "1px solid darkgray",
         backgroundColor: "lightgray",
         borderRadius: "5px",
@@ -102,8 +101,8 @@ const GridContainerTemplate = ({ ...args }) => (
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: "50px",
-                    height: "50px",
+                    minWidth: "50px",
+                    minHeight: "50px",
                     color: "white",
                     backgroundColor: "red",
                 }}>A</div>
@@ -114,8 +113,8 @@ const GridContainerTemplate = ({ ...args }) => (
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: "50px",
-                    height: "75px",
+                    minWidth: "50px",
+                    minHeight: "75px",
                     color: "white",
                     backgroundColor: "deeppink",
                 }}>B</div>
@@ -126,8 +125,8 @@ const GridContainerTemplate = ({ ...args }) => (
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: "50px",
-                    height: "100px",
+                    minWidth: "50px",
+                    minHeight: "100px",
                     color: "white",
                     backgroundColor: "hotpink",
 
@@ -247,45 +246,55 @@ export const DynamicFluidGrid = () => (
 );
 
 
-
-function Child() {
+//TODO: FIXME:
+function DemoItem({ ...props }) {
     return (
-        <>
-            <Grid item xs={4}>
-                <div style={{
-                    textAlign: "center",
-                    color: "white",
-                    backgroundColor: "gray",
-                }}>A</div>
-            </Grid>
-            <Grid item xs={4}>
-                <div style={{
-                    textAlign: "center",
-                    color: "white",
-                    backgroundColor: "gray",
-                }}>B</div>
-            </Grid>
-            <Grid item xs={4}>
-                <div style={{
-                    textAlign: "center",
-                    color: "white",
-                    backgroundColor: "gray",
-                }}>C</div>
-            </Grid>
-        </>
+        <div style={{
+            minHeight: "100px",
+            minWidth: "100px",
+            textAlign: "center",
+            color: "white",
+            backgroundColor: "gray",
+        }}>{props.text}</div>
     );
 }
 
 export const NestedGrid = () => (
+
     <Grid container spacing={1}>
         <Grid container item spacing={3}>
-            <Child />
+            <Grid item xs={4}>
+                <DemoItem text="A" />
+            </Grid>
+            <Grid item xs={4}>
+                <DemoItem text="B" />
+            </Grid>
+            <Grid item xs={4}>
+                <DemoItem text="C" />
+            </Grid>
         </Grid>
         <Grid container item spacing={3}>
-            <Child />
+            <Grid item xs={4}>
+                <DemoItem text="A" />
+            </Grid>
+            <Grid item xs={4}>
+                <DemoItem text="B" />
+            </Grid>
+            <Grid item xs={4}>
+                <DemoItem text="C" />
+            </Grid>
         </Grid>
         <Grid container item spacing={3}>
-            <Child />
+            <Grid item xs={4}>
+                <DemoItem text="A" />
+            </Grid>
+            <Grid item xs={4}>
+                <DemoItem text="B" />
+            </Grid>
+            <Grid item xs={4}>
+                <DemoItem text="C" />
+            </Grid>
         </Grid>
     </Grid>
+
 );
