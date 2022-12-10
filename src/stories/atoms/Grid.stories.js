@@ -246,7 +246,6 @@ export const DynamicFluidGrid = () => (
 );
 
 
-//TODO: FIXME:
 function DemoItem({ ...props }) {
     return (
         <div style={{
@@ -296,5 +295,4 @@ export const NestedGrid = () => (
             </Grid>
         </Grid>
     </Grid>
-
 );
