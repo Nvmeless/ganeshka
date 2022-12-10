@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { StyledGridContainer, StyledGridItem } from './styles.js';
 
 export const Grid = ({ ...props }) => {
+    // Spacing handling
     if(!props.rowSpacing && props.spacing) props.rowSpacing = props.spacing;
     if(!props.columnSpacing && props.spacing) props.columnSpacing = props.spacing;
 
@@ -66,7 +67,6 @@ export const Grid = ({ ...props }) => {
     // If its a container we return the components
     if (props.container) {
         const nbItemPerRow = getNbItemPerRow();
-        console.log("max item per row :", nbItemPerRow);
 
         return (
             <StyledGridContainer {...props}>
