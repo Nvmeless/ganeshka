@@ -137,10 +137,6 @@ const GridContainerTemplate = ({ ...args }) => (
     </Grid>
 );
 
-
-
-
-
 export const GridContainer = GridContainerTemplate.bind({});
 GridContainer.args = {
     container: true,
@@ -163,8 +159,7 @@ export const Breakpoints = () => (
                     textAlign: "center",
                     color: "white",
                     backgroundColor: "red",
-                }}
-            >A</div>
+                }}>A</div>
         </Grid>
         <Grid item xs={1} sm={1} md={2} lg={3} xl={4} key="2">
             <div
@@ -172,8 +167,7 @@ export const Breakpoints = () => (
                     textAlign: "center",
                     color: "white",
                     backgroundColor: "deeppink",
-                }}
-            >B</div>
+                }}>B</div>
         </Grid>
         <Grid item xs={1} sm={1} md={2} lg={3} xl={4} key="3">
             <div
@@ -181,8 +175,7 @@ export const Breakpoints = () => (
                     textAlign: "center",
                     color: "white",
                     backgroundColor: "hotpink",
-                }}
-            >C</div>
+                }}>C</div>
         </Grid>
     </Grid>
 );
@@ -249,6 +242,50 @@ export const DynamicFluidGrid = () => (
                 color: "white",
                 backgroundColor: "gray",
             }}>xs=6 md=8</div>
+        </Grid>
+    </Grid>
+);
+
+
+
+function Child() {
+    return (
+        <>
+            <Grid item xs={4}>
+                <div style={{
+                    textAlign: "center",
+                    color: "white",
+                    backgroundColor: "gray",
+                }}>A</div>
+            </Grid>
+            <Grid item xs={4}>
+                <div style={{
+                    textAlign: "center",
+                    color: "white",
+                    backgroundColor: "gray",
+                }}>B</div>
+            </Grid>
+            <Grid item xs={4}>
+                <div style={{
+                    textAlign: "center",
+                    color: "white",
+                    backgroundColor: "gray",
+                }}>C</div>
+            </Grid>
+        </>
+    );
+}
+
+export const NestedGrid = () => (
+    <Grid container spacing={1}>
+        <Grid container item spacing={3}>
+            <Child />
+        </Grid>
+        <Grid container item spacing={3}>
+            <Child />
+        </Grid>
+        <Grid container item spacing={3}>
+            <Child />
         </Grid>
     </Grid>
 );
