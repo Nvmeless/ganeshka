@@ -30,7 +30,7 @@ export const StyledGridItem = styled.div`
     ${props => (props?.xs && typeof props.xs === "number" && props.xs < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.xs});
     `}
-    ${props => (props?.xs && props.xs === true || props.xs >= props.columns) && css`
+    ${props => (props?.xs && (props.xs === true || props.xs >= props.columns)) && css`
       flex-basis: 100%;
     `}
     ${props => (props?.xs && props.xs === 'auto') && css`
@@ -43,7 +43,7 @@ export const StyledGridItem = styled.div`
     ${props => (props?.sm && typeof props.sm === "number" && props.sm < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.sm});
     `}
-    ${props => (props?.sm && props.sm === true || props.sm >= props.columns) && css`
+    ${props => (props?.sm && (props.sm === true || props.sm >= props.columns)) && css`
       flex-basis: 100%;
     `}
     ${props => (props?.sm && props.sm === 'auto') && css`
@@ -56,7 +56,7 @@ export const StyledGridItem = styled.div`
     ${props => (props?.md && typeof props.md === "number" && props.md < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.md});
     `}
-    ${props => (props?.md && props.md === true || props.md >= props.columns) && css`
+    ${props => (props?.md && (props.md === true || props.md >= props.columns)) && css`
       flex-basis: 100%;
     `}
     ${props => (props?.md && props.md === 'auto') && css`
@@ -69,7 +69,7 @@ export const StyledGridItem = styled.div`
     ${props => (props?.lg && typeof props.lg === "number" && props.lg < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.lg});
     `}
-    ${props => (props?.lg && props.lg === true || props.lg >= props.columns) && css`
+    ${props => (props?.lg && (props.lg === true || props.lg >= props.columns)) && css`
       flex-basis: 100%;
     `}
     ${props => (props?.lg && props.lg === 'auto') && css`
@@ -82,7 +82,7 @@ export const StyledGridItem = styled.div`
     ${props => (props?.xl && typeof props.xl === "number" && props.xl < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.xl});
     `}
-    ${props => (props?.xl && props.xl === true || props.xl >= props.columns) && css`
+    ${props => (props?.xl && (props.xl === true || props.xl >= props.columns)) && css`
       flex-basis: 100%;
     `}
     ${props => (props?.xl && props.xl === 'auto') && css`
