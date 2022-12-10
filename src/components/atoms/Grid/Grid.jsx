@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { StyledGridContainer, StyledGridItem } from './styles.js';
 
 export const Grid = ({ ...props }) => {
-    // Spacing handling
-    if(!props.rowSpacing && props.spacing) props.rowSpacing = props.spacing;
-    if(!props.columnSpacing && props.spacing) props.columnSpacing = props.spacing;
-
     // This function is used to set the breakpoint props
     const setBreakpointProps = (data) => {
         if (data.xs || data.sm || data.md || data.lg || data.xl) {
@@ -19,17 +15,17 @@ export const Grid = ({ ...props }) => {
     }
 
     // This function is used to get the max number of item per row
-    const getMaxItemPerRow = () => {
+    const getMaxItemPerRow = (data) => {
         const breakPointObj = {xs: [], sm: [], md: [], lg: [], xl: []};
         
-        React.Children.forEach(props.children, child => {
-            const data = setBreakpointProps({ ...child.props });
+        React.Children.forEach(data.children, child => {
+            const tmp = setBreakpointProps({ ...child.props });
             
-            breakPointObj.xs.push(data.xs);
-            breakPointObj.sm.push(data.sm);
-            breakPointObj.md.push(data.md);
-            breakPointObj.lg.push(data.lg);
-            breakPointObj.xl.push(data.xl);
+            breakPointObj.xs.push(tmp.xs);
+            breakPointObj.sm.push(tmp.sm);
+            breakPointObj.md.push(tmp.md);
+            breakPointObj.lg.push(tmp.lg);
+            breakPointObj.xl.push(tmp.xl);
         });
         
         for (const key in breakPointObj) {
@@ -41,13 +37,13 @@ export const Grid = ({ ...props }) => {
                         count += value;
                     }
                 });
-                return (Math.ceil(4 / (count / props.columns))-1);
+                return (Math.ceil(4 / (count / data.columns))-1);
             }
         }
     }
 
     // This function is used to set the props of the child
-    const setChildProps = (child, maxItemPerRow) => {
+    const setChildProps = (parent, child, maxItemPerRow) => {
         const data = setBreakpointProps({ ...child.props });
 
         const childProps = {
@@ -57,28 +53,48 @@ export const Grid = ({ ...props }) => {
             lg: data.lg,
             xl: data.xl,
             zeroMinWidth: data.zeroMinWidth,
-            columns: props.columns,
-            columnSpacing: props.columnSpacing,
+            columns: parent.columns,
+            columnSpacing: parent.columnSpacing,
             maxItemPerRow: maxItemPerRow,
         }
         
         return childProps;
     }
 
-    // If its a container we return the components
-    if (props.container) {
-        const maxItemPerRow = getMaxItemPerRow();
+    // This function is used to render a <Grid container></Grid>
+    const containerRendering = ({...data}) => {
+        const maxItemPerRow = getMaxItemPerRow(data);
+        if(!data.rowSpacing) data.rowSpacing = data.spacing;
+        if(!data.columnSpacing) data.columnSpacing = data.spacing;
 
+        if (data.container) {
+            return (
+                <StyledGridContainer { ...data }>
+                    {React.Children.map(data.children, child => {
+                        return child.props.item && !child.props.container ? (
+                            childRendering(data, child, maxItemPerRow)
+                        ) : (
+                            containerRendering(child.props)
+                        );
+                    })}
+                </StyledGridContainer >
+            );
+        }
+    }
+
+    // This function is used to render a <Grid item></Grid>
+    const childRendering = (parent, child, maxItemPerRow) => {
         return (
-            <StyledGridContainer {...props}>
-                {React.Children.map(props.children, child => (
-                    <StyledGridItem {...setChildProps(child, maxItemPerRow)}>
-                        {child.props.children}
-                    </StyledGridItem>
-                ))}
-            </StyledGridContainer >
+            <StyledGridItem {...setChildProps(parent, child, maxItemPerRow)}>
+                {child.props.children}
+            </StyledGridItem>
         );
     }
+    
+    // Return the component
+    return (
+        containerRendering(props)
+    );
 }
 
 // Define possible values for the props
