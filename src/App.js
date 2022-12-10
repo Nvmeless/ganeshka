@@ -11,7 +11,7 @@ function App() {
     <ThemeProvider theme={getTheme()}>
     <div className="App">
       <Card backgroundColor={"red"} height="10px" width={"100%"}><Typography align={"left"}> toto</Typography></Card>
-      
+      <Typography component={"h1"}>Helo </Typography>
       Ganeshka toolkit
     </div>
     </ThemeProvider>

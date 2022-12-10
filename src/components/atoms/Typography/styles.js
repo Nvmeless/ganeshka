@@ -36,7 +36,7 @@ return 'inherit';
     `}
 
     height:50vh;
-
+    ${props => props.fontTheme}
     
 `
 
