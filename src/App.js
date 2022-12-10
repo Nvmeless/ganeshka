@@ -10,8 +10,7 @@ function App() {
   easterEgg();
 
   return (
-    <>
-      <ThemeProvider theme={getTheme()} />
+    <ThemeProvider theme={getTheme()}>
       <div className="App">
         Ganeshka toolkit
         {/* Grid 1 */}
@@ -94,7 +93,7 @@ function App() {
           </Grid>
         </Grid> */}
       </div >
-    </>
+    </ThemeProvider>
   );
 }
 
