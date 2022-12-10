@@ -89,8 +89,4 @@ export const StyledGridItem = styled.div`
       flex-basis: content;
     `}
   }
-
-  ${props => props?.style && css`
-    ${props.style}
-  `}
 `
