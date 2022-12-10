@@ -5,30 +5,17 @@ import {BsPlusLg} from "react-icons/bs";
 import { GiAerodynamicHarpoon } from "react-icons/gi";
 
 const SpeedDialIcon = ({...props}) => {
-  const updateIconWithProps = React.Children.map(
-      props.icon,
-      (child, i) => {
-        const animation = (props?.menuOpen ? "transition-out" : "transition-in")
-        return React.cloneElement(child, {
-          style: {"animation": animation}
-        });
-      }
-  );
 
-  const updateOpenIconWithProps = React.Children.map(
-      props.openIcon,
-      (child, i) => {
-        const animation = (props?.menuOpen ? "transition-in" : "transition-out")
-        return React.cloneElement(child, {
-          style: {"animation": animation}
-        });
-      }
-  );
   return (
-      <span className={["speedDialAction",props?.className].join(" ")}>
-        {
-          props?.openIcon && props?.menuOpen ?  updateOpenIconWithProps : updateIconWithProps
-        }
+      <span className={["speedDialAction",(props?.menuOpen ? "icon-rotate " : "icon-no-rotate"),props?.className].join(" ")}>
+          <span className={["icon",(props?.openIcon && props?.menuOpen ? "icon-hide" : "icon-show" )].join(" ")}>
+              {props.icon}
+          </span>
+           <span className={["icon",(props?.openIcon && props?.menuOpen ? "icon-show"  : "icon-hide" )].join(" ")} >
+              {
+                  props?.openIcon && props?.menuOpen ?  props.openIcon : <></>
+              }
+           </span>
       </span>
 
   );

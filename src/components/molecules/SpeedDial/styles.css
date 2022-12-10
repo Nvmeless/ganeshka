@@ -1,50 +1,11 @@
-
-
-.rotate-icon:not(:hover) {
-    animation: rotate-center-leave 0.2s linear;
+.icon-action-hide {
+    scale: 0;
+    opacity: 0;
 }
 
-.rotate-icon:hover {
-    animation: rotate-center 0.2s linear;
-}
-
-@keyframes scale-in-center {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+.icon-action-visible {
+    scale: 1;
+    opacity: 1;
 }
 
 
-@keyframes scale-out-center {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0);
-        opacity: 1;
-    }
-}
-
-@keyframes rotate-center {
-    0% {
-        transform: rotate(0);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@keyframes rotate-center-leave {
-    0% {
-        transform: rotate(45deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}

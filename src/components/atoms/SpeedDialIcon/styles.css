@@ -7,31 +7,32 @@
     align-items: center;
     display: grid;
     place-content: center;
+    transition: all 0.3s ease-in-out;
 }
 
-transition-out{
-    animation:fade-out 1s both;
+.icon {
+    transition: all 0.3s ease-in-out;
+    display: inline;
+    padding: 0;
+    margin: 0;
 }
 
-
-transition-in{
-    animation:fade-in 1s both;
+.icon-rotate {
+    transform: rotate(45deg);
 }
 
-@keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+.icon-no-rotate {
+    transform: rotate(0deg);
 }
 
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.icon-hide {
+    display: none;
+    opacity: 0;
+    scale: 0;
+
+}
+
+.icon-show {
+    opacity: 1;
+    scale: 1;
 }

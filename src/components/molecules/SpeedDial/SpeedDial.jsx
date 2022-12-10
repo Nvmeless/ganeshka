@@ -15,7 +15,9 @@ const SpeedDial = (props) => {
 
     const generateMenu = () => {
         return props.children.map((children, i) => {
-            return <span key={i} className={"icon-action"} style={ {transition: (menuOpen ? "scale-in-center 0.5s " + 0.05 *i + "s" : "scale-out-center 0.5s " +  0.05 * (props.children.length - i) + "s")  }} > {children} </span>
+            return <span key={i} style={
+                {transition: (menuOpen ? "all " + 0.1 *i + "s ease-in-out" : "all " +  0.1 * (props.children.length - i) +"s ease-in-out") }
+            } className={(menuOpen ? "icon-action-visible" : "icon-action-hide" )} > {children} </span>
         })
     }
 
@@ -27,10 +29,10 @@ const SpeedDial = (props) => {
             });
         }
     );
-
+    console.log(menuOpen)
     return (<div  style={ {display:"inline-block" } }>
-            <StyledContainer onMouseLeave={() => handleOpenMenu(false)} >
-                <div onMouseEnter={() => { handleOpenMenu(true)}} >
+            <StyledContainer className={"container-desactivate"} onMouseLeave={() => handleOpenMenu(false)} >
+                <div className={"container-activate"} onMouseEnter={() => { handleOpenMenu(true)}} >
                     <Fab color="primary" aria-label="add" className={"rotate-icon"}>
                         {updateChildrenWithProps}
                     </Fab>
