@@ -13,6 +13,7 @@ export const Typography = ({...props}) => {
     else if (component === 'h3'){
         return( <StyledTitleThree {...props}></StyledTitleThree>)
     }
+    
     else if (component === 'h4'){
         return( <StyledTitleFour {...props}></StyledTitleFour>)
     }
