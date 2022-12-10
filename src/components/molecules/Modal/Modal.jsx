@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 export const Modal = ({...props}) => {
 
@@ -27,11 +28,48 @@ export const Modal = ({...props}) => {
         zIndex: 1000
     }
     
+    var lastElementFocus = document.activeElement
 
     const inputReference = useRef(null);
 
-    useEffect(() => {  
+    var portal;
 
+    if(!document.getElementById('portal') && !props.disablePortal){
+        portal = document.createElement('div')
+        portal.setAttribute('id', 'portal')
+        document.body.appendChild(portal)
+    }
+
+
+
+    useEffect(() => {  
+        if(!props.disablePortal && props.container){
+            if(props.container){
+                if(typeof(props.container) == "function"){
+                    var containerPortal = props.container();
+                }
+                else{
+                    var containerPortal = props.container
+                }
+                var containerElement = document.getElementById(containerPortal.props.id)
+                containerElement.appendChild(document.getElementById('portal'))
+                        
+            }
+            
+            
+        }
+
+        if(!props.open && props.keepMounted){
+            document.getElementById('overlay').style.visibility = "hidden";
+        }
+
+        if(props.open && props.keepMounted){
+            document.getElementById('overlay').style.visibility = "visible";
+        }
+        if(props.open && !props.disableAutoFocus){
+            inputReference.current.focus();
+        }
+        
         if(props.open && !props.disableScrollLock){
             document.body.style.overflow = 'hidden';
         }
@@ -44,13 +82,14 @@ export const Modal = ({...props}) => {
                 'a[href], button:not([disabled]), textarea, input, select'
               );
 
-              const firstElement = focusableModalElements[0]
-              const lastElement =
+              if(focusableModalElements.length != 0){
+                const firstElement = focusableModalElements[0]
+                const lastElement =
                 focusableModalElements[focusableModalElements.length - 1]
 
-            firstElement.focus();
+                firstElement.focus();
 
-            document.addEventListener('keydown', function handleFocus(e) {
+                document.addEventListener('keydown', function handleFocus(e) {
                     if(e.key === 'Tab'){
                         // if going forward by pressing tab and lastElement is active shift focus to first focusable element 
                         if (!e.shiftKey && document.activeElement === lastElement) {
@@ -67,22 +106,18 @@ export const Modal = ({...props}) => {
                 
                     
             })
+              }
+
+           
         }
         
-        if(props.open && !props.disableAutoFocus){
-            inputReference.current.focus();
-        }
-        if(!document.getElementById('portal') && !props.disablePortal){
-            let portal = document.createElement('div')
-            portal.setAttribute('id', 'portal')
-            document.body.appendChild(portal)
-        }
+        
 
         if (props.open && !props.disableEscapeKeyDown){
             
             function handleEscape(e) {
                 if(e.keyCode === 27)
-                    props.onClose();
+                    handleClose();
             }
     
             document.addEventListener('keydown', handleEscape);
@@ -93,10 +128,23 @@ export const Modal = ({...props}) => {
         }
     }, [props.open]);
 
+    const handleClose = () => {
+        if(!props.disableAutoFocus){
+            if(!props.disableRestoreFocus){
+                lastElementFocus.focus();
+            }
+        }
+        if(props.keepMounted){
+            document.getElementById('overlay').style.visibility = "hidden"
+        }
+        props.onClose();
+        
+    }
+
     if(props.open){
         if(!props.disablePortal){
             return ReactDOM.createPortal(
-                <div className="overlay" onClick={props.onClose} style={OVERLAY_STYLES} autoFocus>
+                <div id="overlay" className="overlay" onClick={handleClose} style={OVERLAY_STYLES}>
                     <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
                         e.stopPropagation();
                     }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
@@ -106,7 +154,7 @@ export const Modal = ({...props}) => {
             , document.getElementById('portal'))
         }
         return (
-            <div className="overlay" onClick={props.onClose} style={OVERLAY_STYLES}>
+            <div id="overlay" className="overlay" onClick={handleClose} style={OVERLAY_STYLES}>
                 <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
                     e.stopPropagation();
                 }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
@@ -114,6 +162,30 @@ export const Modal = ({...props}) => {
                 </div>
             </div>
         )
+    }
+    else {
+        if(props.keepMounted){
+            if(!props.disablePortal){
+                return ReactDOM.createPortal(
+                    <div id="overlay" className="overlay" onClick={handleClose} style={OVERLAY_STYLES}>
+                        <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
+                            e.stopPropagation();
+                        }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
+                                {props.children}
+                        </div>
+                    </div>
+                , document.getElementById('portal'))
+            }
+            return (
+                <div id="overlay" className="overlay" onClick={handleClose} style={OVERLAY_STYLES}>
+                    <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
+                        e.stopPropagation();
+                    }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
+                            {props.children}
+                    </div>
+                </div>
+            )
+        }
     }
 }
 
@@ -130,12 +202,55 @@ Modal.propTypes ={
     /**
      * The modal will close when pressing escape key ?
      */
-    disableEscapeDown: PropTypes.bool
+    disableEscapeKeyDown: PropTypes.bool,
+
+    /**
+     * The focus will be set on the modal.
+     */
+    disableAutoFocus: PropTypes.bool,
+
+    /**
+     * The focusable element can only be in the modal ?
+     */
+    disableEnforceFocus: PropTypes.bool,
+
+    /**
+     * Is the focus restored after the modal is closed ? 
+     */
+    disableRestoreFocus: PropTypes.bool,
+
+    /**
+     * Is the scroll locked when the modal is open ?
+     */
+    disableScrollLock: PropTypes.bool,
+
+    /**
+     * Is the backdrop of the modal hidden ?
+     */
+    hideBackdrop: PropTypes.bool,
+
+    /**
+     * Is the modal mounted at anytime ?
+     */
+    keepMounted: PropTypes.bool,
+
+    /**
+     * The function to close the modal
+     */
+    onClose: PropTypes.func,
+
 }
 
 
 Modal.defaultProps = {
     open: false,
-    disableEscapeDown: false,
-    disablePortal: false
+    disableEscapeKeyDown: false,
+    disablePortal: false,
+    disableAutoFocus: false,
+    disableEnforceFocus: false,
+    disableRestoreFocus: false,
+    disableScrollLock: false,
+    hideBackdrop: false,
+    keepMounted: false,
+    onClose: null,
 }

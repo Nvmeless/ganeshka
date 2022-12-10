@@ -14,8 +14,15 @@ export const Primary = Template.bind({});
 Primary.args = {
     primary: true,
     open: false,
-    disableEscapeDown: false,
-    disablePorta: false,
+    disableEscapeKeyDown: false,
+    disablePortal: false,
+    disableAutoFocus: false,
+    disableEnforceFocus: false,
+    disableRestoreFocus: false,
+    disableScrollLock: false,
+    hideBackdrop: false,
+    keepMounted: false,
+    onClose: null,
     loading: false,
 
 }  
