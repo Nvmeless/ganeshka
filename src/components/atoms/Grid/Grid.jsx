@@ -19,7 +19,7 @@ export const Grid = ({ ...props }) => {
     }
 
     // This function is used to get the max number of item per row
-    const getNbItemPerRow = () => {
+    const getMaxItemPerRow = () => {
         const breakPointObj = {xs: [], sm: [], md: [], lg: [], xl: []};
         
         React.Children.forEach(props.children, child => {
@@ -41,13 +41,13 @@ export const Grid = ({ ...props }) => {
                         count += value;
                     }
                 });
-                return Math.ceil(4 / (count / props.columns));
+                return (Math.ceil(4 / (count / props.columns))-1);
             }
         }
     }
 
     // This function is used to set the props of the child
-    const setChildProps = (child, nbItemPerRow) => {
+    const setChildProps = (child, maxItemPerRow) => {
         const data = setBreakpointProps({ ...child.props });
 
         const childProps = {
@@ -57,8 +57,8 @@ export const Grid = ({ ...props }) => {
             lg: data.lg,
             xl: data.xl,
             columns: props.columns,
-            nbChild: nbItemPerRow,
             columnSpacing: props.columnSpacing,
+            maxItemPerRow: maxItemPerRow,
         }
         
         return childProps;
@@ -66,12 +66,12 @@ export const Grid = ({ ...props }) => {
 
     // If its a container we return the components
     if (props.container) {
-        const nbItemPerRow = getNbItemPerRow();
+        const maxItemPerRow = getMaxItemPerRow();
 
         return (
             <StyledGridContainer {...props}>
                 {React.Children.map(props.children, child => (
-                    <StyledGridItem {...setChildProps(child, nbItemPerRow)}>
+                    <StyledGridItem {...setChildProps(child, maxItemPerRow)}>
                         {child.props.children}
                     </StyledGridItem>
                 ))}
