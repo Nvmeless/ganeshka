@@ -1,15 +1,33 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css'
-import {AiOutlinePlus} from "react-icons/ai";
+import {BsPlusLg} from "react-icons/bs";
+import { GiAerodynamicHarpoon } from "react-icons/gi";
 
 const SpeedDialIcon = ({...props}) => {
+  const updateIconWithProps = React.Children.map(
+      props.icon,
+      (child, i) => {
+        const animation = (props?.menuOpen ? "transition-out" : "transition-in")
+        return React.cloneElement(child, {
+          style: {"animation": animation}
+        });
+      }
+  );
 
-
+  const updateOpenIconWithProps = React.Children.map(
+      props.openIcon,
+      (child, i) => {
+        const animation = (props?.menuOpen ? "transition-in" : "transition-out")
+        return React.cloneElement(child, {
+          style: {"animation": animation}
+        });
+      }
+  );
   return (
-      <span className={props?.className}>
+      <span className={["speedDialAction",props?.className].join(" ")}>
         {
-          props?.openIcon && props.open ?  props.openIcon : props.icon
+          props?.openIcon && props?.menuOpen ?  updateOpenIconWithProps : updateIconWithProps
         }
       </span>
 
@@ -23,6 +41,11 @@ SpeedDialIcon.propTypes  = {
    * The icon to display.
    */
   icon: PropTypes.node,
+  /**
+   * @ignore
+   * If `true`, the component is shown.
+   */
+  menuOpen: PropTypes.bool,
   /**
    * @ignore
    * If `true`, the component is shown.
@@ -44,8 +67,8 @@ SpeedDialIcon.propTypes  = {
 
 SpeedDialIcon.defaultProps = {
   open: false,
-  icon:<AiOutlinePlus></AiOutlinePlus>,
-  openIcon:<AiOutlinePlus></AiOutlinePlus>,
+  icon:<BsPlusLg></BsPlusLg>,
+  openIcon:<GiAerodynamicHarpoon></GiAerodynamicHarpoon>,
   classes: null
 }
 

@@ -10,23 +10,29 @@ const SpeedDial = (props) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const handleOpenMenu = (toOpen) => {
-        console.log(toOpen);
-        console.log(props.children)
         setMenuOpen(toOpen);
     }
 
     const generateMenu = () => {
         return props.children.map((children, i) => {
-            return <span key={i} style={ {animation: (menuOpen ? "scale-in-center 0.5s " + 0.05 *i + "s both" : "scale-out-center 0.5s " +  0.05 * (props.children.length - i) + "s both")  }} > {children} </span>
+            return <span key={i} className={"icon-action"} style={ {transition: (menuOpen ? "scale-in-center 0.5s " + 0.05 *i + "s" : "scale-out-center 0.5s " +  0.05 * (props.children.length - i) + "s")  }} > {children} </span>
         })
     }
 
+    const updateChildrenWithProps = React.Children.map(
+        props.icon,
+        (child, i) => {
+            return React.cloneElement(child, {
+                menuOpen: menuOpen
+            });
+        }
+    );
 
     return (<div  style={ {display:"inline-block" } }>
             <StyledContainer onMouseLeave={() => handleOpenMenu(false)} >
                 <div onMouseEnter={() => { handleOpenMenu(true)}} >
-                    <Fab color="primary"   aria-label="add">
-                        {props.icon}
+                    <Fab color="primary" aria-label="add" className={"rotate-icon"}>
+                        {updateChildrenWithProps}
                     </Fab>
                 </div>
                 {generateMenu()}
