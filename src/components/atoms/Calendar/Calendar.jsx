@@ -58,6 +58,25 @@ const Calendar = (props) => {
     props.onChange(day)
   }
 
+  const isDayInRange = (day) => {
+    const rangeStart = props.range?.start;
+    const rangeEnd = props.range?.end;
+
+    if (!rangeStart || !rangeEnd) {
+      return false;
+    }
+    
+    rangeStart.setHours(0, 0, 0, 0)
+    rangeEnd.setHours(0, 0, 0, 0)
+    day.setHours(0, 0, 0, 0)
+
+    const startTimestamp = rangeStart.getTime();
+    const endTimestamp = rangeEnd.getTime();
+    const dayTimestamp = day.getTime();
+
+    return startTimestamp <= dayTimestamp && dayTimestamp <= endTimestamp;
+  }
+
   useEffect(() => {
     if (isYearChooserDisplayed) {
       const selectedElementPos = yearChooserRef.current.querySelector('span.selected').offsetTop;
@@ -68,10 +87,10 @@ const Calendar = (props) => {
   return (
     <StyledCalendar {...props} className={`agenda ${props.className}`} onClick={(e) => e.stopPropagation()}>
       <div className='agenda__header'>
-        <div>
-          <span>{monthsName[props.value.getMonth()]} {props.value.getFullYear()}</span>
+        <span onClick={displayYearChooser}>
+          {monthsName[props.value.getMonth()]} {props.value.getFullYear()}
           <MdArrowDropDown size={30} color={props.color} onClick={displayYearChooser} />
-        </div>
+        </span>
         <div>
           {!isYearChooserDisplayed && (
             <>
@@ -96,7 +115,16 @@ const Calendar = (props) => {
         </div>
         <div className='agenda__grid'>
           {getAllDaysInMonth(props.value.getFullYear(), props.value.getMonth()).map((day, index) => (
-            <span key={index} onClick={() => selectDate(day)} className={day && day.getDate() === props.value.getDate() ? 'selected' : ''}>{day ? day.getDate() : ''}</span>
+            <span
+              key={index}
+              onClick={() => selectDate(day)}
+              className={`
+                ${day && day.getDate() === props.value.getDate() ? 'selected' : ''}
+                ${day && isDayInRange(day) ? 'inrange' : ''}
+              `}
+            >
+              {day ? day.getDate() : ''}
+            </span>
           ))}
         </div>
       </div>
@@ -116,6 +144,10 @@ Calendar.propTypes = {
   width: PropTypes.number,
   color: PropTypes.string,
   backgroundColor: PropTypes.string,
+  range: PropTypes.exact({
+    start: PropTypes.instanceOf(Date),
+    end: PropTypes.instanceOf(Date),
+  }),
 };
 
 Calendar.defaultProps = {

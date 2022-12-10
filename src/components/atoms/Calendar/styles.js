@@ -3,16 +3,13 @@ import styled from 'styled-components';
 export default styled.div`
   visibility: hidden;
   opacity: 0;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translateY(100%);
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   padding: 15px;
   border-radius: 6px;
   transition: visibility 0s linear 0.36s, opacity 0.35s, bottom 0.35s;
+  z-index: 50;
 
   .agenda__header {
     display: flex;
@@ -21,16 +18,17 @@ export default styled.div`
     align-items: center;
     font-weight: bold;
 
-    > div:first-child {
+    > span {
       display: flex;
       flex-direction: row;
       justify-content: start;
       align-items: center;
       gap: 10px;
       white-space: nowrap;
+      cursor: pointer;
     }
 
-    > div:last-child {
+    > div {
       display: flex;
       flex-direction: row;
       justify-content: start;
@@ -110,8 +108,15 @@ export default styled.div`
       filter: brightness(85%);
     }
 
+    span.inrange {
+      background-color: ${(props) => props.backgroundColor};
+      border: 1px solid ${(props) => props.color};
+      color: ${(props) => props.color};
+    }
+
     span.selected {
       background-color: ${(props) => props.color};
+      opacity: 1;
       color: ${(props) => props.backgroundColor};
     }
   }
