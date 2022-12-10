@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
-//TODO: Add grid item styles
-
+// Grid container styles
 export const StyledGridContainer = styled.div`
   display: flex;
   width: 100%;
@@ -18,34 +17,74 @@ export const StyledGridContainer = styled.div`
   `}
 `
 
+// Grid item styles
 export const StyledGridItem = styled.div`
   flex-basis: 100%;
 
-  ${props => (props?.xs && typeof props.xs === "number" && props.xs < props.columns) && css`
-    @media (min-width: 0px) {
+  // XS
+  @media (min-width: 0px) {
+    ${props => (props?.xs && typeof props.xs === "number" && props.xs < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.xs});
-    }
-  `}
-  ${props => (props?.sm && typeof props.sm === "number" && props.sm < props.columns) && css`
-    @media (min-width: 600px) {
+    `}
+    ${props => (props?.xs && props.xs === true || props.xs >= props.columns) && css`
+      flex-basis: 100%;
+    `}
+    ${props => (props?.xs && props.xs === 'auto') && css`
+      flex-basis: content;
+    `}
+  }
+
+  // SM
+  @media (min-width: 600px) {
+    ${props => (props?.sm && typeof props.sm === "number" && props.sm < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.sm});
-    }
-  `}
-  ${props => (props?.md && typeof props.md === "number" && props.md < props.columns) && css`
-    @media (min-width: 900px) {
+    `}
+    ${props => (props?.sm && props.sm === true || props.sm >= props.columns) && css`
+      flex-basis: 100%;
+    `}
+    ${props => (props?.sm && props.sm === 'auto') && css`
+      flex-basis: content;
+    `}
+  }
+
+  // MD
+  @media (min-width: 900px) {
+    ${props => (props?.md && typeof props.md === "number" && props.md < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.md});
-    }
-  `}
-  ${props => (props?.lg && typeof props.lg === "number" && props.lg < props.columns) && css`
-    @media (min-width: 1200px) {
+    `}
+    ${props => (props?.md && props.md === true || props.md >= props.columns) && css`
+      flex-basis: 100%;
+    `}
+    ${props => (props?.md && props.md === 'auto') && css`
+      flex-basis: content;
+    `}
+  }
+
+  // LG
+  @media (min-width: 1200px) {
+    ${props => (props?.lg && typeof props.lg === "number" && props.lg < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.lg});
-    }
-  `}
-  ${props => (props?.xl && typeof props.xl === "number" && props.xl < props.columns) && css`
-    @media (min-width: 1536px) {
+    `}
+    ${props => (props?.lg && props.lg === true || props.lg >= props.columns) && css`
+      flex-basis: 100%;
+    `}
+    ${props => (props?.lg && props.lg === 'auto') && css`
+      flex-basis: content;
+    `}
+  }
+
+  // XL
+  @media (min-width: 1536px) {
+    ${props => (props?.xl && typeof props.xl === "number" && props.xl < props.columns) && css`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.xl});
-    }
-  `}
+    `}
+    ${props => (props?.xl && props.xl === true || props.xl >= props.columns) && css`
+      flex-basis: 100%;
+    `}
+    ${props => (props?.xl && props.xl === 'auto') && css`
+      flex-basis: content;
+    `}
+  }
 
   ${props => props?.style && css`
     ${props.style}
