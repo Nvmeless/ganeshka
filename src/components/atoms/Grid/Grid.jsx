@@ -70,11 +70,11 @@ Grid.propTypes = {
     /**
      *  Row spacing
      * */
-    rowSpacing: PropTypes.oneOf([0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    rowSpacing: PropTypes.oneOf(['auto', 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * Column spacing
      * */
-    columnSpacing: PropTypes.oneOf([0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    columnSpacing: PropTypes.oneOf(['auto', 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * xs
      * */
@@ -110,8 +110,8 @@ Grid.defaultProps = {
     alignItems: 'stretch',
     wrap: 'wrap',
     spacing: 0,
-    rowSpacing: 0,
-    columnSpacing: 0,
+    rowSpacing: 'true',
+    columnSpacing: 'true',
     xs: false,
     sm: false,
     md: false,

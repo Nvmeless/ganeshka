@@ -11,9 +11,13 @@ export const StyledGridContainer = styled.div`
   flex-direction: ${props => props?.direction && props.direction};
   justify-content: ${props => props?.justifyContent && props.justifyContent};
   align-items: ${props => props?.alignItems && props.alignItems};
-  row-gap: ${props => props?.rowSpacing && props.rowSpacing * 8}px;
-  column-gap: ${props => props?.columnSpacing && props.columnSpacing * 8}px;
   gap: ${props => props?.spacing && props.spacing * 8}px;
+  ${props => props?.rowSpacing && props.rowSpacing !== 'auto' && css`
+    row-gap: ${props.rowSpacing * 8}px !important;
+  `}
+  ${props => props?.columnSpacing && props.columnSpacing !== 'auto' && css`
+    column-gap: ${props.columnSpacing * 8}px !important;
+  `}
 `
 
 export const StyledGridItem = styled.div`
