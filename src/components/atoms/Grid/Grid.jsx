@@ -15,17 +15,17 @@ export const Grid = ({ ...props }) => {
     }
 
     // This function is used to get the max number of item per row
-    const getMaxItemPerRow = () => {
+    const getMaxItemPerRow = (data) => {
         const breakPointObj = {xs: [], sm: [], md: [], lg: [], xl: []};
         
-        React.Children.forEach(props.children, child => {
-            const data = setBreakpointProps({ ...child.props });
+        React.Children.forEach(data.children, child => {
+            const tmp = setBreakpointProps({ ...child.props });
             
-            breakPointObj.xs.push(data.xs);
-            breakPointObj.sm.push(data.sm);
-            breakPointObj.md.push(data.md);
-            breakPointObj.lg.push(data.lg);
-            breakPointObj.xl.push(data.xl);
+            breakPointObj.xs.push(tmp.xs);
+            breakPointObj.sm.push(tmp.sm);
+            breakPointObj.md.push(tmp.md);
+            breakPointObj.lg.push(tmp.lg);
+            breakPointObj.xl.push(tmp.xl);
         });
         
         for (const key in breakPointObj) {
@@ -37,7 +37,7 @@ export const Grid = ({ ...props }) => {
                         count += value;
                     }
                 });
-                return (Math.ceil(4 / (count / props.columns))-1);
+                return (Math.ceil(4 / (count / data.columns))-1);
             }
         }
     }
@@ -63,7 +63,7 @@ export const Grid = ({ ...props }) => {
 
     // This function is used to render a <Grid container></Grid>
     const containerRendering = ({...data}) => {
-        const maxItemPerRow = getMaxItemPerRow();
+        const maxItemPerRow = getMaxItemPerRow(data);
         if(!data.rowSpacing) data.rowSpacing = data.spacing;
         if(!data.columnSpacing) data.columnSpacing = data.spacing;
 
