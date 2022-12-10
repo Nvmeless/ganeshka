@@ -70,7 +70,6 @@ export const Grid = ({ ...props }) => {
 
         return (
             <StyledGridContainer {...props}>
-                {/* {props.children} */}
                 {React.Children.map(props.children, child => (
                     <StyledGridItem {...setChildProps({ ...child.props }, nbItemPerRow)}>
                         {child.props.children}
