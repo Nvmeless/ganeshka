@@ -12,11 +12,7 @@ export const Avatar = ({...props}) => {
     */
     const generateAvatarIcon = () => {
         if (typeof (props.children) == "string") {
-            if (props.children.indexOf(' ') >= 0) {
-                let index = props.children.indexOf(' ')
-                return props.children.slice(0, 1).toUpperCase() + props.children.slice(index+1, index+2).toUpperCase()
-            }
-            return props.children.slice(0, 2).toUpperCase()
+            return getLetters();
         } else if (typeof (props.children) == "undefined"){
             return <img src={AvatarDefaultImage}></img>
         } else {
@@ -24,6 +20,25 @@ export const Avatar = ({...props}) => {
         }
 
     }
+
+    const getSize = () => {
+        
+    }
+
+
+    /**
+     * Renvoie les premières lettres du nom et prenom mis dans les props.children
+     * @returns 1 ou 2 deux lettres en majuscule
+     */
+    const getLetters = () => {
+        if (props.children.indexOf(' ') >= 0) {
+            let index = props.children.indexOf(' ')
+            return  props.children.slice(0, 1).toUpperCase() + props.children.slice(index+1, index+2).toUpperCase()
+        }
+        return props.children.slice(0, 2).toUpperCase()
+        }
+
+
 
     return (
         <div>
