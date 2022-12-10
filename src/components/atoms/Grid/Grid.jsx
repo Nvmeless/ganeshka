@@ -3,7 +3,43 @@ import PropTypes from 'prop-types';
 import { StyledGridContainer, StyledGridItem } from './styles.js';
 
 export const Grid = ({ ...props }) => {
-    const setChildProps = (data) => {
+    if(!props.rowSpacing && props.spacing) props.rowSpacing = props.spacing;
+    if(!props.columnSpacing && props.spacing) props.columnSpacing = props.spacing;
+
+    const getNbItemPerRow = () => {
+        const breakPointObj = {xs: [], sm: [], md: [], lg: [], xl: []};
+        
+        React.Children.forEach(props.children, child => {
+            let data = { ...child.props }
+            if (data.xs || data.sm || data.md || data.lg || data.xl) {
+                if (!data.sm) data.sm = data.xs;
+                if (!data.md) data.md = data.sm;
+                if (!data.lg) data.lg = data.md;
+                if (!data.xl) data.xl = data.lg;
+            }
+            
+            breakPointObj.xs.push(data.xs);
+            breakPointObj.sm.push(data.sm);
+            breakPointObj.md.push(data.md);
+            breakPointObj.lg.push(data.lg);
+            breakPointObj.xl.push(data.xl);
+        });
+        
+        for (const key in breakPointObj) {
+            if (Object.hasOwnProperty.call(breakPointObj, key)) {
+                let count = 0;
+                const element = breakPointObj[key];
+                element.forEach((value, key) => {
+                    if (value) {
+                        count += value;
+                    }
+                });
+                return Math.ceil(4 / (count / props.columns));
+            }
+        }
+    }
+
+    const setChildProps = (data, nbItemPerRow) => {
         if (data.xs || data.sm || data.md || data.lg || data.xl) {
             if (!data.sm) data.sm = data.xs;
             if (!data.md) data.md = data.sm;
@@ -18,18 +54,22 @@ export const Grid = ({ ...props }) => {
             lg: data.lg,
             xl: data.xl,
             columns: props.columns,
-            spacing: props.spacing
+            nbChild: nbItemPerRow,
+            columnSpacing: props.columnSpacing,
         }
-
+        
         return childProps;
     }
 
     if (props.container) {
+        const nbItemPerRow = getNbItemPerRow();
+        console.log("max item per row :", nbItemPerRow);
+
         return (
             <StyledGridContainer {...props}>
                 {/* {props.children} */}
                 {React.Children.map(props.children, child => (
-                    <StyledGridItem {...setChildProps({ ...child.props })}>
+                    <StyledGridItem {...setChildProps({ ...child.props }, nbItemPerRow)}>
                         {child.props.children}
                     </StyledGridItem>
                 ))}
@@ -70,11 +110,11 @@ Grid.propTypes = {
     /**
      *  Row spacing
      * */
-    rowSpacing: PropTypes.oneOf(['auto', 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    rowSpacing: PropTypes.oneOf([0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * Column spacing
      * */
-    columnSpacing: PropTypes.oneOf(['auto', 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    columnSpacing: PropTypes.oneOf([0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * xs
      * */
@@ -110,8 +150,8 @@ Grid.defaultProps = {
     alignItems: 'stretch',
     wrap: 'wrap',
     spacing: 0,
-    rowSpacing: 'auto',
-    columnSpacing: 'auto',
+    rowSpacing: null,
+    columnSpacing: null,
     xs: false,
     sm: false,
     md: false,

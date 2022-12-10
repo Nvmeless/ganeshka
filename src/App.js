@@ -42,20 +42,22 @@ function App() {
           </Grid>
         </Grid> */}
       {/* Grid 2 */}
-      <Grid container columns={8} spacing={2}>
-        <Grid item xs={8}>
-          <div style={{ backgroundColor: 'darkorange' }}>8</div>
+      <section style={{ width: '50vw', backgroundColor: 'silver' }}>
+        <Grid container direction={'row'} alignItems={'stretch'} columns={8} spacing={2} columnSpacing={6} rowSpacing={4}>
+          <Grid item xs={8} md={6}>
+            <div style={{ backgroundColor: 'darkorange' }}>xs: 8 | md: 6</div>
+          </Grid>
+          <Grid item xs={4} md={6}>
+            <div style={{ backgroundColor: 'darkslateblue' }}>xs: 4 | md: 6</div>
+          </Grid>
+          <Grid item xs={4} md={6}>
+            <div style={{ backgroundColor: 'plum' }}>xs: 4 | md: 6</div>
+          </Grid>
+          <Grid item xs={8} md={6}>
+            <div style={{ backgroundColor: 'gold' }}>xs: 8 | md: 6</div>
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <div style={{ backgroundColor: 'darkslateblue' }}>4</div>
-        </Grid>
-        <Grid item xs={4}>
-          <div style={{ backgroundColor: 'plum' }}>4</div>
-        </Grid>
-        <Grid item xs={8}>
-          <div style={{ backgroundColor: 'gold' }}>8</div>
-        </Grid>
-      </Grid>
+      </section>
       {/* Grid 3 */}
       {/* <Grid container direction={"column"} rowSpacing={2}>
         <Grid xs={12} md={12} spacing={1} wrap={"nowrap"}>
