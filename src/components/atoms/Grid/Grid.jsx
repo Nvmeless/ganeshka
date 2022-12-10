@@ -71,7 +71,7 @@ export const Grid = ({ ...props }) => {
             return (
                 <StyledGridContainer { ...data }>
                     {React.Children.map(data.children, child => {
-                        return child.props.item ? (
+                        return child.props.item && !child.props.container ? (
                             childRendering(data, child, maxItemPerRow)
                         ) : (
                             containerRendering(child.props)
