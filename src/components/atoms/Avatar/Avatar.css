@@ -1,24 +1,21 @@
 .imgDefaultAvatar {
     border-radius: 50%;
     background-color: black;
-    border: 5px solid #555;
 }
 
 .imgAvatar {
     border-radius: 50%;
-    border: 5px solid #555;
 }
 
 .textAvatar { 
-    border-radius: 50%;
-    background-color: black;
-    border: 1px solid #555;
+   border-radius: 50%;
+    display: flex;
     color: white;
-    width: 2em;
-    height: 2em;
-    text-align: center;
-    vertical-align: middle;
-    display: table-cell;
-    font-size: 100%;
     font-weight: bold;
+}
+
+.letterAvatar {
+    margin: auto; 
+    text-align: center;
+    vertical-align: bottom;
 }

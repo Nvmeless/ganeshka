@@ -2,16 +2,34 @@ import React from "react";
 import AvatarDefaultImage from './AvatarDefaultImage.png'
 import './Avatar.css';
 
-export const Avatar = ({src,...props}) => {
+export const Avatar = ({src,size,alt,bgColor,...props}) => {
 
-    const randomColor = () => {
-        var x = Math.floor(Math.random() * 256);
-        var y = Math.floor(Math.random() * 256);
-        var z = Math.floor(Math.random() * 256);
-        var bgColor = "rgb(" + x + "," + y + "," + z + ")";
-        return bgColor;
+    // Récupère une couleur en fonction du string mis en paramètre
+    function stringToColor(string) {
+        let hash = 0;
+        let i;
+      
+        for (i = 0; i < string.length; i += 1) {
+          hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        }
+      
+        let color = '#';
+      
+        for (i = 0; i < 3; i += 1) {
+          const value = (hash >> (i * 8)) & 0xff;
+          color += `00${value.toString(16)}`.slice(-2);
+        }
+      
+        return color;
+      }
+
+
+    const getSize = () => {
+        if (size > 5) return size
+        else return 5
     }
-
+    
+    
     /*
     * Permet de générer soit : 
     *   - Une image par défaut (Si aucune n'est mise)
@@ -19,31 +37,38 @@ export const Avatar = ({src,...props}) => {
     *   - L'image mis en props
     */
     const generateAvatarIcon = () => {
+        let AvatarSize = getSize()
+        let StyleAvatar = {
+            width: AvatarSize+"px",
+            height: AvatarSize+"px"
+        }
+
+        // L'avatar sera géneré avec des lettres
         if (typeof (props.children) == "string") {
             let Letters = getLetters()
-            let color = {
-                backgroundColor : randomColor()
-            }
-            
-            return <div className="textAvatar" style={color}>{Letters}</div>;
+            StyleAvatar['backgroundColor'] = stringToColor(props.children)
+            StyleAvatar['fontSize'] = AvatarSize/2
 
+            return <div className="textAvatar" style={StyleAvatar} alt={props.children}><p className="letterAvatar">{Letters}</p></div>;
+
+        // Image défini par le paramètre src
         } else if (src) {
-           
-            return <img src={src} className="imgAvatar "></img>
+            return <img src={src} className="imgAvatar " style={StyleAvatar} alt={alt}></img>
         }
+
+        // Image par défaut car ni une lettre ni une image n'est indiqué
         else if (typeof (props.children) == "undefined"){
-            
-            return <img src={AvatarDefaultImage} className="imgDefaultAvatar"></img>
+            return <img src={AvatarDefaultImage} className="imgDefaultAvatar" style={StyleAvatar} alt={alt}></img>
+        // Autres élements    
+        } else {
+            StyleAvatar['backgroundColor'] = bgColor
+            return <div className="imgAvatar" style={StyleAvatar} alt={props.children}>{props.children}</div>;
 
-        } 
-
-    }
-
-    const getSize = () => {
-        const defautSize = "medium"
-
+        }
 
     }
+
+    
 
 
     /**
