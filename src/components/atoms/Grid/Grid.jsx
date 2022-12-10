@@ -56,6 +56,7 @@ export const Grid = ({ ...props }) => {
             md: data.md,
             lg: data.lg,
             xl: data.xl,
+            zeroMinWidth: data.zeroMinWidth,
             columns: props.columns,
             columnSpacing: props.columnSpacing,
             maxItemPerRow: maxItemPerRow,
@@ -141,7 +142,11 @@ Grid.propTypes = {
     /**
      * Wrap
      * */
-    wrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse'])
+    wrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse']),
+    /**
+     * Zero min width
+     * */
+    zeroMinWidth: PropTypes.bool,
 }
 
 // Define default values for the props
@@ -160,5 +165,6 @@ Grid.defaultProps = {
     sm: false,
     md: false,
     lg: false,
-    xl: false
+    xl: false,
+    zeroMinWidth: false,
 }

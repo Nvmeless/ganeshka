@@ -25,6 +25,10 @@ export const StyledGridItem = styled.div`
     width: 100%;
   }
 
+  ${props => props?.zeroMinWidth && css`
+    overflow-x: hidden;
+  `}
+
   // XS
   @media (min-width: 0px) {
     ${props => (props?.xs && typeof props.xs === "number" && props.xs < props.columns) && css`
