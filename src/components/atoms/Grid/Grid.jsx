@@ -7,18 +7,23 @@ export const Grid = ({ ...props }) => {
     if(!props.rowSpacing && props.spacing) props.rowSpacing = props.spacing;
     if(!props.columnSpacing && props.spacing) props.columnSpacing = props.spacing;
 
+    // This function is used to set the breakpoint props
+    const setBreakpointProps = (data) => {
+        if (data.xs || data.sm || data.md || data.lg || data.xl) {
+            if (!data.sm) data.sm = data.xs;
+            if (!data.md) data.md = data.sm;
+            if (!data.lg) data.lg = data.md;
+            if (!data.xl) data.xl = data.lg;
+        }
+        return data;
+    }
+
     // This function is used to get the max number of item per row
     const getNbItemPerRow = () => {
         const breakPointObj = {xs: [], sm: [], md: [], lg: [], xl: []};
         
         React.Children.forEach(props.children, child => {
-            let data = { ...child.props }
-            if (data.xs || data.sm || data.md || data.lg || data.xl) {
-                if (!data.sm) data.sm = data.xs;
-                if (!data.md) data.md = data.sm;
-                if (!data.lg) data.lg = data.md;
-                if (!data.xl) data.xl = data.lg;
-            }
+            const data = setBreakpointProps({ ...child.props });
             
             breakPointObj.xs.push(data.xs);
             breakPointObj.sm.push(data.sm);
@@ -42,13 +47,8 @@ export const Grid = ({ ...props }) => {
     }
 
     // This function is used to set the props of the child
-    const setChildProps = (data, nbItemPerRow) => {
-        if (data.xs || data.sm || data.md || data.lg || data.xl) {
-            if (!data.sm) data.sm = data.xs;
-            if (!data.md) data.md = data.sm;
-            if (!data.lg) data.lg = data.md;
-            if (!data.xl) data.xl = data.lg;
-        }
+    const setChildProps = (child, nbItemPerRow) => {
+        const data = setBreakpointProps({ ...child.props });
 
         const childProps = {
             xs: data.xs,
@@ -71,7 +71,7 @@ export const Grid = ({ ...props }) => {
         return (
             <StyledGridContainer {...props}>
                 {React.Children.map(props.children, child => (
-                    <StyledGridItem {...setChildProps({ ...child.props }, nbItemPerRow)}>
+                    <StyledGridItem {...setChildProps(child, nbItemPerRow)}>
                         {child.props.children}
                     </StyledGridItem>
                 ))}
