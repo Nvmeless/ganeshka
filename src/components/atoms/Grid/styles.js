@@ -3,8 +3,6 @@ import styled, { css } from "styled-components";
 // Grid container styles
 export const StyledGridContainer = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
   flex-wrap: ${props => props?.wrap && props.wrap};
   flex-direction: ${props => props?.direction && props.direction};
   justify-content: ${props => props?.justifyContent && props.justifyContent};

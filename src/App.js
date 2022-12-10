@@ -43,7 +43,18 @@ function App() {
         </Grid> */}
       {/* Grid 2 */}
       <section style={{ width: '80vw', height: '60vh', backgroundColor: 'silver' }}>
-        <Grid container direction={'row'} alignItems={'flex-start'} columns={8} spacing={4} columnSpacing={8} rowSpacing={2}>
+        <Grid container direction={'row'} alignItems={'flex-start'} columns={8} columnSpacing={8} rowSpacing={2}>
+          {/* Nested */}
+          <Grid container direction={'row'} alignItems={'stretch'} columns={12} spacing={4} style={{ backgroundColor: 'lightgray', width: '100%' }} >
+            <Grid item xs={8} md={6}>
+              <div style={{ backgroundColor: 'darkorange' }}>xs: 8 | md: 6</div>
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <div style={{ backgroundColor: 'darkslateblue' }}>xs: 4 | md: 6</div>
+            </Grid>
+          </Grid>
+
+          {/* Normal */}
           <Grid item xs={8} md={6}>
             <div style={{ backgroundColor: 'darkorange' }}>xs: 8 | md: 6</div>
           </Grid>
