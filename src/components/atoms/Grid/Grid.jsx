@@ -122,23 +122,23 @@ Grid.propTypes = {
     /**
      * xs
      * */
-    xs: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    xs: PropTypes.oneOf(['auto', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * sm
      * */
-    sm: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    sm: PropTypes.oneOf(['auto', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * md
      * */
-    md: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    md: PropTypes.oneOf(['auto', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * lg
      * */
-    lg: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    lg: PropTypes.oneOf(['auto', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * xl
      * */
-    xl: PropTypes.oneOf(['auto', 'none', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+    xl: PropTypes.oneOf(['auto', false, true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
     /**
      * Wrap
      * */
