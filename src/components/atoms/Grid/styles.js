@@ -12,10 +12,10 @@ export const StyledGridContainer = styled.div`
   justify-content: ${props => props?.justifyContent && props.justifyContent};
   align-items: ${props => props?.alignItems && props.alignItems};
   gap: ${props => props?.spacing && props.spacing * 8}px;
-  ${props => props?.rowSpacing && props.rowSpacing !== 'auto' && css`
+  ${props => props?.rowSpacing && typeof props.rowSpacing === "number" && css`
     row-gap: ${props.rowSpacing * 8}px !important;
   `}
-  ${props => props?.columnSpacing && props.columnSpacing !== 'auto' && css`
+  ${props => props?.columnSpacing && typeof props.columnSpacing === "number" && css`
     column-gap: ${props.columnSpacing * 8}px !important;
   `}
 `
