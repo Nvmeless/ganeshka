@@ -21,32 +21,32 @@ export const StyledGridContainer = styled.div`
 export const StyledGridItem = styled.div`
   flex-basis: 100%;
 
-  ${props => (props?.xs && props.xs < props.columns) && css`
+  ${props => (props?.xs && typeof props.xs === "number" && props.xs < props.columns) && css`
     @media (min-width: 0px) {
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.xs});
     }
   `}
-  ${props => (props?.sm && props.sm < props.columns) && css`
+  ${props => (props?.sm && typeof props.sm === "number" && props.sm < props.columns) && css`
     @media (min-width: 600px) {
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.sm});
     }
   `}
-  ${props => (props?.md && props.md < props.columns) && css`
+  ${props => (props?.md && typeof props.md === "number" && props.md < props.columns) && css`
     @media (min-width: 900px) {
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.md});
     }
   `}
-  ${props => (props?.lg && props.lg < props.columns) && css`
+  ${props => (props?.lg && typeof props.lg === "number" && props.lg < props.columns) && css`
     @media (min-width: 1200px) {
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.lg});
     }
   `}
-  ${props => (props?.xl && props.xl < props.columns) && css`
+  ${props => (props?.xl && typeof props.xl === "number" && props.xl < props.columns) && css`
     @media (min-width: 1536px) {
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * ((${props.nbChild} - 1) * 4px)) / ${props.columns} * ${props.xl});
     }
   `}
-  
+
   ${props => props?.style && css`
     ${props.style}
   `}
