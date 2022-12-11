@@ -1,4 +1,7 @@
+
+
 import React from 'react';
+
 import { Grid } from '../../components/atoms/Grid/Grid';
 
 export default {
@@ -10,83 +13,24 @@ export default {
         },
         item: {
             control: false,
-
         },
-        spacing: {
-            control: {
-                type: "select",
-                options: [null, 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            },
+        xs: {
+            control: false,
         },
-        columns: {
-            control: {
-                type: "select",
-                options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            },
+        sm: {
+            control: false,
         },
-        direction: {
-            control: {
-                type: "select",
-                options: ["row", "row-reverse", "column", "column-reverse"],
-            },
+        md: {
+            control: false,
         },
-        justifyContent: {
-            control: {
-                type: "select",
-                options: ["flex-start", "center", "flex-end", "space-between", "space-around", "space-evenly"],
-            },
+        lg: {
+            control: false,
         },
-        alignItems: {
-            control: {
-                type: "select",
-                options: ["stretch", "center", "flex-start", "flex-end", "baseline"],
-            },
+        xl: {
+            control: false,
         },
-        wrap: {
-            control: {
-                type: "select",
-                options: ["nowrap", "wrap", "wrap-reverse"],
-            },
-        },
-        rowSpacing: {
-            control: {
-                type: "select",
-                options: [null, 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            },
-        },
-        columnSpacing: {
-            control: {
-                type: "select",
-                options: [null, 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            },
-        },
-        // children: { type: "number", defaultValue: 4 },
     },
-
-
 };
-
-// const GridTemplate = ({ children, ...args }) => (
-//     <Grid container {...args} style={{
-//         width: "100%",
-//         height: "500px",
-//     }}>
-//         {[...Array(children).keys()].map(n => (
-//             <Grid item key={n}>
-//                 <div
-//                     style={{
-//                         width: "50px",
-//                         height: "50px",
-//                         backgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16), // random color
-//                     }}
-//                 >
-//                     {n + 1}
-//                 </div>
-//             </Grid>
-//         ))}
-//     </Grid>
-// );
-
 
 const GridContainerTemplate = ({ ...args }) => (
 
@@ -179,35 +123,33 @@ export const Breakpoints = () => (
     </Grid>
 );
 
+function DemoItem({ ...props }) {
+    return (
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100px",
+            minWidth: "100px",
+            color: "white",
+            backgroundColor: "gray",
+        }}>{props.text}</div>
+    );
+}
+
 export const FluidGrid = () => (
     <Grid container spacing={2}>
         <Grid item xs={8}>
-            <div style={{
-                textAlign: "center",
-                color: "white",
-                backgroundColor: "gray",
-            }}>xs=8</div>
+            <DemoItem text={"xs=8"} />
         </Grid>
         <Grid item xs={4}>
-            <div style={{
-                textAlign: "center",
-                color: "white",
-                backgroundColor: "gray",
-            }}>xs=4</div>
+            <DemoItem text={"xs=4"} />
         </Grid>
         <Grid item xs={4}>
-            <div style={{
-                textAlign: "center",
-                color: "white",
-                backgroundColor: "gray",
-            }}>xs=4</div>
+            <DemoItem text={"xs=4"} />
         </Grid>
         <Grid item xs={8}>
-            <div style={{
-                textAlign: "center",
-                color: "white",
-                backgroundColor: "gray",
-            }}>xs=8</div>
+            <DemoItem text={"xs=8"} />
         </Grid>
     </Grid>
 );
@@ -215,84 +157,66 @@ export const FluidGrid = () => (
 export const DynamicFluidGrid = () => (
     <Grid container spacing={2}>
         <Grid item xs={6} md={8}>
-            <div style={{
-                textAlign: "center",
-                color: "white",
-                backgroundColor: "gray",
-            }}>xs=6 md=8</div>
+            <DemoItem text={"xs=6 | md=8"} />
         </Grid>
         <Grid item xs={6} md={4}>
-            <div style={{
-                textAlign: "center",
-                color: "white",
-                backgroundColor: "gray",
-            }}>xs=6 md=4</div>
+            <DemoItem text={"xs=6 | md=4"} />
         </Grid>
         <Grid item xs={6} md={4}>
-            <div style={{
-                textAlign: "center",
-                color: "white",
-                backgroundColor: "gray",
-            }}>xs=6 md=4</div>
+            <DemoItem text={"xs=6 | md=4"} />
         </Grid>
         <Grid item xs={6} md={8}>
-            <div style={{
-                textAlign: "center",
-                color: "white",
-                backgroundColor: "gray",
-            }}>xs=6 md=8</div>
+            <DemoItem text={"xs=6 | md=8"} />
         </Grid>
     </Grid>
 );
-
-
-function DemoItem({ ...props }) {
-    return (
-        <div style={{
-            minHeight: "100px",
-            minWidth: "100px",
-            textAlign: "center",
-            color: "white",
-            backgroundColor: "gray",
-        }}>{props.text}</div>
-    );
-}
 
 export const NestedGrid = () => (
 
     <Grid container spacing={1}>
         <Grid container item spacing={3}>
             <Grid item xs={4}>
-                <DemoItem text="A" />
+                <DemoItem text="A1" />
             </Grid>
             <Grid item xs={4}>
-                <DemoItem text="B" />
+                <DemoItem text="B1" />
             </Grid>
             <Grid item xs={4}>
-                <DemoItem text="C" />
+                <DemoItem text="C1" />
             </Grid>
         </Grid>
         <Grid container item spacing={3}>
             <Grid item xs={4}>
-                <DemoItem text="A" />
+                <DemoItem text="A2" />
             </Grid>
             <Grid item xs={4}>
-                <DemoItem text="B" />
+                <DemoItem text="B2" />
             </Grid>
             <Grid item xs={4}>
-                <DemoItem text="C" />
+                <DemoItem text="C2" />
             </Grid>
         </Grid>
         <Grid container item spacing={3}>
             <Grid item xs={4}>
-                <DemoItem text="A" />
+                <DemoItem text="A3" />
             </Grid>
             <Grid item xs={4}>
-                <DemoItem text="B" />
+                <DemoItem text="B3" />
             </Grid>
             <Grid item xs={4}>
-                <DemoItem text="C" />
+                <DemoItem text="C3" />
             </Grid>
+        </Grid>
+    </Grid>
+);
+
+export const GridColumns = () => (
+    <Grid container item direction={'row'} alignItems={'stretch'} columns={8} spacing={4}>
+        <Grid item xs={8} md={6}>
+            <DemoItem text="xs=8 | md=6" />
+        </Grid>
+        <Grid item xs={4} md={6}>
+            <DemoItem text="xs=4 | md=6" />
         </Grid>
     </Grid>
 );
