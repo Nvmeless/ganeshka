@@ -157,6 +157,10 @@ Grid.propTypes = {
      * Zero min width
      * */
     zeroMinWidth: PropTypes.bool,
+    /**
+     * SX
+     * */
+    sx: PropTypes.object,
 }
 
 // Define default values for the props
@@ -177,4 +181,5 @@ Grid.defaultProps = {
     lg: false,
     xl: false,
     zeroMinWidth: false,
+    sx: null,
 }

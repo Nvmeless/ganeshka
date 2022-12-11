@@ -14,6 +14,7 @@ export const StyledGridContainer = styled.div`
   ${props => props?.columnSpacing && typeof props.columnSpacing === "number" && css`
     column-gap: ${props.columnSpacing * 8}px !important;
   `}
+  ${props => ((props?.sx) && props?.sx)}
 `
 
 // Grid item styles

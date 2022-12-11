@@ -31,10 +31,9 @@ export default {
 
 const GridContainerTemplate = ({ ...args }) => (
 
-    <Grid container {...args} style={{
+    <Grid container {...args} sx={{
         border: "1px solid darkgray",
         backgroundColor: "lightgray",
-        borderRadius: "5px",
     }}>
         <Grid item>
             <div
@@ -259,7 +258,7 @@ export const GridZeroMinWidth = () => {
 };
 
 export const GridColumnsWithBreakpoints = () => (
-    <Grid container spacing={2} direction={'column'} >
+    <Grid container spacing={2} direction={'column'} sx={{ backgroundColor: "darkgray" }} >
         <Grid item xs={6} md={8}>
             <DemoItem text={"xs=6 | md=8"} />
         </Grid>
