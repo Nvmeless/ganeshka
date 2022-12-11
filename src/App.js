@@ -5,6 +5,7 @@ import { Card } from './components/atoms/Card/Card';
 import { ThemeProvider } from 'styled-components';
 import {getTheme} from './themes/default.js'
 import D3Scene from './components/organisms/D3Scene/D3Scene.jsx';
+import { Map } from './components/organisms/D3Scene/Map/Map';
 function App() {
   fetch('https://api.github.com/users/Nvmeless/repos').then(
   resp => resp.json() // this returns a promise
@@ -21,7 +22,7 @@ function App() {
     <div className="App">
       Ganeshka toolkit
     </div>
-    <D3Scene width={1920} height={720}></D3Scene>
+    <Map/>
     </ThemeProvider>
   );
 }
