@@ -1,8 +1,10 @@
 .badge {
     height:auto;
     padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
     position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .rounded {

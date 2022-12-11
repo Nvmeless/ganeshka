@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import Icon from '../../atoms/Icon/Icon'
 import './style.css';
 
-export const Badge = ({badgeContent, badgeBackground, backgroundColor, rounded, height, width, iconColor, ...props}) => {
+export const Badge = ({badgeContent, badgeBackground, backgroundColor, rounded, height, width, ...props}) => {
 
   const borderRadius = rounded ? 'rounded' : '';
   let badgeBackgroundColor = null;
@@ -14,7 +13,6 @@ export const Badge = ({badgeContent, badgeBackground, backgroundColor, rounded, 
     : badgeBackground.includes("Danger") ? "red"
     : badgeBackground
   }
-  //const iconWidth = width.include("em") ? width + "10" : width + 10;
   return (
         <div className={['badge',borderRadius, props?.className].join(' ')} 
         style={
@@ -29,7 +27,7 @@ export const Badge = ({badgeContent, badgeBackground, backgroundColor, rounded, 
         }>
             {
                 <>
-                    <Icon icon={"Bs/BsFillAlarmFill"} size={width} color={iconColor} />
+                    {props.children}
                     {badgeContent ? 
                     <div className="rounded notification"
                     style={
@@ -70,10 +68,6 @@ Badge.propTypes = {
      */
     rounded: PropTypes.bool,
     /**
-     * Icon color
-     */
-    iconColor: PropTypes.string,
-    /**
      * Which number is displayed in badge
      */
     badgeContent: PropTypes.number,
@@ -93,3 +87,11 @@ Badge.defaultProps = {
     height: "50px",
     iconColor: "black"
 }
+
+/*
+Exemple :
+
+<Badge backgroundColor={"#00ff00"} rounded={true} badgeContent={2} width={50} height={50}>
+    <Icon icon={"Bs/BsFillAlarmFill"} size={50} color={"black"} />
+</Badge>
+*/
