@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { Card } from './components/atoms/Card/Card';
 import { Avatar } from './components/atoms/Avatar/Avatar';
-import {CiAlarmOn} from "react-icons/ci"
  
 
 function App() {
