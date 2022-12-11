@@ -15,8 +15,63 @@ export default {
       control: "boolean",
       defaultValue: false,
     },
+    link: {
+      name: "Button type link ?",
+      control: "boolean",
+      defaultValue: false,
+      if: {
+        arg: "upload",
+        truthy: false
+      }
+    },
+    linkObject: {
+      name: "Link button to ...",
+      control: "text",
+      if: {
+        arg: "link",
+        truthy: true
+      }
+    },
+    contained: {
+      name: "Button contained ?",
+      control: "boolean",
+      defaultValue: false
+    },
     textual: {
       name: "Button textual only ?",
+      control: "boolean",
+      defaultValue: false
+    },
+    size: {
+      name: "Button size",
+      control: "select",
+      options: {
+        "Small": "btn-sm",
+        "Medium" : "",
+        "Large" : "btn-lg"
+      },
+      defaultValue: ""
+    },
+    upload: {
+      name: "Upload button ?",
+      control: "boolean",
+      defaultValue: false
+    },
+    uploadType: {
+      name: "Upload file type",
+      control: "select",
+      options: [
+        "*",
+        "image/*"
+      ],
+      defaultValue: "*",
+      if: {
+        arg: "upload",
+        truthy: true
+      }
+    },
+    loading: {
+      name: "Loading button ?",
       control: "boolean",
       defaultValue: false
     },
@@ -35,6 +90,10 @@ export default {
     value: {
       name: "Value inside button",
       control: "text"
+    },
+
+    handleClick: {
+      action: "clicked"
     }
   },
 }

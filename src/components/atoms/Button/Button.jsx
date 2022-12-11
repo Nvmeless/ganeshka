@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import "./styles.css"
+
+import {FaBookOpen} from "react-icons/all";
+import {Puff} from "react-loading-icons";
+
 const DEFAULT_DISABLED_STATE = false
 const DEFAULT_OUTLINED_STATE = false
 const DEFAULT_TEXTUAL_STATE = false
+const DEFAULT_LINK_STATE = false
+const DEFAULT_CONTAINED_STATE = false
+const DEFAULT_UPLOAD_STATE = false
+const DEFAULT_LOADING_STATE = false
 
 const DEFAULT_TEXT_COLOR = "#FFFFFF";
 const DEFAULT_BACKGROUND_COLOR = "#1E88E5";
@@ -53,7 +61,9 @@ function shadeColor(color, percent) {
   return "#"+RR+GG+BB;
 }
 
-export const Button = ({disabled, outlined, textual, textColor, backgroundColor, value, ...props}) => {
+export const Button = ({disabled, outlined, link, linkObject, contained, textual, size, upload, uploadType, loading, textColor, backgroundColor, startIcon, endIcon, value, ...props}) => {
+  const inputRef = useRef();
+
   textColor = alwaysConvertToHex(textColor)
 
   const pickedColor = {
@@ -92,39 +102,87 @@ export const Button = ({disabled, outlined, textual, textColor, backgroundColor,
     pickedColor["--bs-btn-hover-color"] = textColor
   }
 
-  return (
-    <button className={[
+  const classList = [
       "btn",
-      disabled ? "disabled" : ""
-    ].join(" ")}
-            style={
-              {
-                ...pickedColor,
-                ...{
+      disabled ? "disabled" : "",
+      contained ? "btn-contained" : "",
+      size,
+      loading ? "btn-loading" : ""
+    ].join(" ")
 
-                },
-                ...props?.style
-              }
-            }>
-      { value }
-    </button>
+  const styleList = {
+    ...pickedColor,
+    ...{
+
+    },
+    ...props?.style
+  }
+
+  if (upload) {
+    props.handleClick = () => {
+      inputRef.current.click()
+    }
+  }
+
+  return (
+    link ?
+      <a className={classList}
+         style={styleList}
+         href={linkObject}
+         onClick={props.handleClick}>
+        { loading ? (<Puff stroke="rgba(0, 0, 0, 0.12)" height="20px" width="20px" />) : ""}
+        { (startIcon) }&nbsp;
+
+        { value }
+
+        &nbsp;{ (endIcon) }
+      </a>
+      :
+      <button className={classList}
+              style={styleList}
+              onClick={props.handleClick}>
+        { loading ? (<Puff stroke="rgba(0, 0, 0, 0.12)" height="20px" width="20px" />) : ""}&nbsp;
+        { (startIcon) }&nbsp;
+
+        { value }
+        { upload ? (<input hidden ref={inputRef} accept={uploadType} multiple type="file" />) : ""}
+
+        &nbsp;{ (endIcon) }
+      </button>
   )
 }
 
 Button.propTypes = {
   disabled: PropTypes.bool,
   outlined: PropTypes.bool,
+  link: PropTypes.bool,
+  linkObject: PropTypes.string,
+  contained: PropTypes.string,
   textual: PropTypes.bool,
+  size: PropTypes.string,
+  upload: PropTypes.bool,
+  uploadType: PropTypes.string,
+  loading: PropTypes.bool,
   textColor: PropTypes.string,
   backgroundColor: PropTypes.string,
-  value: PropTypes.string,
+  startIcon: PropTypes.any,
+  endIcon: PropTypes.any,
+  value: PropTypes.string
 }
 
 Button.defaultProps = {
   disabled: DEFAULT_DISABLED_STATE,
   outlined : DEFAULT_OUTLINED_STATE,
+  link: DEFAULT_LINK_STATE,
+  linkObject: "#",
+  contained: DEFAULT_CONTAINED_STATE,
   textual: DEFAULT_TEXTUAL_STATE,
+  size: "",
+  upload: DEFAULT_UPLOAD_STATE,
+  uploadType: "*",
+  loading: DEFAULT_LOADING_STATE,
   textColor: DEFAULT_TEXT_COLOR,
   backgroundColor: DEFAULT_BACKGROUND_COLOR,
-  value: DEFAULT_VALUE,
+  startIcon: <FaBookOpen />,
+  value: DEFAULT_VALUE
 }
