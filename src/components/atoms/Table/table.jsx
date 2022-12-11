@@ -2,6 +2,7 @@ import PropTypes, { bool, func } from 'prop-types';
 
 export const Table = ({children,classes,component,padding,size,stickyHeader,sx,...props}) => {
     classes = classes ? classes : '';
+
     return (
         <table className={['MuiTableCell-root','MuiTable-stickyHeader',classes, props?.className].join(' ')}>
         {children}

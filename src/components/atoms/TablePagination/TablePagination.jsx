@@ -4,27 +4,26 @@ import { useState } from "react";
 import { BiArrowToLeft,BiRightArrowAlt,BiLeftArrowAlt,BiArrowToRight } from 'react-icons/bi';
 
 
-export const TablePagination = ({count,onPageChange, rowsPerPage,ActionsComponent,backIconButtonProps,classes,compononent,getItemAriaLabel,labelDisplayedRows,labelRowsPerPage,nextIconButtonProps,onRowsPerPageChange,rowsPerPageOptions,SelectProps,showFirstButton,showLastButton, sx,...props}) => {
-    
-    const [page, setPage] = useState(0);
+export const TablePagination = ({count,page = 1,onPageChange, rowsPerPage = 10,ActionsComponent,backIconButtonProps,classes,compononent,getItemAriaLabel,labelDisplayedRows,labelRowsPerPage,nextIconButtonProps,onRowsPerPageChange,rowsPerPageOptions,SelectProps,showFirstButton,showLastButton, sx,...props}) => {
+
     const maxpage = Math.max(0, Math.ceil(count / rowsPerPage) - 1);
 
     const handleFirstPageButtonClick = (event) => {
-        setPage(1);
+        onPageChange(1);
       };
     
       const handleBackButtonClick = (event) => {
         if(page-1 > 0)
-            setPage(page - 1);
+            onPageChange(page - 1);
       };
     
       const handleNextButtonClick = (event) => {
         if(page < maxpage)
-            setPage(page + 1);
+            onPageChange(page + 1);
       };
     
       const handleLastPageButtonClick = (event) => {
-        setPage(maxpage);
+        onPageChange(maxpage);
       };
 
     return (
@@ -49,7 +48,7 @@ export const TablePagination = ({count,onPageChange, rowsPerPage,ActionsComponen
             >
                 <BiLeftArrowAlt></BiLeftArrowAlt>
             </span>
-            <span>{page}</span>
+            <span>{page}/{maxpage}</span>
             <span
                 onClick={handleNextButtonClick}
                 disabled={count !== -1 ? page >= Math.ceil(count / rowsPerPage) - 1 : false}
