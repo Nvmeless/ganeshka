@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-export const Tab = ({label, value, icon, iconPosition, disabled, selected, ...props}) => {
+
+export const Tab = ({label, value, icon, iconPosition, disabled, onClick, ...props}) => {
 
     const iconPositionClass = iconPosition ? `iconPosition--${iconPosition}` : 'iconPosition--top'
-    const [isActive, setIsActive] = useState(false);
-
-    function handleClick(e) {
-        setIsActive(!isActive);
-    }
 
     return (
-        <button className={['tab', isActive ? 'tabActive' : '', props?.className].join(' ')} role="tab" disabled={disabled} value={value} onClick={handleClick}>
+        <li 
+            className={['tab', props?.className].join(' ')} 
+            role="tab" 
+            disabled={disabled} 
+            value={value} 
+            onClick={onClick}
+        >
             <div className={[iconPositionClass, props?.className].join(' ')}>
                 <span className="tabLabel">{label}</span>
                 {
                     icon ? <span className="tabIcon">{icon}</span> : null 
                 }
             </div>
-        </button>
+        </li>
     )
 }
 
@@ -30,7 +32,7 @@ Tab.propTypes ={
     /**
      * Which value is used for Tab
      */
-    value: PropTypes.string,
+    value: PropTypes.number,
     /**
      * Which icon is used for Tab
      */
@@ -44,10 +46,6 @@ Tab.propTypes ={
      * Is disabled ?
      */
     disabled: PropTypes.bool,
-    /**
-     * Is selected ?
-     */
-    selected: PropTypes.bool,
 
 }
 

@@ -2,6 +2,8 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+    list-style: none;
+    margin: 10px;
 }
 
 .tabLabel{
