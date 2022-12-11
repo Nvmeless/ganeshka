@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
 
-export const Tab = ({label, value, icon, iconPosition, disabled, onClick, ...props}) => {
-
+export const Tab = ({label, value, index, icon, iconPosition, disabled, onClick, color, ...props}) => {
     const iconPositionClass = iconPosition ? `iconPosition--${iconPosition}` : 'iconPosition--top'
 
     return (
@@ -12,9 +11,23 @@ export const Tab = ({label, value, icon, iconPosition, disabled, onClick, ...pro
             role="tab" 
             disabled={disabled} 
             value={value} 
+            index={index}
             onClick={onClick}
         >
-            <div className={[iconPositionClass, props?.className].join(' ')}>
+            <div 
+                className={[iconPositionClass, props?.className].join(' ')}
+                style={
+                    value === index ?
+                    {
+                        ...{
+
+                            color : color || "black"
+                        },
+                        ...props?.style
+                    }
+                    : null
+                }
+            >
                 <span className="tabLabel">{label}</span>
                 {
                     icon ? <span className="tabIcon">{icon}</span> : null 

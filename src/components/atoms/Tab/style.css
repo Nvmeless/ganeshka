@@ -1,9 +1,8 @@
 .tab{
-    background-color: transparent;
-    border: none;
     cursor: pointer;
     list-style: none;
-    margin: 10px;
+    margin: 0 10px;
+    padding: 10px;
 }
 
 .tabLabel{

@@ -7,7 +7,6 @@ import {getTheme} from './themes/default.js'
 import { TabPanel } from './components/atoms/TabPanel/TabPanel';
 import { Tabs } from './components/atoms/Tabs/Tabs';
 import { Box } from '@mui/material';
-import { FaAmazon } from "react-icons/fa";
 
 function App() {
   const [value, setValue] = useState(0)
@@ -16,15 +15,17 @@ function App() {
       setValue(newValue);
   };
 
+  const theme = getTheme();
+
   return (
     <ThemeProvider theme={getTheme()}>
       <div className="App">
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} aria-label="basic tabs example">
-            <Tab label="Item One" onClick={() => handleClick(0)} icon={<FaAmazon />}/>
-            <Tab label="Item Two" onClick={() => handleClick(1)}/>
-            <Tab label="Item Three" onClick={() => handleClick(2)}/>
+          <Tabs>
+            <Tab label="Item One" onClick={() => handleClick(0)} value={value} index={0} color={theme.primary}/>
+            <Tab label="Item Two" onClick={() => handleClick(1)} value={value} index={1} color={theme.primary}/>
+            <Tab label="Item Three" onClick={() => handleClick(2)} value={value} index={2} color={theme.primary}/>
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
