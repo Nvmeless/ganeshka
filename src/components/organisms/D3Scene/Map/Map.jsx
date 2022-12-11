@@ -36,12 +36,12 @@ export const Map = ({ projectionName = "geoEquirectangular" }) => {
           </defs>
           <path
             d={pathGenerator(sphere)}
-            fill="#f2f2f7"
+            fill="#8ab4f8"
           />
           <g style={{ clipPath: "url(#Map__sphere)" }}>
             {/* we can even have graticules! */}
             <path
-              d={pathGenerator(d3.geoGraticule10())}
+            //   d={pathGenerator(d3.geoGraticule10())}
               fill="none"
               stroke="#fff"
             />
@@ -59,7 +59,7 @@ export const Map = ({ projectionName = "geoEquirectangular" }) => {
                   key={shape.properties.subunit}
                   d={pathGenerator(shape)}
                   fill="#9980FA"
-                  stroke="#fff"
+                //   stroke="#fff"
                 >
                   <title>
                     {shape.properties.name}
