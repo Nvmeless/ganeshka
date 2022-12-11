@@ -1,15 +1,19 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledContainer = styled.div`
-    background-color:${props => props?.backgroundColor && props.backgroundColor};
+  background-color: ${(props) =>
+    props?.backgroundColor && props.backgroundColor};
 
-    
-    ${props => props?.padding && css`
-    padding: ${props.padding};
+  ${(props) =>
+    props?.padding &&
+    css`
+      padding: ${props.padding};
     `}
-    ${props => props?.margin && css`
-    margin: ${props.margin};
+  ${(props) =>
+    props?.margin &&
+    css`
+      margin: ${props.margin};
     `}
 
     height:50vh;
-`
+`;
