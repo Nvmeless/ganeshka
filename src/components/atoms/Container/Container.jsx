@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {StyledContainer} from './styles.js';
 
 export const Container = ({...props}) => {
-    const {backgroundColor, margin, padding} = props;
+    const {backgroundColors, margin, padding} = props;
 
 
     return( <StyledContainer {...props}></StyledContainer>)
