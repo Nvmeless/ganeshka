@@ -1,0 +1,16 @@
+.MuiTableSortLabel-iconDirectionDesc, .MuiTableSortLabel-iconDirectionAsc {
+    transition: opacity 0.4;
+}
+.MuiTableSortLabel-iconDirectionDesc:hover::before, .MuiTableSortLabel-iconDirectionAsc:hover::before {
+    opacity: 1;
+}
+
+.MuiTableSortLabel-iconDirectionDesc::before {
+    content: '↓';
+    opacity: 0;
+}
+
+.MuiTableSortLabel-iconDirectionAsc::before {
+    content: '↑';
+    opacity: 0;
+}
