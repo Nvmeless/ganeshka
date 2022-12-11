@@ -10,13 +10,7 @@ export const TableSortLabel = ({active,children,classes,direction,hideSortIcon,I
     classes   += (direction === 'asc' ? 'MuiTableSortLabel-iconDirectionAsc' : '');
 
     return (
-        <div className={['MuiTableCell-root','MuiTableSortLabel-icon',classes, props?.className].join(' ')}  style={
-            {
-                ...{
-                    border: "solid black 2px"
-                }
-            }
-        }>
+        <div className={['MuiTableCell-root','MuiTableSortLabel-icon',classes, props?.className].join(' ')}>
             {children}
         </div>
     )
