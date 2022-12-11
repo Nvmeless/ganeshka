@@ -12,11 +12,11 @@ export const Tabs = ({ children }) => {
     // };
 
     return (
-        <div>
-            <ul className="tab-list" >
+        <>
+            <div className="tab-list" >
                 {children}
-            </ul> 
-        </div>
+            </div> 
+        </>
     )
 }
 

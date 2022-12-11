@@ -1,4 +1,6 @@
 .tab{
+    background-color: transparent;
+    border: none;
     cursor: pointer;
     list-style: none;
     padding: 10px;

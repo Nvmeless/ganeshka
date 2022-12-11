@@ -6,7 +6,7 @@ export const Tab = ({label, value, index, icon, iconPosition, disabled, onClick,
     const iconPositionClass = iconPosition ? `iconPosition--${iconPosition}` : 'iconPosition--top'
 
     return (
-        <li 
+        <button 
             className={['tab', props?.className].join(' ')} 
             role="tab" 
             disabled={disabled} 
@@ -34,7 +34,7 @@ export const Tab = ({label, value, index, icon, iconPosition, disabled, onClick,
                     icon ? <span className="tabIcon">{icon}</span> : null 
                 }
             </div>
-        </li>
+        </button>
     )
 }
 
