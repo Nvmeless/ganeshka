@@ -45,7 +45,6 @@ class ErrorBoundary extends Component {
 
 const Icon = ({ ...props }) => {
   const [library, iconComponent] = props.icon.split("/")
-  console.log(library,iconComponent)
   if (!library || !iconComponent) return <div>Icon Library or Icon Name is missing</div>
   if (library.slice(0, 2) !== iconComponent.slice(0, 2)) return <div>Icon Library and Icon Name Mismatch</div>
   const lib = library.toLowerCase()
