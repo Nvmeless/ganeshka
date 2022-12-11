@@ -5,12 +5,13 @@ import { TableBody } from './components/atoms/TableBody/TableBody';
 import { TableCell } from './components/atoms/TableCell/TableCell';
 import { ThemeProvider } from 'styled-components';
 import {getTheme} from './themes/default.js'
-import TableHead from './components/molecules/TableHead/TableHead';
+import TableHead from './components/atoms/TableHead/TableHead';
 
 function App() {
   return (
     <div className="App">
       <TableContainer>
+        
       </TableContainer>
       <TableBody>
         <TableCell align={'right'}>
