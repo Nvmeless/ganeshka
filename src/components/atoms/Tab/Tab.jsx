@@ -13,20 +13,21 @@ export const Tab = ({label, value, index, icon, iconPosition, disabled, onClick,
             value={value} 
             index={index}
             onClick={onClick}
+            style={
+                value === index ?
+                {
+                    ...{
+
+                        color : color || "black",
+                        borderBottom: `2px solid ${color || "black"}`,
+                    },
+                    ...props?.style
+                }
+                : null
+            }
         >
             <div 
                 className={[iconPositionClass, props?.className].join(' ')}
-                style={
-                    value === index ?
-                    {
-                        ...{
-
-                            color : color || "black"
-                        },
-                        ...props?.style
-                    }
-                    : null
-                }
             >
                 <span className="tabLabel">{label ? label : null}</span>
                 {

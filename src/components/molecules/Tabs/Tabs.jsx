@@ -5,7 +5,7 @@ import './style.css';
 export const Tabs = ({ children }) => {
 
     // CODE À METTRE DANS LE COMPOSANT OU EST APPELLÉ LE COMPOSANT TABS :
-    
+
     // const [value, setValue] = useState(0)
     // const handleClick = (newValue) => {
     //     setValue(newValue);
@@ -21,6 +21,5 @@ export const Tabs = ({ children }) => {
 }
 
 Tabs.propTypes ={ 
-    children: PropTypes.node,
-    value: PropTypes.number.isRequired, 
+    children: PropTypes.node, 
 }

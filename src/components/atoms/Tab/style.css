@@ -42,7 +42,3 @@
 .iconPosition--start span, .iconPosition--end span, .iconPosition--top span, .iconPosition--bottom span{
     margin: 0 5px;
 }
-
-.tabActive{
-    color: red;
-}
