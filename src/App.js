@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Card } from './components/atoms/Card/Card';
-import { Badge } from './components/molecules/Badge/Badge';
+import { Badge } from './components/atoms/Badge/Badge';
 import Icon from './components/atoms/Icon/Icon'
 
 function App() {

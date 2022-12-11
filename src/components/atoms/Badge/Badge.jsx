@@ -83,8 +83,8 @@ Badge.defaultProps = {
     badgeContent: null,
     badgeBackground: null,
     rounded: false,
-    width: "50px",
-    height: "50px",
+    width: "50",
+    height: "50",
     iconColor: "black"
 }
 
