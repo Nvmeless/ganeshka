@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Tabs } from '../../components/atoms/Tabs/Tabs'
+import { Tabs } from '../../components/molecules/Tabs/Tabs'
 
 export default {
-    title:"Atoms/Tabs",
+    title:"Molecules/Tabs",
     component: Tabs,
 }
 

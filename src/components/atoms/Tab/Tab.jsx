@@ -28,7 +28,7 @@ export const Tab = ({label, value, index, icon, iconPosition, disabled, onClick,
                     : null
                 }
             >
-                <span className="tabLabel">{label}</span>
+                <span className="tabLabel">{label ? label : null}</span>
                 {
                     icon ? <span className="tabIcon">{icon}</span> : null 
                 }
@@ -63,7 +63,6 @@ Tab.propTypes ={
 }
 
 Tab.defaultProps = {
-    label: "Item",
     value: null,
     disabled: false,
 }

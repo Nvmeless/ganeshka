@@ -24,13 +24,11 @@
 .iconPosition--start{
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: row-reverse;
 }
 .iconPosition--end{
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: row;
 }
 .iconPosition--bottom{
@@ -38,6 +36,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 0 auto;
+}
+
+.iconPosition--start span, .iconPosition--end span, .iconPosition--top span, .iconPosition--bottom span{
+    margin: 0 5px;
 }
 
 .tabActive{
