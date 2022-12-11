@@ -50,7 +50,12 @@ const DateField = (props) => {
   }, [props.value])
 
   return (
-    <StyledDateField {...props} className={props.className} onFocus={animateFocus} onClick={animateFocus}>
+    <StyledDateField
+      {...props}
+      className={props.className}
+      onFocus={(e) => !props.disabled && animateFocus(e)}
+      onClick={(e) => !props.disabled && animateFocus(e)}
+    >
       <input
         value={value}
         ref={inputRef} 
@@ -58,9 +63,14 @@ const DateField = (props) => {
         onChange={formatToDateString} 
         placeholder='MM/DD/YYYY' 
         readOnly={props.disabled}
+        disabled={props.disabled}
       />
       {props.label && <label>{props.label}</label>}
-      <span className='datefield__icon' onClick={!props.disabled && props.onClick}><CgCalendar size={25} color={props.color} /></span>
+      {props.displayIcon && (
+        <span className='datefield__icon' onClick={(e) => !props.disabled && props.onClick(e)}>
+          <CgCalendar size={25} color={props.color} />
+        </span>
+      )}
     </StyledDateField>
   )
 }
@@ -68,24 +78,20 @@ const DateField = (props) => {
 DateField.propTypes = {
   value: PropTypes.instanceOf(Date),
   className: PropTypes.string,
-  closeOnSelect: PropTypes.bool,
   disabled: PropTypes.bool,
-  disableOpenPicker: PropTypes.bool,
-  open: PropTypes.bool,
   width: PropTypes.number,
   label: PropTypes.string,
   color: PropTypes.string,
   backgroundColor: PropTypes.string,
   placeholderColor: PropTypes.string,
+  displayIcon: PropTypes.bool,
 };
 
 DateField.defaultProps = {
   disabled: false,
-  closeOnSelect: true,
-  disableOpenPicker: false,
-  open: false,
   width: 200,
   color: '#000',
+  displayIcon: true,
   backgroundColor: '#fff',
   placeholderColor: 'gray',
 };

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import StyledDatePicker from './styles.js';
-import Calendar from '../Calendar/Calendar.jsx';
+import Calendar from '../../atoms/Calendar/Calendar.jsx';
 
 const DatePicker = (props) => {
   const [date, setDate] = useState(undefined)
@@ -34,12 +34,18 @@ const DatePicker = (props) => {
         placeholder: 'MM/DD/YYYY',
         label: props.label,
         readOnly: props.disabled,
-        onClick: (e) => displayCalendar(e),
+        onClick: (e) => (!props.disableOpenPicker && !props.disabled) && displayCalendar(e),
       })}
       <Calendar
-        className={`datepicker__calendar ${display ? 'displayed' : ''}`}
-        value={date || new Date()}
-        onChange={(val) => setFormattedValue(val)}
+        className={`datepicker__calendar`}
+        open={props.open || display}
+        value={date}
+        onChange={(val) => {
+          setFormattedValue(val)
+          if (props.closeOnSelect) {
+            setDisplay(false);
+          }
+        }}
         dayOfWeekFormatter={props.dayOfWeekFormatter}
         color={props.color}
         backgroundColor={props.backgroundColor}
@@ -49,17 +55,14 @@ const DatePicker = (props) => {
 }
 
 DatePicker.propTypes = {
-  value: PropTypes.instanceOf(Date),
+  value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   renderInput: PropTypes.func.isRequired,
   className: PropTypes.string,
   closeOnSelect: PropTypes.bool,
   dayOfWeekFormatter: PropTypes.func,
-  defaultCalendarMonth: PropTypes.any,
   disabled: PropTypes.bool,
   disableOpenPicker: PropTypes.bool,
-  maxDate: PropTypes.any,
-  minDate: PropTypes.any,
   open: PropTypes.bool,
   width: PropTypes.number,
   label: PropTypes.string,

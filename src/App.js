@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import DateField from './components/atoms/DateField/DateField';
-import DatePicker from './components/atoms/DatePicker/DatePicker';
-import DateRangePicker from './components/atoms/DateRangePicker/DateRangePicker';
+import DatePicker from './components/molecules/DatePicker/DatePicker';
+import DateRangePicker from './components/molecules/DateRangePicker/DateRangePicker';
 
 function App() {
   const [dates, setDates] = useState([undefined, undefined]);
