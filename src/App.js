@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Card backgroundColor={"red"} height="10px" width={"100%"}>Message</Card>
-      <Badge/>
+      <Badge backgroundColor={"#00ff00"} rounded={true} badgeContent={2} width={50} height={50}  />
     </div>
   );
 }
