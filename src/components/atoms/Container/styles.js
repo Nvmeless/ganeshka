@@ -5,11 +5,25 @@ export const StyledContainer = styled.div`
 
     
     ${props => props?.padding && css`
-    padding: ${props.padding};
-    `}
-    ${props => props?.margin && css`
-    margin: ${props.margin};
+        padding: ${props.padding}px;
     `}
 
+    ${props => props?.margin && css`
+        margin: ${props.margin}px;
+    `}
+
+    ${props => props?.direction && css`
+        flex-direction: ${props.direction};
+    `}
+
+    ${props => props?.justifyContent && css`
+        justify-content: ${props.justifyContent};
+    `}
+
+    ${props => props?.direction && css`
+        align-items: ${props.alignItem};
+    `}
+    
+    display: flex;
     height:50vh;
 `
