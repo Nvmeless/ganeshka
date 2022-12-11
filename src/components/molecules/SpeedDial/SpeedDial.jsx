@@ -183,5 +183,5 @@ SpeedDial.defaultProps = {
     hidden: false,
     loading: false,
 }
-
+SpeedDial.displayName = 'SpeedDial';
   export default SpeedDial;

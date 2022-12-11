@@ -6,6 +6,7 @@ import {StyledSpan} from './styles.js';
 import {Tooltip} from "@mui/material";
 import {Fab} from "@mui/material";
 import './styles.css'
+import SpeedDialIcon from "../SpeedDialIcon/SpeedDialIcon";
 
 
 
@@ -102,5 +103,5 @@ SpeedDialAction.defaultProps = {
   sx:{},
   id:null
 }
-
+SpeedDialAction.displayName = 'SpeedDialAction';
 export default SpeedDialAction;

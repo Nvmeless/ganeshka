@@ -56,4 +56,5 @@ SpeedDialIcon.defaultProps = {
 }
 
 
+SpeedDialIcon.displayName = 'SpeedDialIcon';
 export default SpeedDialIcon;

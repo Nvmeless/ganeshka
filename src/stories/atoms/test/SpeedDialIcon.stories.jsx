@@ -6,7 +6,7 @@ export default {
     title:"Atoms/test/SpeedDialIcon",
     component: SpeedDialIcon,
     argType: {
-        backgroundColor: {control: 'color'}
+
     },
 }
 
