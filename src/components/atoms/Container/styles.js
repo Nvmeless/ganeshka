@@ -1,15 +1,27 @@
 import styled, {css} from "styled-components";
 
-export const StyledContainer = styled.div`
-    background-color:${props => props?.backgroundColor && props.backgroundColor};
-
-    
-    ${props => props?.padding && css`
-    padding: ${props.padding};
+export const StyledAppBar = styled.div`
+  background-color: ${(props) => props?.color && props.color};
+  
+  ${(props) =>
+    props?.position &&
+    css`
+      position: ${props.position};
     `}
-    ${props => props?.margin && css`
-    margin: ${props.margin};
+  ${(props) =>
+    props?.margin &&
+    css`
+      margin: ${props.margin};
     `}
-
-    height:50vh;
-`
+    ${(props) =>
+    props?.sx &&
+    css`
+      ${props.sx};
+    `}
+    ${(props) =>
+    !props?.enableColorOnDark &&
+    props?.theme.mode == "dark" &&
+    css`
+      background-color: #121212 !important;
+    `}
+`;
