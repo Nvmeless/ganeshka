@@ -76,7 +76,7 @@ export const ClockTimePickerWindow = styled.div`
   width: 300px;
   height: 250px;
   top: 100%;
-  background-color: #2e2e2e;
+  background-color: ${props => props.backgroundColor};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,7 +99,7 @@ export const ClockButtonContainer = styled.div`
     props.selected &&
     css`
       color: white;
-      background-color: teal;
+      background-color: ${props => props.controlsColor};
     `}
 
   ${(props) =>
@@ -138,7 +138,6 @@ const getLeftTop = (radAngle) => {
 
 const getSpansStyle = (nbElements) => {
   let spansStyle = "";
-  console.log("nbElem", nbElements);
   for (let i = 0; i < nbElements; i++) {
     const radAngle = getRadAngle(nbElements, i);
     const [left, top] = getLeftTop(radAngle);
@@ -156,7 +155,6 @@ export const ClockContainer = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-color: #2b2b2b;
   padding: 18px;
   ${(props) => props.nbElements && getSpansStyle(props.nbElements)}
 
@@ -213,10 +211,10 @@ export const ClockPointer = styled.div`
   .thumb {
     width: 4px;
     height: 4px;
-    background-color: teal;
+    background-color: ${props => props.controlsColor};
     border-radius: 50%;
     position: absolute;
-    border: 16px solid lightblue;
+    border: 16px solid ${props => props.controlsColor};
     box-sizing: content-box;
     transform: translate(-50%, -50%);
     display: none;
@@ -238,7 +236,7 @@ export const ClockPointer = styled.div`
     position: absolute;
     width: 100px;
     height: 4px;
-    background-color: teal;
+    background-color: ${props => props.controlsColor};
     display: none;
     left: 50%;
     top: 50%;
@@ -263,7 +261,7 @@ export const ClockPointer = styled.div`
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: teal;
+    background-color: ${props => props.controlsColor};
   }
 `;
 
@@ -274,6 +272,6 @@ export const ClockPageControls = styled.div`
   right: 0;
 
   button {
-    color: white;
+    color: ${props => props.controlsColor};
   }
 `;

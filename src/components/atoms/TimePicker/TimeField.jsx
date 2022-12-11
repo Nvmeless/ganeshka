@@ -10,11 +10,13 @@ const TimeField = ({ ...props }) => {
   const [timeOfDay, setTimeOfDay] = useState("AM");
 
   useEffect(() => {
-    let [timeValue, timeOfDay] = props.value.split(" ");
-    setTimeValue(timeValue);
-    setTimeOfDay(timeOfDay);
-    if (timeValue) {
-      setActive(true);
+    if (props.value) {
+      let [timeValue, timeOfDay] = props.value.split(" ");
+      setTimeValue(timeValue);
+      setTimeOfDay(timeOfDay);
+      if (timeValue) {
+        setActive(true);
+      }
     }
   }, [props.value]);
 
