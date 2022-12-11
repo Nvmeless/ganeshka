@@ -1,62 +1,58 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css'
 import {BsPlusLg} from "react-icons/bs";
 import { GiAerodynamicHarpoon } from "react-icons/gi";
-
+import {StyledSpan} from './styles.js';
 const SpeedDialIcon = ({...props}) => {
 
-  return (
-      <span className={["speedDialAction",(props?.menuOpen ? "icon-rotate " : "icon-no-rotate"),props?.className].join(" ")}>
+
+    return (
+        <StyledSpan className={["speedDialAction",
+            (props.open ? "speedDialAction-component-visible" : "speedDialAction-component-hidden"),
+            (props?.menuOpen ? "icon-rotate " : "icon-no-rotate"),
+            props?.className].join(" ")}
+        style={{...props.sx}}>
           <span className={["icon",(props?.openIcon && props?.menuOpen ? "icon-hide" : "icon-show" )].join(" ")}>
               {props.icon}
           </span>
            <span className={["icon",(props?.openIcon && props?.menuOpen ? "icon-show"  : "icon-hide" )].join(" ")} >
               {
-                  props?.openIcon && props?.menuOpen ?  props.openIcon : <></>
+                props?.openIcon && props?.menuOpen ?  props.openIcon : <></>
               }
            </span>
-      </span>
-
-  );
+      </StyledSpan> );
 }
 
 SpeedDialIcon.propTypes  = {
-
+    /* rejoute des classe sur le speedDialIcon */
   classes: PropTypes.object,
-  /**
-   * The icon to display.
-   */
+    /* icon qui est de base sur le speedDialIcon */
   icon: PropTypes.node,
-  /**
-   * @ignore
-   * If `true`, the component is shown.
-   */
+    /* propriété qui permet de savoir si le menu est ouvert ou non */
   menuOpen: PropTypes.bool,
-  /**
-   * @ignore
-   * If `true`, the component is shown.
-   */
+    /* si a true alors le composant s'affiche */
   open: PropTypes.bool,
-  /**
-   * The icon to display in the SpeedDial Floating Action Button when the SpeedDial is open.
-   */
+    /* icon qui s'affiche lorsque le speedial est ouvert */
   openIcon: PropTypes.node,
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
+    /* sx etends le style pour le speedDialIcon */
   sx: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
     PropTypes.func,
     PropTypes.object,
   ]),
+    /* Aria label envoyé du parent pour fomer les ids */
+    ariaLabel: PropTypes.string,
 };
 
 SpeedDialIcon.defaultProps = {
-  open: false,
+  open: true,
   icon:<BsPlusLg></BsPlusLg>,
   openIcon:<GiAerodynamicHarpoon></GiAerodynamicHarpoon>,
-  classes: null
+  sx:{},
+  menuOpen:false,
+  classes:{},
+  ariaLabel:null
 }
 
 

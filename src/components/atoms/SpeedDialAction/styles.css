@@ -1,0 +1,13 @@
+.SpeedDialAction-component-visible {
+    scale: 1;
+    opacity: 1;
+}
+.SpeedDialAction-component-hidden {
+    scale: 0;
+    opacity: 0;
+}
+
+.SpeedDialAction-component {
+    transition: all 0.6s ease-in-out;
+
+}

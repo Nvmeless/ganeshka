@@ -2,7 +2,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { ImFilesEmpty } from "react-icons/im";
-
+import {StyledSpan} from './styles.js';
 import {Tooltip} from "@mui/material";
 import {Fab} from "@mui/material";
 import './styles.css'
@@ -10,17 +10,33 @@ import './styles.css'
 
 
 
+
 const SpeedDialAction = (props) => {
+  const transitionStyle = props?.delay ? { transitionDelay: `${props.delay}ms` } : {};
+  const fabStyle = props?.FabProps?.style ? { ...props.FabProps.style, ...transitionStyle } : transitionStyle;
+
 
     return (
-        <div className={props?.classes}  id={props?.id ? props.id : null}>
+        <div
+            className={
+              ["SpeedDialAction-component",
+                (props.open ? "SpeedDialAction-component-visible " : "SpeedDialAction-component-hidden"),
+                props?.classes].join(" ")
+            }
+            style={{...props.sx}}
+            id={props?.id ? props.id : (props?.ariaLabel ? props.ariaLabel : "") +  Math.floor(Math.random() * 1000000).toString()}>
           <Tooltip
               title={props?.tooltipTitle ? props.tooltipTitle : "" }
               classes={props?.TooltipClasses}
               placement={props?.tooltipPlacement}
-              open={props.tooltipOpen}>
-          <Fab {...props?.FabProps} >
-            {props.icon}
+              open={props.tooltipOpen && props.menuOpen}>
+          <Fab {...props?.FabProps}
+               style={{
+                   ...fabStyle,
+               }}>
+            <StyledSpan>
+              {props.icon}
+            </StyledSpan>
           </Fab>
         </Tooltip>
         </div>)
@@ -28,54 +44,29 @@ const SpeedDialAction = (props) => {
 
 SpeedDialAction.propTypes  = {
 
-  /**
-   * Override or extend the styles applied to the component.
-   */
+  /* ajoutes des class sur le speedDialAction */
   classes: PropTypes.object,
-  /**
-   * Adds a transition delay, to allow a series of SpeedDialActions to be animated.
-   * @default 0
-   */
+  /* ajoute du delay sur l'animation pour le fab composant */
   delay: PropTypes.number,
-  /**
-   * Props applied to the [`Fab`](/material-ui/api/fab/) component.
-   * @default {}
-   */
+  /* object qui permet d'envoyer toute les props au composant fab */
   FabProps: PropTypes.object,
-  /**
-   * The icon to display in the SpeedDial Fab.
-   */
+  /* icone afficher dans le speedDialAction*/
   icon: PropTypes.node,
-  /**
-   * This prop is used to help implement the accessibility logic.
-   * If you don't provide this prop. It falls back to a randomly generated id.
-   */
+  /* id si null un id est g"neré */
   id: PropTypes.string,
-  /**
-   * If `true`, the component is shown.
-   */
+  /* si true le composant */
   open: PropTypes.bool,
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
+  /* ajoutes du style  */
   sx: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
     PropTypes.func,
     PropTypes.object,
   ]),
-  /**
-   * `classes` prop applied to the [`Tooltip`](/material-ui/api/tooltip/) element.
-   */
+  /* ajouts de classe sur le tooltips */
   TooltipClasses: PropTypes.object,
-  /**
-   * Make the tooltip always visible when the SpeedDial is open.
-   * @default false
-   */
+  /* si le tooltips doit rester ouvert ou non */
   tooltipOpen: PropTypes.bool,
-  /**
-   * Placement of the tooltip.
-   * @default 'left'
-   */
+  /* placement  du tooltips */
   tooltipPlacement: PropTypes.oneOf([
     'bottom-end',
     'bottom-start',
@@ -90,15 +81,26 @@ SpeedDialAction.propTypes  = {
     'top-start',
     'top',
   ]),
-  /**
-   * Label to display in the tooltip.
-   */
-  tooltipTitle: PropTypes.node,
+  /* label du tooltips */
+  tooltipTitle: PropTypes.string,
+
+  /* Aria label envoyé du parent pour fomer les ids */
+  ariaLabel: PropTypes.string,
+
 };
 
 SpeedDialAction.defaultProps = {
   FabProps: { size:"small"},
-  icon:<ImFilesEmpty></ImFilesEmpty>
+  icon:<ImFilesEmpty></ImFilesEmpty>,
+  open:true,
+  ariaLabel:null,
+  tooltipTitle:"",
+  tooltipPlacement:"left",
+  delay:0,
+  classes:{},
+  TooltipClasses:{},
+  sx:{},
+  id:null
 }
 
 export default SpeedDialAction;

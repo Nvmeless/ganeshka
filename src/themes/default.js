@@ -2,7 +2,7 @@ export const getTheme = () => {
     return {
         background:"",
         primary:"cyan",
-        secondary:"",
+        secondary:"red",
         validate:"",
         error:"",
         container:{
@@ -21,8 +21,12 @@ export const getTheme = () => {
                 secondary:"",
                 validate:"",
                 error:"",
-            }    
+            }
+        },
+        icon:{
+            primary:"black",
+            secondary:"white"
         }
-        
+
     }
 }

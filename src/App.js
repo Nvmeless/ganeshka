@@ -7,24 +7,34 @@ import {getTheme} from './themes/default.js'
 import SpeedDialIcon from "./components/atoms/SpeedDialIcon/SpeedDialIcon";
 import SpeedDialAction from "./components/atoms/SpeedDialAction/SpeedDialAction";
 import SpeedDial from "./components/molecules/SpeedDial/SpeedDial"
-import { FaBeer,FaAccessibleIcon } from 'react-icons/fa';
+import { FaBeer,FaAccessibleIcon,Fa500Px,FaAcquisitionsIncorporated } from 'react-icons/fa';
 
+
+const actions = [
+  { icon: <FaBeer />, name: 'Copy' },
+  { icon: <FaAccessibleIcon />, name: 'Save' },
+  { icon: <Fa500Px />, name: 'Print' },
+  { icon: <FaAcquisitionsIncorporated />, name: 'Share' },
+];
 
 function App() {
+
   return (
     <ThemeProvider theme={getTheme()}>
     <div className="App">
       Ganeshka toolkit
-      <SpeedDialIcon icon={<FaBeer></FaBeer>} openIcon={<FaAccessibleIcon></FaAccessibleIcon>}> </SpeedDialIcon>
-      <SpeedDialIcon > </SpeedDialIcon>
-      <SpeedDialAction></SpeedDialAction>
-      <SpeedDial>
-
-        <SpeedDialAction></SpeedDialAction>
-        <SpeedDialAction></SpeedDialAction>
-        <SpeedDialAction></SpeedDialAction>
-        <SpeedDialAction></SpeedDialAction>
-
+      <SpeedDial
+          ariaLabel="SpeedDial tooltip example"
+          icon={<SpeedDialIcon />}
+      >
+        {actions.map((action) => (
+            <SpeedDialAction
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
+                tooltipPlacement={"left"}
+            />
+        ))}
       </SpeedDial>
     </div>
     </ThemeProvider>
