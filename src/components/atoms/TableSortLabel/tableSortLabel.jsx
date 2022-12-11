@@ -2,7 +2,7 @@ import PropTypes, { bool, func } from 'prop-types';
 import './style.css';
 
 export const TableSortLabel = ({active,children,classes,direction,hideSortIcon,IconComponent,sx,...props}) => {
-    
+
     classes    = (classes ? classes: '');
     classes   += (active ? 'Mui-active' : '');
     direction  = (direction !== undefined ? direction : 'asc');
@@ -10,7 +10,7 @@ export const TableSortLabel = ({active,children,classes,direction,hideSortIcon,I
     classes   += (direction === 'asc' ? 'MuiTableSortLabel-iconDirectionAsc' : '');
 
     return (
-        <div className={['MuiTableCell-root','MuiTableSortLabel-icon',classes, props?.className].join(' ')}>
+        <div onClick={props.changeOrder} className={['MuiTableCell-root','MuiTableSortLabel-icon',classes, props?.className].join(' ')}>
             {children}
         </div>
     )

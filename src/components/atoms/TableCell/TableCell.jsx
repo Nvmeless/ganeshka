@@ -2,7 +2,7 @@ import PropTypes, { bool, func } from 'prop-types';
 import {StyledTableCell} from './styles.js';
 import './style.css';
 
-export const TableCell = ({align,children,classes,component,padding,scope,size,sortDirection,sx,variant,...props}) => {
+export const TableCell = ({align,children,classes,component,padding,scope,size,sortDirection,changeOrder,sx,variant,...props}) => {
     classes = classes ? classes : '';
     classes += ((variant === 'head' ? 'MuiTableCell-head' : ''));
     classes += ((variant === 'body' ? 'MuiTableCell-body' : ''));

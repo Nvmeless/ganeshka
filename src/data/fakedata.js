@@ -4,8 +4,8 @@ import { BiTimeFive } from  'react-icons/bi';
 
 export const headerFakeData = [
     {
-        name: 'fruits',
-        label: 'Fruits',
+        name: 'name',
+        label: 'Nom du fruits',
         ordered: false,
         icon: <GiFruitBowl></GiFruitBowl>
     },
@@ -24,7 +24,8 @@ export const headerFakeData = [
 ];
 
 
-export const  dummybodydata = [{"name":"Norwegian Whitlowgrass","quantity":194,"season":"Fall"},
+export const  dummybodydata = [
+{"name":"Norwegian Whitlowgrass","quantity":194,"season":"Fall"},
 {"name":"Brownplume Wirelettuce","quantity":122,"season":"Winter"},
 {"name":"Woodyaster","quantity":100,"season":"Summer"},
 {"name":"Splitleaf Groundsel","quantity":377,"season":"All"},

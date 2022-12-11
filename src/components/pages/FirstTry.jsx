@@ -8,42 +8,73 @@ import { Table } from '../atoms/Table/Table';
 import TableHead from '../atoms/TableHead/TableHead';
 import { TablePagination } from '../atoms/TablePagination/TablePagination';
 import { dummybodydata, headerFakeData} from '../../data/fakedata';
-import React from 'react';
+import React, { useState } from 'react';
 
 export const FirstTry = () => {
 
-  const [page, setPage] = React.useState(10);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const [order, setOrder] = useState();
+  const [orderBy, setOrderBy] = useState();
+
+    
+  function sortValues(orderBy, order) {
+    return function(a, b) {
+      if (a[orderBy] < b[orderBy])
+        return (order === 'desc' ? 1 : -1);
+      if (a[orderBy] > b[orderBy])
+        return (order === 'desc' ? -1 : 1);
+      return 0;
+    };
+  }
+
+    const handleOrder = (key) => {
+      setOrderBy(key);
+      setOrder((order === 'asc' ? 'desc' : 'asc'));
+    }
     return (
+      <TableContainer>
         <Table>
-        <TableContainer>
           <TableHead primary>
-          <TableRow>
+            <TableRow>
+              {
+                headerFakeData.map((el) => {
+                return  <TableCell>
+                          <TableSortLabel 
+                          changeOrder={() => handleOrder(el.name)}
+                          name={el.name}
+                          direction={(orderBy === el.name ? order : 'asc')}
+                          >
+                            {el.icon} {el.label}
+                          </TableSortLabel>
+                        </TableCell>
+                })
+              }
+              </TableRow>
+            </TableHead>
+            <TableBody>
             {
-              headerFakeData.map((el) => {
-              return  <TableCell scope="col">
-                        <TableSortLabel name={el.name}>{el.icon} {el.label}</TableSortLabel>
-                      </TableCell>
-              })
+              dummybodydata.sort(sortValues(orderBy, order)).slice(page*rowsPerPage, page*rowsPerPage+rowsPerPage).map((el) => {
+                return <TableRow>
+                    <TableCell>{el.name}</TableCell>
+                    <TableCell>{el.quantity}</TableCell>
+                    <TableCell>{el.season}</TableCell>
+                  </TableRow>
+                })
             }
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {
-            dummybodydata.slice(page*rowsPerPage, page*rowsPerPage+rowsPerPage).map((el) => {
-              return <TableRow>
-                  <TableCell scope="col">{el.name}</TableCell>
-                  <TableCell scope="col">{el.quantity}</TableCell>
-                  <TableCell scope="col">{el.season}</TableCell>
-                </TableRow>
-              })
-          }
-          </TableBody>
-          <TableFooter>
-            <TablePagination page={page} onPageChange={setPage} count={dummybodydata.length}></TablePagination>
-          </TableFooter>
-          </TableContainer>
-        </Table>
+            </TableBody>
+            <TableFooter>
+              <TablePagination 
+              showFirstButton 
+              showLastButton 
+              page={page} 
+              onPageChange={setPage} 
+              count={dummybodydata.length}
+              ></TablePagination>
+            </TableFooter>
+          </Table>
+        </TableContainer>
+
     )
 }

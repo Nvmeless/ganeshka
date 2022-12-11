@@ -4,7 +4,26 @@ import { useState } from "react";
 import { BiArrowToLeft,BiRightArrowAlt,BiLeftArrowAlt,BiArrowToRight } from 'react-icons/bi';
 
 
-export const TablePagination = ({count,page = 1,onPageChange, rowsPerPage = 10,ActionsComponent,backIconButtonProps,classes,compononent,getItemAriaLabel,labelDisplayedRows,labelRowsPerPage,nextIconButtonProps,onRowsPerPageChange,rowsPerPageOptions,SelectProps,showFirstButton,showLastButton, sx,...props}) => {
+export const TablePagination = ({
+    count,
+    page = 1,
+    onPageChange, 
+    rowsPerPage = 10,ActionsComponent,
+    backIconButtonProps,
+    classes,
+    compononent,
+    getItemAriaLabel,
+    labelDisplayedRows,
+    labelRowsPerPage,
+    nextIconButtonProps,
+    onRowsPerPageChange,
+    rowsPerPageOptions,
+    SelectProps,
+    showFirstButton,
+    showLastButton,
+    sx,
+    ...props
+    }) => {
 
     const maxpage = Math.max(0, Math.ceil(count / rowsPerPage) - 1);
 
