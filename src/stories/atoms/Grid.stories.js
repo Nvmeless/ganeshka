@@ -36,7 +36,7 @@ const GridContainerTemplate = ({ ...args }) => (
         backgroundColor: "lightgray",
         borderRadius: "5px",
     }}>
-        <Grid item key="1" >
+        <Grid item>
             <div
                 style={{
                     display: "flex",
@@ -48,7 +48,7 @@ const GridContainerTemplate = ({ ...args }) => (
                     backgroundColor: "red",
                 }}>A</div>
         </Grid>
-        <Grid item key="2">
+        <Grid item>
             <div
                 style={{
                     display: "flex",
@@ -60,7 +60,7 @@ const GridContainerTemplate = ({ ...args }) => (
                     backgroundColor: "deeppink",
                 }}>B</div>
         </Grid>
-        <Grid item key="3">
+        <Grid item>
             <div
                 style={{
                     display: "flex",
@@ -93,7 +93,7 @@ GridContainer.args = {
 
 export const Breakpoints = () => (
     <Grid container spacing={2} justifyContent={"center"} wrap={"nowrap"}>
-        <Grid item xs={1} sm={1} md={2} lg={3} xl={4} key="1">
+        <Grid item xs={1} sm={1} md={2} lg={3} xl={4}>
             <div
                 style={{
                     textAlign: "center",
@@ -101,7 +101,7 @@ export const Breakpoints = () => (
                     backgroundColor: "red",
                 }}>A</div>
         </Grid>
-        <Grid item xs={1} sm={1} md={2} lg={3} xl={4} key="2">
+        <Grid item xs={1} sm={1} md={2} lg={3} xl={4}>
             <div
                 style={{
                     textAlign: "center",
@@ -109,7 +109,7 @@ export const Breakpoints = () => (
                     backgroundColor: "deeppink",
                 }}>B</div>
         </Grid>
-        <Grid item xs={1} sm={1} md={2} lg={3} xl={4} key="3">
+        <Grid item xs={1} sm={1} md={2} lg={3} xl={4}>
             <div
                 style={{
                     textAlign: "center",
@@ -121,15 +121,17 @@ export const Breakpoints = () => (
 );
 
 function DemoItem({ ...props }) {
+    props.position = props.position ?? "center";
     return (
         <div style={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: props.position,
             alignItems: "center",
             minHeight: "100px",
             minWidth: "100px",
-            color: "white",
-            backgroundColor: "gray",
+            color: "black",
+            backgroundColor: "lightgray",
+            whiteSpace: "nowrap",
         }}>{props.text}</div>
     );
 }
@@ -212,6 +214,63 @@ export const GridColumns = () => (
         </Grid>
         <Grid item xs={4} md={6}>
             <DemoItem text="xs=4 | md=6" />
+        </Grid>
+    </Grid>
+);
+
+export const GridAutoLayout = () => (
+    <Grid container spacing={3}>
+        <Grid item xs>
+            <DemoItem text={'xs'} />
+        </Grid>
+        <Grid item xs={8}>
+            <DemoItem text={'xs=8'} />
+        </Grid>
+        <Grid item xs>
+            <DemoItem text={'xs'} />
+        </Grid>
+        <Grid container spacing={3}>
+            <Grid item xs="auto">
+                <DemoItem text={'Variable width aaaaaaaaaaaaaa'} />
+            </Grid>
+            <Grid item xs={8}>
+                <DemoItem text={'xs=8'} />
+            </Grid>
+            <Grid item xs>
+                <DemoItem text={'xs'} />
+            </Grid>
+        </Grid>
+    </Grid>
+);
+
+export const GridZeroMinWidth = () => {
+    const demoText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lorem risus, dapibus ut congue sit amet, mollis eget est. Nam aliquam neque neque, lacinia malesuada neque sagittis in."
+
+    return (
+        <Grid container spacing={2} direction={'column'} >
+            <Grid item xs={8} md={6} zeroMinWidth>
+                <DemoItem text={demoText} position={"flex-start"} />
+            </Grid>
+            <Grid item xs={8} md={6}>
+                <DemoItem text={demoText} position={"flex-start"} />
+            </Grid>
+        </Grid>
+    );
+};
+
+export const GridColumnsWithBreakpoints = () => (
+    <Grid container spacing={2} direction={'column'} >
+        <Grid item xs={6} md={8}>
+            <DemoItem text={"xs=6 | md=8"} />
+        </Grid>
+        <Grid item xs={6} md={4}>
+            <DemoItem text={"xs=6 | md=4"} />
+        </Grid>
+        <Grid item xs={6} md={4}>
+            <DemoItem text={"xs=6 | md=4"} />
+        </Grid>
+        <Grid item xs={6} md={8}>
+            <DemoItem text={"xs=6 | md=8"} />
         </Grid>
     </Grid>
 );

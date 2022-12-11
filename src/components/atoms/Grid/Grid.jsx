@@ -16,30 +16,26 @@ export const Grid = ({ ...props }) => {
 
     // This function is used to get the max number of item per row
     const getMaxItemPerRow = (data) => {
-        const breakPointObj = {xs: [], sm: [], md: [], lg: [], xl: []};
-        
+        const breakPointArray = [[], [], [], [], []];
+        let result = 0;
+
         React.Children.forEach(data.children, child => {
             const tmp = setBreakpointProps({ ...child.props });
-            
-            breakPointObj.xs.push(tmp.xs);
-            breakPointObj.sm.push(tmp.sm);
-            breakPointObj.md.push(tmp.md);
-            breakPointObj.lg.push(tmp.lg);
-            breakPointObj.xl.push(tmp.xl);
+
+            breakPointArray[0].push(tmp.xs);
+            breakPointArray[1].push(tmp.sm);
+            breakPointArray[2].push(tmp.md);
+            breakPointArray[3].push(tmp.lg);
+            breakPointArray[4].push(tmp.xl);
         });
-        
-        for (const key in breakPointObj) {
-            if (Object.hasOwnProperty.call(breakPointObj, key)) {
-                let count = 0;
-                const element = breakPointObj[key];
-                element.forEach((value, key) => {
-                    if (value) {
-                        count += value;
-                    }
-                });
-                return (Math.ceil(4 / (count / data.columns))-1);
-            }
-        }
+
+        breakPointArray.forEach((elt) => {
+            let count = 0;
+            elt.forEach(value => count += typeof value === "number" ? value : 0);
+            result = count > 0 ? (Math.ceil(4 / (count / data.columns)) - 1) : 0;
+        });
+
+        return result;
     }
 
     // This function is used to set the props of the child
@@ -57,25 +53,23 @@ export const Grid = ({ ...props }) => {
             columnSpacing: parent.columnSpacing,
             maxItemPerRow: maxItemPerRow,
         }
-        
+
         return childProps;
     }
 
     // This function is used to render a <Grid container></Grid>
-    const containerRendering = ({...data}) => {
+    const containerRendering = ({ ...data }) => {
         const maxItemPerRow = getMaxItemPerRow(data);
-        if(!data.rowSpacing) data.rowSpacing = data.spacing;
-        if(!data.columnSpacing) data.columnSpacing = data.spacing;
+        if (!data.rowSpacing) data.rowSpacing = data.spacing;
+        if (!data.columnSpacing) data.columnSpacing = data.spacing;
 
         if (data.container) {
             return (
-                <StyledGridContainer { ...data }>
+                <StyledGridContainer {...data}>
                     {React.Children.map(data.children, child => {
-                        return child.props.item && !child.props.container ? (
-                            childRendering(data, child, maxItemPerRow)
-                        ) : (
-                            containerRendering(child.props)
-                        );
+                        return child.props.item && !child.props.container
+                            ? (childRendering(data, child, maxItemPerRow))
+                            : (containerRendering(child.props));
                     })}
                 </StyledGridContainer >
             );
@@ -90,7 +84,7 @@ export const Grid = ({ ...props }) => {
             </StyledGridItem>
         );
     }
-    
+
     // Return the component
     return (
         containerRendering(props)

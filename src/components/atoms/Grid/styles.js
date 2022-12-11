@@ -34,9 +34,12 @@ export const StyledGridItem = styled.div`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.xs});
       max-width: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.xs});
     `}
-    ${props => (props?.xs && (props.xs === true || props.xs >= props.columns)) && css`
+    ${props => (props?.xs && props.xs >= props.columns) && css`
       flex-basis: 100%;
       max-width: 100%;
+    `}
+    ${props => (props?.xs && props.xs === true) && css`
+      flex-grow: 1;
     `}
     ${props => (props?.xs && props.xs === 'auto') && css`
       flex-basis: content;
@@ -49,9 +52,12 @@ export const StyledGridItem = styled.div`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.sm});
       max-width: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.sm});
     `}
-    ${props => (props?.sm && (props.sm === true || props.sm >= props.columns)) && css`
+    ${props => (props?.sm && props.sm >= props.columns) && css`
       flex-basis: 100%;
       max-width: 100%;
+    `}
+    ${props => (props?.sm && props.sm === true) && css`
+      flex-grow: 1;
     `}
     ${props => (props?.sm && props.sm === 'auto') && css`
       flex-basis: content;
@@ -64,9 +70,12 @@ export const StyledGridItem = styled.div`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.md});
       max-width: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.md});
     `}
-    ${props => (props?.md && (props.md === true || props.md >= props.columns)) && css`
+    ${props => (props?.md && props.md >= props.columns) && css`
       flex-basis: 100%;
       max-width: 100%;
+    `}
+    ${props => (props?.md && props.md === true) && css`
+      flex-grow: 1;
     `}
     ${props => (props?.md && props.md === 'auto') && css`
       flex-basis: content;
@@ -79,9 +88,12 @@ export const StyledGridItem = styled.div`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.lg});
       max-width: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.lg});
     `}
-    ${props => (props?.lg && (props.lg === true || props.lg >= props.columns)) && css`
+    ${props => (props?.lg && props.lg >= props.columns) && css`
       flex-basis: 100%;
       max-width: 100%;
+    `}
+    ${props => (props?.lg && props.lg === true) && css`
+      flex-grow: 1;
     `}
     ${props => (props?.lg && props.lg === 'auto') && css`
       flex-basis: content;
@@ -94,9 +106,12 @@ export const StyledGridItem = styled.div`
       flex-basis: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.xl});
       max-width: calc((100% - 2 * ${props.columnSpacing} * (${props.maxItemPerRow} * 4px)) / ${props.columns} * ${props.xl});
     `}
-    ${props => (props?.xl && (props.xl === true || props.xl >= props.columns)) && css`
+    ${props => (props?.xl && props.xl >= props.columns) && css`
       flex-basis: 100%;
       max-width: 100%;
+    `}
+    ${props => (props?.xl && props.xl === true) && css`
+      flex-grow: 1;
     `}
     ${props => (props?.xl && props.xl === 'auto') && css`
       flex-basis: content;
