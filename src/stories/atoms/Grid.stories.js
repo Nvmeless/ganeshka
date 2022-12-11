@@ -1,7 +1,4 @@
-
-
 import React from 'react';
-
 import { Grid } from '../../components/atoms/Grid/Grid';
 
 export default {
@@ -172,7 +169,6 @@ export const DynamicFluidGrid = () => (
 );
 
 export const NestedGrid = () => (
-
     <Grid container spacing={1}>
         <Grid container item spacing={3}>
             <Grid item xs={4}>
@@ -209,7 +205,6 @@ export const NestedGrid = () => (
         </Grid>
     </Grid>
 );
-
 export const GridColumns = () => (
     <Grid container item direction={'row'} alignItems={'stretch'} columns={8} spacing={4}>
         <Grid item xs={8} md={6}>
