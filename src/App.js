@@ -10,11 +10,11 @@ function App() {
     <div className="App">
       {/*<Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>*/}
       <div><Avatar src="./logo512.png"></Avatar>
-      <Avatar size={100} textColor={'white'}>Julien Guilet</Avatar>
+      <Avatar size={100} borderRadius={10} textColor={'white'} bgColor={"red"}>Julien Guilet</Avatar>
       <Avatar size={20}>bonour</Avatar>
-      <Avatar size={10}>Alex Thibeaud</Avatar>
-      <Avatar size={30}></Avatar>
-      <Avatar size={30}>Max Wacquier</Avatar></div>
+      <Avatar size={25} >Alex Thibeaud</Avatar>
+      <Avatar size={30} borderRadius={10}></Avatar>
+      <Avatar size={30} bgColor={"green"} borderRadius={10}>Max Wacquier</Avatar></div>
     </div>
   );
 }
