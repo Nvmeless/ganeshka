@@ -1,10 +1,10 @@
 import React, { useState } from "react"
-import { TransferList } from "../components/molecules/transferList/TransferList"
-import { useCheckList } from "../hooks/useCheckList"
-import { useArray } from "../hooks/useArray"
+import { TransferList } from "../../components/molecules/transferList/TransferList"
+import { useCheckList } from "../../hooks/useCheckList"
+import { useArray } from "../../hooks/useArray"
 
 export default {
-  title: "TransferList",
+  title: "Molecules/TransferList",
   component: TransferList,
   argType: {
     backgroundColor: { control: 'color' },
