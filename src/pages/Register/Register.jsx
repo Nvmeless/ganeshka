@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Logo } from '../../components/molecules/Logo/Logo';
 
 function Copyright(props) {
   return (
@@ -47,9 +48,7 @@ export default function Register() {
             alignItems: 'center',
             }}
         >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-           
-            </Avatar>
+            <Logo width="50px"/>
             <Typography component="h1" variant="h5">
             Inscription
             </Typography>

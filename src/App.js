@@ -25,6 +25,7 @@ function App() {
         </div>
         </ThemeProvider>
       </Provider>
+
   );
 }
 // primary secondary loading

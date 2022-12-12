@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Logo } from '../../components/molecules/Logo/Logo';
 
 function Copyright(props) {
   return (
@@ -44,8 +45,7 @@ export default function Login() {
             alignItems: 'center',
             }}
         >
-            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-            </Avatar>
+            <Logo width={50}/>
             <Typography component="h1" variant="h5">
             Connexion
             </Typography>
