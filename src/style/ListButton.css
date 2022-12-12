@@ -1,0 +1,16 @@
+div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+}
+
+span {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+}
+
+hr {
+    width: 100px;
+
+}

@@ -1,12 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Card } from './components/atoms/Card/Card';
+import {List} from "./components/List.jsx"
+import { FiActivity, FiAlertOctagon, FiBriefcase, FiChrome} from "react-icons/fi";
+
+/* Test contenu List */
+// const content = [
+//   {buttonContent:{id: 1, text: "Bulbizarre", icon:(<FiActivity/>)}, divider: true},
+//   {buttonContent:{id: 2, text: "Herbizarre",}, disabled:true},
+//   {buttonContent:{id: 3, text: "Florizarre"}, divider: true},
+//   {buttonContent:{id: 4, text: "Salamèche", icon:(<FiBriefcase/>)}},
+//   {buttonContent:{id: 5, text: "Reptincel", icon:(<FiAlertOctagon/>)}}
+// ];
+
+const content = []
 
 function App() {
   return (
     <div className="App">
-      <Card backgroundColor={"red"} height="10px" width={"100%"}>Meswsage</Card>
+        <List content={content}/>
     </div>
   );
 }
