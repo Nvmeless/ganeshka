@@ -11,10 +11,6 @@ function App() {
 
   return (
     <div className="App">
-      <Switch size='small' label='message' color="#006666" placement="top" checked={toggle} onChange={setToggle}></Switch>
-      <Switch label='message' placement="top" checked={toggle} onChange={setToggle}></Switch>
-      <Switch size='small' iconUnchecked='🌜' iconChecked='🌞' color="#660066" placement="top"></Switch>
-      <Switch labelBefore='off' labelAfter='on' color="#666600" placement="top" defaultChecked></Switch>
     </div>
   );
 }
