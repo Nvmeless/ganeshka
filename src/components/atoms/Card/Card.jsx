@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
+
 export const Card = ({backgroundColor,shadow,rounded, height, width,...props}) => {
     
     const borderRadius = rounded ? 'rounded' : '';
