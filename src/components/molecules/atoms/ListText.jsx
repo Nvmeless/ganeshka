@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+// ListItem : Text
 function ListText(props)  {
     return(
         <span className="itemText">
