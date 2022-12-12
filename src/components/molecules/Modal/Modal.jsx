@@ -37,6 +37,7 @@ export const Modal = ({...props}) => {
 
     var portal;
 
+    // Props pour la création du portail si le props disablePortal est à false
     if(!document.getElementById('portal') && !props.disablePortal){
         portal = document.createElement('div')
         portal.setAttribute('id', 'portal')
@@ -45,6 +46,8 @@ export const Modal = ({...props}) => {
 
     var backdrop;
     
+    // Gestion du backdrop : s'il n'y a pas de props slots, un backdrop par défaut est renvoyé, sinon récupération du composant envoyé dans slots.backdrop
+    // Permet également l'ajout de props au composant backdrop grâce au props slotsProps.backdrop s'il ne s'agit pas du backdrop par défaut
     if(!props.slots?.backdrop){
         backdrop = <div id="backdrop" className="backdrop"  style={BACKDROP_STYLES}></div>;
     }
@@ -63,7 +66,8 @@ export const Modal = ({...props}) => {
 
 
     useEffect(() => {  
-       
+
+        // Gestion du container qui sera le root du portail (fonctionne uniquement si le portail est activé)
         if(!props.disablePortal && props.container){
             if(props.container){
                 if(typeof(props.container) == "function"){
@@ -77,17 +81,20 @@ export const Modal = ({...props}) => {
             }
         }
 
+        // Gestion du props keepMounted : si ce props est à true, le modal est monté de base et sera seulement caché plutôt que démonté
         if(!props.open && props.keepMounted){
             document.getElementById('root-modal').style.visibility = "hidden";
         }
-
         if(props.open && props.keepMounted){
             document.getElementById('root-modal').style.visibility = "visible";
         }
+
+        // Gestion du props disableAutoFocus : Si à false, focus sur le modal en lui-même
         if(props.open && !props.disableAutoFocus){
             inputReference.current.focus();
         }
         
+        // Gestion du props disableScrollLock : Si à false, empêche de scroller si le modal est ouvert
         if(props.open && !props.disableScrollLock){
             document.body.style.overflow = 'hidden';
         }
@@ -95,6 +102,8 @@ export const Modal = ({...props}) => {
             document.body.style.overflow = '';
         }
 
+        // Gestion du props disableEnforceFocus : Si à false, le focus est possible uniquement sur les éléments focusable du modal
+        // (PS: si aucun élément du modal n'est focusable, ne fonctionne pas)
         if(props.open && !props.disableEnforceFocus){
             const focusableModalElements = inputReference.current.querySelectorAll(
                 'a[href], button:not([disabled]), textarea, input, select'
@@ -108,13 +117,11 @@ export const Modal = ({...props}) => {
 
                 document.addEventListener('keydown', function handleFocus(e) {
                     if(e.key === 'Tab'){
-                        // if going forward by pressing tab and lastElement is active shift focus to first focusable element 
                         if (!e.shiftKey && document.activeElement === lastElement) {
                             firstElement.focus()
                             return e.preventDefault()
                         }
                     
-                        // if going backward by pressing tab and firstElement is active shift focus to last focusable element 
                         if (e.shiftKey && document.activeElement === firstElement) {
                             lastElement.focus()
                             e.preventDefault()
@@ -125,7 +132,7 @@ export const Modal = ({...props}) => {
 
            
         }
-        
+        //Gestion du props disableEscapeKeyDown : Si à false, permet au modal de se fermer lorsque l'utilisateur appuie sur la touche 'Échap'
         if (props.open && !props.disableEscapeKeyDown){
             
             function handleEscape(e) {
@@ -141,7 +148,9 @@ export const Modal = ({...props}) => {
         }
     }, [props.open]);
 
+    
     const handleClose = () => {
+        // Gestion du focus : Si les props disableAutoFocus et disableRestoreFocus sont à false, le focus est placé sur l'élément focus avant l'ouverture du modal
         if(!props.disableAutoFocus){
             if(!props.disableRestoreFocus){
                 lastElementFocus.focus();
