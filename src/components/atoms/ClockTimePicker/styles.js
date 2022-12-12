@@ -1,86 +1,24 @@
 import styled, { css } from "styled-components";
 
-export const InputContainer = styled.div`
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  width: fit-content;
-  height: 100%;
-  border: 1px solid grey;
-  border-radius: 5px;
-  margin-top: 50px;
-  ${(props) =>
-    props.active &&
-    css`
-      border-width: 2px;
-      border-color: blue;
-    `}
-  ${(props) =>
-    props.error &&
-    css`
-      border-color: red;
-    `}
-
-  label {
-    position: absolute;
-    left: 14px;
-    bottom: 50%;
-    transform: translateY(50%);
-    line-height: 1.4375rem;
-    pointer-events: none;
-    transition-duration: 250ms;
-    color: grey;
-    margin-top: 12px;
-    ${(props) =>
-      props.active &&
-      css`
-        color: blue;
-        font-size: 12px;
-        bottom: 100%;
-        transform: translateY(0);
-      `};
-    ${(props) =>
-      props.error &&
-      css`
-        color: red;
-      `};
-  }
-
-  input {
-    border-radius: 5px;
-    width: 100%;
-    height: 1.4375rem;
-    border: none;
-    padding: 16.5px 0px 16.5px 14px;
-    background-color: transparent;
-    color: inherit;
-    &:focus {
-      outline: none;
-    }
-  }
-
-  select {
-    background-color: transparent;
-    border: none;
-    color: inherit;
-
-    option {
-      color: black;
-      border: none;
-    }
-  }
-`;
-
 export const ClockTimePickerWindow = styled.div`
   position: absolute;
   width: 300px;
   height: 250px;
-  top: 100%;
-  background-color: ${props => props.backgroundColor};
+  z-index: 3;
+  background-color: ${(props) => props.backgroundColor};
   display: flex;
   align-items: center;
   justify-content: center;
   animation: zoom-in 0.2s ease;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 6px;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: unset !important;
+  }
 
   @keyframes zoom-in {
     0% {
@@ -95,11 +33,18 @@ export const ClockTimePickerWindow = styled.div`
 export const ClockButtonContainer = styled.div`
   position: absolute;
   bottom: 0;
+
+  button {
+    color: ${(props) => props.controlsColor};
+  }
+
   ${(props) =>
     props.selected &&
     css`
-      color: white;
-      background-color: ${props => props.controlsColor};
+      background-color: ${(props) => props.controlsColor};
+      button {
+        color: white;
+      }
     `}
 
   ${(props) =>
@@ -113,10 +58,6 @@ export const ClockButtonContainer = styled.div`
     css`
       right: 0;
     `}
-
-    button {
-      color : white;
-    }
 `;
 
 const clockContainerSize = 200;
@@ -169,7 +110,7 @@ export const ClockContainer = styled.div`
 
 export const ClockItem = styled.span`
   position: absolute;
-  color: white;
+  color: ${(props) => props.controlsColor};
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 36px;
@@ -196,25 +137,27 @@ export const ClockItem = styled.span`
     }
   }
 
-  ${(props) => props.selected && css`
-    p {
-      color : black;
+  ${(props) =>
+    props.selected &&
+    css`
+      p {
+        color: black;
 
-      .dot {
-        background-color : black;
+        .dot {
+          background-color: black;
+        }
       }
-    }
-  `}
+    `}
 `;
 
 export const ClockPointer = styled.div`
   .thumb {
     width: 4px;
     height: 4px;
-    background-color: ${props => props.controlsColor};
+    background-color: ${(props) => props.controlsColor};
     border-radius: 50%;
     position: absolute;
-    border: 16px solid ${props => props.controlsColor};
+    border: 16px solid ${(props) => props.controlsColor};
     box-sizing: content-box;
     transform: translate(-50%, -50%);
     display: none;
@@ -236,7 +179,7 @@ export const ClockPointer = styled.div`
     position: absolute;
     width: 100px;
     height: 4px;
-    background-color: ${props => props.controlsColor};
+    background-color: ${(props) => props.controlsColor};
     display: none;
     left: 50%;
     top: 50%;
@@ -261,7 +204,7 @@ export const ClockPointer = styled.div`
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: ${props => props.controlsColor};
+    background-color: ${(props) => props.controlsColor};
   }
 `;
 
@@ -272,6 +215,6 @@ export const ClockPageControls = styled.div`
   right: 0;
 
   button {
-    color: ${props => props.controlsColor};
+    color: ${(props) => props.controlsColor};
   }
 `;

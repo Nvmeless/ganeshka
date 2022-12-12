@@ -3,13 +3,16 @@ import "./App.css";
 import DateField from "./components/atoms/DateField/DateField";
 import DatePicker from "./components/atoms/DatePicker/DatePicker";
 import DateRangePicker from "./components/atoms/DateRangePicker/DateRangePicker";
-import TimeField from "./components/atoms/TimePicker/TimeField";
+import DateTimeField from "./components/atoms/DateTimeField/DateTimeField";
+import { DateTimePicker } from "./components/atoms/DateTimePicker/DateTimePicker";
+import TimeField from "./components/atoms/TimeField/TimeField";
 import { TimePicker } from "./components/atoms/TimePicker/TimePicker";
 
 function App() {
   const [dates, setDates] = useState([undefined, undefined]);
-  const [time, setTime] = useState("");
   const [date, setDate] = useState();
+  const [time, setTime] = useState("");
+  const [dateTime, setDateTime] = useState("");
 
   return (
     <div
@@ -44,17 +47,18 @@ function App() {
         renderInput={(params) => <DateField {...params} />}
       />
 
-      <DateField
-        value={date}
-        onChange={(val) => setDate(val)}
-        label="Date input"
-      />
-
       <TimePicker
         label={"Basic Example"}
         value={time}
         onChange={(value) => setTime(value)}
         renderInput={(props) => <TimeField {...props} />}
+      />
+
+      <DateTimePicker
+        label={"DateTimePicker"}
+        value={dateTime}
+        onChange={(value) => setDateTime(value)}
+        renderInput={(props) => <DateTimeField {...props} />}
       />
     </div>
   );

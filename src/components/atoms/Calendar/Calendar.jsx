@@ -56,6 +56,7 @@ const Calendar = (props) => {
 
   const selectDate = (day) => {
     props.onChange(day)
+    props.selectDate(day)
   }
 
   const isDayInRange = (day) => {
@@ -136,6 +137,7 @@ const Calendar = (props) => {
 Calendar.propTypes = {
   value: PropTypes.instanceOf(Date),
   onChange: PropTypes.func.isRequired,
+  selectDate: PropTypes.func,
   className: PropTypes.string,
   dayOfWeekFormatter: PropTypes.func,
   defaultCalendarMonth: PropTypes.any,
