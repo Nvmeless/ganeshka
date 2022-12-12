@@ -35,6 +35,6 @@ const todoSlice = createSlice(
 
 export const store = configureStore({
     reducer: {
-        todoList: todoSlice.reducer
+
     }
 })
