@@ -24,7 +24,7 @@ function App() {
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs>
-            <Tab label="Item One" onClick={() => handleClick(0)} value={value} index={0} color={theme.primary} disabled/>
+            <Tab label="Item One" onClick={() => handleClick(0)} value={value} index={0} color={theme.primary} />
             <Tab label="Item Two" onClick={() => handleClick(1)} value={value} index={1} color={theme.primary}/>
             <Tab label="Item Three" onClick={() => handleClick(2)} value={value} index={2} color={theme.primary}/>
           </Tabs>
