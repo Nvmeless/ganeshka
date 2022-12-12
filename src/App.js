@@ -8,7 +8,7 @@ function App() {
   return (
     <ThemeProvider theme={getTheme()}>
     <div className="App">
-      <TransferList></TransferList>
+      Ganeshka toolkit
     </div>
     </ThemeProvider>
   );
