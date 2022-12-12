@@ -17,8 +17,6 @@ export const Switch = ({disabled, defaultChecked, labelBefore, labelAfter, iconU
 
     var [toggle, setToggle] = React.useState(!!defaultChecked);
     if(checked != undefined){ toggle=checked }
-    console.log(checked);
-    console.log(toggle);
     
     const triggerToggle = () => {
       if(disabled) return
