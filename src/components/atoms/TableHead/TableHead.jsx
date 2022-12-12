@@ -11,7 +11,7 @@ class TableHead extends React.Component {
 
     render(){
         return (
-            <StyledTHead {...this.props} className={[this.props?.className].join(' ')} 
+            <StyledTHead onClick={this.props.onSelectAllClick} {...this.props} className={[this.props?.className].join(' ')} 
             style={
                 {
                     ...{

@@ -9,6 +9,8 @@ import TableHead from '../atoms/TableHead/TableHead';
 import { TablePagination } from '../atoms/TablePagination/TablePagination';
 import { dummybodydata, headerFakeData} from '../../data/fakedata';
 import React, { useState } from 'react';
+import { Checkbox } from '@mui/material';
+
 
 export const FirstTry = () => {
 
@@ -17,7 +19,7 @@ export const FirstTry = () => {
 
   const [order, setOrder] = useState();
   const [orderBy, setOrderBy] = useState();
-
+  const [selected, setSelected] = React.useState([]);
     
   function sortValues(orderBy, order) {
     return function(a, b) {
@@ -29,16 +31,52 @@ export const FirstTry = () => {
     };
   }
 
-    const handleOrder = (key) => {
-      setOrderBy(key);
-      setOrder((order === 'asc' ? 'desc' : 'asc'));
-    }
+  const handleOrder = (key) => {
+    setOrderBy(key);
+    setOrder((order === 'asc' ? 'desc' : 'asc'));
+  }
+
+  const isSelected = (key) => selected.indexOf(key)  !== -1;
+
+  const handleSelectAllClick = (event) => {
+    if(event.target.checked){
+      const newElement = dummybodydata.map((el) => el.name );
+      setSelected(newElement);
+    }else
+      setSelected([]);
+  }
+  const sizeData = dummybodydata.length;
+  const selectCount = selected.length;
+
+  const handleClick = (key) => {
+    console.log(selected.length)
+    let templist = dummybodydata;
+    const newList = templist.filter((el, index)  =>{
+      if(key === el.name ) {
+        if(isSelected(key))
+          return false;
+        return true;
+      }
+      return false;
+    });
+    setSelected(newList)
+    console.log(newList.length)
+  }
+
     return (
       <TableContainer>
         <Table>
-          <TableHead primary>
+          <TableHead>
             <TableRow>
+              <TableCell>
+                  <Checkbox 
+                      onChange={handleSelectAllClick}
+                      indeterminate={selectCount > 0 && selectCount < sizeData}
+                      checked={sizeData > 0 && selectCount === sizeData}
+                      ></Checkbox>
+              </TableCell>
               {
+
                 headerFakeData.map((el) => {
                 return  <TableCell>
                           <TableSortLabel 
@@ -56,11 +94,18 @@ export const FirstTry = () => {
             <TableBody>
             {
               dummybodydata.sort(sortValues(orderBy, order)).slice(page*rowsPerPage, page*rowsPerPage+rowsPerPage).map((el) => {
-                return <TableRow>
-                    <TableCell>{el.name}</TableCell>
-                    <TableCell>{el.quantity}</TableCell>
-                    <TableCell>{el.season}</TableCell>
-                  </TableRow>
+                // const isSelected = isSelected(el.name);
+                return  <TableRow>
+                          <TableCell>
+                            <Checkbox 
+                            onClick={()=> handleClick(el.name)}
+                            checked={isSelected(el.name)}
+                            ></Checkbox>
+                          </TableCell>
+                          <TableCell>{el.name}</TableCell>
+                          <TableCell>{el.quantity}</TableCell>
+                          <TableCell>{el.season}</TableCell>
+                        </TableRow>
                 })
             }
             </TableBody>
