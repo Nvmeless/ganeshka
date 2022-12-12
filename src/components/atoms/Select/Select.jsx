@@ -1,12 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import {Card} from "../Card/Card"
-import {Container} from "../Container/Container"
-import { Button } from "@mui/material";
 import { useState} from "react"
-//jinn#4465
-
 export const Select = ({backgroundColor,color, width, height,rounded, value, label, onChange, ...props}) => {
 
     const borderRadius = rounded ? 'rounded' : '';
@@ -116,6 +111,6 @@ Select.defaultProps = {
     rounded:false,
     width : "130px",
     height : "40px",
-    label : "label",
+    label : "Choisir...",
     value : null
 }

@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import {Card} from "../Card/Card"
-import {Container} from "../Container/Container"
-import { Button } from "@mui/material";
-import { useState} from "react"
-//jinn#4465
 
 export const MenuItem = ({value,isSelected,...props}) => {
 
@@ -35,29 +30,13 @@ export const MenuItem = ({value,isSelected,...props}) => {
 
 MenuItem.propTypes = {
      /**
-     * Which color is used for background
-     */
-      backgroundColor: PropTypes.string,
-      /**
-     * Which color is used for the text
-     */
-       color: PropTypes.string,
-    /**
-     * Which color is used for the border
-     */
-        borderColor: PropTypes.string,
-      /**
-      * Which width
+      * Which value of option
       */
-     width: PropTypes.string,
+     value: PropTypes.string,
      /**
-      * Which height
+     * Is selected option ? 
       */
-     height: PropTypes.string,
-     /**
-     * Is rounded ? 
-      */
-     rounded: PropTypes.bool,
+     isSelected: PropTypes.bool,
 }
 
 MenuItem.defaultProps = {
