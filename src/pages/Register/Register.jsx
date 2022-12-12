@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Logo } from '../../components/molecules/Logo/Logo';
+import { Logo } from '../../components/atoms/Logo/Logo';
 
 function Copyright(props) {
   return (
