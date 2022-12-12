@@ -1,6 +1,5 @@
 import { Modal } from "../../components/molecules/Modal/Modal";
-import React from "react";
-
+import React, { useState } from "react";
 
 export default {
     title:"Molecules/Modal",
@@ -8,12 +7,19 @@ export default {
 }
 
 
-const Template = (args) => <Modal {...args}/>
+const Template = (args) => {
+
+    const [open, setOpen] = useState(false)
+
+    return <>
+           <Modal {...args} open={open} onClose={() => {setOpen(false)}} >Ceci est un test <button>Premier bouton</button> <button>Deuxième bouton</button></Modal>
+           <button onClick={() => {setOpen(true)}}>Ouvrir le modal</button>
+            </> 
+}
 
 export const Primary = Template.bind({});
 Primary.args = {
     primary: true,
-    open: false,
     disableEscapeKeyDown: false,
     disablePortal: false,
     disableAutoFocus: false,
@@ -22,18 +28,33 @@ Primary.args = {
     disableScrollLock: false,
     hideBackdrop: false,
     keepMounted: false,
-    onClose: null,
     loading: false,
 
 }  
 export const Secondary = Template.bind({});
 Secondary.args = {
     primary: false,
+    disableEscapeKeyDown: false,
+    disablePortal: false,
+    disableAutoFocus: false,
+    disableEnforceFocus: false,
+    disableRestoreFocus: false,
+    disableScrollLock: false,
+    hideBackdrop: false,
+    keepMounted: false,
     loading: false,
 
 }  
 
 export const isLoading = Template.bind({});
 isLoading.args = {
+    disableEscapeKeyDown: false,
+    disablePortal: false,
+    disableAutoFocus: false,
+    disableEnforceFocus: false,
+    disableRestoreFocus: false,
+    disableScrollLock: false,
+    hideBackdrop: false,
+    keepMounted: false,
     loading: true,
 }  

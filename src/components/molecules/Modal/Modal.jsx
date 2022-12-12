@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { Backdrop } from '@mui/material';
 import { useState } from 'react';
 
 export const Modal = ({...props}) => {
@@ -8,7 +9,9 @@ export const Modal = ({...props}) => {
     const background = !props.hideBackdrop && ('rgba(0,0,0,0.7)' || 'rgba(255,255,255)') 
 
     var MODAL_STYLES = {
+        border: 'solid',
         position: 'fixed',
+        textAlign: 'center',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
@@ -17,7 +20,7 @@ export const Modal = ({...props}) => {
         zIndex: 1000
     }
     
-    var OVERLAY_STYLES = {
+    var BACKDROP_STYLES = {
         backgroundColor: background,
         position: 'fixed',
         left: 0,
@@ -40,9 +43,27 @@ export const Modal = ({...props}) => {
         document.body.appendChild(portal)
     }
 
+    var backdrop;
+    
+    if(!props.slots?.backdrop){
+        backdrop = <div id="backdrop" className="backdrop"  style={BACKDROP_STYLES}></div>;
+    }
+    else{
+        var objectBackdropProps= new Object();
+        if(props.slotsProps){
+            objectBackdropProps = props.slotsProps.backdrop
+            
+        }
+        if(props.hideBackdrop){
+            objectBackdropProps.invisible = true;
+        }
+        objectBackdropProps.open = true
+        backdrop = React.createElement(props.slots.backdrop.Backdrop, objectBackdropProps)
+    }
 
 
     useEffect(() => {  
+       
         if(!props.disablePortal && props.container){
             if(props.container){
                 if(typeof(props.container) == "function"){
@@ -53,18 +74,15 @@ export const Modal = ({...props}) => {
                 }
                 var containerElement = document.getElementById(containerPortal.props.id)
                 containerElement.appendChild(document.getElementById('portal'))
-                        
             }
-            
-            
         }
 
         if(!props.open && props.keepMounted){
-            document.getElementById('overlay').style.visibility = "hidden";
+            document.getElementById('root-modal').style.visibility = "hidden";
         }
 
         if(props.open && props.keepMounted){
-            document.getElementById('overlay').style.visibility = "visible";
+            document.getElementById('root-modal').style.visibility = "visible";
         }
         if(props.open && !props.disableAutoFocus){
             inputReference.current.focus();
@@ -84,8 +102,7 @@ export const Modal = ({...props}) => {
 
               if(focusableModalElements.length != 0){
                 const firstElement = focusableModalElements[0]
-                const lastElement =
-                focusableModalElements[focusableModalElements.length - 1]
+                const lastElement = focusableModalElements[focusableModalElements.length - 1]
 
                 firstElement.focus();
 
@@ -102,17 +119,13 @@ export const Modal = ({...props}) => {
                             lastElement.focus()
                             e.preventDefault()
                         }
-                }
-                
-                    
-            })
-              }
+                    }
+                })
+            }
 
            
         }
         
-        
-
         if (props.open && !props.disableEscapeKeyDown){
             
             function handleEscape(e) {
@@ -135,7 +148,7 @@ export const Modal = ({...props}) => {
             }
         }
         if(props.keepMounted){
-            document.getElementById('overlay').style.visibility = "hidden"
+            document.getElementById('root-modal').style.visibility = "hidden"
         }
         props.onClose();
         
@@ -144,20 +157,18 @@ export const Modal = ({...props}) => {
     if(props.open){
         if(!props.disablePortal){
             return ReactDOM.createPortal(
-                <div id="overlay" className="overlay" onClick={handleClose} style={OVERLAY_STYLES}>
-                    <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
-                        e.stopPropagation();
-                    }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
-                            {props.children}
+                <div id="root-modal" onClick={handleClose}>
+                    {backdrop}
+                        <div id="modal" className={['modal', props?.classes].join(' ')} onClick={(e) => {e.stopPropagation();}} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
+                                {props.children}
+                        </div>
                     </div>
-                </div>
             , document.getElementById('portal'))
         }
         return (
-            <div id="overlay" className="overlay" onClick={handleClose} style={OVERLAY_STYLES}>
-                <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
-                    e.stopPropagation();
-                }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
+            <div id="root-modal" onClick={handleClose}>
+                {backdrop}
+                <div id="modal" className={['modal', props?.classes].join(' ')} onClick={(e) => {e.stopPropagation();}} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
                         {props.children}
                 </div>
             </div>
@@ -167,21 +178,19 @@ export const Modal = ({...props}) => {
         if(props.keepMounted){
             if(!props.disablePortal){
                 return ReactDOM.createPortal(
-                    <div id="overlay" className="overlay" onClick={handleClose} style={OVERLAY_STYLES}>
-                        <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
-                            e.stopPropagation();
-                        }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
+                    <div id="root-modal" onClick={handleClose}>
+                        {backdrop}
+                        <div id="modal" className={['modal', props?.classes].join(' ')} onClick={(e) => {e.stopPropagation();}} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
                                 {props.children}
                         </div>
                     </div>
                 , document.getElementById('portal'))
             }
             return (
-                <div id="overlay" className="overlay" onClick={handleClose} style={OVERLAY_STYLES}>
-                    <div id="modal" className={['modal', props?.className].join(' ')} onClick={(e) => {
-                        e.stopPropagation();
-                    }} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
-                            {props.children}
+                <div id="root-modal" onClick={handleClose}>
+                    {backdrop}
+                    <div id="modal" className={['modal', props?.classes].join(' ')} onClick={(e) => {e.stopPropagation();}} style={MODAL_STYLES} tabIndex="-1" ref={inputReference}>
+                        {props.children}
                     </div>
                 </div>
             )
@@ -235,15 +244,14 @@ Modal.propTypes ={
     keepMounted: PropTypes.bool,
 
     /**
-     * The function to close the modal
+     * Additionnal classes for the modal
      */
-    onClose: PropTypes.func,
+    classes: PropTypes.string
 
 }
 
 
 Modal.defaultProps = {
-    open: false,
     disableEscapeKeyDown: false,
     disablePortal: false,
     disableAutoFocus: false,
@@ -252,5 +260,4 @@ Modal.defaultProps = {
     disableScrollLock: false,
     hideBackdrop: false,
     keepMounted: false,
-    onClose: null,
 }
