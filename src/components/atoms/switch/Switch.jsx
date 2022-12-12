@@ -14,11 +14,6 @@ export const Switch = ({disabled, defaultChecked, labelBefore, labelAfter, iconU
     color='#FFFFFF' => permet de choisir la couleur du bouton en état Checked
 
   */
-    
-    const SwitchHandler = () => {
-        console.log("Switch button : props.action /"+props.action)
-        return props.isSwitchButton ? props.action2(props.SwitchButton) : props.action(props.SwitchButton)
-    }
 
     var [toggle, setToggle] = React.useState(!!defaultChecked);
     if(checked != undefined){ toggle=checked }
