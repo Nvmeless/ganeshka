@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import StyledCalendar from './styles.js';
 
 const Calendar = (props) => {
+  const [date, setDate] = useState(new Date());
   const [isYearChooserDisplayed, setDisplayYearChooser] = useState(false);
   const yearChooserRef = useRef();
 
@@ -31,23 +32,23 @@ const Calendar = (props) => {
   }
 
   const setPrevMonth = () => {
-    const newMonth = props.value.getMonth() - 1;
-    const isYearBoundaries = props.value.getMonth() === 0;
+    const newMonth = date.getMonth() - 1;
+    const isYearBoundaries = date.getMonth() === 0;
     const month = isYearBoundaries ? monthsName.length - 1 : newMonth;
-    const year = isYearBoundaries && props.value.getFullYear() > minYear ? props.value.getFullYear() - 1 : props.value.getFullYear();
-    props.onChange(new Date(year, month, props.value.getDate()))
+    const year = isYearBoundaries && date.getFullYear() > minYear ? date.getFullYear() - 1 : date.getFullYear();
+    props.onChange(new Date(year, month, date.getDate()))
   }
 
   const setNextMonth = () => {
-    const newMonth = props.value.getMonth() + 1;
-    const isYearBoundaries = props.value.getMonth() === monthsName.length - 1;
+    const newMonth = date.getMonth() + 1;
+    const isYearBoundaries = date.getMonth() === monthsName.length - 1;
     const month = isYearBoundaries ? 0 : newMonth;
-    const year = isYearBoundaries && props.value.getFullYear() < (maxYear - 1) ? props.value.getFullYear() + 1 : props.value.getFullYear();
-    props.onChange(new Date(year, month, props.value.getDate()))
+    const year = isYearBoundaries && date.getFullYear() < (maxYear - 1) ? date.getFullYear() + 1 : date.getFullYear();
+    props.onChange(new Date(year, month, date.getDate()))
   }
 
   const setYear = (year) => {
-    props.onChange(new Date(year, props.value.getMonth(), props.value.getDate()));
+    props.onChange(new Date(year, date.getMonth(), date.getDate()));
   }
 
   const displayYearChooser = () => {
@@ -85,11 +86,17 @@ const Calendar = (props) => {
     }
   }, [isYearChooserDisplayed]);
 
+  useEffect(() => {
+    if (props.value) {
+      setDate(props.value);
+    }
+  }, [props.value])
+
   return (
-    <StyledCalendar {...props} className={`agenda ${props.className}`} onClick={(e) => e.stopPropagation()}>
+    <StyledCalendar {...props} className={`agenda ${props.className} ${props.open ? 'displayed' : ''}`} onClick={(e) => e.stopPropagation()}>
       <div className='agenda__header'>
         <span onClick={displayYearChooser}>
-          {monthsName[props.value.getMonth()]} {props.value.getFullYear()}
+          {monthsName[date.getMonth()]} {date.getFullYear()}
           <MdArrowDropDown size={30} color={props.color} onClick={displayYearChooser} />
         </span>
         <div>
@@ -105,7 +112,7 @@ const Calendar = (props) => {
         {isYearChooserDisplayed && (
           <div className='agenda__year-chooser' ref={yearChooserRef}>
             {yearsAvailable.map((val, index) => (
-              <span key={minYear + index} onClick={() => setYear(minYear + index)} className={`${props.value.getFullYear() === minYear + index ? 'selected' : ''}`}>{minYear + index}</span>
+              <span key={minYear + index} onClick={() => setYear(minYear + index)} className={`${date.getFullYear() === minYear + index ? 'selected' : ''}`}>{minYear + index}</span>
             ))}
           </div>
         )}
@@ -115,12 +122,12 @@ const Calendar = (props) => {
           ))}
         </div>
         <div className='agenda__grid'>
-          {getAllDaysInMonth(props.value.getFullYear(), props.value.getMonth()).map((day, index) => (
+          {getAllDaysInMonth(date.getFullYear(), date.getMonth()).map((day, index) => (
             <span
               key={index}
               onClick={() => selectDate(day)}
               className={`
-                ${day && day.getDate() === props.value.getDate() ? 'selected' : ''}
+                ${day && day.getDate() === date.getDate() ? 'selected' : ''}
                 ${day && isDayInRange(day) ? 'inrange' : ''}
               `}
             >
@@ -150,6 +157,7 @@ Calendar.propTypes = {
     start: PropTypes.instanceOf(Date),
     end: PropTypes.instanceOf(Date),
   }),
+  open: PropTypes.bool,
 };
 
 Calendar.defaultProps = {

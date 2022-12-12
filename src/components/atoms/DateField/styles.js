@@ -29,16 +29,16 @@ export default styled.div`
   }
 
   .datefield__input {
-    width: 100%;
     padding: 15px;
     background-color: ${(props) => props.backgroundColor};
     border-radius: 6px;
-    border: 1px solid ${(props) => props.color};
+    outline: 1px solid ${(props) => props.placeholderColor};
+    border: none;
   }
 
   .datefield__input:not(:placeholder-shown),
   .datefield__input:focus {
-    outline: none;
+    outline: 1px solid ${(props) => props.color};
   }
 
   .datefield__input:not(:placeholder-shown) + label,

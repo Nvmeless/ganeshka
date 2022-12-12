@@ -1,9 +1,10 @@
 import StyledDateRangePicker from './styles.js';
 import { useState, useEffect } from 'react';
-import Calendar from '../Calendar/Calendar.jsx';
+import PropTypes from 'prop-types';
+import Calendar from '../../atoms/Calendar/Calendar.jsx';
 
 const DateRangePicker = (props) => {
-  const [display, setDisplay] = useState(true);
+  const [display, setDisplay] = useState(false);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
@@ -35,13 +36,21 @@ const DateRangePicker = (props) => {
             value: props.value[0],
             className: 'daterangepicker__input',
             placeholder: 'MM/DD/YYYY',
-            onClick: displayRangeChooser, 
+            onClick: (!props.disableOpenPicker && !props.disabled) && displayRangeChooser, 
+            backgroundColor: props.backgroundColor,
+            color: props.colors,
+            placeholderColor: props.placeholderColor,
+            open: props.open,
           },
           {
             value: props.value[1],
             className: 'daterangepicker__input',
             placeholder: 'MM/DD/YYYY',
-            onClick: displayRangeChooser,
+            onClick: (!props.disableOpenPicker && !props.disabled) && displayRangeChooser,
+            backgroundColor: props.backgroundColor,
+            color: props.colors,
+            placeholderColor: props.placeholderColor,
+            open: props.open,
           }
         )}
       </div>
@@ -58,9 +67,10 @@ const DateRangePicker = (props) => {
               end: endDate
             }}
             backgroundColor={props.backgroundColor}
+            disabled={props.disabled}
           />
           <Calendar
-            className={`daterangepicker__calendar ${display ? 'displayed' : ''}`}
+            className={`daterangepicker__calendar ${props.open || display ? 'displayed' : ''}`}
             value={endDate || tomorrowDate}
             onChange={(val) => setFormattedValue([startDate, val])}
             dayOfWeekFormatter={props.dayOfWeekFormatter}
@@ -70,11 +80,42 @@ const DateRangePicker = (props) => {
               end: endDate
             }}
             backgroundColor={props.backgroundColor}
+            disabled={props.disabled}
           />
         </div>
       )}
     </StyledDateRangePicker>
   )
 }
+
+
+DateRangePicker.propTypes = {
+  value: PropTypes.any,
+  onChange: PropTypes.func.isRequired,
+  renderInput: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  closeOnSelect: PropTypes.bool,
+  dayOfWeekFormatter: PropTypes.func,
+  disabled: PropTypes.bool,
+  disableOpenPicker: PropTypes.bool,
+  open: PropTypes.bool,
+  width: PropTypes.number,
+  label: PropTypes.string,
+  color: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  placeholderColor: PropTypes.string,
+};
+
+DateRangePicker.defaultProps = {
+  disabled: false,
+  closeOnSelect: true,
+  disableOpenPicker: false,
+  open: false,
+  width: 200,
+  color: '#000',
+  backgroundColor: '#fff',
+  placeholderColor: 'gray',
+  dayOfWeekFormatter: (day) => day.charAt(0).toUpperCase(),
+};
 
 export default DateRangePicker;

@@ -15,18 +15,15 @@ function App() {
   const [dateTime, setDateTime] = useState("");
 
   return (
-    <div
-      className="App"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "start",
-        alignItems: "center",
-        paddingTop: "100px",
-        height: "100vh",
-        gap: "40px",
-      }}
-    >
+    <div className="App" style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'start',
+      alignItems: 'center',
+      paddingTop: '100px',
+      height: '100vh',
+      gap: '40px',
+    }}>
       <p>{dates?.toString()}</p>
       <DateRangePicker
         value={dates}

@@ -10,6 +10,7 @@ export default styled.div`
   border-radius: 6px;
   transition: visibility 0s linear 0.36s, opacity 0.35s, bottom 0.35s;
   z-index: 50;
+  width: fit-content;
 
   .agenda__header {
     display: flex;
