@@ -253,8 +253,6 @@ function App() {
 
 			</Container>
 		</div>
-
-
 	);
 }
 
