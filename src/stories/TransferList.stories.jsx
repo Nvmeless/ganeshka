@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { TransferList } from "../components/transfertList/TransferList"
+import { TransferList } from "../components/transfertList/molecules/TransferList"
 import { useCheckList } from "../hooks/useCheckList"
 import { useArray } from "../hooks/useArray"
 

@@ -1,7 +1,7 @@
-import { useCheckList } from '../../hooks/useCheckList'
+import { useCheckList } from '../../../hooks/useCheckList'
 import { Grid } from '@mui/material'
-import { TransferListButtons } from '../transfertList/molecules/TransfertListButtons'
-import { TransferListColumn } from '../transfertList/molecules/TransferListColumn'
+import { TransferListButtons } from '../atoms/TransfertListButtons'
+import { TransferListColumn } from '../atoms/TransferListColumn'
 
 export const TransferList = (props) => {
   const { checked, setChecked, left, setLeft, right, setRight, buttons, item, leftColumn, rightColumn } = props
