@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 import DateField from "./components/atoms/DateField/DateField";
-import DatePicker from "./components/atoms/DatePicker/DatePicker";
-import DateRangePicker from "./components/atoms/DateRangePicker/DateRangePicker";
+import DatePicker from "./components/molecules/DatePicker/DatePicker";
+import DateRangePicker from "./components/molecules/DateRangePicker/DateRangePicker";
 import DateTimeField from "./components/atoms/DateTimeField/DateTimeField";
 import { DateTimePicker } from "./components/atoms/DateTimePicker/DateTimePicker";
 import TimeField from "./components/atoms/TimeField/TimeField";
@@ -22,8 +22,6 @@ function App() {
         flexDirection: "column",
         justifyContent: "start",
         alignItems: "center",
-        paddingTop: "100px",
-        height: "100vh",
         gap: "40px",
       }}
     >

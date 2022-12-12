@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const ClockTimePickerWindow = styled.div`
   position: absolute;
   width: 300px;
-  height: 250px;
+  top: 100%;
   z-index: 3;
   background-color: ${(props) => props.backgroundColor};
   display: flex;

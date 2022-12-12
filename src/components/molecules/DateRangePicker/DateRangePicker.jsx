@@ -57,7 +57,8 @@ const DateRangePicker = (props) => {
       {display && (
         <div className='daterangepicker__calendar-container'>
           <Calendar 
-            className={`daterangepicker__calendar ${display ? 'displayed' : ''}`}
+            className="daterangepicker__calendar"
+            open={props.open || display}
             value={startDate || todayDate}
             onChange={(val) => setFormattedValue([val, endDate])}
             dayOfWeekFormatter={props.dayOfWeekFormatter}
@@ -70,7 +71,8 @@ const DateRangePicker = (props) => {
             disabled={props.disabled}
           />
           <Calendar
-            className={`daterangepicker__calendar ${props.open || display ? 'displayed' : ''}`}
+            className="daterangepicker__calendar"
+            open={props.open || display}
             value={endDate || tomorrowDate}
             onChange={(val) => setFormattedValue([startDate, val])}
             dayOfWeekFormatter={props.dayOfWeekFormatter}

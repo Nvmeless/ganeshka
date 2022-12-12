@@ -6,7 +6,9 @@ export default styled.div`
   color: ${(props) => props.color};
 
   .datepicker__calendar {
-    position: relative;
+    position: absolute;
     width: fit-content;
+    bottom: -10px;
+    transform: translateY(100%);
   }
 `

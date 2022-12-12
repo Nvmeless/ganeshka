@@ -30,6 +30,7 @@ export default styled.div`
 
   .datefield__input {
     padding: 15px;
+    width: 100%;
     background-color: ${(props) => props.backgroundColor};
     border-radius: 6px;
     outline: 1px solid ${(props) => props.placeholderColor};

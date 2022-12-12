@@ -49,7 +49,7 @@ const CalendarClockPicker = ({value, onChange, ...props }) => {
 
   const handleSelectDate = (value) => {
     handleChangeDate(value);
-    // setWindowPage(windowPage + 1);
+    setWindowPage(windowPage + 1);
   }
 
   const handleChangeTime = (value) => {
@@ -69,7 +69,7 @@ const CalendarClockPicker = ({value, onChange, ...props }) => {
     <DateTimePickerWindow {...props}>
       {windowPage === 1 && (
         <Calendar
-          className={`datepicker__calendar displayed`}
+          open={true}
           value={date || new Date()}
           onChange={handleChangeDate}
           selectDate={handleSelectDate}
