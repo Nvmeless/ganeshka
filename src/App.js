@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Card } from './components/atoms/Card/Card';
 import { ThemeProvider } from 'styled-components';
 import {getTheme} from './themes/default.js'
+<<<<<<< HEAD
 import SpeedDialIcon from "./components/atoms/SpeedDialIcon/SpeedDialIcon";
 import SpeedDialAction from "./components/atoms/SpeedDialAction/SpeedDialAction";
 import SpeedDial from "./components/molecules/SpeedDial/SpeedDial"
@@ -16,11 +16,14 @@ const actions = [
   { icon: <Fa500Px />, name: 'Print' },
   { icon: <FaAcquisitionsIncorporated />, name: 'Share' },
 ];
+=======
+>>>>>>> caa5ec0b615c52103c578af598937051dff6ba42
 
 function App() {
 
   return (
     <ThemeProvider theme={getTheme()}>
+<<<<<<< HEAD
     <div className="App">
       Ganeshka toolkit
       <SpeedDial
@@ -37,6 +40,11 @@ function App() {
         ))}
       </SpeedDial>
     </div>
+=======
+      <div className="App">
+        Ganeshka toolkit 
+      </div>
+>>>>>>> caa5ec0b615c52103c578af598937051dff6ba42
     </ThemeProvider>
   );
 }
