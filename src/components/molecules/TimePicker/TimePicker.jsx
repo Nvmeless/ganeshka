@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Container } from "@mui/system";
-import TimeField from "../TimeField/TimeField.jsx";
-import { ClockTimePicker } from "../ClockTimePicker/ClockTimePicker.jsx";
+import TimeField from "../../atoms/TimeField/TimeField.jsx";
+import Clock from "../../atoms/Clock/Clock.jsx";
 
 export const TimePicker = ({ ...props }) => {
   const [showWindow, setShowWindow] = useState(false);
@@ -15,9 +15,10 @@ export const TimePicker = ({ ...props }) => {
     <Container style={{ position: "relative", width: "fit-content" }}>
       {props.renderInput({ ...props, toggleShowWindow })}
       {showWindow && (
-        <ClockTimePicker
+        <Clock
           value={props.value}
           onChange={props.onChange}
+          endSelect={() => setShowWindow(false)}
           {...props}
         />
       )}
@@ -40,7 +41,7 @@ TimePicker.propTypes = {
   /**
    * Color of the controls in the clock
    */
-  controlsColor: PropTypes.string,
+  color: PropTypes.string,
   /**
    * Component input
    */
@@ -49,6 +50,6 @@ TimePicker.propTypes = {
 
 TimePicker.defaultProps = {
   backgroundColor: "white",
-  controlsColor: "teal",
+  color: "teal",
   renderInput: (props) => <TimeField {...props} />,
 };

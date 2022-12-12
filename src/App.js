@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
 import DateField from "./components/atoms/DateField/DateField";
-import DatePicker from "./components/atoms/DatePicker/DatePicker";
-import DateRangePicker from "./components/atoms/DateRangePicker/DateRangePicker";
+import DatePicker from "./components/molecules/DatePicker/DatePicker";
+import DateRangePicker from "./components/molecules/DateRangePicker/DateRangePicker";
 import DateTimeField from "./components/atoms/DateTimeField/DateTimeField";
-import { DateTimePicker } from "./components/atoms/DateTimePicker/DateTimePicker";
+import { DateTimePicker } from "./components/molecules/DateTimePicker/DateTimePicker";
 import TimeField from "./components/atoms/TimeField/TimeField";
-import { TimePicker } from "./components/atoms/TimePicker/TimePicker";
+import { TimePicker } from "./components/molecules/TimePicker/TimePicker";
 
 function App() {
   const [dates, setDates] = useState([undefined, undefined]);
@@ -54,7 +54,10 @@ function App() {
       <DateTimePicker
         label={"DateTimePicker"}
         value={dateTime}
-        onChange={(value) => setDateTime(value)}
+        onChange={(value) => {
+          setDateTime(value)
+          console.log(value);
+        }}
         renderInput={(props) => <DateTimeField {...props} />}
       />
     </div>

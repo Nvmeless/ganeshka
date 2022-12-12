@@ -28,13 +28,14 @@ export default styled.div`
     z-index: -1;
   }
 
-  .datefield__input {
-    width: 100%;
-    padding: 15px;
-    background-color: ${(props) => props.backgroundColor};
-    border-radius: 6px;
-    border: 1px solid ${(props) => props.color};
-  }
+    .datefield__input {
+      width: 100%;
+      display : flex;
+      padding: 15px;
+      background-color: ${(props) => props.backgroundColor};
+      border-radius: 6px;
+      border: 1px solid ${(props) => props.color};
+    }
 
   .datefield__input:not(:placeholder-shown),
   .datefield__input:focus {
@@ -68,4 +69,4 @@ export default styled.div`
     color: ${(props) => props.color};
     user-select: none;
   }
-`
+`;

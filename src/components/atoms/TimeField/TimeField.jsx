@@ -82,6 +82,7 @@ const TimeField = ({ ...props }) => {
     <InputContainer active={active} error={active && error}>
       <label>{props.label}</label>
       <input
+        disabled={props.disabled}
         placeholder={active ? "hh:mm" : undefined}
         value={timeValue}
         onChange={handleTimeValueChange}
@@ -89,7 +90,11 @@ const TimeField = ({ ...props }) => {
         onBlur={handleBlur}
         maxLength="5"
       />
-      <select value={timeOfDay} onChange={handleTimeOfDayChange}>
+      <select
+        disabled={props.disabled}
+        value={timeOfDay}
+        onChange={handleTimeOfDayChange}
+      >
         <option value="AM">AM</option>
         <option value="PM">PM</option>
       </select>

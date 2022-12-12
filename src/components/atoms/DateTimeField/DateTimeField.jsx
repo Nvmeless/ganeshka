@@ -6,19 +6,21 @@ import PropTypes from "prop-types";
 
 const DateTimeField = (props) => {
   const [value, setValue] = useState("");
-  const [timeOfDay, setTimeOfDay] = useState("");
   const inputRef = useRef();
 
   const formatToDateString = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const eventValue = e.target.value;
-    console.log(eventValue);
     const isDeleteKey = e.nativeEvent.inputType === "deleteContentBackward";
     const isValidDateFormat =
-      /^([0-9]{1,2}\/?)?([0-9]{1,2}\/?)?([0-9]{1,4}) ?([0-1]?[0-2]):[0-5][0-9]?$/g.test(eventValue);
+      /^([0-9]{1,2}\/?)?([0-9]{1,2}\/?)?([0-9]{1,4})? ?([0-1]?[0-2])?:?[0-5]?[0-9]? ?([A|P]?M?)?$/g.test(
+        eventValue
+      );
     const isValidCompleteDateFormat =
-      /^([0-9]{2}\/)([0-9]{2}\/)([0-9]{4}) ([0-1]?[0-2]):[0-5][0-9]$/g.test(eventValue);
+      /^([0-9]{2}\/)([0-9]{2}\/)([0-9]{4}) ([0-1][0-2]):[0-5][0-9] ([A|P]M)$/g.test(
+        eventValue
+      );
 
     if (isValidDateFormat || isValidCompleteDateFormat) {
       if (!isDeleteKey && [2, 5].includes(eventValue.length)) {
@@ -28,13 +30,7 @@ const DateTimeField = (props) => {
     }
 
     if (isValidCompleteDateFormat) {
-      const dateValue = new Date(eventValue);
-      const isValidDate = dateValue instanceof Date && !isNaN(dateValue);
-      if (!isValidDate) {
-        setValue("");
-        return;
-      }
-      props.onChange(dateValue);
+      props.onChange(eventValue);
     }
   };
 
@@ -43,20 +39,14 @@ const DateTimeField = (props) => {
     inputRef.current.focus();
   };
 
-  const handleTimeOfDayChange = (e) => {
-    props.onChange(value + " " + e.target.value);
-  };
-
   useEffect(() => {
     if (props.value) {
-      const splitDateTime = props.value.split(" ");
-      const date = new Date(splitDateTime[0]);
-      const time = splitDateTime[1];
+      let [date, time, timeOfDay] = props.value.split(" ");
+      date = new Date(date);
       const month = date.getMonth() + 1;
       const day = date.getDate();
       const year = date.getFullYear();
-      setValue(`${month}/${day}/${year} ${time}`);
-      setTimeOfDay(splitDateTime[2]);
+      setValue(`${month}/${day}/${year} ${time} ${timeOfDay || ""}`);
     }
   }, [props.value]);
 
@@ -67,18 +57,14 @@ const DateTimeField = (props) => {
       onFocus={animateFocus}
       onClick={animateFocus}
     >
-      <input
-        value={value}
-        ref={inputRef}
-        className="datefield__input"
-        onChange={formatToDateString}
-        placeholder="MM/DD/YYYY HH:mm"
-        readOnly={props.disabled}
-      />
-      {/* <select value={timeOfDay} onChange={handleTimeOfDayChange}>
-        <option value="AM">AM</option>
-        <option value="PM">PM</option>
-      </select> */}
+        <input
+          value={value}
+          ref={inputRef}
+          className="datefield__input"
+          onChange={formatToDateString}
+          placeholder="MM/DD/YYYY HH:mm"
+          readOnly={props.disabled}
+        />
       {props.label && <label>{props.label}</label>}
       <span
         className="datefield__icon"
