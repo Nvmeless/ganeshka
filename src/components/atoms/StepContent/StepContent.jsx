@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {StyledContainer} from './styles.js';
+import {StyledStepContent} from './styles.js';
 
-export const Container = ({...props}) => {
+export const StepContent = ({...props}) => {
     const {backgroundColor, margin, padding} = props;
 
 
-    return( <StyledContainer {...props}></StyledContainer>)
+    return( <StyledStepContent {...props}></StyledStepContent>)
     // return (
     //     <div className={['container', props?.className].join(" ")}  style={
     //         {
