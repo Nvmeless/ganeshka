@@ -10,6 +10,10 @@ span {
     width: 100px;
 }
 
+.buttonItem:hover {
+    background-color: lightgray;
+}
+
 hr {
     width: 100px;
 

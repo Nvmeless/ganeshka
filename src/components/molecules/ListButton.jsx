@@ -19,7 +19,7 @@ function ListButton(props) {
     // }
     return (
         <>
-        {!props.disabled && <div style= {{alignItems: props.alignItems, backgroundColor: background}}>
+        {!props.disabled && <div className="buttonItem" style= {{alignItems: props.alignItems, backgroundColor: background}}>
                 {props.buttonContent.icon != null}<ListIcon icon={props.buttonContent.icon}/>
                 <ListText text={props.buttonContent.text}/>
             </div>}
