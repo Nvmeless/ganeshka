@@ -1,7 +1,11 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit"
 
 
-/*
+const initialState = [
+    {id:2, title: "Se Calcifier la glande pinéale", isDone: false},
+    {id: 1, title:"Consideration a zeulé", isDone: false},
+];
+
 const todoSlice = createSlice(
     {
         name:"todo",
@@ -27,10 +31,10 @@ const todoSlice = createSlice(
             }
         }
     }
-);*/
+);
 
 export const store = configureStore({
     reducer: {
-        //todoList: todoSlice.reducer
+        todoList: todoSlice.reducer
     }
 })
