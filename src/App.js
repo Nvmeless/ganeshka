@@ -4,6 +4,7 @@ import './App.css';
 import { ThemeProvider } from 'styled-components';
 import {getTheme} from './themes/default.js'
 import CustomThreeGlobalScene from './three/CustomThreeGlobalScene';
+import DigiCard from './three/DigiCard';
 
 function App() {
   return (
@@ -11,7 +12,11 @@ function App() {
       <div className="App">
         Ganeshka toolkit 
       </div>
-      <CustomThreeGlobalScene></CustomThreeGlobalScene>
+      <CustomThreeGlobalScene>
+
+        <DigiCard></DigiCard>
+
+      </CustomThreeGlobalScene>
     </ThemeProvider>
   );
 }

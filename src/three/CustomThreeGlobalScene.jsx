@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import {Canvas, useFrame} from "@react-three/fiber"
-
+import DigiCard from './DigiCard'
 function Box(props) {
     // This reference gives us direct access to the THREE.Mesh object
     const ref = useRef()
@@ -29,9 +29,8 @@ function Box(props) {
 export default function CustomThreeGlobalScene ( props ) {
     return(
         <Canvas>
-            {/* <ambientLight color={'red'} intensity={.1}/> */}
             <directionalLight color={'cyan'} intensity={1} position={[0,0,5]}  castShadow/>
-            <Box position={[-1.2, 0, 0]} />
+            {props.children}
     </Canvas>   
 
     )
