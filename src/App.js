@@ -1,15 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Card } from './components/atoms/Card/Card';
-import { ThemeProvider } from 'styled-components';
-import {getTheme} from './themes/default.js'
+import React from "react";
+import "./App.css";
+import { ThemeProvider } from "styled-components";
+import { getTheme } from "./themes/default.js";
+import { Appbar } from "./shared/components/molecules/Appbar/Appbar";
 function App() {
   return (
     <ThemeProvider theme={getTheme()}>
-    <div className="App">
-      Ganeshka toolkit
-    </div>
+      <div className="App">Parcours Sportifs</div>
+      <Appbar></Appbar>
     </ThemeProvider>
   );
 }

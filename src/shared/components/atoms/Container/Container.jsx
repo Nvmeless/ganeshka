@@ -6,7 +6,7 @@ export const Container = ({...props}) => {
     const {backgroundColor, margin, padding} = props;
 
 
-    return( <StyledContainer {...props}></StyledContainer>)
+    return( <StyledContainer {...props}>Test</StyledContainer>)
     // return (
     //     <div className={['container', props?.className].join(" ")}  style={
     //         {

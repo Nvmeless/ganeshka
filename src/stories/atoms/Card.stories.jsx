@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Card } from '../../components/atoms/Card/Card'
+import {Card } from '../../shared/components/atoms/Card/Card'
 
 export default {
     title:"Atoms/Card",
