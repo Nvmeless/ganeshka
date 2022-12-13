@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import {store} from './store/store'
 import  Login  from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import { Navbar } from './components/atoms/Navbar/Navbar';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Provider store={store} >
         <ThemeProvider theme={getTheme()}>
         <div className="App">
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
