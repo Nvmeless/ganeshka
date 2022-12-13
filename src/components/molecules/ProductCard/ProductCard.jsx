@@ -9,6 +9,7 @@ export const ProductCard = ({...props}) => {
     const styleCard = {
         display : "flex",
         height:"5%",
+        margin:"15px"
     }
 
     const styleImg = {

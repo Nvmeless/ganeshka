@@ -1,5 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
+import  ProductServices, { getAllProducts }  from '../features/Products/Products';
 
-export default configureStore({
-  reducer: {}
+export const store = configureStore({
+  reducer: {
+    products : ProductServices
+
+  }
 })
+
+
+
