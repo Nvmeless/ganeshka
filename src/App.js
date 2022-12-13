@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import {getTheme} from './themes/default.js'
 import Commerce from '@chec/commerce.js';
 
+
 function App() {
   // creation de notre instance commerce
   const commerce = new Commerce('pk_test_49104637cd5730bad2a0d52cc7f38c2ed5927e9f0368e', true);
