@@ -13,7 +13,6 @@ import Divider from '@mui/material/Divider';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { useTheme } from 'styled-components';
 
 const navigationLinks = [
     {name: 'Accueil', href: '/'},
@@ -34,7 +33,6 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 export const Navbar = () => {
-    const theme = useTheme()
     const styles = useStyle()
     const [open, setOpen] = useState(false);
     return (
@@ -49,7 +47,7 @@ export const Navbar = () => {
                             variant="button" 
                             underline='none' 
                             href={item.href}
-                            key={item}
+                            key={item.name}
                         >
                             {item.name}
                         </Link>
