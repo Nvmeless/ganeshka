@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Container } from "@mui/system";
-import { ClockTimePicker } from "../ClockTimePicker/ClockTimePicker.jsx";
+import Clock from "../../atoms/Clock/Clock.jsx";
 import { DateTimePickerWindow } from "./styles.js";
-import Calendar from "../Calendar/Calendar.jsx";
+import Calendar from "../../atoms/Calendar/Calendar.jsx";
 import dayjs from "dayjs";
-import DateTimeField from "../DateTimeField/DateTimeField.jsx";
 
 export const DateTimePicker = (props) => {
   const [showWindow, setShowWindow] = useState(false);
@@ -14,13 +13,18 @@ export const DateTimePicker = (props) => {
     setShowWindow(!showWindow);
   };
 
+  useEffect(() => {
+    console.log(props.value);
+  }, [props.value]);
+
   return (
     <Container style={{ position: "relative", width: "fit-content" }}>
-      {props.renderInput({ ...props, onClick : toggleShowWindow })}
+      {props.renderInput({ ...props, onClick: toggleShowWindow })}
       {showWindow && (
         <CalendarClockPicker
           value={props.value}
           onChange={props.onChange}
+          endSelect={() => setShowWindow(false)}
           {...props}
         />
       )}
@@ -28,19 +32,10 @@ export const DateTimePicker = (props) => {
   );
 };
 
-const CalendarClockPicker = ({value, onChange, ...props }) => {
+const CalendarClockPicker = ({ value, onChange, ...props }) => {
   const [windowPage, setWindowPage] = useState(1);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-
-  const formatDate = (date) => {
-    if(date instanceof Date) {
-      const month = date.getMonth();
-      const day = date.getDate();
-      const year = date.getFullYear();
-      return `${month < 10 ? "0"+month : month}/${day < 10 ? "0"+day : day}/${year}`
-    }
-  }
 
   const handleChangeDate = (value) => {
     const newDate = dayjs(value).format("MM/DD/YYYY");
@@ -57,11 +52,16 @@ const CalendarClockPicker = ({value, onChange, ...props }) => {
     onChange(formattedDate + " " + value);
   };
 
+  const handleEndSelect = () => {
+    setWindowPage(1);
+    props.endSelect();
+  };
+
   useEffect(() => {
     if (value) {
-      let [date, time] = value.split(" ");
+      const [date, time, timeOfDay] = value.split(" ");
       setDate(new Date(date));
-      setTime(time);
+      setTime(`${time} ${timeOfDay || ""}`);
     }
   }, [value]);
 
@@ -79,9 +79,11 @@ const CalendarClockPicker = ({value, onChange, ...props }) => {
         />
       )}
       {windowPage === 2 && (
-        <ClockTimePicker
+        <Clock
           value={time || "12:00"}
           onChange={handleChangeTime}
+          endSelect={handleEndSelect}
+          clickChangePage
           {...props}
         />
       )}
@@ -103,9 +105,13 @@ DateTimePicker.propTypes = {
    */
   backgroundColor: PropTypes.string,
   /**
+   * Color on focus elements
+   */
+  focusColor: PropTypes.string,
+  /**
    * Color of the controls in the clock
    */
-  controlsColor: PropTypes.string,
+  color: PropTypes.string,
   /**
    * Component input
    */
@@ -114,6 +120,6 @@ DateTimePicker.propTypes = {
 
 DateTimePicker.defaultProps = {
   backgroundColor: "white",
-  controlsColor: "teal",
-  renderInput: (props) => <DateTimeField {...props} />,
+  color: "teal",
+  focusColor : "black"
 };

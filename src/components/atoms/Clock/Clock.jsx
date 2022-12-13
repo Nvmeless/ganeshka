@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  ClockButtonContainer,
-  ClockContainer,
-  ClockItem,
-  ClockPageControls,
-  ClockPointer,
-  ClockTimePickerWindow,
-} from "./styles.js";
+import { ClockWindow } from "./styles.js";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Button } from "@mui/material";
+import PropTypes from "prop-types";
 
 const hours = ["12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
 const minutes = [];
@@ -22,7 +16,7 @@ for (let i = 0; i < 60; i++) {
   }
 }
 
-export const ClockTimePicker = (props) => {
+const Clock = (props) => {
   const [timeValue, setTimeValue] = useState("");
   const [timeOfDay, setTimeOfDay] = useState("");
   const [windowPage, setWindowPage] = useState(1);
@@ -30,15 +24,26 @@ export const ClockTimePicker = (props) => {
   const [minuteSelected, setMinuteSelected] = useState("");
 
   const handleClickHour = (hour) => {
-    const value = `${formatHour(hour)}:${
-      timeValue.split(":")[1] || "00"
-    } ${timeOfDay || "AM"}`;
+    const value = `${formatHour(hour)}:${timeValue.split(":")[1] || "00"} ${
+      timeOfDay || "AM"
+    }`;
     props.onChange(value);
+    if (props.clickChangePage) {
+      setWindowPage(windowPage + 1);
+    }
   };
 
   const handleClickMinute = (minute) => {
-    const value = `${timeValue.split(":")[0] || "00"}:${minute} ${timeOfDay || "AM"}`;
+    const value = `${timeValue.split(":")[0] || "00"}:${minute} ${
+      timeOfDay || "AM"
+    }`;
     props.onChange(value);
+    if (props.clickChangePage) {
+      setWindowPage(1);
+      if (props.endSelect) {
+        props.endSelect();
+      }
+    }
   };
 
   const handleTimeOfDayChange = (value) => {
@@ -63,8 +68,11 @@ export const ClockTimePicker = (props) => {
 
   useEffect(() => {
     if (props.value) {
-      setTimeValue(props.value.split(" ")[0]);
-      setTimeOfDay(props.value.split(" ")[1]);
+      const [timeValue, timeOfDay] = props.value.split(" ");
+      setTimeValue(timeValue);
+      if (timeOfDay) {
+        setTimeOfDay(timeOfDay);
+      }
     }
   }, [props.value]);
 
@@ -79,54 +87,60 @@ export const ClockTimePicker = (props) => {
   };
 
   return (
-    <ClockTimePickerWindow {...props}>
-      <ClockContainer
-        nbElements={windowPage === 1 ? hours.length : minutes.length}
-        {...props}
-      >
-        <ClockPointer
-          nbElements={windowPage === 1 ? hours.length : minutes.length}
-          selectedIndex={windowPage === 1 ? hourSelected : minuteSelected}
-          {...props}
-        >
+    <ClockWindow
+      timeOfDay={timeOfDay}
+      nbElements={windowPage === 1 ? hours.length : minutes.length}
+      selectedIndex={windowPage === 1 ? hourSelected : minuteSelected}
+      {...props}
+    >
+      <div className="clock_container">
+        <div className="clock_pointer">
           <div className="base"></div>
           <div className="line"></div>
           <div className="thumb"></div>
-        </ClockPointer>
+        </div>
         {windowPage === 1 &&
           hours.map((hour, index) => {
+            const isSelected = hourSelected === index;
             return (
-              <ClockItem
+              <span
+                className={`clock_item ${isSelected ? "selected" : ""}`}
                 key={"hour" + hour}
-                selected={
-                  windowPage === 1
-                    ? hourSelected === index
-                    : minuteSelected === index
-                }
-                {...props}
               >
                 <p onClick={() => handleClickHour(hour, index)}>{hour}</p>
-              </ClockItem>
+              </span>
             );
           })}
         {windowPage === 2 &&
           minutes.map((minute, index) => {
+            const isSelected = minuteSelected === index;
             return (
-              <ClockItem key={"minute" + minute}>
+              <span
+                className={`clock_item ${isSelected ? "selected" : ""}`}
+                key={"minute" + minute}
+              >
                 <p onClick={() => handleClickMinute(minute, index)}>
                   {minute % 5 === 0 ? minute : <span className="dot"></span>}
                 </p>
-              </ClockItem>
+              </span>
             );
           })}
-      </ClockContainer>
-      <ClockButtonContainer left selected={timeOfDay === "AM"} {...props}>
+      </div>
+      <div
+        className={`clock_button_container left ${
+          timeOfDay === "AM" ? "selected" : ""
+        }`}
+      >
         <Button onClick={() => handleTimeOfDayChange("AM")}>AM</Button>
-      </ClockButtonContainer>
-      <ClockButtonContainer right selected={timeOfDay === "PM"} {...props}>
+      </div>
+      <div
+        className={`clock_button_container right ${
+          timeOfDay === "PM" ? "selected" : ""
+        }`}
+      >
         <Button onClick={() => handleTimeOfDayChange("PM")}>PM</Button>
-      </ClockButtonContainer>
-      <ClockPageControls {...props}>
+      </div>
+      <div className="clock_page_controls">
         <IconButton
           disabled={windowPage === 1}
           onClick={() => setWindowPage(windowPage - 1)}
@@ -139,7 +153,26 @@ export const ClockTimePicker = (props) => {
         >
           <ChevronRightIcon />
         </IconButton>
-      </ClockPageControls>
-    </ClockTimePickerWindow>
+      </div>
+    </ClockWindow>
   );
 };
+
+Clock.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  clickChangePage: PropTypes.bool,
+  endSelect: PropTypes.func,
+  backgroundColor: PropTypes.string,
+  focusColor: PropTypes.string,
+  color: PropTypes.string,
+};
+
+Clock.defaultProps = {
+  clickChangePage: true,
+  backgroundColor: "#fff",
+  focusColor : "#fff",
+  color: "#000",
+};
+
+export default Clock;
