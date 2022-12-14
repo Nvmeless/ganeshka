@@ -1,5 +1,47 @@
 export const getTheme = () => {
     return {
+        font:{
+            primary:"Roboto",
+            secondary:"Times New Roman",
+        },
+        fontStyle:[
+            {
+                name:"primary",
+                color:"blue",
+                font:"Times New Roman",
+                size:"2em",
+            },
+            {
+                name:"secondary",
+                color:"grey",
+                font:"Roboto",
+                size:"1em",
+            },
+            {
+                name:"validate",
+                color:"green",
+                font:"Roboto",
+                size:"1em",
+            },
+            {
+                name:"cancel",
+                color:"red",
+                font:"Roboto",
+                size:"1em",
+            },
+            {
+                name:"title",
+                color:"black",
+                font:"Roboto",
+                size:"3em",
+            },
+            {
+                name:"subTitle",
+                color:"grey",
+                font:"Roboto",
+                size:"2em",
+            },
+        ],
         background:"",
         primary:"cyan",
         secondary:"",
