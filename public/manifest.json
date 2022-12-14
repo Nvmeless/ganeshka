@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Ganeshka Toolkit",
+  "name": "Super UX/UI Toolkit",
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +21,20 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "description":"Super Toolkit, franchement pshartek",
+  "screenshot":[
+    {
+      "src":"logo512.png",
+      "type": "image/png",
+      "sizes":"512x512",
+      "form_factor": "wide"
+    },
+    {
+      "src":"logo512.png",
+      "type": "image/png",
+      "sizes":"512x512",
+      "form_factor": "narrow"
+    }
+  ]
 }
