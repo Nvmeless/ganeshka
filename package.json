@@ -15,6 +15,7 @@
     "react-placeholder-loading": "^0.5.30",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.6",
+    "usehooks-ts": "^2.9.1",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
