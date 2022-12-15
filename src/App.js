@@ -1,15 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Card } from './components/atoms/Card/Card';
 import { ThemeProvider } from 'styled-components';
-import {getTheme} from './themes/default.js'
+import {getTheme} from './themes/default.js';
+import {
+  RouterProvider,
+} from "react-router-dom";
+import { router } from '../src/router/routes'
+
 function App() {
   return (
     <ThemeProvider theme={getTheme()}>
-    <div className="App">
-      Ganeshka toolkit
-    </div>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
