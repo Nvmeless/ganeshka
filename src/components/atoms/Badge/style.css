@@ -1,0 +1,23 @@
+.badge {
+    height:auto;
+    padding: 10px;
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rounded {
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.notification {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
