@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import {PostCard} from '../../components/molecules/PostCard'
 
 const fakeData = ({
@@ -41,6 +42,10 @@ const fakeData = ({
 })
 
 export const Home = () => {
+  const { token } = useSelector((state) => state.auth);
+
+  console.log(token);
+
   return (
     <div>
       <div> Fil d'actualité</div>

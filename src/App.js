@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home/Home';
 import  CreatePost  from './pages/CreatePost/CreatePost';
 import { Provider } from 'react-redux';
-import {store} from './store/store'
+import store from './store/store'
 import  Login  from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import { Navbar } from './components/atoms/Navbar/Navbar';
