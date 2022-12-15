@@ -5,13 +5,4 @@ export default {
     component: Appbar,
 }
 const Template = (args) => <Appbar {...args}/>
-export const Primary = Template.bind({});
-Primary.args = {
-    primary: true,
-    loading: false,
-}  
-export const Secondary = Template.bind({});
-Secondary.args = {
-    primary: false,
-    loading: false,
-}  
+export const Default = Template.bind({});
