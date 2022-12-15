@@ -29,7 +29,8 @@ function Box(props) {
 export default function CustomThreeGlobalScene ( props ) {
     return(
         <Canvas>
-            <directionalLight color={'cyan'} intensity={1} position={[0,0,5]}  castShadow/>
+            <ambientLight/>
+            <directionalLight color={'white'} intensity={1} position={[0,0,5]}  castShadow/>
             {props.children}
     </Canvas>   
 

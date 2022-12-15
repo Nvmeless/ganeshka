@@ -3,20 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 import { ThemeProvider } from 'styled-components';
 import {getTheme} from './themes/default.js'
-import CustomThreeGlobalScene from './three/CustomThreeGlobalScene';
-import DigiCard from './three/DigiCard';
 
+import { useFocusabilityState } from 'webrix/hooks';
+import Website from './components/pages/Website'
 function App() {
   return (
     <ThemeProvider theme={getTheme()}>
       <div className="App">
         Ganeshka toolkit 
       </div>
-      <CustomThreeGlobalScene>
+      <Website></Website>
 
-        <DigiCard></DigiCard>
-
-      </CustomThreeGlobalScene>
     </ThemeProvider>
   );
 }
