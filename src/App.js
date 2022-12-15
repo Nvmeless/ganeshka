@@ -9,7 +9,7 @@ function App() {
   return (
     <ThemeProvider theme={getTheme()}>
     <div className="App">
-      Ganeshka toolkit
+      
     </div>
     </ThemeProvider>
   );
