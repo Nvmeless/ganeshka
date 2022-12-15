@@ -6,16 +6,16 @@ import { StyledAppbar } from "./styles";
 
 export const Appbar = ({...props}) => {
 
-    const [value, setValue] = useState()
-    // const theme = useTheme();
-    // console.log("Theme", theme)
+    const [link, setLink] = useState()
+
     return( 
         <StyledAppbar>
-            <BottomNavigation {...props} value={value} onChange={(event, newValue) => {setValue(newValue)}}>
-                <BottomNavigationAction label="Students" icon={<Diversity3 />} />
-                <BottomNavigationAction label="Lessons" icon={<CoPresent />} />
-                <BottomNavigationAction label="Modules" icon={<FitnessCenter />} />
-                <BottomNavigationAction label="Account" icon={<AccountCircle />} />
+            <div className="App">Parcours Sportifs</div>
+            <BottomNavigation {...props} value={link} onChange={(event, newLink) => {setLink(newLink)}}>
+                <BottomNavigationAction value="students" label="Students" icon={<Diversity3 />} />
+                <BottomNavigationAction value="lessons"  label="Lessons"  icon={<CoPresent />} />
+                <BottomNavigationAction value="modules"  label="Modules"  icon={<FitnessCenter />} />
+                <BottomNavigationAction value="account"  label="Account"  icon={<AccountCircle />} />
             </BottomNavigation>
         </StyledAppbar>
     )
