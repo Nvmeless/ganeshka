@@ -3,7 +3,7 @@ import { setMessage } from "./message";
 
 import AuthService from "../services/auth.service";
 
-const user = JSON.parse(localStorage.getItem("user"));
+const token = localStorage.getItem("access_token");
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -30,7 +30,8 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const data = await AuthService.login(email, password);
-      return { user: data };
+      window.localStorage.setItem("access_token", data.data.access_token);
+      return { token: data };
     } catch (error) {
       const message =
         (error.response &&
@@ -48,10 +49,10 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   await AuthService.logout();
 });
 
-const initialState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
-
+const initialState = token
+  ? { isLoggedIn: true, token }
+  : { isLoggedIn: false, token: null };
+  
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -64,15 +65,15 @@ const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
-      state.user = action.payload.user;
+      state.token = action.payload.user;
     },
     [login.rejected]: (state, action) => {
       state.isLoggedIn = false;
-      state.user = null;
+      state.token = null;
     },
     [logout.fulfilled]: (state, action) => {
       state.isLoggedIn = false;
-      state.user = null;
+      state.token = null;
     },
   },
 });

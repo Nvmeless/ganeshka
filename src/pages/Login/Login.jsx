@@ -43,7 +43,7 @@ export default function Login() {
       dispatch(clearMessage());
     }, [dispatch]);
   
-    const handleLogin = (e, formValue) => {
+    const handleLogin = (e) => {
       e.preventDefault();
 
       const email = e.target.email.value;
@@ -55,7 +55,7 @@ export default function Login() {
         .unwrap()
         .then(() => {
           navigate("/");
-          window.location.reload();
+          // window.location.reload();
         })
         .catch(() => {
           setLoading(false);
@@ -114,6 +114,11 @@ export default function Login() {
             >
                 Connexion
             </Button>
+            {message && (
+              <Typography variant="subtitle1" gutterBottom color="error">
+                  {message}
+              </Typography>     
+            )}
             <Grid item xs>
                 <Link href="#" variant="body2">
                     Mot de passe oublié ?
