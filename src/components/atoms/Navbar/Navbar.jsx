@@ -13,11 +13,11 @@ import Divider from '@mui/material/Divider';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const navigationLinks = [
-    {name: 'Accueil', href: '/'},
-    {name: 'Connexion', href: '/login'},
-    {name: 'Inscription', href: '/register'},         
+    {name: 'Accueil', href: '/'},      
 ]
 
 const useStyle = makeStyles((theme) => ({
@@ -33,8 +33,17 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 export const Navbar = () => {
+    let navigate = useNavigate()
+    const { isLoggedIn } = useSelector((state) => state.auth);
     const styles = useStyle()
     const [open, setOpen] = useState(false);
+
+    const handleLogout = () => {
+        localStorage.removeItem("access_token");
+        navigate("/login");
+        window.location.reload();
+    };
+
     return (
         <AppBar position='sticky' color='default'>
             <Container maxWidth="md">
@@ -82,6 +91,44 @@ export const Navbar = () => {
                             </Link>
                         </ListItem>
                     ))}
+                    {isLoggedIn ? (
+                        <ListItem>
+                                <Link 
+                                    className={styles.link} 
+                                    color='textPrimary' 
+                                    variant="button" 
+                                    underline='none' 
+                                    onClick={handleLogout}
+                                >
+                                    Déconnexion
+                                </Link>
+                        </ListItem>  
+                    ) : (
+                        <>
+                            <ListItem>
+                                <Link 
+                                    className={styles.link} 
+                                    color='textPrimary' 
+                                    variant="button" 
+                                    underline='none' 
+                                    href="/login"
+                                >
+                                    Connexion
+                                </Link>
+                            </ListItem>
+                            <ListItem>
+                                <Link 
+                                    className={styles.link} 
+                                    color='textPrimary' 
+                                    variant="button" 
+                                    underline='none' 
+                                    href="/register"
+                                >
+                                    Inscription
+                                </Link>
+                            </ListItem>
+                        </>
+                    )}
                 </List>
             </SwipeableDrawer>
         </AppBar>
