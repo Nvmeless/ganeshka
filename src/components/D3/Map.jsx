@@ -35,6 +35,15 @@ export default function Map ({projectionName = "geoEquirectangular"}) {
                 d={pathGenerator(shape)}
                 fill="lime"
                 stroke={"black"}
+                onClick={(e) => {
+                    d3.select(e.target).attr('fill', "red")
+                }}
+                onMouseEnter={(e) => {
+                    d3.select(e.target).attr('fill', "blue")
+                }}
+                onMouseLeave={(e) => {
+                    d3.select(e.target).attr('fill', "pink")
+                }}
                 /> 
             })}
 
