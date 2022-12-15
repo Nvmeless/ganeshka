@@ -48,7 +48,7 @@ export default function D3Scene() {
     useInterval(() => {
         const  newDataset = moveDataset(dataset);
         setDataset(newDataset)
-    }, 100)
+    }, 10000)
     useEffect(() => {
         const svgElement = d3.select(ref.current);
         
@@ -85,6 +85,17 @@ export default function D3Scene() {
 
 
 
+    useEffect(() => {
+        const svgElt = d3.select(ref.current);
+        const xScale  = d3.scaleLinear()
+        .domain([0, 100])
+        .range([[10, 290]])
+
+        const axisGeneration = d3.axisBottom(xScale);
+        const newG = svgElt.append('g')
+        axisGeneration(newG);
+
+    }, [])
 
 
 

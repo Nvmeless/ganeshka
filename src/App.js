@@ -3,12 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import { ThemeProvider } from 'styled-components';
 import {getTheme} from './themes/default.js'
-import D3Scene from './components/D3/D3Scene';
+import Map from './components/D3/Map';
 
 function App() {
   return (
     <ThemeProvider theme={getTheme()}>
-      <D3Scene></D3Scene>
+      <Map ></Map>
     </ThemeProvider>
   );
 }
