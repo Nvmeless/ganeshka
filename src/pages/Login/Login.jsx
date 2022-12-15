@@ -55,7 +55,7 @@ export default function Login() {
         .unwrap()
         .then(() => {
           navigate("/");
-          // window.location.reload();
+          window.location.reload();
         })
         .catch(() => {
           setLoading(false);
