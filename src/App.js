@@ -1,23 +1,12 @@
 import React from 'react';
 import './App.css';
-import { ThemeProvider } from 'styled-components';
-import {getTheme} from './themes/default.js'
-import { ProductList } from './components/organisms/ProductList/ProductList';
+import Home from './components/pages/Home'
 
 function App() {
   
   return (
-    
-    <ThemeProvider theme={getTheme()}>
-    
-    <div className="App">
-      Ganeshka toolkit
-   
-    <ProductList></ProductList>
-    </div> 
-    </ThemeProvider>
+    <Home></Home>
   );
 }
 
 export default App;
-//onClick={() => console.log("Liste des produits : ",getproducts())}
