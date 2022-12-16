@@ -1,0 +1,28 @@
+.talk-bubble {
+    margin: 40px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: auto;
+    background-color: lightyellow;
+}
+
+.round{
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+
+}
+
+.tri-right.right-in:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -20px;
+    top: 38px;
+    bottom: auto;
+    border: 12px solid;
+    border-color: lightyellow transparent transparent lightyellow;
+}

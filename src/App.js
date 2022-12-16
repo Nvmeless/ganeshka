@@ -7,7 +7,9 @@ import  CreatePost  from './pages/CreatePost/CreatePost';
 import { Provider } from 'react-redux';
 import store from './store/store'
 import  Login  from './pages/Login/Login';
-import Register from './pages/Register/Register';
+import  Register  from './pages/Register/Register';
+import Chat from './pages/message/message';
+import Conversation from './pages/conversation/conversation';
 import { Navbar } from './components/atoms/Navbar/Navbar';
 import { ThemeProvider } from "@mui/material/styles";
 import createTheme from './themes/default.js'
@@ -24,6 +26,8 @@ function App() {
             <Route path="/createPost" element={<CreatePost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+              <Route path="/message" element={<Chat />} />
+              <Route path="/conversation" element={<Conversation />} />
           </Routes>
         </div>
         </ThemeProvider>

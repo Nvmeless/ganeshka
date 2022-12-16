@@ -1,3 +1,3 @@
 export default {
-    apiUrl: process.env.API_URL || 'http://localhost:8081',
+    API_URL: process.env.API_URL || "http://squirel.kilian-marmilliot.com:8055/",
 };

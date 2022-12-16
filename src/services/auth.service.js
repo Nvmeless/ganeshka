@@ -1,6 +1,7 @@
 import axios from "axios";
+import config from '../config';
 
-const API_URL = "http://squirel.kilian-marmilliot.com:8055/auth/";
+const API_URL = config.API_URL + "auth/";
 
 const register = (username, email, password) => {
   return axios.post(API_URL + "signup", {

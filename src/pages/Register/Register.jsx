@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Logo } from '../../components/atoms/Logo/Logo';
+import { useState } from 'react';
 
 function Copyright(props) {
   return (
@@ -25,15 +26,15 @@ function Copyright(props) {
 }
 
 export default function Register() {
-    const [value, setValue] = React.useState(null);
+
+    const [value, setValue] = useState(null);
+
+
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-        });
     };
 
   return (
@@ -61,6 +62,7 @@ export default function Register() {
                     label="Nom"
                     name="lastName"
                     autoComplete="family-name"
+
                 />
                 </Grid>
                 <Grid item xs={6} sm={6}>
