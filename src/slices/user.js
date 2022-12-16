@@ -9,8 +9,9 @@ const token = localStorage.getItem("access_token");
 
 export const getUserAuth = createAsyncThunk(
     "users/me",
-    async ({ token }, thunkAPI) => {
+    async ( thunkAPI) => {
         try {
+            console.log('you are in getUserAuth')
             const response = await usersService.getUserAuth(token);
             thunkAPI.dispatch(setMessage(response.data.message));
             window.sessionStorage.setItem("user", JSON.stringify(response.data.data));
@@ -37,19 +38,14 @@ const usersSlice = createSlice({
     name: "users",
     initialState,
     extraReducers: {
-        [getUserAuth.fulfilled]: (state, action) => {
-            state = null;
-        },
         [getUserAuth.rejected]: (state, action) => {
             state = null;
         },
         [getUserAuth.fulfilled]: (state, action) => {
+            console.log(action);
             state = action.payload.user;
         },
         [getUserAuth.rejected]: (state, action) => {
-            state = null;
-        },
-        [getUserAuth.fulfilled]: (state, action) => {
             state = null;
         },
     },

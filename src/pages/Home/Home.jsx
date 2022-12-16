@@ -45,7 +45,7 @@ const fakeData = ({
 export const Home = () => {
   const { token } = useSelector((state) => state.auth);
   const user = useSelector((state) => state.users);
-
+  console.log(user);
   return (
     <div>
       <div> Fil d'actualité</div>
