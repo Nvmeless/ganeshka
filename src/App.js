@@ -1,22 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { ThemeProvider } from 'styled-components';
-import {getTheme} from './themes/default.js'
-import Commerce from '@chec/commerce.js';
+import React, { useState, useEffect } from 'react';
+import commerce from './components/lib/commerce';
 
+import './styles/scss/styles';
 
-function App() {
-  // creation de notre instance commerce
-  const commerce = new Commerce('pk_test_49104637cd5730bad2a0d52cc7f38c2ed5927e9f0368e', true);
+import Hero from './components/molecules/products/Hero';
+import ProductsList from './components/molecules/products/ProductsList';
+
+const App = () => {
+  const [merchant, setMerchant] = useState({});
+  const [products, setProducts] = useState([]);
+
+  // Because React rendering can be triggered for many different reasons, 
+  // it is best practice to wrap our commerce object method calls into a 
+  // useEffect() hook. This hook acts as the replacment to componentWillMount() 
+  // function when using class components. By leaving the second argument array 
+  // empty, this method will run once before the initial render.
+  useEffect(() => {
+    fetchMerchantDetails();
+    fetchProducts();
+  }, []);
+
+  /**
+   * Fetch merchant details
+   * https://commercejs.com/docs/sdk/full-sdk-reference#merchants
+   */
+  const fetchMerchantDetails = () => {
+    commerce.merchants.about().then((merchant) => {
+      setMerchant(merchant);
+    }).catch((error) => {
+      console.log('There was an error fetching the merchant details', error)
+    });
+  }
+
+  /**
+   * Fetch products data from Chec and stores in the products data object.
+   * https://commercejs.com/docs/sdk/products
+   */
+  const fetchProducts = () => {
+    commerce.products.list().then((products) => {
+      setProducts(products.data);
+    }).catch((error) => {
+      console.log('There was an error fetching the products', error)
+    });
+  }
 
   return (
-    <ThemeProvider theme={getTheme()}>
-    <div className="App">
-        {/* Passer l'instance commerce en props si on veut l'utiliser dans un composant */}
+    <div className="app">
+      <Hero
+        merchant={merchant}
+      />
+      <ProductsList 
+        products={products}
+      />
     </div>
-    </ThemeProvider>
   );
-}
+};
 
 export default App;
