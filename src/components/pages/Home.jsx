@@ -62,7 +62,7 @@ export default class Home extends React.Component {
         <p>Liste des produits proches de moi</p>
         <Divider></Divider>
         {this.renderContent(this.state.content)}
-        <Drawer></Drawer>
+        
         <Divider></Divider>
         <FilterMenu changeContent={this.changeContent} menus={[
             {label:"map", content:"Map"},
