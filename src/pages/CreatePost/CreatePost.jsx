@@ -11,10 +11,6 @@ export default function CreatePost() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      titre: data.get('titre'),
-      desc: data.get('desc'),
-    });
   };
 
   return (

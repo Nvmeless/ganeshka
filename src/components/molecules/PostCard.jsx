@@ -8,7 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 
 
-console.log('postCard')
+
 export function PostCard({ user, title, desc ,...props}) {
   return (
     <Card sx={{ minWidth: 275, textAlign: 'start', margin: '10px' }}>

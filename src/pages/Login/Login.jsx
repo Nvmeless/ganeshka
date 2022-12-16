@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { clearMessage } from '../../slices/message';
 import { login } from '../../slices/auth';
+import {getUserAuth} from "../../slices/user";
 
 function Copyright(props) {
   return (
@@ -31,18 +32,19 @@ function Copyright(props) {
 
 export default function Login() {
     let navigate = useNavigate();
-  
+
     const [loading, setLoading] = useState(false);
-  
-    const { isLoggedIn } = useSelector((state) => state.auth);
+
+    const { isLoggedIn,token } = useSelector((state) => state.auth);
+    const user  = useSelector((state) => state.users);
     const { message } = useSelector((state) => state.message);
-  
+
     const dispatch = useDispatch();
-  
+
     useEffect(() => {
       dispatch(clearMessage());
     }, [dispatch]);
-  
+
     const handleLogin = (e) => {
       e.preventDefault();
 
@@ -50,18 +52,21 @@ export default function Login() {
       const password = e.target.password.value;
 
       setLoading(true);
-  
+
       dispatch(login({ email , password }))
         .unwrap()
-        .then(() => {
-          navigate("/");
-          window.location.reload();
+        .then((res) => {
+
+            dispatch(getUserAuth({ token:res.token.data.access_token})).unwrap().then((res) => {
+                navigate("/");
+
+            });
         })
         .catch(() => {
           setLoading(false);
         });
     };
-  
+
     if (isLoggedIn) {
       return <Navigate to="/" />;
     }
@@ -117,7 +122,7 @@ export default function Login() {
             {message && (
               <Typography variant="subtitle1" gutterBottom color="error">
                   {message}
-              </Typography>     
+              </Typography>
             )}
             <Grid item xs>
                 <Link href="#" variant="body2">

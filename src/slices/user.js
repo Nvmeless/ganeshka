@@ -1,23 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
-
-
 import usersService from "../services/user.service";
-import {login, logout, register} from "./auth";
 
-const token = localStorage.getItem("access_token");
 
 export const getUserAuth = createAsyncThunk(
     "users/me",
-    async ( thunkAPI) => {
+    async ({ token },thunkAPI) => {
         try {
-            console.log('you are in getUserAuth')
             const response = await usersService.getUserAuth(token);
             thunkAPI.dispatch(setMessage(response.data.message));
-            window.sessionStorage.setItem("user", JSON.stringify(response.data.data));
 
             return response.data;
-
         } catch (error) {
             const message =
                 (error.response &&
@@ -32,21 +25,22 @@ export const getUserAuth = createAsyncThunk(
 );
 
 
-const initialState = window.sessionStorage.getItem("user") != null ? JSON.parse(window.sessionStorage.getItem("user")) : null;
 
 const usersSlice = createSlice({
     name: "users",
-    initialState,
+    initialState:{},
     extraReducers: {
         [getUserAuth.rejected]: (state, action) => {
             state = null;
+            return state;
         },
         [getUserAuth.fulfilled]: (state, action) => {
-            console.log(action);
-            state = action.payload.user;
+            state = action.payload;
+            return state;
         },
         [getUserAuth.rejected]: (state, action) => {
             state = null;
+            return state;
         },
     },
 });

@@ -1,7 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {PostCard} from '../../components/molecules/PostCard'
 import usersService from '../../services/user.service';
+import {getUserAuth} from "../../slices/user";
 const fakeData = ({
 
   1: {
@@ -43,8 +44,10 @@ const fakeData = ({
 
 
 export const Home = () => {
-  const { token } = useSelector((state) => state.auth);
-  const user = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.usersSlice);
+
   console.log(user);
   return (
     <div>
