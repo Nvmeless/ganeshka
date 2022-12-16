@@ -1,6 +1,6 @@
 import React from "react";
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-import { StyledMapCheckpointDiv, StyledMapCheckpointIcon } from './style.js'
+import { StyledMapCheckpointDiv } from './style.js'
 
 export const MapCheckPoint = ({...props}) => {
 

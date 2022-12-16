@@ -9,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
 import Drawer from '../molecules/Drawer/Drawer'
 import Divider from '@mui/material/Divider';
+import { ProductList } from "../organisms/ProductList/ProductList";
 
 export default class Home extends React.Component {
 
@@ -22,11 +23,32 @@ export default class Home extends React.Component {
       this.setState({content: content});
   }
 
-  renderContent(state){
-    if (state) {
-      return <p>{state}</p>
-    } else {
-      return <p>Welcome Home</p>
+  renderContent(state) {
+    switch (state) {
+      case "Map":
+        return <p>Map</p>
+
+      case "List":
+        return <ProductList></ProductList>
+
+      case "Products":
+        return <p>Products</p>
+
+      case "Shops":
+        return <p>Shops</p>
+
+      case "Menu":
+        return <p>Menu</p>
+
+      case "Search":
+        return <p>Search</p>
+
+      case "Chat":
+        return <p>Chat</p>
+
+
+      default:
+        return <p>Welcome home</p>
     }
   }
 
@@ -40,7 +62,7 @@ export default class Home extends React.Component {
         <p>Liste des produits proches de moi</p>
         <Divider></Divider>
         {this.renderContent(this.state.content)}
-        {/* <Drawer></Drawer> */}
+        <Drawer></Drawer>
         <Divider></Divider>
         <FilterMenu changeContent={this.changeContent} menus={[
             {label:"map", content:"Map"},
