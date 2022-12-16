@@ -5,7 +5,7 @@ import {getTheme} from './themes/default.js';
 import {
   RouterProvider,
 } from "react-router-dom";
-import { router } from '../src/router/routes'
+import { router } from '../src/shared/router/routes'
 
 function App() {
   return (
