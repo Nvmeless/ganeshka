@@ -8,7 +8,7 @@ export default class ButtonAppBar extends React.Component {
     render() {
         return (
           <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="fixed" sx={{ top: 'auto', bottom: 0, backgroundColor: '#87D98E' }}>
+          <AppBar position={this.props.position} sx={this.props.sx}>
             <Toolbar>
             {this.props.children}
             </Toolbar>
