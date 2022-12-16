@@ -1,28 +1,10 @@
 export const getTheme = () => {
   return {
-    background: "#0D0106",
-    primary: "#3626A7",
-    secondary: "#657ED4",
-    validate: "#FF331F",
-    white: "#FBFBFF",
-    error: "red",
-    container: {
-      primary: "",
-      secondary: "",
-      validate: "",
-      error: "",
-    },
-    on: {
-      primary: "",
-      secondary: "",
-      validate: "",
-      error: "",
-      container: {
-        primary: "",
-        secondary: "",
-        validate: "",
-        error: "",
-      },
-    },
+    primary: "#28666E",
+    secondary: "#CFD11A",
+    white: "#FFFDFD",
+    grey: "#CACFD6",
+    black: "#100113",
+    error: "#D9381E",
   };
 };
