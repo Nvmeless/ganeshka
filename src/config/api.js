@@ -4,7 +4,7 @@ import config from '../config';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: `${config.apiUrl}/api/`,
+    baseURL: `${config.API_URL}`,
 });
 
 instance.interceptors.response.use({}, async (error) => {
@@ -15,7 +15,7 @@ instance.interceptors.response.use({}, async (error) => {
         originalRequest.headers = {
             'Content-Type': 'application/json',
         };
-        const res = await instance.post('/accounts/token', { refresh_token: get(localStorage, 'mydevops_token') });
+        const res = await instance.post('/auth/refresh', { refresh_token: get(localStorage, 'refresh_token') });
         if (res.status === 201) {
             return axios(originalRequest);
         }

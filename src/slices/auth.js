@@ -31,6 +31,7 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.login(email, password);
       window.localStorage.setItem("access_token", data.data.access_token);
+      window.localStorage.setItem("refresh_token", data.data.refresh_token);
       return { token: data };
     } catch (error) {
       const message =
