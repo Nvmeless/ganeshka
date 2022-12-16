@@ -1,8 +1,47 @@
 import React, {useState, useEffect} from 'react';
 import { useRef } from 'react';
+import Draggable from 'react-draggable';
+import styled from 'styled-components';
 
-function Card({ id, description, name,refs, ...props }) {
 
+
+const StyleCol= styled.div`
+display:flex;
+flex-direction column;
+align-items: center;
+justify-content:center;
+`
+const StyleRow= styled.div`
+display:flex;
+flex-direction: row;
+height:${props => props.height }
+`
+
+
+const StylSquare= styled.span`
+background-color:blue;
+position: relative;
+z-index:20;
+top: 20px;
+height:${props => props.active ? props.activeSize : props.size};
+width:${props => props.active ? props.activeSize : props.size};
+`
+
+
+const StyledGrid = styled.div`
+display:flex;
+justify-content:space-around;
+`
+
+
+
+function Card({ id, description, name,myRef, ...props }) {
+
+    const mRf = useRef(props.ref)
+    console.log("REF", mRf)
+    useEffect(() => {
+        mRf.current = 'Hey'
+    }, [])
   return (
     <div 
     style={{
@@ -18,19 +57,39 @@ function Card({ id, description, name,refs, ...props }) {
 );
 }
 
-function Container({onDragEnter,...props}) {
+function Container({onDragEnter, ref,...props}) {
+    const Sizer = (props) => {
+        return active ? <Draggable {...props}><StylSquare size="25px"></StylSquare></Draggable> : null 
+    } 
+    const [active, setActive] = useState(false);
 
 
+
+    const childrenRef = useRef([]);
+
+    useEffect(() => {
+      console.log("Form Children", childrenRef.current);
+    }, [childrenRef]);
+    
+    
+    const elementList = React.Children.map(props.children, (child, index) =>
+        React.cloneElement(child, {
+          ref: (ref) => (childrenRef.current[index] = ref)
+        })
+      )
+    
   return (
    
-    <div style={{
-        backgroundColor: "red",
-        padding: 20
+    <StyleCol style={{
+
+        
     }}
-    onDragEnter={onDragEnter}
   >
-        {props.children}
-    </div>
+    <StyleRow><Sizer axis='y'  onStart={(x) => {console.log(x)}}/></StyleRow>
+
+    <StyleRow><Sizer axis='x' /><div onClick={() => {setActive(!active)}}>{elementList}</div><Sizer axis='x' /></StyleRow>
+    <StyleRow><Sizer axis='y'/></StyleRow>
+    </StyleCol>
 );
 }
 
@@ -38,9 +97,9 @@ function Container({onDragEnter,...props}) {
 
 
 
-
-
 function Board() {
+
+
     const [exempleCurrentTask,setExempleCurrentTask]= useState([
         {
            name:" 0Tache",
@@ -91,10 +150,14 @@ function Board() {
             dragOverItem.current = null;
         };
       }, [dragOverItem, dragItem]);
+
+
+
   return (
     <>
-    
-    {exempleCurrentTask.map((x) => <Card key={x.id} onDragEnter={(e) => dragEnter(e, x.id)} onDragEnd={drop} onDragStart={(e) => dragStart(e, x.id)} {...x} />)}
+    <StyledGrid>
+    {exempleCurrentTask.map((x) =><Container  key={x.id} ><Card key={x.id} onDragEnter={(e) => dragEnter(e, x.id)} onDragEnd={drop} onDragStart={(e) => dragStart(e, x.id)} {...x} /></Container>)}
+    </StyledGrid>
     </>
 
 
