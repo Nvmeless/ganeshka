@@ -6,14 +6,15 @@ export const fetchProducts = createAsyncThunk(
         return await fetch(process.env.REACT_APP_URL_BACK + "/items/products")
             .then(response => response.json())
             .then(product => product.data)
-            .catch(err => console.log("erruer: ", err))
+            .catch(err => console.log("erreur dans la récupèration des produits : ", err))
     }
 )
 
 const ProductServices = createSlice({
     name: 'products',
     initialState: {
-        productsList: []
+        productsList: [],
+        status: 'idle'
     },
     reducers: {},
     extraReducers: builder => {

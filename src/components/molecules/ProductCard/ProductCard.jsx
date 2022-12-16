@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "@mui/material";
 import {MapCheckPoint} from "./../MapCheckPoint/MapCheckPoint.jsx"
-import { PropaneSharp } from "@mui/icons-material";
+
 
 
 export const ProductCard = ({...props}) => {
@@ -54,7 +54,7 @@ export const ProductCard = ({...props}) => {
     return (
          <>
         <Card style={styleCard}>
-            <img src={props.src} style={styleImg}></img>
+            <img src={props.src} style={styleImg} alt={"img"+props.title}></img>
 
             <div style={styleDivTitleDescription}>
             <h1 style={styleTitle}>{props.title}</h1>
@@ -62,7 +62,7 @@ export const ProductCard = ({...props}) => {
             <p style={styleDescription}>{props.description}</p>
             </div>
             <div style={styleDivMapCheckpoint}>
-
+                <p>{props.price}€</p>
                 <MapCheckPoint text={props.checkpointDistance} style={styleMapCheckPoint}></MapCheckPoint>
 
             </div>
