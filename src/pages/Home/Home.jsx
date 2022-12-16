@@ -48,9 +48,14 @@ export const Home = () => {
 
   return (
     <div>
-      Ceci est la Home de Squirrel
-
-
+      <div> Fil d'actualité</div>
+      <div>
+        {Object.keys(fakeData).map((key, index) =>  {
+          return (
+            <PostCard user={fakeData[key].user} title={fakeData[key].title} desc={fakeData[key].desc}/>
+          )
+        })}
+      </div>
     </div>
   )
 }
