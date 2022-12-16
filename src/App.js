@@ -26,8 +26,8 @@ function App() {
             <Route path="/createPost" element={<CreatePost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-              <Route path="/message" element={<Chat />} />
-              <Route path="/conversation" element={<Conversation />} />
+            <Route path="/messages" element={<Chat />} />
+            <Route path="/conversation" element={<Conversation />} />
           </Routes>
         </div>
         </ThemeProvider>

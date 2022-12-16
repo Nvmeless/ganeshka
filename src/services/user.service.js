@@ -12,6 +12,8 @@ const getUserAuth = async (token) => {
     const response = await axios.get(API_URL + "me",{
         headers: config,
     })
+
+    return response.data;
 };
 
 const usersService = {

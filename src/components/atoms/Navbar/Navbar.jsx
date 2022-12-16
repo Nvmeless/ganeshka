@@ -20,6 +20,10 @@ const navigationLinks = [
     {name: 'Accueil', href: '/'},      
 ]
 
+const navigationLinksLoggedIn = [
+    {name: 'Messages', href: '/messages'},
+]
+
 const useStyle = makeStyles((theme) => ({
     link: {
         marginRight: 20
@@ -92,7 +96,22 @@ export const Navbar = () => {
                         </ListItem>
                     ))}
                     {isLoggedIn ? (
-                        <ListItem>
+                        <>
+                            <ListItem>
+                                {navigationLinksLoggedIn.map((item) => (
+                                    <Link 
+                                        className={styles.link} 
+                                        color='textPrimary' 
+                                        variant="button" 
+                                        underline='none' 
+                                        href={item.href}
+                                        key={item.name}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                ))}
+                            </ListItem>
+                            <ListItem>
                                 <Link 
                                     className={styles.link} 
                                     color='textPrimary' 
@@ -102,7 +121,8 @@ export const Navbar = () => {
                                 >
                                     Déconnexion
                                 </Link>
-                        </ListItem>  
+                            </ListItem> 
+                        </> 
                     ) : (
                         <>
                             <ListItem>
