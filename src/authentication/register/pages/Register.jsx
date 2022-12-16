@@ -1,8 +1,13 @@
-import { useFitnessTrailApi } from '../../../shared/api/hooks/useFitnessTrailApi'
 import { RegisterForm } from '../components/RegisterForm'
+import { useRoleIds } from '../hooks/useRoleIds'
+import { useParams } from 'react-router-dom'
+import { useRegister } from '../hooks/useRegister'
 
 export const Register = () => {
-  const { call: handleRegister } = useFitnessTrailApi('/api', {}, "post")
+  const roleIds = useRoleIds()
+  const { roleName } = useParams()
+  const role = roleIds[roleName]
+  const { register } = useRegister(role)
 
-  return <RegisterForm handleRegister={handleRegister} />
+  return <RegisterForm handleRegister={register} />
 }

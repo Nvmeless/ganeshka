@@ -1,11 +1,9 @@
-import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useState } from "react";
 import { AccountCircle, CoPresent, Diversity3, FitnessCenter } from '@mui/icons-material';
 import { StyledAppbar } from "./styles";
 
 export const Appbar = ({...props}) => {
-
     const [link, setLink] = useState()
 
     return( 
