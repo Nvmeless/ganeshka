@@ -7,8 +7,11 @@ import {
 } from "react-router-dom";
 import { router } from '../src/shared/router/routes'
 import { Appbar } from "./shared/components/molecules/Appbar/Appbar";
+import { useRefreshConnectedUser } from "./authentication/login/hooks/useRefreshConnectedUser"
 
 function App() {
+  useRefreshConnectedUser()
+
   return (
     <ThemeProvider theme={getTheme()}>
       <Appbar />
