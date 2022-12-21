@@ -1,6 +1,5 @@
 export const useStudentList = {
-    firstName: "Prénom",
-    lastName: "Nom",
-    email: "Mail",
+  first_name: "Prénom",
+  last_name: "Nom",
+  email: "Mail",
 }
-

@@ -11,9 +11,13 @@ export const useFitnessTrailApi = (
   const [data, setData] = useState(defaultData);
   const [error, setError] = useState("");
   axios.defaults.baseURL = process.env.REACT_APP_FITNESS_TRAIL_API;
-
+  let config = {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token"),
+    },
+  };
   const call = (callParams = params, callEndpoint = endpoint) => {
-    axios[action](callEndpoint, callParams)
+    axios[action](callEndpoint, callParams, config)
       .then(({ data }) => {
         setData(data);
         setIsLoading(false);
