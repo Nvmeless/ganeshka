@@ -2,10 +2,10 @@ import { List } from "../../../shared/components/atoms/List/List";
 import { Action } from "../../../shared/components/atoms/Action/Action";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useModuleList, useModuleData } from "../hooks/useModuleList";
+import { useModuleList } from "../hooks/useModuleList";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import { call, showDatas } from "../../../store";
+import { call, showDatas } from "../../../shared/stores/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
