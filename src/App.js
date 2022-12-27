@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import commerce from './components/lib/commerce';
 
-import './styles/scss/styles';
+import './styles/scss/styles.scss';
 
 import Hero from './components/molecules/products/Hero';
 import ProductsList from './components/molecules/products/ProductsList';
