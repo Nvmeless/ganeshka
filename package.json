@@ -17,6 +17,8 @@
     "react-icons": "^4.6.0",
     "react-placeholder-loading": "^0.5.30",
     "react-scripts": "5.0.1",
+    "sass": "^1.57.1",
+    "scss": "^0.2.4",
     "storybook-addon-styled-component-theme": "^2.0.0",
     "string-strip-html": "^13.0.2",
     "styled-components": "^5.3.6",

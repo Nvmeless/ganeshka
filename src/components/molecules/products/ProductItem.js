@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import stripHtml from 'string-strip-html';
+// consume as a CommonJS require:
+const stripHtml = require("string-strip-html");
 
 const ProductItem = ({ product }) => {
 
