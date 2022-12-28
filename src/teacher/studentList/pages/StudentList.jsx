@@ -2,10 +2,10 @@ import { List } from "../../../shared/components/atoms/List/List";
 import { Action } from "../../../shared/components/atoms/Action/Action";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useStudentList, useStudentData } from "../hooks/useStudentList";
+import { useStudentList } from "../hooks/useStudentList";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import { call, showDatas } from "../../../store";
+import { call, showDatas } from "../../../shared/stores/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -18,9 +18,7 @@ export const StudentList = () => {
     return getAllStudent;
   }, []);
 
-  let { data, isLoading, error } = useSelector(showDatas);
-
-  console.log(data);
+  let { data, isLoading } = useSelector(showDatas);
 
   const hasDatas = !isLoading && data.students.length > 0;
 
