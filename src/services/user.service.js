@@ -1,6 +1,5 @@
-import axios from "axios";
 import config from '../config';
-import {useSelector} from "react-redux";
+import api from '../config/api';
 
 const API_URL = config.API_URL + "users/";
 
@@ -9,7 +8,7 @@ const getUserAuth = async (token) => {
     const config = {
         Authorization: `Bearer ${token}`
     };
-    const response = await axios.get(API_URL + "me",{
+    const response = await api.get(API_URL + "me",{
         headers: config,
     })
 

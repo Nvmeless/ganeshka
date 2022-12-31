@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {PostCard} from '../../components/molecules/PostCard'
 import usersService from '../../services/user.service';
 import {getUserAuth} from "../../slices/user";
+import {useEffect} from "react";
 const fakeData = ({
 
   1: {
@@ -45,17 +46,21 @@ const fakeData = ({
 
 export const Home = () => {
   const dispatch = useDispatch();
-
   const user = useSelector((state) => state.usersSlice);
+  const token = useSelector((state) => state.auth.token);
+  useEffect(() => {
+    dispatch(getUserAuth({ token:token}));
+  }, []);
 
-  console.log(user);
+
+
   return (
     <div>
       <div> Fil d'actualité</div>
       <div>
         {Object.keys(fakeData).map((key, index) =>  {
           return (
-            <PostCard user={fakeData[key].user} title={fakeData[key].title} desc={fakeData[key].desc}/>
+            <PostCard key={index} user={fakeData[key].user} title={fakeData[key].title} desc={fakeData[key].desc}/>
           )
         })}
       </div>

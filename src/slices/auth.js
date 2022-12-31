@@ -4,6 +4,7 @@ import { setMessage } from "./message";
 import AuthService from "../services/auth.service";
 
 const token = localStorage.getItem("access_token");
+const refreshToken = localStorage.getItem("refresh_token");
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -51,12 +52,21 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 });
 
 const initialState = token
-  ? { isLoggedIn: true, token }
-  : { isLoggedIn: false, token: null };
-  
+  ? { isLoggedIn: true, token, refreshToken }
+  : { isLoggedIn: false, token: null, refreshToken };
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    reloadToken: (state, action) => {
+      state.token = action.payload.token;
+      state.refreshToken = action.payload.refreshToken;
+      localStorage.setItem("access_token", action.payload.token);
+      localStorage.setItem("refresh_token", action.payload.refreshToken);
+      return state;
+    }
+  },
   extraReducers: {
     [register.fulfilled]: (state, action) => {
       state.isLoggedIn = false;
@@ -66,7 +76,8 @@ const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
-      state.token = action.payload.user;
+      state.token = action.payload.token.data.access_token;
+      state.refreshToken = action.payload.token.data.refresh_token;
     },
     [login.rejected]: (state, action) => {
       state.isLoggedIn = false;
@@ -78,6 +89,8 @@ const authSlice = createSlice({
     },
   },
 });
+
+export const { reloadToken } = authSlice.actions;
 
 const { reducer } = authSlice;
 export default reducer;
