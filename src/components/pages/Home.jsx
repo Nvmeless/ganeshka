@@ -7,9 +7,11 @@ import {FilterMenu} from '../molecules/FilterMenu/FilterMenu'
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
-import Drawer from '../molecules/Drawer/Drawer'
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import Divider from '@mui/material/Divider';
 import { ProductList } from "../organisms/ProductList/ProductList";
+import { MenuButton } from "../atoms/MenuButton/MenuButton";
+import { AddProductForm } from "../organisms/AddProductForm/AddPoductForm";
 
 export default class Home extends React.Component {
 
@@ -46,6 +48,9 @@ export default class Home extends React.Component {
       case "Chat":
         return <p>Chat</p>
 
+      case "Add Product":
+        return <AddProductForm></AddProductForm>
+
 
       default:
         return <p>Welcome home</p>
@@ -60,6 +65,7 @@ export default class Home extends React.Component {
             {label:"shops", content:"Shops"},
         ]} sx={{ mt: 1.5, "& .MuiTabs-indicator": { backgroundColor: 'white'}, "& button": {borderRadius: 10}, "& button.Mui-selected": {backgroundColor: 'lightgray'}}}></FilterMenu>
         <p>Liste des produits proches de moi</p>
+        <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/> ? <AddBoxIcon/> : "add product"}</MenuButton>
         <Divider></Divider>
         {this.renderContent(this.state.content)}
         
@@ -67,7 +73,7 @@ export default class Home extends React.Component {
         <FilterMenu changeContent={this.changeContent} menus={[
             {label:"map", content:"Map"},
             {label:"list", content:"List"},
-        ]} sx={{ position: 'absolute', bottom: 0, mb: 8, ml: 10, mt: 1.5, "& .MuiTabs-indicator": { backgroundColor: 'white'}, "& button": {borderRadius: 10}, "& button.Mui-selected": {backgroundColor: 'lightgray'}}}></FilterMenu>
+        ]} sx={{ position: 'fixed', bottom: 0, mb: 8, ml: 10, mt: 1.5, "& .MuiTabs-indicator": { backgroundColor: 'white'}, "& button": {borderRadius: 10}, "& button.Mui-selected": {backgroundColor: 'lightgray'}}}></FilterMenu>
         <Menu changeContent={this.changeContent} menus={[
             {size:"large", edge:"start", color:"black", label:"chat", sx:{ mr: 2 }, icon :(<MenuIcon/>), content:"Menu"},
             {size:"large", edge:"start", color:"black", label:"search", sx:{ mr: 2, flexGrow: 1 }, icon :(<SearchIcon/>), content:"Search"},
