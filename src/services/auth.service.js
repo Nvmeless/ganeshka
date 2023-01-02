@@ -3,14 +3,6 @@ import api from '../config/api';
 
 const API_URL = config.API_URL + "auth/";
 
-const register = (username, email, password) => {
-    return api.post(API_URL + "signup", {
-        username,
-        email,
-        password,
-    });
-};
-
 const login = (email, password) => {
     return api
         .post(API_URL + "login", {
@@ -31,7 +23,6 @@ const logout = () => {
 };
 
 const authService = {
-    register,
     login,
     logout,
 };
