@@ -1,0 +1,24 @@
+import { Route, Routes } from "react-router-dom"
+import { Account } from "../../account/pages/Account"
+import { Login } from "../../authentication/login/pages/Login"
+import { Register } from "../../authentication/register/pages/Register"
+import { CreateStudentGoal } from "../../student-goal/pages/CreateStudentGoal"
+import { ModifyStudentGoal } from "../../student-goal/pages/ModifyStudentGoal"
+import { LessonList } from "../../teacher/lessonList/pages/LessonList"
+import { StudentList } from "../../teacher/studentList/pages/StudentList"
+import { ModuleList } from "../../teacher/moduleList/pages/ModuleList"
+
+export const Routing = () => {
+    return (
+        <Routes>
+            <Route index path="/account" element={<Account />} />
+            <Route path="/register/:roleName" element={<Register />} />
+            <Route path="/teacher/student/list" element={<StudentList />} />
+            <Route path="/teacher/lessons/list" element={<LessonList />} />
+            <Route path="/teacher/modules/list" element={<ModuleList />} />
+            <Route path="/student/:studentId/goal/:goalId/student-goal/create" element={<CreateStudentGoal />} />
+            <Route path="/student-goal/:goalId" element={<ModifyStudentGoal />} />
+            <Route path="/login" element={<Login />} />
+        </Routes>
+    )
+}

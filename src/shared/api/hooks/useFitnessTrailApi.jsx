@@ -17,6 +17,9 @@ export const useFitnessTrailApi = ({
   axios.defaults.baseURL = process.env.REACT_APP_FITNESS_TRAIL_API;
 
   const call = async (callParams = params, callMessages = messages, callEndpoint = endpoint) => {
+    setError(undefined);
+    setIsLoading(true);
+    if (axios.defaults.headers.common['Authorization'] === 'Bearer null') delete axios.defaults.headers.common['Authorization']
     const response = await axios[action](callEndpoint, callParams)
       .catch((errors) => {
         setError(errors);
@@ -27,8 +30,9 @@ export const useFitnessTrailApi = ({
     if (error !== undefined) return
     const data = response.data.data
     setData(data);
-    setError(undefined);
-    if (callMessages?.success) dispatch(add({ message: callMessages.success, isError: false }))
+    if (callMessages?.success) {
+      dispatch(add({ message: callMessages.success, isError: false }))
+    }
     return data
   };
 

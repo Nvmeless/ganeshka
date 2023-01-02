@@ -19,7 +19,7 @@ export const ModuleList = () => {
     return getAllModule;
   }, []);
 
-  let { data, isLoading, error } = useSelector(showDatas);
+  let { data, isLoading } = useSelector(showDatas);
 
   const hasDatas = !isLoading && data.modules.length > 0;
   return (
@@ -79,5 +79,3 @@ export const ModuleList = () => {
     </>
   );
 };
-
-export default ModuleList;
