@@ -7,6 +7,7 @@ import { ModifyStudentGoal } from "../../student-goal/pages/ModifyStudentGoal"
 import { LessonList } from "../../teacher/lessonList/pages/LessonList"
 import { StudentList } from "../../teacher/studentList/pages/StudentList"
 import { ModuleList } from "../../teacher/moduleList/pages/ModuleList"
+import { CreateModule } from "../../modules/pages/CreateModule"
 
 export const Routing = () => {
     return (
@@ -19,6 +20,7 @@ export const Routing = () => {
             <Route path="/student/:studentId/goal/:goalId/student-goal/create" element={<CreateStudentGoal />} />
             <Route path="/student-goal/:goalId" element={<ModifyStudentGoal />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/classroom/:classroomId/modules/create" element={<CreateModule />} />
         </Routes>
     )
 }
