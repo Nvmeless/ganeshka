@@ -2,29 +2,29 @@ import { List } from "../../../shared/components/atoms/List/List";
 import { Action } from "../../../shared/components/atoms/Action/Action";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useModuleList } from "../hooks/useModuleList";
+import { useLessonList } from "../hooks/useLessonList";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { call, showDatas } from "../../../shared/stores/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-export const ModuleList = () => {
+export const LessonList = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    const getAllModule = async () => {
-      dispatch(call("/items/Module", [], "get", "", "modules"));
+    const getAllLesson = async () => {
+      dispatch(call("/Users", [], "get", "", "students"));
     };
-    return getAllModule;
+    return getAllLesson;
   }, []);
 
-  let { data, isLoading, error } = useSelector(showDatas);
+  let { data, isLoading } = useSelector(showDatas);
 
-  const hasDatas = !isLoading && data.modules.length > 0;
+  const hasDatas = !isLoading && data.students.length > 0;
+
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Liste des module</h1>
+      <h1 style={{ textAlign: "center" }}>Liste des élèves</h1>
       <div className="buttonAdd">
         <Button
           variant="outlined"
@@ -34,7 +34,7 @@ export const ModuleList = () => {
             borderColor: "black",
           }}
         >
-          Ajouter des modules
+          Ajouter des élèves
         </Button>
       </div>
       {isLoading ? (
@@ -49,20 +49,20 @@ export const ModuleList = () => {
         </div>
       ) : hasDatas ? (
         <div className="list">
-          {data.modules.map(function (object, key) {
+          {data.students.map(function (object, key) {
             return (
               <List
                 displayList={object}
-                typeList={useModuleList}
+                typeList={useLessonList}
                 key={key}
                 action={
                   <>
                     <Action
-                      action={"module/update/" + object.id}
+                      action={"student/update/" + object.id}
                       icon={<VisibilityIcon></VisibilityIcon>}
                     ></Action>
                     <Action
-                      action={"module/delete/" + object.id}
+                      action={"student/delete/" + object.id}
                       icon={<DeleteIcon></DeleteIcon>}
                     ></Action>
                   </>
@@ -73,11 +73,11 @@ export const ModuleList = () => {
         </div>
       ) : (
         <h2 style={{ textAlign: "center" }}>
-          Vous n’avez actuellement pas de module
+          Vous n’avez actuellement pas d’élèves
         </h2>
       )}
     </>
   );
 };
 
-export default ModuleList;
+export default LessonList;

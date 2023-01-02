@@ -5,7 +5,7 @@ import { StudentList } from "../../teacher/studentList/pages/StudentList"
 import { ModuleList } from "../../teacher/moduleList/pages/ModuleList"
 import { ModifyStudentGoal } from "../../student-goal/pages/ModifyStudentGoal"
 import { CreateStudentGoal } from "../../student-goal/pages/CreateStudentGoal"
-
+import { Account } from "../../account/pages/Account";
 
 export const router = createBrowserRouter([
   {
@@ -31,5 +31,9 @@ export const router = createBrowserRouter([
   {
     path: "student/:studentId/goal/:goalId/student-goal/create",
     element: <CreateStudentGoal />
+  },
+  {
+    path: "/",
+    element: <Account />,
   }
-])
+]);
