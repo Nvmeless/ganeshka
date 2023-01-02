@@ -14,6 +14,7 @@ function App() {
         <BrowserRouter>
           <Appbar role="professor" />
           <Routing />
+          <div className="appbar_space"></div>
         </BrowserRouter>
       </ThemeProvider>
     </Provider>
