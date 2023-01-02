@@ -16,9 +16,9 @@ export const Appbar = ({...props}) => {
     
     if(props.role === "professor"){
         linkNav = [
-            {key: 1, value: "students", label: "Students", navigation:"students", icon: <Diversity3 />},
-            {key: 2, value: "lessons",  label: "Lessons",  navigation:"lessons",  icon: <CoPresent />},
-            {key: 3, value: "modules",  label: "Modules",  navigation:"modules",  icon: <FitnessCenter />},
+            {key: 1, value: "students", label: "Students", navigation:"teacher/student/list", icon: <Diversity3 />},
+            {key: 2, value: "lessons",  label: "Lessons",  navigation:"teacher/lessons/list",  icon: <CoPresent />},
+            {key: 3, value: "modules",  label: "Modules",  navigation:"teacher/modules/list",  icon: <FitnessCenter />},
             {key: 4, value: "account",  label: "Account",  navigation:"account",  icon: <AccountCircle />}
         ]
     }
