@@ -4,6 +4,7 @@ import { Register } from "../../authentication/register/pages/Register"
 import { StudentList } from "../../teacher/studentList/pages/StudentList"
 import { ModuleList } from "../../teacher/moduleList/pages/ModuleList"
 import { ModifyStudentGoal } from "../../student-goal/pages/ModifyStudentGoal"
+import { CreateStudentGoal } from "../../student-goal/pages/CreateStudentGoal"
 
 
 export const router = createBrowserRouter([
@@ -27,3 +28,8 @@ export const router = createBrowserRouter([
     path: "student-goal/:goalId",
     element: <ModifyStudentGoal />
   },
+  {
+    path: "student/:studentId/goal/:goalId/student-goal/create",
+    element: <CreateStudentGoal />
+  }
+])
