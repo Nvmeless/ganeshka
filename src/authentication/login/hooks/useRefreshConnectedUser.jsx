@@ -8,7 +8,8 @@ export const useRefreshConnectedUser = () => {
 
   useEffect(() => {
     const refreshConnectedUser = async () => {
-      await refreshTokens()
+      const token = await refreshTokens()
+      if (token === null) return
       await setConnectedUser({})
     }
 

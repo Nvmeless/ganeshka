@@ -10,7 +10,7 @@ export const useTokens = () => {
   }
 
   const refreshTokens = async () => {
-    const refresh_token = localStorage.getItem("refresh_token");
+    const refresh_token = localStorage.getItem("refresh_token")
     const tokens = await refresh({ refresh_token, mode: "json" })
     setTokens(tokens)
   }

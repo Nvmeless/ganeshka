@@ -11,6 +11,7 @@ export const useLogin = () => {
   const { setTokens } = useTokens()
 
   const login = async (params) => {
+    params = { ...params, headers: { Authorization: sessionStorage.getItem("access_token") } }
     const loginResponse = await callLogin(params)
     setTokens(loginResponse)
     setConnectedUser()
