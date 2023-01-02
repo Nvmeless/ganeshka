@@ -7,9 +7,9 @@ import {FilterMenu} from '../molecules/FilterMenu/FilterMenu'
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
-import Drawer from '../molecules/Drawer/Drawer'
 import Divider from '@mui/material/Divider';
 import { ProductList } from "../organisms/ProductList/ProductList";
+import { MerchantList } from "../organisms/MerchantList/MerchantList";
 
 export default class Home extends React.Component {
 
@@ -35,7 +35,7 @@ export default class Home extends React.Component {
         return <p>Products</p>
 
       case "Shops":
-        return <p>Shops</p>
+        return <MerchantList></MerchantList>
 
       case "Menu":
         return <p>Menu</p>
