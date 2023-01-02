@@ -9,7 +9,7 @@ export const CreateStudentGoal = () => {
   const { studentId, goalId } = useParams()
   const { register, handleSubmit, formState: { errors } } = useForm()
   const navigate = useNavigate()
-  const messages = { success: "l'objectif a été créé" }
+  const messages = { success: "la note a été envoyé" }
   const { call: createGoal } = useFitnessTrailApi({ endpoint: `/items/studentgoal`, action: 'post', messages })
   const createStudentGoal = async (form) => {
     await createGoal({ ...form, idStudent: studentId, idGoal: goalId })
@@ -17,7 +17,7 @@ export const CreateStudentGoal = () => {
   }
 
   return (
-    <FormBox title="Créer l'objectif" onSubmit={handleSubmit((form) => createStudentGoal(form))}>
+    <FormBox title="Créer la note de l'élève" onSubmit={handleSubmit((form) => createStudentGoal(form))}>
       <TextField form={{ errors, register }} id='comments' label='Commentaire' />
       <TextField form={{ errors, register }} id='level' label='Note' rules={{ required: 'Veuillez entrer la note' }} />
       <Button type="submit" variant="contained" style={{ margin: 20 }}>Valider</Button>

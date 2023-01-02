@@ -10,7 +10,7 @@ export const ModifyStudentGoal = () => {
   const { goalId } = useParams()
   const { register, handleSubmit, formState: { errors } } = useForm()
   const navigate = useNavigate()
-  const messages = { success: "l'objectif a été modifié" }
+  const messages = { success: "la note a été modifié" }
   const { call: getGoal, data, isLoading } = useFitnessTrailApi({ endpoint: `/items/studentgoal/${goalId}`, action: 'get' })
   const { call: modifyGoal } = useFitnessTrailApi({ endpoint: `/items/studentgoal/${goalId}`, action: 'patch', messages })
   const modifyStudentGoal = async (form) => {
@@ -23,7 +23,7 @@ export const ModifyStudentGoal = () => {
   if (isLoading) return
 
   return (
-    <FormBox title="Modifier l'objectif" onSubmit={handleSubmit((form) => modifyStudentGoal(form))}>
+    <FormBox title="Modifier la note de l'élève" onSubmit={handleSubmit((form) => modifyStudentGoal(form))}>
       <TextField form={{ errors, register }} defaultValue={data?.comments} id='comments' label='Commentaire' />
       <TextField form={{ errors, register }} defaultValue={data?.level} id='level' label='Note' />
       <Button type="submit" variant="contained" style={{ margin: 20 }}>Valider</Button>
