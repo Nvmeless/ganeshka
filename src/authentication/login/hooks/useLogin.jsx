@@ -1,21 +1,26 @@
 import { useDispatch } from "react-redux"
 import { useFitnessTrailApi } from "../../../shared/api/hooks/useFitnessTrailApi"
-import connectedUser from "../../shared/stores/connectedUser"
+import { connect } from "../stores/connectedUser"
+import { useTokens } from "./useTokens"
 
 export const useLogin = () => {
-  const messages = { error: "Il y a eu une erreur.", success: "connexion réussie" }
+  const defaultMessages = { error: "Il y a eux une erreur", success: "Connexion réussie" }
+  const { call: callLogin } = useFitnessTrailApi({ endpoint: '/auth/login', action: 'post', messages: { error: defaultMessages.error } })
+  const { call: getUser } = useFitnessTrailApi({ endpoint: '/users/me', action: 'get', messages: defaultMessages })
   const dispatch = useDispatch()
-  const { call: callLogin, data } = useFitnessTrailApi({ endpoint: '/auth/login', action: 'post', messages })
+  const { setTokens } = useTokens()
 
   const login = async (params) => {
-    await callLogin(params)
-
-    const { access_token, refresh_token } = data
-    sessionStorage.setItem("access_token", access_token);
-    sessionStorage.setItem("refresh_token", refresh_token);
-
-    dispatch(connectedUser(params))
+    params = { ...params, headers: { Authorization: sessionStorage.getItem("access_token") } }
+    const loginResponse = await callLogin(params)
+    setTokens(loginResponse)
+    setConnectedUser()
   }
 
-  return { login }
+  const setConnectedUser = async (messages = defaultMessages) => {
+    const user = await getUser({}, messages)
+    dispatch(connect(user))
+  }
+
+  return { login, setConnectedUser }
 }

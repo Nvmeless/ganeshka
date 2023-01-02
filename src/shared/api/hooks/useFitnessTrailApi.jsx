@@ -1,41 +1,36 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from 'react-redux'
 import { add } from "../../notifications/stores/notifications"
 
 export const useFitnessTrailApi = ({
   endpoint,
-  defaultData = [],
-  action = "get",
+  action,
   params,
   messages
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState(defaultData);
+  const [data, setData] = useState();
   const [error, setError] = useState(undefined);
   const dispatch = useDispatch()
-  
+
   axios.defaults.baseURL = process.env.REACT_APP_FITNESS_TRAIL_API;
 
   const call = async (callParams = params, callMessages = messages, callEndpoint = endpoint) => {
-    axios[action](callEndpoint, callParams)
-      .then(({ data }) => {
-        setData(data);
-        setError(undefined);
-        setIsLoading(false);
-        if (callMessages?.success) dispatch(add({ message: callMessages.success, isError: false }))
-      })
+    const response = await axios[action](callEndpoint, callParams)
       .catch((errors) => {
         setError(errors);
-        setIsLoading(false);
         if (callMessages?.error) dispatch(add({ message: callMessages.error, isError: true }))
       });
-  };
 
-  useEffect(() => {
-    if (action !== "get") return;
-    call();
-  }, []);
+    setIsLoading(false);
+    if (error !== undefined) return
+    const data = response.data.data
+    setData(data);
+    setError(undefined);
+    if (callMessages?.success) dispatch(add({ message: callMessages.success, isError: false }))
+    return data
+  };
 
   return { call, isLoading, data, error };
 };
