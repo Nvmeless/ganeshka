@@ -2,26 +2,16 @@ import { List } from "../../../shared/components/atoms/List/List";
 import { Action } from "../../../shared/components/atoms/Action/Action";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useModuleList } from "../hooks/useModuleList";
+import { useModuleList, useModule } from "../hooks/useModuleList";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import { call, showDatas } from "../../../shared/stores/index";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-
+import { showDatas } from "../../../shared/stores/index";
+import { useSelector } from "react-redux";
 export const ModuleList = () => {
-  const dispatch = useDispatch();
+  useModule();
 
-  useEffect(() => {
-    const getAllModule = async () => {
-      dispatch(call("/items/Module", [], "get", "", "modules"));
-    };
-    return getAllModule;
-  }, []);
-
-  let { data, isLoading, error } = useSelector(showDatas);
-
-  const hasDatas = !isLoading && data.modules.length > 0;
+  let { data, isLoading } = useSelector(showDatas);
+  const hasDatas = !isLoading.modules && data.modules.length > 0;
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Liste des module</h1>
@@ -37,7 +27,7 @@ export const ModuleList = () => {
           Ajouter des modules
         </Button>
       </div>
-      {isLoading ? (
+      {isLoading.modules ? (
         <div
           style={{
             display: "flex",
