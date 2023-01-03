@@ -2,10 +2,12 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 import axios from "axios";
 
 axios.defaults.baseURL = process.env.REACT_APP_FITNESS_TRAIL_API;
-axios.defaults.headers.common[
-  "Authorization"
-] = `Bearer ${sessionStorage.getItem("token")}`;
-const initialState = { isLoading: true, error: "", data: {} };
+
+const initialState = {
+  isLoading: { classroom: true, students: true, modules: true },
+  error: "",
+  data: {},
+};
 
 const trailApiSlice = createSlice({
   name: "trailApi",
@@ -14,8 +16,11 @@ const trailApiSlice = createSlice({
   reducers: {
     FitnessTrailApi: (state, action) => {
       state.data[action.payload.type] = action.payload.data;
-      state.isLoading = action.payload.isLoading;
+      state.isLoading[action.payload.type] = action.payload.isLoading;
       state.error = action.payload.error;
+      if (action.payload.type == "classroom") {
+        localStorage.setItem("classroom", action.payload.data[0].id);
+      }
     },
   },
 });
