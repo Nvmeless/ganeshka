@@ -42,14 +42,15 @@ export default class Home extends React.Component {
         return <MerchantList></MerchantList>
 
       case "Menu":
-        return <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/> ? <AddBoxIcon/> : "add product"}</MenuButton>
+        return <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/>}Ajouter un produit</MenuButton>
 
       case "Search":
         return <p>Search</p>
 
       case "Chat":
         return <p>Chat</p>
-
+      case "Add Product":
+        return <AddProductForm></AddProductForm>
   
 
 
@@ -63,10 +64,7 @@ export default class Home extends React.Component {
     return (
       <ThemeProvider theme={getTheme()}>
         <HomeFilter  changeContent={this.changeContent} nameContent={this.state.content}>
-          <p>Liste des produits proches de moi</p>
-          <Divider></Divider>
           {this.renderContent(this.state.content)}
-
           <Divider></Divider>
         </HomeFilter>
 

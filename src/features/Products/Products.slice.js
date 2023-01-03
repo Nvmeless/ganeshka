@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
+
+
+
+
 export const fetchProducts = createAsyncThunk(
     'product/getAll',
     async () => {
@@ -13,6 +17,7 @@ export const fetchProducts = createAsyncThunk(
 export const addProduct = createAsyncThunk(
     'product/addOne',
     async ({ name, description, price }) => {
+        
         return await fetch(process.env.REACT_APP_URL_BACK + "/items/products", {
             method: 'POST',
             headers: {
@@ -36,14 +41,21 @@ const ProductServices = createSlice({
         productsList: [],
         status: 'idle'
     },
-    reducers: {},
+    reducers: {
+        resetStatus(state) {
+        state.status = 'idle'
+      }
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.productsList.push(action.payload)
+                state.status = 'idle'
             })
             .addCase(addProduct.fulfilled, (state, action) => {
-                console.log("On a réussi ma gueugle")
+                fetchProducts()
+                state.status = action.meta.requestStatus
+                
             })
     }
 })

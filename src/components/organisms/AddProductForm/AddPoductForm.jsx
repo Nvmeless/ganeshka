@@ -1,15 +1,26 @@
-import React, {useState}  from "react"
-import { useDispatch} from 'react-redux'
-import { store, addProduct } from '../../../app/store'
+import React, {useState, useEffect}  from "react"
+import { useDispatch, useSelector} from 'react-redux'
+import { store, addProduct, productActions } from '../../../app/store'
 import { TextField } from "@mui/material"
 import { Button } from "@mui/material"
 
+
 export const AddProductForm = () => {
     const dispatch = useDispatch()
+    const productStatus = useSelector(state => state.products.status)
     
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
+
+    useEffect(() => {
+        if (productStatus === 'fulfilled') {
+            
+            alert("Ajout réussi !")
+        }
+        dispatch(productActions.resetStatus())
+      }, [productStatus, dispatch])
+
 
     return(
         <div style={{textAlign: "center"}}>
@@ -43,11 +54,13 @@ export const AddProductForm = () => {
                 />
                 <br/>
                 <p>Ce produit sera enregistré à vos coordonnées GPS.</p>
-                <Button onClick={() => store.dispatch(addProduct({
+                <Button onClick={() => {store.dispatch(addProduct({
                     name : name,
                     description : description,
                     price : price
-                }))} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>
+                }
+                ))
+                console.log("Status : "+productStatus)}} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>
                     Ajouter
                 </Button>
             </form>
