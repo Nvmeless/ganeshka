@@ -40,7 +40,7 @@ export default class Home extends React.Component {
         return <p>Shops</p>
 
       case "Menu":
-        return <p>Menu</p>
+        return <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/> ? <AddBoxIcon/> : "add product"}</MenuButton>
 
       case "Search":
         return <p>Search</p>
@@ -48,8 +48,7 @@ export default class Home extends React.Component {
       case "Chat":
         return <p>Chat</p>
 
-      case "Add Product":
-        return <AddProductForm></AddProductForm>
+  
 
 
       default:
@@ -65,7 +64,7 @@ export default class Home extends React.Component {
             {label:"shops", content:"Shops"},
         ]} sx={{ mt: 1.5, "& .MuiTabs-indicator": { backgroundColor: 'white'}, "& button": {borderRadius: 10}, "& button.Mui-selected": {backgroundColor: 'lightgray'}}}></FilterMenu>
         <p>Liste des produits proches de moi</p>
-        <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/> ? <AddBoxIcon/> : "add product"}</MenuButton>
+        
         <Divider></Divider>
         {this.renderContent(this.state.content)}
         

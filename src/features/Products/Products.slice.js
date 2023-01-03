@@ -12,17 +12,16 @@ export const fetchProducts = createAsyncThunk(
 
 export const addProduct = createAsyncThunk(
     'product/addOne',
-    async () => {
+    async ({ name, description, price }) => {
         return await fetch(process.env.REACT_APP_URL_BACK + "/items/products", {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer D69ohpAu8w5dG5XTjmbu0yqMng2SzHVX',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: "Pinot Noir",
-                description: "Ici une super description sur une boisson d'exception",
-                price: "29"
+                name: name,
+                description: description,
+                price: price
               })
         })
             .then(response => response.json())
