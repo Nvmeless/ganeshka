@@ -69,5 +69,3 @@ export const ModuleList = () => {
     </>
   );
 };
-
-export default ModuleList;
