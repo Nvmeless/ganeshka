@@ -5,13 +5,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useStudentList, useStudent } from "../hooks/useStudentList";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import { showDatas } from "../../../shared/stores/index";
 import { useSelector } from "react-redux";
 
 export const StudentList = () => {
   useStudent();
-  let { data, isLoading } = useSelector(showDatas);
-
+  const { data, isLoading } = useSelector((state) => state.fitnessTrailApi)
   const hasDatas = !isLoading.students && data.students.length > 0;
 
   return (
