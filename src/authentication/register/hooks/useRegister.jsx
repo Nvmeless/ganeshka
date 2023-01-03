@@ -1,9 +1,12 @@
 import { useFitnessTrailApi } from "../../../shared/api/hooks/useFitnessTrailApi"
 import { useLogin } from "../../login/hooks/useLogin"
+import { useRoleIds } from "./useRoleIds"
 
 export const useRegister = (role) => {
   const { call: createUser } = useFitnessTrailApi({ endpoint: '/users', action: 'post' })
+  const { call: createClassroom } = useFitnessTrailApi({ endpoint: '/items/classroom', action: 'post' })
   const { login } = useLogin()
+  const roleIds = useRoleIds()
 
   const register = async (form) => {
     const { password, email, firstName, lastName } = form
@@ -14,10 +17,11 @@ export const useRegister = (role) => {
       password,
       theme: 'auto',
       status: 'active',
-      role,
+      role: roleIds[role],
       email_notifications: true
     }
-    await createUser(params)
+    const user = await createUser(params)
+    if (role === 'professor') await createClassroom({ idProfessor: user.id })
     await login({ email, password })
   }
 
