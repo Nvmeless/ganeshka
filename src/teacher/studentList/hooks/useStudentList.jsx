@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { call } from "../../../shared/stores/index";
+import { call } from "../../../shared/api/stores/api";
 import { useFitnessTrailApi } from "../../../shared/api/hooks/useFitnessTrailApi";
 
 export const useStudentList = {

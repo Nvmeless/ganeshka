@@ -5,12 +5,13 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useLessonList } from "../hooks/useLessonList";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import { call, showDatas } from "../../../shared/stores/index";
+import { call } from "../../../shared/api/stores/api";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export const LessonList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+
   useEffect(() => {
     const getAllLesson = async () => {
       dispatch(call("/Users", [], "get", "", "students"));
@@ -18,9 +19,10 @@ export const LessonList = () => {
     return getAllLesson;
   }, []);
 
-  let { data, isLoading } = useSelector(showDatas);
-
+  const { data, isLoading } = useSelector((state) => state.fitnessTrailApi)
   const hasDatas = !isLoading && data.students.length > 0;
+
+  console.log({ data })
 
   return (
     <>
