@@ -13,7 +13,7 @@ export const CreateStudentGoal = () => {
   const { call: createGoal } = useFitnessTrailApi({ endpoint: `/items/studentgoal`, action: 'post', messages })
   const createStudentGoal = async (form) => {
     await createGoal({ ...form, idStudent: studentId, idGoal: goalId })
-    navigate('/student-goal')
+    navigate('/teacher/student-goal')
   }
 
   return (

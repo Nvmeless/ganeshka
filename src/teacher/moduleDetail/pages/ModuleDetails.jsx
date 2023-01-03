@@ -1,32 +1,40 @@
+import {
+  useModuleDetail,
+  useGoalsModule,
+  useGoalList,
+} from "../hooks/useModuleDetails";
+import { CircularProgress } from "@mui/material";
 import { List } from "../../../shared/components/atoms/List/List";
 import { Action } from "../../../shared/components/atoms/Action/Action";
+import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useModuleList, useModule } from "../hooks/useModuleList";
-import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFitnessTrailApi } from "../../../shared/api/hooks/useFitnessTrailApi";
-import CreateIcon from "@mui/icons-material/Create";
 
-export const ModuleList = () => {
-  const { fetchData } = useModule();
+export const ModuleDetails = () => {
+  const { moduleDetail: moduleDetail, isLoading: isLoadingDetail } =
+    useModuleDetail();
+  const {
+    goal: goalsModule,
+    isLoading: isLoadingGoals,
+    fetchData,
+  } = useGoalsModule();
 
-  const navigate = useNavigate();
+  const hasDatas = !isLoadingGoals && goalsModule.length > 0;
   const { call: callDelete } = useFitnessTrailApi({
     endpoint: "",
     action: "delete",
   });
-  const deleteModule = async (id) => {
-    await callDelete("", "", `/items/module/${id}`);
+  const deleteGoalsModule = async (id) => {
+    await callDelete("", "", `/items/goal/${id}`);
     fetchData();
   };
-  const { data, isLoading } = useSelector((state) => state.fitnessTrailApi);
-  const hasDatas = !isLoading.modules && data.modules.length > 0;
+
+  const navigate = useNavigate();
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Liste des module</h1>
+      <h1 style={{ textAlign: "center" }}>{moduleDetail.name}</h1>
       <div className="buttonAdd">
         <Button
           variant="outlined"
@@ -36,17 +44,13 @@ export const ModuleList = () => {
             borderColor: "black",
           }}
           onClick={() =>
-            navigate(
-              `/teacher/classroom/${localStorage.getItem(
-                "classroom"
-              )}/modules/create`
-            )
+            navigate(`/teacher/module/${moduleDetail.id}/goal/create`)
           }
         >
-          Ajouter des modules
+          Ajouter des objectifs
         </Button>
       </div>
-      {isLoading.modules ? (
+      {isLoadingGoals ? (
         <div
           style={{
             display: "flex",
@@ -58,26 +62,24 @@ export const ModuleList = () => {
         </div>
       ) : hasDatas ? (
         <div className="list">
-          {data.modules.map(function (object, key) {
+          {goalsModule.map(function (object, key) {
             return (
               <List
                 displayList={object}
-                typeList={useModuleList}
+                typeList={useGoalList}
                 key={key}
                 action={
                   <>
                     <Action
-                      action={() => navigate(`/teacher/module/${object.id}`)}
-                      icon={<VisibilityIcon></VisibilityIcon>}
-                    ></Action>
-                    <Action
                       action={() =>
-                        navigate(`/teacher/module/${object.id}/modify`)
+                        navigate(
+                          `/teacher/module/${moduleDetail.id}/goal/${object.id}/modify`
+                        )
                       }
                       icon={<CreateIcon></CreateIcon>}
                     ></Action>
                     <Action
-                      action={() => deleteModule(object.id)}
+                      action={() => deleteGoalsModule(object.id)}
                       icon={<DeleteIcon></DeleteIcon>}
                     ></Action>
                   </>
@@ -87,9 +89,7 @@ export const ModuleList = () => {
           })}
         </div>
       ) : (
-        <p style={{ textAlign: "center" }}>
-          Vous n’avez actuellement pas de module
-        </p>
+        <p style={{ textAlign: "center" }}>Ce module n'as pas de goal</p>
       )}
     </>
   );

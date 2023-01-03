@@ -22,8 +22,6 @@ export const LessonList = () => {
   const { data, isLoading } = useSelector((state) => state.fitnessTrailApi)
   const hasDatas = !isLoading && data.students.length > 0;
 
-  console.log({ data })
-
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Liste des élèves</h1>

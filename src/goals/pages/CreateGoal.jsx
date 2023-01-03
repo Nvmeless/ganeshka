@@ -13,7 +13,7 @@ export const CreateGoal = () => {
   const { call: create } = useFitnessTrailApi({ endpoint: `/items/goal`, action: 'post', messages })
   const createGoal = async (form) => {
     await create({ ...form, idModule: moduleId })
-    navigate(`/module/${moduleId}`)
+    navigate(`/teacher/module/${moduleId}`)
   }
 
   return (

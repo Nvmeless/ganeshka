@@ -11,8 +11,8 @@ import { CreateModule } from "../../modules/pages/CreateModule"
 import { ModifyModule } from "../../modules/pages/ModifyModule"
 import { CreateGoal } from "../../goals/pages/CreateGoal"
 import { ModifyGoal } from "../../goals/pages/ModifyGoal"
-import { AddStudentToProfessor } from "../../teacher/add-student/pages/AddStudentToProfessor"
 
+import { ModuleDetails } from "../../teacher/moduleDetail/pages/ModuleDetails"
 export const Routing = () => {
     return (
         <Routes>
@@ -24,16 +24,17 @@ export const Routing = () => {
             <Route path="/teacher/lessons/list" element={<LessonList />} />
             <Route path="/teacher/modules/list" element={<ModuleList />} />
 
-            <Route path="/student/:studentId/goal/:goalId/student-goal/create" element={<CreateStudentGoal />} />
-            <Route path="/student-goal/:goalId/modify" element={<ModifyStudentGoal />} />
+            <Route path="/teacher/student/:studentId/goal/:goalId/student-goal/create" element={<CreateStudentGoal />} />
+            <Route path="/teacher/student-goal/:goalId/modify" element={<ModifyStudentGoal />} />
 
-            <Route path="/classroom/:classroomId/modules/create" element={<CreateModule />} />
-            <Route path="/module/:moduleId/modify" element={<ModifyModule />} />
+            <Route path="teacher/classroom/:classroomId/modules/create" element={<CreateModule />} />
+            <Route path="teacher/module/:moduleId/modify" element={<ModifyModule />} />
 
-            <Route path="/module/:moduleId/goal/create" element={<CreateGoal />} />
-            <Route path="/module/:moduleId/goal/:goalId/modify" element={<ModifyGoal />} />
+            <Route path="teacher/module/:moduleId/goal/create" element={<CreateGoal />} />
+            <Route path="teacher/module/:moduleId/goal/:goalId/modify" element={<ModifyGoal />} />
 
-            <Route path="/teacher/student/add" element={<AddStudentToProfessor />} />
+            <Route path="teacher/module/:moduleId" element={<ModuleDetails />} />
+
         </Routes>
     )
 }

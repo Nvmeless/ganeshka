@@ -28,6 +28,7 @@ export const call =
     const setData = fitnessTrailApi.actions.setData
     axios[action](endpoint, params)
       .then(({ data }) => {
+
         dispatch(setData({ data: data.data, isLoading: false, type }));
       })
       .catch((errors) => {

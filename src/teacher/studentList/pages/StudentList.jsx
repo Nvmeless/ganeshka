@@ -6,11 +6,42 @@ import { useStudentList, useStudent } from "../hooks/useStudentList";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
+import { useFitnessTrailApi } from "../../../shared/api/hooks/useFitnessTrailApi";
 
 export const StudentList = () => {
-  useStudent();
-  const { data, isLoading } = useSelector((state) => state.fitnessTrailApi)
-  const hasDatas = !isLoading.students && data.students.length > 0;
+  const { fetchData, students } = useStudent();
+  const { data, isLoading } = useSelector((state) => state.fitnessTrailApi);
+  let hasDatas = false
+  let isLoadingStudents = true
+  if (students.length > 0) {
+    hasDatas = !isLoading.students && data.students.length > 0;
+    isLoadingStudents = false
+  }else{
+    isLoadingStudents = false
+  }
+  const { call } = useFitnessTrailApi({
+    endpoint: "",
+    action: "get",
+  });
+  const { call: callDelete } = useFitnessTrailApi({
+    endpoint: "",
+    action: "delete",
+  });
+
+  const deleteModule = async (idClassroom, idStudent) => {
+    const studentclassroom = await call(
+      "",
+      "",
+      `/items/studentclassroom?filter={"_and":[{"idClassroom":{"_eq": ${idClassroom}}},{"idStudent":{"_eq":"${idStudent}"}}]} `
+    );
+    await callDelete(
+      "",
+      "",
+      `/items/studentclassroom/${studentclassroom[0].id}`
+    );
+
+    fetchData();
+  };
 
   return (
     <>
@@ -27,7 +58,7 @@ export const StudentList = () => {
           Ajouter des élèves
         </Button>
       </div>
-      {isLoading.students ? (
+      {isLoadingStudents ? (
         <div
           style={{
             display: "flex",
@@ -52,7 +83,12 @@ export const StudentList = () => {
                       icon={<VisibilityIcon></VisibilityIcon>}
                     ></Action>
                     <Action
-                      action={"student/delete/" + object.id}
+                      action={() =>
+                        deleteModule(
+                          localStorage.getItem("classroom"),
+                          object.id
+                        )
+                      }
                       icon={<DeleteIcon></DeleteIcon>}
                     ></Action>
                   </>
@@ -62,9 +98,9 @@ export const StudentList = () => {
           })}
         </div>
       ) : (
-        <h2 style={{ textAlign: "center" }}>
+        <p style={{ textAlign: "center" }}>
           Vous n’avez actuellement pas d’élèves
-        </h2>
+        </p>
       )}
     </>
   );

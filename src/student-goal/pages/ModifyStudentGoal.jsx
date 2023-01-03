@@ -15,7 +15,7 @@ export const ModifyStudentGoal = () => {
   const { call: modifyGoal } = useFitnessTrailApi({ endpoint: `/items/studentgoal/${goalId}`, action: 'patch', messages })
   const modifyStudentGoal = async (form) => {
     await modifyGoal(form)
-    navigate('/student-goal')
+    navigate('/teacher/student-goal')
   }
 
   useEffect(() => { getGoal() }, [])
