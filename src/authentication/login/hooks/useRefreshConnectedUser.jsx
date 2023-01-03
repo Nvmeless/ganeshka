@@ -20,4 +20,5 @@ export const useRefreshConnectedUser = () => {
     }, process.env.REACT_APP_REFRESH_MILLISECONDS);
     return () => clearInterval(interval);
   }, []);
+  
 }

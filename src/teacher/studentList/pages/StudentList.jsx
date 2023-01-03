@@ -2,25 +2,17 @@ import { List } from "../../../shared/components/atoms/List/List";
 import { Action } from "../../../shared/components/atoms/Action/Action";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useStudentList } from "../hooks/useStudentList";
+import { useStudentList, useStudent } from "../hooks/useStudentList";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import { call, showDatas } from "../../../shared/stores/index";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { showDatas } from "../../../shared/stores/index";
+import { useSelector } from "react-redux";
 
 export const StudentList = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const getAllStudent = async () => {
-      dispatch(call("/Users", [], "get", "", "students"));
-    };
-    return getAllStudent;
-  }, []);
-
+  useStudent();
   let { data, isLoading } = useSelector(showDatas);
 
-  const hasDatas = !isLoading && data.students.length > 0;
+  const hasDatas = !isLoading.students && data.students.length > 0;
 
   return (
     <>
@@ -37,7 +29,7 @@ export const StudentList = () => {
           Ajouter des élèves
         </Button>
       </div>
-      {isLoading ? (
+      {isLoading.students ? (
         <div
           style={{
             display: "flex",
