@@ -7,9 +7,13 @@ import HomeFilter from '../organisms/HomeFilter/HomeFilter'
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import Divider from '@mui/material/Divider';
 import { ProductList } from "../organisms/ProductList/ProductList";
+import { MenuButton } from "../atoms/MenuButton/MenuButton";
+import { AddProductForm } from "../organisms/AddProductForm/AddPoductForm";
 import { MerchantList } from "../organisms/MerchantList/MerchantList";
+
 
 export default class Home extends React.Component {
 
@@ -38,7 +42,7 @@ export default class Home extends React.Component {
         return <MerchantList></MerchantList>
 
       case "Menu":
-        return <p>Menu</p>
+        return <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/> ? <AddBoxIcon/> : "add product"}</MenuButton>
 
       case "Search":
         return <p>Search</p>
@@ -46,11 +50,14 @@ export default class Home extends React.Component {
       case "Chat":
         return <p>Chat</p>
 
+  
+
 
       default:
         return <p>Welcome home</p>
     }
   }
+
 
   render() {
     return (
@@ -62,7 +69,6 @@ export default class Home extends React.Component {
 
           <Divider></Divider>
         </HomeFilter>
-
 
         <Menu changeContent={this.changeContent} menus={[
           { size: "large", edge: "start", color: "black", label: "chat", sx: { mr: 2 }, icon: (<MenuIcon />), content: "Menu" },
