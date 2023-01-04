@@ -13,9 +13,12 @@ import { ProductList } from "../organisms/ProductList/ProductList";
 import { MenuButton } from "../atoms/MenuButton/MenuButton";
 import { AddProductForm } from "../organisms/AddProductForm/AddPoductForm";
 import { MerchantList } from "../organisms/MerchantList/MerchantList";
-
+import { store } from '../../app/store';
+import {Login} from './Login/Login';
+import {Deconnection} from '../molecules/Deconnection/Deconnection'
 
 export default class Home extends React.Component {
+
 
   constructor(props) {
     super(props)
@@ -42,7 +45,12 @@ export default class Home extends React.Component {
         return <MerchantList></MerchantList>
 
       case "Menu":
-        return <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/>}Ajouter un produit</MenuButton>
+        return (
+        <div>
+        <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{ mr: 2 }}>{<AddBoxIcon />}Ajouter un produit</MenuButton>
+        <Deconnection></Deconnection>
+        </div>
+        )
 
       case "Search":
         return <p>Search</p>
@@ -51,7 +59,7 @@ export default class Home extends React.Component {
         return <p>Chat</p>
       case "Add Product":
         return <AddProductForm></AddProductForm>
-  
+
 
 
       default:
@@ -59,21 +67,35 @@ export default class Home extends React.Component {
     }
   }
 
+  isConnect() {
+    var states = store.getState()
+    return states.auth.isLoggedIn
+  }
+
+  generateApp(){
+    if (this.isConnect()) {
+      return (
+        <ThemeProvider theme={getTheme()}>
+          <HomeFilter changeContent={this.changeContent} nameContent={this.state.content}>
+            {this.renderContent(this.state.content)}
+            <Divider></Divider>
+          </HomeFilter>
+
+          <Menu changeContent={this.changeContent} menus={[
+            { size: "large", edge: "start", color: "black", label: "chat", sx: { mr: 2 }, icon: (<MenuIcon />), content: "Menu" },
+            { size: "large", edge: "start", color: "black", label: "search", sx: { mr: 2, flexGrow: 1 }, icon: (<SearchIcon />), content: "Search" },
+            { size: "large", edge: "start", color: "black", label: "menu", sx: { mr: 2 }, icon: (<ChatIcon />), content: "Chat" }
+          ]} position={"fixed"} sx={{ top: 'auto', bottom: 0, backgroundColor: '#87D98E' }}></Menu>
+        </ThemeProvider>
+      )
+    } else {
+      return <Login></Login>
+    }
+  }
 
   render() {
-    return (
-      <ThemeProvider theme={getTheme()}>
-        <HomeFilter  changeContent={this.changeContent} nameContent={this.state.content}>
-          {this.renderContent(this.state.content)}
-          <Divider></Divider>
-        </HomeFilter>
 
-        <Menu changeContent={this.changeContent} menus={[
-          { size: "large", edge: "start", color: "black", label: "chat", sx: { mr: 2 }, icon: (<MenuIcon />), content: "Menu" },
-          { size: "large", edge: "start", color: "black", label: "search", sx: { mr: 2, flexGrow: 1 }, icon: (<SearchIcon />), content: "Search" },
-          { size: "large", edge: "start", color: "black", label: "menu", sx: { mr: 2 }, icon: (<ChatIcon />), content: "Chat" }
-        ]} position={"fixed"} sx={{ top: 'auto', bottom: 0, backgroundColor: '#87D98E' }}></Menu>
-      </ThemeProvider>
-    )
-  }
+    return this.generateApp()
+      
+}
 }
