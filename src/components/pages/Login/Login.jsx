@@ -13,9 +13,9 @@ export const Login = ({ ...props }) => {
 
 
     return (
-        <div class="outer">
-            <div class="middle">
-                <div class="inner"></div>
+        <div className="outer">
+            <div className="middle">
+                <div className="inner"></div>
                 
                 <div style={{ textAlign: "center" }}>
                 <h1>Local Eat</h1>
@@ -44,7 +44,6 @@ export const Login = ({ ...props }) => {
                             }))
                             
                         }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>Connexion</Button>
-
 
                     </form>
                 </div>

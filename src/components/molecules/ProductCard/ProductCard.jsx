@@ -4,13 +4,10 @@ import { MapCheckPoint } from "./../MapCheckPoint/MapCheckPoint.jsx"
 import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useState } from 'react';
-import { useDispatch, useSelector} from 'react-redux'
 import { store, updateLikeProduct } from '../../../app/store'
 
 export const ProductCard = ({ ...props }) => {
 
-    const dispatch = useDispatch()
-    const productStatus = useSelector(state => state.products.status)
     
     const [state, setState] = useState({
         like: props.like
