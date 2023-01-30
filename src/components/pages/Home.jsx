@@ -13,6 +13,7 @@ import { ProductList } from "../organisms/ProductList/ProductList";
 import { MenuButton } from "../atoms/MenuButton/MenuButton";
 import { AddProductForm } from "../organisms/AddProductForm/AddPoductForm";
 import { MerchantList } from "../organisms/MerchantList/MerchantList";
+import { AddMerchantForm } from "../organisms/AddMerchantForm/AddMerchantForm";
 
 
 export default class Home extends React.Component {
@@ -42,17 +43,20 @@ export default class Home extends React.Component {
         return <MerchantList></MerchantList>
 
       case "Menu":
-        return <MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/>}Ajouter un produit</MenuButton>
+        return <><MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/>}Ajouter un produit</MenuButton>
+        <MenuButton action={this.changeContent} content="Add Merchant" size="large" edge="start" color="black" label="add merchant" sx={{mr : 2}}>{<AddBoxIcon/>}Ajouter un marchand</MenuButton></>
 
       case "Search":
         return <p>Search</p>
 
       case "Chat":
         return <p>Chat</p>
+
       case "Add Product":
         return <AddProductForm></AddProductForm>
-  
 
+      case "Add Merchant":
+        return <AddMerchantForm></AddMerchantForm>
 
       default:
         return <p>Welcome home</p>
