@@ -19,7 +19,7 @@ export const ProductList = ({...props}) => {
         
         if (!productPram[0]) return <p>On load</p>
         return productPram[0].map(prod => {
-            return <ProductCard src="./logo192.png" key={prod.name+prod.id} title={prod.name} description={prod.description} price={prod.price} checkpointDistance="200m"></ProductCard>
+            return <ProductCard src="./logo192.png" key={prod.name+prod.id} id={prod.id} title={prod.name} like={prod.numberLike} description={prod.description} price={prod.price} checkpointDistance="200m"></ProductCard>
         })
     }
     
