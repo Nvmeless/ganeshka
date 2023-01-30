@@ -32,14 +32,10 @@ export default class Home extends React.Component {
 
   renderContent(state) {
     switch (state) {
-      case "Product":
-        return <p>Product Map</p>
 
       case "ProductList":
         return <ProductList></ProductList>
 
-      case "Shops":
-        return <p>Shops Map</p>
 
       case "ShopsList":
         return <MerchantList></MerchantList>
@@ -63,7 +59,7 @@ export default class Home extends React.Component {
 
 
       default:
-        return <p>Welcome home</p>
+        return <ProductList></ProductList>
     }
   }
 
@@ -81,11 +77,14 @@ export default class Home extends React.Component {
             <Divider></Divider>
           </HomeFilter>
 
+
+
           <Menu changeContent={this.changeContent} menus={[
             { size: "large", edge: "start", color: "black", label: "chat", sx: { mr: 2 }, icon: (<MenuIcon />), content: "Menu" },
             { size: "large", edge: "start", color: "black", label: "search", sx: { mr: 2, flexGrow: 1 }, icon: (<SearchIcon />), content: "Search" },
             { size: "large", edge: "start", color: "black", label: "menu", sx: { mr: 2 }, icon: (<ChatIcon />), content: "Chat" }
           ]} position={"fixed"} sx={{ top: 'auto', bottom: 0, backgroundColor: '#87D98E' }}></Menu>
+
         </ThemeProvider>
       )
     } else {
