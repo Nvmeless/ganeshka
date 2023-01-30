@@ -45,9 +45,7 @@ export const Register = ({ ...props }) => {
                             value={Password}
                             onChange={(e) => setPassword(e.target.value)}
                         /><br />
-                         <Button onClick={() => {
-                            setshowregisterPage(false)
-                        }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>Se connecter</Button>
+                         
   
                         <Button onClick={() => {
                             dispatch(register({
@@ -56,8 +54,10 @@ export const Register = ({ ...props }) => {
                             }))
                             
                         }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>Inscription</Button>
-  
-                       
+                        <br /><br /><br /><br /><br /><br />
+                        <Button onClick={() => {
+                            setshowregisterPage(false)
+                        }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>Se connecter</Button>
   
   
                     </form>

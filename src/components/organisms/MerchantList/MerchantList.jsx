@@ -19,7 +19,7 @@ export const MerchantList = ({...props}) => {
         
         if (!shopPram[0]) return <p>On load</p>
         return shopPram[0].map(shop => {
-            return <MerchantCard src="./logo192.png" key={shop.name+shop.id} title={shop.name} description={shop.description} price={shop.horaire} checkpointDistance="200m"></MerchantCard>
+            return <MerchantCard src="./logo192.png" key={shop.name+shop.id} id={shop.id} title={shop.name} description={shop.description} price={shop.horaire} checkpointDistance="200m" favorite={shop.favorite}></MerchantCard>
         })
     }
     return(
