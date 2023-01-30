@@ -46,11 +46,7 @@ export const Login = ({ ...props }) => {
                             value={Password}
                             onChange={(e) => setPassword(e.target.value)}
                         /><br />
-                        <Button onClick={() => {
-                            
-                            setshowloginPage(false)
-                            
-                        }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>S'inscrire</Button>
+                        
 
                         <Button onClick={() => {
                             dispatch(login({
@@ -59,6 +55,12 @@ export const Login = ({ ...props }) => {
                             }))
                             
                         }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>Connexion</Button>
+                        <br /><br /><br /><br /><br /><br />
+                        <Button onClick={() => {
+                            
+                            setshowloginPage(false)
+                            
+                        }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>S'inscrire</Button>
 
                         
 

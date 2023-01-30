@@ -10,6 +10,28 @@ export const fetchShops = createAsyncThunk(
     }
 )
 
+
+export const updateFavoriteShop = createAsyncThunk(
+    'shop/favorite',
+    async ({ id, favoritevalue }) => {
+
+        return await fetch(process.env.REACT_APP_URL_BACK + "/items/shops/" + id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                favorite: favoritevalue,
+            })
+        })
+            .then(response => response.json())
+            .then(shop => shop.data)
+            .catch(err => console.log("erreur dans l'ajout au favori : ", err))
+    }
+)
+
+
+
 const ShopServices = createSlice({
     name: 'shop',
     initialState: {
@@ -21,6 +43,10 @@ const ShopServices = createSlice({
         builder
             .addCase(fetchShops.fulfilled, (state, action) => {
                 state.shopsList.push(action.payload)
+            })
+            .addCase(updateFavoriteShop.fulfilled, (state, action) => {
+                fetchShops()
+                state.status = action.meta.requestStatus
             })
     }
 })

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { FilterMenu } from "../../molecules/FilterMenu/FilterMenu";
 
 export default class HomeFilter extends React.Component {
