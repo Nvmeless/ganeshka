@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../../app/store'
+import { register } from '../../../app/store'
 import { TextField } from "@mui/material"
 import { Button } from "@mui/material"
-import './Login.css'
-import { Register } from '../Register/Register';
+import { Login } from '../Login/Login';
 
-export const Login = ({ ...props }) => {
+export const Register = ({ ...props }) => {
     const dispatch = useDispatch()
 
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
-    const [showloginPage, setshowloginPage] = useState("");
+    const [showregisterPage, setshowregisterPage] = useState("");
 
 
     const generateApp = () => {
         
-        if (showloginPage === false) {
-          return (
-            <Register></Register>
+        if (showregisterPage === false) {
             
+          return (
+          <Login></Login>
           )
         } else {
             return (<div className="outer">
@@ -28,7 +27,7 @@ export const Login = ({ ...props }) => {
                 
                 <div style={{ textAlign: "center" }}>
                 <h1>Local Eat</h1>
-                    <h2>Page de connexion</h2>
+                    <h2>Page d'inscription</h2>
                     <form>
                         <TextField
                             style={{ width: "350px", margin: "5px" }}
@@ -46,28 +45,30 @@ export const Login = ({ ...props }) => {
                             value={Password}
                             onChange={(e) => setPassword(e.target.value)}
                         /><br />
+                         <Button onClick={() => {
+                            setshowregisterPage(false)
+                        }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>Se connecter</Button>
+  
                         <Button onClick={() => {
-                            
-                            setshowloginPage(false)
-                            
-                        }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>S'inscrire</Button>
-
-                        <Button onClick={() => {
-                            dispatch(login({
+                            dispatch(register({
                                 email: Email,
                                 password: Password
                             }))
                             
-                        }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>Connexion</Button>
-
-                        
-
+                        }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>Inscription</Button>
+  
+                       
+  
+  
                     </form>
                 </div>
             </div>
-        </div>)
+        </div>
+                
+            )
         }
     }
+
 
     return generateApp()
 }

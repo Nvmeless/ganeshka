@@ -17,6 +17,17 @@ const login = (email, password) => {
         });
 };
 
+const register = (email, password) => {
+    return api
+        .post(process.env.REACT_APP_URL_BACK + "/users", {
+            email,
+            password,
+        })
+        .then((response) => {
+            return response.data;
+        });
+};
+
 const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("access_token");
@@ -26,6 +37,7 @@ const logout = () => {
 const authService = {
     login,
     logout,
+    register
 };
 
 export default authService;
