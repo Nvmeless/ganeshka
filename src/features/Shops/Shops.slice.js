@@ -11,6 +11,7 @@ export const fetchShops = createAsyncThunk(
 )
 
 
+
 export const updateFavoriteShop = createAsyncThunk(
     'shop/favorite',
     async ({ id, favoritevalue }) => {
@@ -32,21 +33,55 @@ export const updateFavoriteShop = createAsyncThunk(
 
 
 
+
+export const addShop = createAsyncThunk(
+    'product/addOne',
+    async ({ name, description, horaire }) => {
+        
+        return await fetch(process.env.REACT_APP_URL_BACK + "/items/shops", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                description: description,
+                horaire: horaire
+              })
+        })
+            .then(response => response.json())
+            .then(product => product.data)
+            .catch(err => console.log("erreur dans l'ajout du marchant : ", err))
+    }
+)
+
+
 const ShopServices = createSlice({
     name: 'shop',
     initialState: {
         shopsList: [],
         status: 'idle'
     },
-    reducers: {},
+    reducers: {
+        resetStatus(state) {
+            state.status = 'idle'
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchShops.fulfilled, (state, action) => {
                 state.shopsList.push(action.payload)
             })
+
             .addCase(updateFavoriteShop.fulfilled, (state, action) => {
                 fetchShops()
                 state.status = action.meta.requestStatus
+            })
+            .addCase(addShop.fulfilled, (state, action) => {
+                fetchShops()
+                state.status = action.meta.requestStatus
+                
+
             })
     }
 })
