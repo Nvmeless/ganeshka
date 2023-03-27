@@ -71,7 +71,7 @@ export default class Home extends React.Component {
   }
 
   generateApp(){
-    if (this.isConnect()) {
+    // if (this.isConnect()) {
       return (
         <ThemeProvider theme={getTheme()}>
           <HomeFilter changeContent={this.changeContent} nameContent={this.state.content}>
@@ -89,9 +89,9 @@ export default class Home extends React.Component {
 
         </ThemeProvider>
       )
-    } else {
-      return <Login></Login>
-    }
+    // } else {
+    //   return <Login></Login>
+    // }
   }
 
   render() {
