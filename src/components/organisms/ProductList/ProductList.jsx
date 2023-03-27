@@ -16,7 +16,7 @@ export const ProductList = ({...props}) => {
       }, [productStatus, dispatch])
 
     const generateProductCards = (productPram) => {
-        console.log("productPram : "+productPram)
+      
         if (!productPram[0]) return <p>On load</p>
         return productPram[0].map(prod => {
             return <ProductCard src="./logo192.png" key={prod.productname+prod._id} id={prod._id} title={prod.productname} like={prod.numberLike} description={prod.description} price={prod.price} checkpointDistance="200m"></ProductCard>
