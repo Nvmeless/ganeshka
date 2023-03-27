@@ -4,8 +4,9 @@ export const fetchProducts = createAsyncThunk(
     'product/getAll',
     async () => {
         return await fetch(process.env.REACT_APP_URL_BACK + "/items/products")
-            .then(response => response.json())
-            .then(product => product.data)
+            .then(product => 
+               product.json()
+            )
             .catch(err => console.log("erreur dans la récupèration des produits : ", err))
     }
 )
