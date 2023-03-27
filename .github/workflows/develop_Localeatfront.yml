@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_4c0fedbc19fd4e3786463ee42261a5de }}/guiletjulien/localeatfront:${{ github.sha }}
+        tags: index.docker.io/guiletjulien/localeatfront:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
