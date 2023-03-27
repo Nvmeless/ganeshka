@@ -16,8 +16,10 @@ import { MerchantList } from "../organisms/MerchantList/MerchantList";
 import { store } from "../../app/store";
 import { Login } from "./Login/Login";
 import { Deconnection } from "../molecules/Deconnection/Deconnection";
-import { logoIcon } from "../atoms/logoIcon/logoIcon";
+// import { logoIcon } from "../atoms/logoIcon/logoIcon";
 import { AddMerchantForm } from "../organisms/AddMerchantForm/AddMerchantForm";
+
+import logoIcon from "../../../assets/logo-icone.svg";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -41,7 +43,6 @@ export default class Home extends React.Component {
       case "Menu":
         return (
           <>
-            <img src="/src/assets/logo.png" alt="Home"></img>
             <MenuButton
               action={this.changeContent}
               content="Add Product"
@@ -102,6 +103,8 @@ export default class Home extends React.Component {
             <Divider></Divider>
           </HomeFilter>
 
+          <img src={logoIcon} alt="home" />
+
           <Menu
             changeContent={this.changeContent}
             menus={[
@@ -120,7 +123,7 @@ export default class Home extends React.Component {
                 color: "black",
                 label: "search",
                 sx: { mr: 2, flexGrow: 1 },
-                icon: <logoIcon />,
+                icon: <img src={logoIcon} alt="home" />,
               },
               {
                 size: "large",
