@@ -48,4 +48,4 @@ jobs:
         app-name: 'Localeatfront'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_4a2f4c08bb5f42898ab778c6790b7cc9 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_4c0fedbc19fd4e3786463ee42261a5de }}/guiletjulien/localeatfront:${{ github.sha }}'
+        images: 'index.docker.io/guiletjulien/localeatfront:${{ github.sha }}'
