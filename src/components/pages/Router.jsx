@@ -20,6 +20,14 @@ export const Router = () => {
       path: "register",
       element: <Register />,
     },
+    {
+      path: "panier",
+      element: <Register />,
+    },
+    {
+      path: "compte",
+      element: <Register />,
+    },
   ]);
 
   return <RouterProvider router={router} />;

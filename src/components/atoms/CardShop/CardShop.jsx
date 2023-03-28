@@ -20,7 +20,13 @@ export const CardShop = ({ ...props }) => {
         <div className="titre">{props.nom}</div>
         <div className="description">{props.description}</div>
         <div className="distance">
-          <img className="icone-position" src={urlPinPos} alt="pinPos" />
+          <div className="icone-position section">
+            <img
+              className="icone position"
+              src={urlPinPos}
+              alt="pin Position"
+            />
+          </div>
           <div className="distance-label">{props.distance}</div>
         </div>
       </Card>

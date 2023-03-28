@@ -42,19 +42,13 @@ export function ShopList() {
     },
   ];
 
-  function displayTaches() {
-    setDisplayedShops(shops);
-  }
-
   useEffect(() => {
-    displayTaches();
-  });
+    setDisplayedShops(shops);
+  }, []);
 
   return (
     <>
       <div className="shop-list">
-        {/* Je suis une liste de boutiques
-        <CardShop></CardShop> */}
         {displayedShops.map((element, i) => {
           return (
             <CardShop

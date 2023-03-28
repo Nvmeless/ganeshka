@@ -38,25 +38,12 @@
     font-size: 0.8em;
   }
 
-  .distance{
+  .prix{
     /* background-color: darkseagreen; */
     grid-area: 1 / 3 /3 / 4;
-    display: grid;
-    grid-template-rows: 50px 25px;
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
-  .icone-position{
-    /* background-color: cornflowerblue; */
-    grid-area: 1/2;
-    
-  }
-
-.distance-label{
-  /* background-color: rgb(200, 237, 100); */
-  grid-area: 2 / 3 ;
-  width: 100%;
-}
-
-.icone.position{
-  width: 100%;
-}

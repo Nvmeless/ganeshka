@@ -11,11 +11,14 @@ export const Card = ({
 }) => {
   const borderRadius = rounded ? "rounded" : "";
   const shadowClass = shadow ? `shadow--${shadow}` : `shadow--1`;
-  console.log(
-    Array.apply(null, Array(themesLengthShadow)).map((x, i) => {
-      return i;
-    })
-  );
+  // console.log(
+  //   Array.apply(null, Array(themesLengthShadow)).map((x, i) => {
+  //     return i;
+  //   })
+  // );
+  Array.apply(null, Array(themesLengthShadow)).map((x, i) => {
+    return i;
+  });
   return (
     <div
       className={["card", shadowClass, borderRadius, props?.className].join(

@@ -4,16 +4,51 @@
     padding-top: 30px;
 }
 
-.filtre-produit-boutique{
-    background-color: rgb(116, 99, 78);
+.filter{
+    /* background-color: rgb(116, 99, 78); */
     margin-top: 20px;
     height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button.filter{
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    height: 30px;
+    width: 100px;
+    margin: auto;
 }
 
 .search-bar{
-    background-color: rgb(119, 74, 19);
+    /* background-color: rgb(119, 74, 19); */
     margin-top: 20px;
     height: 40px;
+    margin-left: 20px;
+}
+
+.fa-search {
+	font-size: 1.5em;
+}
+
+input#search {
+    border-top: none;
+    border-bottom: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    width: 20em;
+	height: 2em;
+    padding-left: 0.5em;
+    margin-left: 0.3em;
+    background: none;
+    transition: all ease-in-out 0.2s;
+	font-size: 1.05em;
+}
+
+input#search:focus {
+    outline: none;
+    border-bottom: 3px solid rgba(84, 191, 255, 0.8);
 }
 
 .container.mapOuListe{
@@ -28,3 +63,4 @@
     margin-top: 20px;
     height: 40px;
 }
+
