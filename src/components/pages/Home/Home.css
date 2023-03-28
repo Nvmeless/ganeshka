@@ -1,0 +1,30 @@
+.main-container{
+    /* background-color: rgb(182, 155, 123); */
+    height: calc(100vh - 80px);
+    padding-top: 30px;
+}
+
+.filtre-produit-boutique{
+    background-color: rgb(116, 99, 78);
+    margin-top: 20px;
+    height: 40px;
+}
+
+.search-bar{
+    background-color: rgb(119, 74, 19);
+    margin-top: 20px;
+    height: 40px;
+}
+
+.container.mapOuListe{
+    /* background-color: rgb(218, 204, 188); */
+    margin-top: 20px;
+    height: 60vh;
+    overflow: scroll;
+}
+
+.filtre-map-liste{
+    background-color: rgb(116, 99, 78);
+    margin-top: 20px;
+    height: 40px;
+}

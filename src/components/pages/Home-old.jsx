@@ -16,8 +16,8 @@ import { MerchantList } from "../organisms/MerchantList/MerchantList";
 import { store } from "../../app/store";
 import { Login } from "./Login/Login";
 import { Deconnection } from "../molecules/Deconnection/Deconnection";
-import { logoIcon } from "../atoms/logoIcon/logoIcon";
 import { AddMerchantForm } from "../organisms/AddMerchantForm/AddMerchantForm";
+import { BottomNavBar } from "../molecules/BottomNavBar/BottomNavBar";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -41,7 +41,6 @@ export default class Home extends React.Component {
       case "Menu":
         return (
           <>
-            <img src="/src/assets/logo.png" alt="Home"></img>
             <MenuButton
               action={this.changeContent}
               content="Add Product"
@@ -101,6 +100,10 @@ export default class Home extends React.Component {
             {this.renderContent(this.state.content)}
             <Divider></Divider>
           </HomeFilter>
+
+          <div className="nav-bar">
+            <BottomNavBar></BottomNavBar>
+          </div>
 
           <Menu
             changeContent={this.changeContent}
