@@ -1,26 +1,26 @@
 import "./Home.css";
 import { BottomNavBar } from "../../molecules/BottomNavBar/BottomNavBar";
-import { ShopList } from "../../molecules/ShopList/ShopList";
+import { MerchantMap } from "../../organisms/MerchantMap/MerchantMap";
 import { ProductList } from "../../molecules/ProductList/ProductList";
 
 import React, { useState, useEffect } from "react";
 
 export function Home() {
-  let productOrShop = "shop";
+  let productOrShop = "product";
 
-  const [displayed, setDisplayed] = useState("shop");
+  const [displayed, setDisplayed] = useState("product");
 
   let componentToDisplay;
 
   switch (displayed) {
     case "shop":
-      componentToDisplay = <ShopList />;
+      componentToDisplay = <MerchantMap />;
       break;
     case "product":
       componentToDisplay = <ProductList />;
       break;
     default:
-      componentToDisplay = <ShopList />;
+      componentToDisplay = <ProductList />;
       break;
   }
 
@@ -59,10 +59,10 @@ export function Home() {
             />
           </div>
           <div className="container mapOuListe">{componentToDisplay}</div>
-          <div className="filter map-liste">
+          {/* <div className="filter map-liste">
             <button className="button filter">Map</button>
             <button className="button filter">Liste</button>
-          </div>
+          </div> */}
         </div>
         <BottomNavBar></BottomNavBar>
       </div>
