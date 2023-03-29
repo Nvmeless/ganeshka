@@ -1,0 +1,19 @@
+.nav-bar{
+    background-color: #7CB8A2;
+    bottom: 0;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    border-radius: 15px 15px 0px 0px ;
+}
+
+.menu-icon{
+    padding: 5px;
+    height: 85%;
+    width: auto;
+}
+
+.menu-icon{
+    filter: drop-shadow(3px 6px 5px #00000090);
+}

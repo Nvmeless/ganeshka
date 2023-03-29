@@ -1,15 +1,13 @@
-import React from 'react';
-import './App.css';
-import Home from './components/pages/Home'
+import React from "react";
+import "./App.css";
+import Home from "./components/pages/Home-old";
+import { Router } from "./components/pages/Router";
 import refreshTokenInterceptor from "./config/refreshTokenInterceptor";
-import {store} from "./app/store";
-
+import { store } from "./app/store";
 
 function App() {
   refreshTokenInterceptor(store);
-  return (
-    <Home></Home>
-  );
+  return <Router></Router>;
 }
 
 export default App;
