@@ -15,8 +15,8 @@ import { AddProductForm } from "../organisms/AddProductForm/AddPoductForm";
 import { MerchantList } from "../organisms/MerchantList/MerchantList";
 import { store } from '../../app/store';
 import {Login} from './Login/Login';
-import {Deconnection} from '../molecules/Deconnection/Deconnection'
-
+import {Deconnection} from '../molecules/Deconnection/Deconnection';
+import { MerchantMap } from '../organisms/MerchantMap/MerchantMap';
 import { AddMerchantForm } from "../organisms/AddMerchantForm/AddMerchantForm";
 
 
@@ -41,7 +41,7 @@ export default class Home extends React.Component {
 
 
       case "ShopsList":
-        return <MerchantList></MerchantList>
+        return <MerchantMap></MerchantMap>
 
       case "Menu":
         return <><MenuButton action={this.changeContent} content="Add Product" size="large" edge="start" color="black" label="add product" sx={{mr : 2}}>{<AddBoxIcon/>}Ajouter un produit</MenuButton>
