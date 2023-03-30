@@ -1,10 +1,9 @@
 import "./ShopList.css";
-import { Card } from "../../atoms/Card/Card";
 import { CardShop } from "../../atoms/CardShop/CardShop";
 
 import React, { useState, useEffect } from "react";
 
-export function ShopList() {
+export function ShopList(...props) {
   const [displayedShops, setDisplayedShops] = useState([]);
 
   const shops = [
@@ -43,8 +42,15 @@ export function ShopList() {
   ];
 
   useEffect(() => {
-    setDisplayedShops(shops);
-  }, []);
+    let filteredShops = shops;
+    if (props.searchTerm) {
+      filteredShops = shops.filter((shops) => {
+        return shops.nom.toLowerCase().includes(props.searchTerm.toLowerCase());
+      }, []);
+    }
+
+    setDisplayedShops(filteredShops);
+  }, [props.searchTerm]);
 
   return (
     <>

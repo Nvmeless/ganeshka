@@ -6,18 +6,17 @@ import { ProductList } from "../../molecules/ProductList/ProductList";
 import React, { useState, useEffect } from "react";
 
 export function Home() {
-  let productOrShop = "shop";
-
   const [displayed, setDisplayed] = useState("shop");
+  const [searchTerm, setSearchTerm] = useState("");
 
   let componentToDisplay;
 
   switch (displayed) {
     case "shop":
-      componentToDisplay = <ShopList />;
+      componentToDisplay = <ShopList searchTerm={searchTerm} />;
       break;
     case "product":
-      componentToDisplay = <ProductList />;
+      componentToDisplay = <ProductList searchTerm={searchTerm} />;
       break;
     default:
       componentToDisplay = <ShopList />;
@@ -28,22 +27,32 @@ export function Home() {
     console.log(displayed);
   }, [displayed]);
 
+  function handleSearch(event) {
+    setSearchTerm(event.target.value);
+  }
+
   return (
     <>
       <div className="page">
         <div className="main-container">
           <div className="filter produit-boutique">
             <button
-              className="button filter"
-              onClick={() => setDisplayed("product")}
-            >
-              Produit
-            </button>
-            <button
-              className="button filter"
+              className={
+                displayed === "shop" ? "button filter active" : "button filter"
+              }
               onClick={() => setDisplayed("shop")}
             >
               Boutiques
+            </button>
+            <button
+              className={
+                displayed === "product"
+                  ? "button filter active"
+                  : "button filter"
+              }
+              onClick={() => setDisplayed("product")}
+            >
+              Produit
             </button>
           </div>
           <div className="search-bar">
@@ -55,13 +64,14 @@ export function Home() {
               name="search"
               type="search"
               list="searchHelper"
-              placeholder="Type an acronym or name to Search..."
+              placeholder="Chercher une boutique ou un produit..."
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <div className="container mapOuListe">{componentToDisplay}</div>
           <div className="filter map-liste">
-            <button className="button filter">Map</button>
-            <button className="button filter">Liste</button>
+            {/* <button className="button filter">Map</button>
+            <button className="button filter">Liste</button> */}
           </div>
         </div>
         <BottomNavBar></BottomNavBar>
