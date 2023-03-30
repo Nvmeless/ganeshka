@@ -2,7 +2,8 @@ import "./Home.css";
 import { BottomNavBar } from "../../molecules/BottomNavBar/BottomNavBar";
 import { MerchantMap } from "../../organisms/MerchantMap/MerchantMap";
 import { ProductList } from "../../molecules/ProductList/ProductList";
-
+import Quagga from "quagga";
+import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 export function Home() {
@@ -30,6 +31,48 @@ export function Home() {
     <>
       <div className="page">
         <div className="main-container">
+          <Button
+            onClick={() => {
+              navigator.mediaDevices
+                .getUserMedia({ video: true })
+                .then(() => {
+                  Quagga.init(
+                    {
+                      inputStream: {
+                        name: "Live",
+                        type: "LiveStream",
+                        target: document.querySelector(".text"),
+                        constraints: {
+                          width: 520,
+                          height: 400,
+                          facingMode: "environment", //"environment" for back camera, "user" front camera
+                        },
+                      },
+                      decoder: {
+                        readers: ["code_128_reader", "ean_reader"],
+                      },
+                    },
+                    function (err) {
+                      if (err) {
+                        console.log(err);
+                        return;
+                      }
+                      console.log("Initialization finished. Ready to start");
+                      Quagga.start();
+                    }
+                  );
+                })
+                .catch((err) => {
+                  console.log(err.name + ": " + err.message);
+                });
+            }}
+            variant="contained"
+            color="primary"
+            style={{ width: "200px", margin: "5px" }}
+          >
+            QrCode
+          </Button>
+          <div className="text">Du texte</div>
           <div className="filter produit-boutique">
             <button
               className={
