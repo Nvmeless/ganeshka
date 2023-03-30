@@ -47,7 +47,7 @@ export function Home() {
                      }    
               },
               decoder : {
-                  readers : ["code_128_reader"]
+                  readers : ["code_128_reader","ean_reader"]
               }
               }, function(err) {
                   if (err) {
