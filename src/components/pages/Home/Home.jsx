@@ -6,8 +6,6 @@ import { ProductList } from "../../molecules/ProductList/ProductList";
 import React, { useState, useEffect } from "react";
 
 export function Home() {
-  let productOrShop = "product";
-
   const [displayed, setDisplayed] = useState("product");
 
   let componentToDisplay;
@@ -34,16 +32,22 @@ export function Home() {
         <div className="main-container">
           <div className="filter produit-boutique">
             <button
-              className="button filter"
-              onClick={() => setDisplayed("product")}
-            >
-              Produit
-            </button>
-            <button
-              className="button filter"
+              className={
+                displayed === "shop" ? "button filter active" : "button filter"
+              }
               onClick={() => setDisplayed("shop")}
             >
               Boutiques
+            </button>
+            <button
+              className={
+                displayed === "product"
+                  ? "button filter active"
+                  : "button filter"
+              }
+              onClick={() => setDisplayed("product")}
+            >
+              Produit
             </button>
           </div>
           <div className="search-bar">
