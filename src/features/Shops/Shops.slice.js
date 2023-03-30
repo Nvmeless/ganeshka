@@ -30,30 +30,34 @@ export const updateFavoriteShop = createAsyncThunk(
     }
 )
 
-
-
-
 export const addShop = createAsyncThunk(
     'product/addOne',
-    async ({ name, description, horaire }) => {
+    async ({ shopName, shopDescription, shopAdress, Location_coordinates}) => {
         
         return await fetch(process.env.REACT_APP_URL_BACK + "/items/shops", {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify({
-                name: name,
-                description: description,
-                horaire: horaire
+                lastName: "None",
+                firstName: "None",
+                email: "None",
+                telNumber: "None",
+                profilImg: "None",
+                isShop: true,
+                shopName: shopName,
+                shopDescription: shopDescription,
+                shopAdress: shopAdress,
+                location: {
+                    Location_type: "Point",
+                    Location_coordinates: Location_coordinates
+                }
               })
         })
-            .then(response => response.json())
-            .then(product => product.data)
-            .catch(err => console.log("erreur dans l'ajout du marchant : ", err))
+        .then(shop => 
+            shop.json()
+         )
+        .catch(err => console.log("erreur dans l'ajout du marchant : ", err))
     }
 )
-
 
 const ShopServices = createSlice({
     name: 'shop',
