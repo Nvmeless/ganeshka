@@ -13,22 +13,22 @@ export const fetchProducts = createAsyncThunk(
 
 export const addProduct = createAsyncThunk(
     'product/addOne',
-    async ({ name, description, price }) => {
+    async ({ productname, description, price, produceradress, productimg }) => {
 
         return await fetch(process.env.REACT_APP_URL_BACK + "/items/products", {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify({
-                name: name,
+                productname: productname,
                 description: description,
-                price: price
+                price: price,
+                produceradress: produceradress,
+                productimg: productimg
             })
         })
-            .then(response => response.json())
-            .then(product => product.data)
-            .catch(err => console.log("erreur dans l'ajout du produit : ", err))
+        .then(product => 
+            product.json()
+         )
+        .catch(err => console.log("erreur dans l'ajout du produit : ", err))
     }
 )
 
