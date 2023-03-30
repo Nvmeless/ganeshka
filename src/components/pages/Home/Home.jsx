@@ -47,7 +47,7 @@ export function Home() {
                      }    
               },
               decoder : {
-                  readers : ["code_128_reader","ean_reader"]
+                  readers : ["code_128_reader","ean_reader", "ean_8_reader","code_39_reader","code_39_vin_reader","codabar_reader","upc_reader","upc_e_reader","i2of5_reader","2of5_reader","code_93_reader"]
               }
               }, function(err) {
                   if (err) {
@@ -57,7 +57,10 @@ export function Home() {
                   console.log("Initialization finished. Ready to start");
                   Quagga.start();
               });
-
+              Quagga.onDetected((data) => {
+                alert("Code barre : "+data.codeResult.code);
+              }
+            )
           })
           .catch((err) => {
             console.log(err.name + ": " + err.message);
