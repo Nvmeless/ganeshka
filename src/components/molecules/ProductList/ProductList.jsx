@@ -1,76 +1,34 @@
+
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch} from 'react-redux'
+import { store, fetchProducts } from '../../../app/store';
 import "./ProductList.css";
 import { CardProduct } from "../../atoms/CardProduct/CardProduct";
 
-import React, { useState, useEffect } from "react";
-
 export function ProductList() {
-  const [displayedProduct, setDisplayedProduct] = useState([]);
 
-  const product = [
-    {
-      productname: "Vin rouge",
-      location: {
-        Location_type: "Point",
-        Location_coordinates: ["-83.97", "50.77"],
-      },
-      description: "Un super vin rouge",
-      price: "7,5",
-      produceradress: "125 rue des lylas",
-      productimg: ".png",
-    },
-    {
-      productname: "Vin rouge",
-      location: {
-        Location_type: "Point",
-        Location_coordinates: ["-83.97", "50.77"],
-      },
-      description: "Un super vin rouge",
-      price: "7,5",
-      produceradress: "125 rue des lylas",
-      productimg: ".png",
-    },
-    {
-      productname: "Vin rouge",
-      location: {
-        Location_type: "Point",
-        Location_coordinates: ["-83.97", "50.77"],
-      },
-      description: "Un super vin rouge",
-      price: "7,5",
-      produceradress: "125 rue des lylas",
-      productimg: ".png",
-    },
-    {
-      productname: "Vin rouge",
-      location: {
-        Location_type: "Point",
-        Location_coordinates: ["-83.97", "50.77"],
-      },
-      description: "Un super vin rouge",
-      price: "7,5",
-      produceradress: "125 rue des lylas",
-      productimg: ".png",
-    },
-  ];
+  const dispatch = useDispatch()
+  const product = useSelector(state => state.products.productsList)
+  const productStatus = useSelector(state => state.products.status)
 
   useEffect(() => {
-    setDisplayedProduct(product);
-  }, []);
+    if (productStatus === 'idle') {
+      dispatch(fetchProducts())
+    }
+  }, [productStatus, dispatch])
+
+  const generateProductCards = (productPram) => {
+        
+    if (!productPram[0]) return <p>On load</p>
+    return productPram[0].map(prod => {
+        return <CardProduct urlPhoto="" key={prod.id} nom={prod.productname} description={prod.description} prix={prod.price}></CardProduct>
+    })
+}
 
   return (
     <>
-      <div className="shop-list">
-        {displayedProduct.map((element, i) => {
-          return (
-            <CardProduct
-              key={i}
-              nom={element.productname}
-              description={element.description}
-              prix={element.price}
-              urlPhoto={element.productimg}
-            ></CardProduct>
-          );
-        })}
+      <div className="shop-list" onLoad={() => store.dispatch(fetchProducts())}>
+    {generateProductCards(product)} 
       </div>
     </>
   );
