@@ -1,0 +1,25 @@
+.add-menu{
+    background-color: #9C8F7399;
+    z-index: 9990;
+    height: calc(100vh - 80px);
+    position: fixed;
+    left : 0;
+    right : 0;
+    top: 0;
+    border-radius: 20px;
+}
+
+.choice{
+    margin-top: 60px;
+}
+
+.form.add{
+    margin-top: 60px;
+}
+
+button.add{
+    border-radius: 10px;
+    height: 50px;
+    width: 150px;
+    margin : auto;
+}

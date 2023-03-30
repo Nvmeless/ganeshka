@@ -3,6 +3,7 @@ import React from "react";
 import { Home } from "./Home/Home";
 import { Login } from "./Login/Login";
 import { Register } from "./Register/Register";
+import { AddMenu } from "./AddMenu/AddMenu";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -22,7 +23,7 @@ export const Router = () => {
     },
     {
       path: "panier",
-      element: <Home />,
+      element: <AddMenu />,
     },
     {
       path: "compte",
