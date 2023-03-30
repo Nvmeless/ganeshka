@@ -4,13 +4,12 @@ export const fetchShops = createAsyncThunk(
     'shop/getAll',
     async () => {
         return await fetch(process.env.REACT_APP_URL_BACK + "/items/shops")
-            .then(response => response.json())
-            .then(shop => shop.data)
+            .then(product => 
+                product.json()
+            )
             .catch(err => console.log("erreur dans la récupèration des shops : ", err))
     }
 )
-
-
 
 export const updateFavoriteShop = createAsyncThunk(
     'shop/favorite',
