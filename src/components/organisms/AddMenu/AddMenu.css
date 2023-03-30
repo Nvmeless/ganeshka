@@ -1,0 +1,9 @@
+.add-menu{
+    background-color: #9C8F73;
+    z-index: 9990;
+    height: calc(100vh - 80px);
+    position: fixed;
+    left : 0;
+    right : 0;
+    top: 0;
+}
