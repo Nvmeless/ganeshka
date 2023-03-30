@@ -2,11 +2,15 @@ import "./Home.css";
 import { BottomNavBar } from "../../molecules/BottomNavBar/BottomNavBar";
 import { MerchantMap } from "../../organisms/MerchantMap/MerchantMap";
 import { ProductList } from "../../molecules/ProductList/ProductList";
+import { AddMenu } from "../../organisms/AddMenu/AddMenu";
 
 import React, { useState, useEffect } from "react";
 
 export function Home() {
-  const [displayed, setDisplayed] = useState("product");
+  const [displayed, setDisplayed] = useState("shop");
+  const currentUrl = window.location.pathname;
+
+  console.log(currentUrl);
 
   let componentToDisplay;
 
@@ -18,7 +22,7 @@ export function Home() {
       componentToDisplay = <ProductList />;
       break;
     default:
-      componentToDisplay = <ProductList />;
+      componentToDisplay = <MerchantMap />;
       break;
   }
 
@@ -30,6 +34,7 @@ export function Home() {
     <>
       <div className="page">
         <div className="main-container">
+          {currentUrl === "/panier" && <AddMenu className="add-menu" />}
           <div className="filter produit-boutique">
             <button
               className={
@@ -59,7 +64,11 @@ export function Home() {
               name="search"
               type="search"
               list="searchHelper"
-              placeholder="Type an acronym or name to Search..."
+              placeholder={
+                displayed === "shop"
+                  ? "Chercher une boutique... "
+                  : "Chercher un produit..."
+              }
             />
           </div>
           <div className="container mapOuListe">{componentToDisplay}</div>
@@ -68,7 +77,7 @@ export function Home() {
             <button className="button filter">Liste</button>
           </div> */}
         </div>
-        <BottomNavBar></BottomNavBar>
+        <BottomNavBar className="nav-bar"></BottomNavBar>
       </div>
     </>
   );
