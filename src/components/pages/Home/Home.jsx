@@ -61,11 +61,11 @@ export function Home() {
                   }
                   console.log("Initialization finished. Ready to start");
                   Quagga.start();
+                  Quagga.onDetected((data) => {
+                    alert("Code barre : "+data.codeResult.code);
+                  })
               });
-              Quagga.onDetected((data) => {
-                alert("Code barre : "+data.codeResult.code);
-              }
-            )
+            
           })
           .catch((err) => {
             console.log(err.name + ": " + err.message);
@@ -74,7 +74,7 @@ export function Home() {
                 }} variant="contained" color="primary" style={{ width: "200px", margin: "5px" }}>
                     QrCode
                 </Button>
-           <div className="text">Du texte</div>
+           <div className="text">Du texte 1</div>
           <div className="filter produit-boutique">
             <button
               className={
