@@ -22,11 +22,11 @@ export const Router = () => {
     },
     {
       path: "panier",
-      element: <Register />,
+      element: <Home />,
     },
     {
       path: "compte",
-      element: <Register />,
+      element: <Home />,
     },
   ]);
 
