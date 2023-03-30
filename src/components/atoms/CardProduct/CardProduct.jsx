@@ -5,7 +5,6 @@ import { Card } from "../Card/Card";
 export const CardProduct = ({ ...props }) => {
   const urlPhotoDefault =
     "https://media.istockphoto.com/id/1200125752/fr/vectoriel/icône-de-la-ligne-produits-de-don-panier-dépicerie-avec-lillustration-de-vecteur-de-coeur.jpg?s=612x612&w=0&k=20&c=FzTmioSnaYz74DgwBd_BKIdfjSOwZVLRU8wQDJcTW6c=";
-  const urlPinPos = "https://www.svgrepo.com/show/157852/location-pin.svg";
 
   return (
     <>
