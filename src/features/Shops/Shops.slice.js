@@ -34,7 +34,7 @@ export const addShop = createAsyncThunk(
     'product/addOne',
     async ({ shopName, shopDescription, shopAdress, Location_coordinates}) => {
         
-        return await fetch(process.env.REACT_APP_URL_BACK + "/items/shops", {
+        return await fetch(process.env.REACT_APP_URL_BACK + "/user", {
             method: 'POST',
             body: JSON.stringify({
                 lastName: "None",
